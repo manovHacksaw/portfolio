@@ -36,7 +36,7 @@ export default function RootLayout({
       ${spaceGrotesk.variable}
     `}
     >
-      <body className={`${firaSans.className}`}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
