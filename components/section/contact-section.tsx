@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 interface ContactSectionProps {
   theme: string;
@@ -35,23 +35,30 @@ export default function ContactSection({ theme }: ContactSectionProps) {
   ];
 
   return (
-    <section id="contact" className={`py-20 px-6 transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'
-    }`}>
+    <section
+      id="contact"
+      className={`py-20 px-6 transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900" : "bg-gray-50"
+      }`}
+    >
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-16">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-colors duration-300 ${
-            theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-6 font-space-grotesk transition-colors duration-300 ${
+              theme === "dark" ? "text-white" : "text-gray-900"
+            }`}
+          >
             Let's Connect
           </h2>
           <div className="w-20 h-0.5 bg-pink-600 mx-auto" />
         </div>
 
         <div className="mb-12">
-          <p className={`text-lg leading-relaxed max-w-2xl mx-auto transition-colors duration-300 ${
-            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-          }`}>
+          <p
+            className={`text-lg leading-relaxed max-w-2xl mx-auto font-fira-sans transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
             I'm always interested in connecting with fellow developers,
             blockchain enthusiasts, and innovators. Whether you have a project
             in mind or just want to chat about technology, I'd love to hear from
@@ -69,30 +76,36 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`group rounded-xl p-6 border shadow-sm transition-all duration-300 ${
-                  theme === 'dark'
-                    ? 'bg-gray-950 border-gray-700 hover:shadow-lg hover:border-pink-600/50'
-                    : 'bg-white border-gray-200 hover:shadow-lg hover:border-pink-300'
+                  theme === "dark"
+                    ? "bg-gray-950 border-gray-700 hover:shadow-lg hover:border-pink-600/50"
+                    : "bg-white border-gray-200 hover:shadow-lg hover:border-pink-300"
                 }`}
               >
                 <div className="flex flex-col items-center space-y-3">
-                  <div className={`p-3 rounded-full transition-colors duration-300 ${
-                    theme === 'dark'
-                      ? 'bg-pink-900/30 group-hover:bg-pink-800/50'
-                      : 'bg-pink-100 group-hover:bg-pink-200'
-                  }`}>
+                  <div
+                    className={`p-3 rounded-full transition-colors duration-300 ${
+                      theme === "dark"
+                        ? "bg-pink-900/30 group-hover:bg-pink-800/50"
+                        : "bg-pink-100 group-hover:bg-pink-200"
+                    }`}
+                  >
                     <Icon className="w-6 h-6 text-pink-600" />
                   </div>
                   <div>
-                    <h3 className={`font-semibold transition-colors duration-300 ${
-                      theme === 'dark'
-                        ? 'text-white group-hover:text-pink-400'
-                        : 'text-gray-900 group-hover:text-pink-600'
-                    }`}>
+                    <h3
+                      className={`font-semibold font-poppins transition-colors duration-300 ${
+                        theme === "dark"
+                          ? "text-white group-hover:text-pink-400"
+                          : "text-gray-900 group-hover:text-pink-600"
+                      }`}
+                    >
                       {link.label}
                     </h3>
-                    <p className={`text-sm font-mono transition-colors duration-300 ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
+                    <p
+                      className={`text-sm font-jetbrains-mono transition-colors duration-300 ${
+                        theme === "dark" ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
                       {link.username}
                     </p>
                   </div>
@@ -102,25 +115,31 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           })}
         </div>
 
-        <div className={`rounded-xl p-8 border shadow-sm transition-colors duration-300 ${
-          theme === 'dark' 
-            ? 'bg-gray-950 border-gray-700' 
-            : 'bg-white border-gray-200'
-        }`}>
-          <h3 className={`text-xl font-semibold mb-4 transition-colors duration-300 ${
-            theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}>
+        <div
+          className={`rounded-xl p-8 border shadow-sm transition-colors duration-300 ${
+            theme === "dark"
+              ? "bg-gray-950 border-gray-700"
+              : "bg-white border-gray-200"
+          }`}
+        >
+          <h3
+            className={`text-xl font-semibold mb-4 font-poppins transition-colors duration-300 ${
+              theme === "dark" ? "text-white" : "text-gray-900"
+            }`}
+          >
             Open to Opportunities
           </h3>
-          <p className={`mb-6 transition-colors duration-300 ${
-            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-          }`}>
+          <p
+            className={`mb-6 font-fira-sans transition-colors duration-300 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
             Currently exploring new opportunities in web development,
             blockchain, and innovative tech projects.
           </p>
           <a
             href="mailto:hello@manobendra.dev"
-            className="inline-flex items-center space-x-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-pink-700 transition-colors duration-300"
+            className="inline-flex items-center space-x-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium font-rubik hover:bg-pink-700 transition-colors duration-300"
           >
             <Mail size={18} />
             <span>Get in touch</span>
