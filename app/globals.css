@@ -5,9 +5,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html{
+/* html{
   font-size: 87.5%;
-}
+} */
 
 
 

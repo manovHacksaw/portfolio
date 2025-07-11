@@ -36,7 +36,7 @@ export default function RootLayout({
       ${spaceGrotesk.variable}
     `}
     >
-      <body className={`${poppins.className}`}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -5,6 +5,7 @@ import AboutSection from '@/components/section/about-section';
 import ContactSection from '@/components/section/contact-section';
 import Footer from '@/components/section/footer';
 import HeroSection from '@/components/section/hero-section';
+import ProgrammingJourneySection from '@/components/section/my-journey-section';
 import ProjectsSection from '@/components/section/projects-section';
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll';
 import { useState, useEffect } from 'react';
@@ -47,7 +48,9 @@ export default function Home() {
       <main>
         <HeroSection theme={theme} />
         <AboutSection theme={theme} />
+
         <ProjectsSection theme={theme} />
+        <ProgrammingJourneySection theme={theme} />
         <ContactSection theme={theme} />
       </main>
       
