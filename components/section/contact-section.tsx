@@ -1,6 +1,13 @@
 "use client";
 
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import {
+  spaceGrotesk,
+  firaSans,
+  poppins,
+  jetbrainsMono,
+  rubik,
+} from "@/app/fonts";
 
 interface ContactSectionProps {
   theme: string;
@@ -44,7 +51,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-bold mb-6 font-space-grotesk transition-colors duration-300 ${
+            className={`text-3xl md:text-4xl font-bold mb-6 ${spaceGrotesk.className} transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
@@ -55,7 +62,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
 
         <div className="mb-12">
           <p
-            className={`text-lg leading-relaxed max-w-2xl mx-auto font-fira-sans transition-colors duration-300 ${
+            className={`text-lg leading-relaxed max-w-2xl mx-auto ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -93,7 +100,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                   </div>
                   <div>
                     <h3
-                      className={`font-semibold font-poppins transition-colors duration-300 ${
+                      className={`font-semibold ${poppins.className} transition-colors duration-300 ${
                         theme === "dark"
                           ? "text-white group-hover:text-pink-400"
                           : "text-gray-900 group-hover:text-pink-600"
@@ -102,7 +109,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                       {link.label}
                     </h3>
                     <p
-                      className={`text-sm font-jetbrains-mono transition-colors duration-300 ${
+                      className={`text-sm ${jetbrainsMono.className} transition-colors duration-300 ${
                         theme === "dark" ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
@@ -123,14 +130,14 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           }`}
         >
           <h3
-            className={`text-xl font-semibold mb-4 font-poppins transition-colors duration-300 ${
+            className={`text-xl font-semibold mb-4 ${poppins.className} transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
             Open to Opportunities
           </h3>
           <p
-            className={`mb-6 font-fira-sans transition-colors duration-300 ${
+            className={`mb-6 ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -139,7 +146,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           </p>
           <a
             href="mailto:hello@manobendra.dev"
-            className="inline-flex items-center space-x-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium font-rubik hover:bg-pink-700 transition-colors duration-300"
+            className={`inline-flex items-center space-x-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
           >
             <Mail size={18} />
             <span>Get in touch</span>
