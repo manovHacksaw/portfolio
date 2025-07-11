@@ -1,6 +1,13 @@
 "use client";
 
 import { Github, ExternalLink } from "lucide-react";
+import {
+  spaceGrotesk,
+  firaSans,
+  poppins,
+  ibmPlexSans,
+  rubik,
+} from "@/app/fonts";
 
 interface ProjectsSectionProps {
   theme: string;
@@ -54,7 +61,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-bold mb-6 font-space-grotesk transition-colors duration-300 ${
+            className={`text-3xl md:text-4xl font-bold mb-6 ${spaceGrotesk.className} transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
@@ -81,7 +88,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3
-                      className={`text-xl font-semibold mb-2 font-poppins transition-colors duration-300 ${
+                      className={`text-xl font-semibold mb-2 ${poppins.className} transition-colors duration-300 ${
                         theme === "dark"
                           ? "text-white group-hover:text-pink-400"
                           : "text-gray-900 group-hover:text-pink-600"
@@ -91,7 +98,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                     </h3>
                     {project.featured && (
                       <span
-                        className={`inline-block px-2 py-1 text-xs font-medium font-ibm-plex-sans rounded-full transition-colors duration-300 ${
+                        className={`inline-block px-2 py-1 text-xs font-medium ${ibmPlexSans.className} rounded-full transition-colors duration-300 ${
                           theme === "dark"
                             ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
                             : "bg-pink-100 text-pink-800"
@@ -136,7 +143,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                 </div>
 
                 <p
-                  className={`leading-relaxed mb-6 font-fira-sans transition-colors duration-300 ${
+                  className={`leading-relaxed mb-6 ${firaSans.className} transition-colors duration-300 ${
                     theme === "dark" ? "text-gray-300" : "text-gray-600"
                   }`}
                 >
@@ -147,7 +154,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
-                      className={`px-3 py-1 rounded-full text-sm font-medium font-ibm-plex-sans transition-colors duration-300 ${
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${ibmPlexSans.className} transition-colors duration-300 ${
                         theme === "dark"
                           ? "bg-gray-800 text-gray-300"
                           : "bg-gray-100 text-gray-700"
@@ -167,7 +174,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
             href="https://github.com/manobendra"
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center space-x-2 font-medium font-rubik transition-colors duration-300 ${
+            className={`inline-flex items-center space-x-2 font-medium ${rubik.className} transition-colors duration-300 ${
               theme === "dark"
                 ? "text-pink-400 hover:text-pink-300"
                 : "text-pink-600 hover:text-pink-700"
