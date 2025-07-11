@@ -9,7 +9,14 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTypewriter } from "@/hooks/use-typewriter";
-import { useItemSwitcher } from "@/hooks/use-item-switcher"; // <-- Import new hook
+import { useItemSwitcher } from "@/hooks/use-item-switcher";
+import {
+  spaceGrotesk,
+  jetbrainsMono,
+  firaSans,
+  ibmPlexSans,
+  rubik,
+} from "@/app/fonts";
 
 interface HeroSectionProps {
   theme: string;
@@ -105,7 +112,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         {/* Main title */}
         <div className="mb-6">
           <h1
-            className={`text-5xl md:text-6xl lg:text-7xl font-bold leading-tight font-space-grotesk transition-colors duration-300 ${
+            className={`text-5xl md:text-6xl lg:text-7xl font-bold leading-tight ${spaceGrotesk.className} transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
@@ -124,7 +131,9 @@ export default function HeroSection({ theme }: HeroSectionProps) {
             </AnimatePresence>
             <br />
             I'm{" "}
-            <span className=" font-rubik text-pink-600">Manobendra Mandal</span>
+            <span className={`text-pink-600 ${rubik.className}`}>
+              Manobendra Mandal
+            </span>
           </h1>
         </div>
 
@@ -132,7 +141,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         <div className="mb-8">
           <div className="flex items-center justify-center">
             <h2
-              className={`text-3xl font-jetbrains-mono md:text-4xl lg:text-5xl font-bold transition-colors duration-300 ${
+              className={`text-3xl ${jetbrainsMono.className} md:text-4xl lg:text-5xl font-bold transition-colors duration-300 ${
                 theme === "dark" ? "text-white" : "text-gray-900"
               }`}
             >
@@ -149,7 +158,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         {/* Bio */}
         <div className="mb-8">
           <p
-            className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-fira-sans transition-colors duration-300 ${
+            className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -165,7 +174,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
             {skills.map((skill) => (
               <span
                 key={skill.name}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium font-ibm-plex-sans transition-all duration-300 ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium ${ibmPlexSans.className} transition-all duration-300 ${
                   theme === "dark" ? `${skill.color} border` : skill.color
                 }`}
               >
@@ -186,7 +195,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
           >
             <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
             <span
-              className={`font-fira-sans text-sm font-medium  transition-colors duration-300 ${
+              className={`${firaSans.className} text-sm font-medium transition-colors duration-300 ${
                 theme === "dark" ? "text-gray-300" : "text-gray-700"
               }`}
             >
@@ -199,7 +208,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         <div className="mb-8">
           <div className="flex flex-wrap gap-4 justify-center">
             <button
-              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium font-rubik transition-all duration-300 ${
+              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-pink-600 text-white hover:bg-pink-700"
                   : "bg-gray-900 text-white hover:bg-gray-800"
@@ -209,7 +218,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
               <ExternalLink size={16} />
             </button>
             <button
-              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium font-rubik border transition-all duration-300 ${
+              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} border transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-gray-900 border-gray-700 text-gray-300 hover:bg-gray-800"
                   : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
