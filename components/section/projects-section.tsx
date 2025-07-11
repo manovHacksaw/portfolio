@@ -1,6 +1,15 @@
 "use client";
 
-import { Github, ExternalLink, Award, Users, Zap, Shield, TrendingUp, Globe } from "lucide-react";
+import {
+  Github,
+  ExternalLink,
+  Award,
+  Calendar,
+  DollarSign,
+  Trophy,
+  Link,
+  Target,
+} from "lucide-react";
 import { useState } from "react";
 
 interface ProjectsSectionProps {
@@ -10,102 +19,230 @@ interface ProjectsSectionProps {
 export default function ProjectsSection({ theme }: ProjectsSectionProps) {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const projects = [
+  const hackathons = [
     {
-      title: "EDU Legacy",
-      shortDescription: "Redefining Digital Asset Inheritance Through Automated Smart Will Systems",
-      description: "EDU Legacy fundamentally reimagines legacy planning by architecting an immutable, automated 'Smart Will' ecosystem that ensures digital wealth—including educational funds, scholarships, and learning resources—seamlessly transfers to rightful beneficiaries without human intervention.",
-      tech: ["Solidity", "OpenZeppelin", "Multi-chain", "Smart Contracts"],
-      github: "https://github.com/manobendra/edu-legacy",
-      live: "https://edu-legacy.vercel.app",
-      featured: true,
-      icon: Shield,
-      color: "purple",
-      image: "/api/placeholder/600/400"
+      name: "Hacker House Goa",
+      month: "August 2024",
+      projects: [
+        {
+          title: "Revee Reviews",
+          description:
+            "A decentralized review platform where users earn crypto tokens for sharing verified product reviews. Utilizes Anon Aadhaar KYC, wallet login, and Diamante Blockchain's consensus to block spam reviews. Rewards handled by Polygon Smart Wallet.",
+          prize: "Track Winner",
+          tech: [
+            "Anon Aadhaar",
+            "Diamante Blockchain",
+            "Polygon",
+            "Smart Wallet",
+            "KYC",
+          ],
+          announcement:
+            "https://www.linkedin.com/posts/manob-mandal_hackerhousegoa-web3-blockchain-activity-7238567457379041280-Fv4P",
+          color: "purple",
+          featured: true,
+        },
+      ],
     },
     {
-      title: "Fork Work",
-      shortDescription: "Eliminating Trust Barriers in Decentralized Work Collaboration",
-      description: "Fork Work tackles the fundamental trust crisis in remote work by building a blockchain-powered platform that replaces subjective ratings with verifiable proof of performance. Features revolutionary 'Skin in the Game' mechanism with escrow-based payments.",
-      tech: ["Ethereum", "Civic Auth", "USDT", "The Graph"],
-      github: "https://github.com/manobendra/fork-work",
-      live: "https://fork-work.vercel.app",
-      featured: true,
-      icon: Users,
-      color: "blue",
-      image: "/api/placeholder/600/400"
+      name: "AIA Chain Inaugural Hackathon",
+      month: "December 2024",
+      projects: [
+        {
+          title: "Plaia Zone",
+          description:
+            "A Web3 travel recommendation app where users earn AIA tokens for creating and sharing travel itineraries, supported by AIA blockchain's proof of contribution system.",
+          prize: "500 USDT",
+          tech: ["AIA Blockchain", "Web3", "Travel Tech", "Token Rewards"],
+          demo: "https://pl-aia-zone.vercel.app/",
+          announcement: "https://x.com/HackQuest_/status/1861432015893209373",
+          color: "blue",
+          featured: false,
+        },
+        {
+          title: "Daccy",
+          description:
+            "A learn-to-earn platform gamifying DSA and tech learning. Features bug-fixing challenges, generative AI tutors, gamified problem solving, and visual learning through AI-powered mind maps. Users earn AIA tokens for completing challenges and learning modules.",
+          prize: "2,000 USDT",
+          tech: [
+            "AI/ML",
+            "Gamification",
+            "DSA",
+            "Educational Tech",
+            "AIA Tokens",
+          ],
+          demo: "https://daccy-aia-learn-to-earn.vercel.app/",
+          announcement: "https://x.com/HackQuest_/status/1861432015893209373",
+          color: "green",
+          featured: true,
+        },
+      ],
     },
     {
-      title: "Coro Tashi",
-      shortDescription: "Decentralized Liquid Staking Protocol Pioneering Cross-Token Rewards",
-      description: "Coro Tashi revolutionizes staking infrastructure on Core Chain by enabling users to stake one token and earn rewards in another. Won 2nd place at Core Hacker House Bangalore, earning $1500 in Core tokens.",
-      tech: ["Core Chain", "Solidity", "Hardhat", "Next.js", "Wagmi"],
-      github: "https://github.com/manobendra/coro-tashi",
-      live: "https://coro-tashi.vercel.app",
-      featured: true,
-      icon: TrendingUp,
-      color: "green",
-      image: "/api/placeholder/600/400",
-      award: "2nd Place - Core Hacker House Bangalore"
+      name: "Telos Mini Hackathon",
+      month: "February 2025",
+      projects: [
+        {
+          title: "Inherify",
+          description:
+            "A decentralized legacy management platform enabling users to create and pass on secure educational legacies using Telos blockchain. (Ported from Edu Legacy)",
+          prize: "600 USDC",
+          tech: ["Telos Blockchain", "Legacy Management", "Educational Tech"],
+          announcement: "https://x.com/HackQuest_/status/1895021811303358625",
+          color: "indigo",
+          featured: false,
+        },
+        {
+          title: "Goalzilla",
+          description:
+            "A milestones-based crowdfunding platform where users can set and achieve funding goals transparently on the Telos blockchain.",
+          prize: "300 USDC",
+          tech: ["Crowdfunding", "Milestones", "Telos", "DeFi"],
+          announcement: "https://x.com/HackQuest_/status/1895021811303358625",
+          color: "orange",
+          featured: false,
+        },
+        {
+          title: "Pixel8r",
+          description:
+            "A decentralized AI-powered pixel art generator that allows users to create, mint, and trade pixel art NFTs on the Telos blockchain.",
+          prize: "100 USDC",
+          tech: ["AI Art", "NFTs", "Pixel Art", "Telos"],
+          demo: "https://pixel8r.vercel.app/",
+          announcement: "https://x.com/HackQuest_/status/1895021811303358625",
+          color: "pink",
+          featured: false,
+        },
+      ],
     },
     {
-      title: "PolyTix",
-      shortDescription: "Decentralized Governance Platform Eliminating Electoral Manipulation",
-      description: "PolyTix solves fundamental trust issues in digital voting by leveraging blockchain's immutability to create transparent, tamper-proof voting infrastructure. Features role-based governance and one-person-one-vote NFT system.",
-      tech: ["Polygon", "Next.js 15", "The Graph", "Solidity", "ShadCN UI"],
-      github: "https://github.com/manovHacksaw/polytix/tree/v2",
-      featured: false,
-      icon: Globe,
-      color: "indigo",
-      image: "/api/placeholder/400/300"
+      name: "Core Hacker House Bangalore",
+      month: "March 2025",
+      projects: [
+        {
+          title: "Coro Tashi",
+          description:
+            "A decentralized liquid staking platform on Core Chain, allowing users to stake tokens, earn rewards, and delegate to validators. Features the custom Tashido reward algorithm and sustainable staking pool creation.",
+          prize: "1,500 CORE Tokens (2nd Prize)",
+          tech: ["Core Chain", "Liquid Staking", "DeFi", "Validators"],
+          announcement:
+            "https://x.com/corechain_devs/status/1904546816537887203",
+          color: "red",
+          featured: true,
+        },
+      ],
     },
     {
-      title: "Pixel8r",
-      shortDescription: "Collaborative Blockchain Art Canvas Democratizing Digital Creativity",
-      description: "Pixel8r transforms simple pixel art into powerful decentralized collaboration by creating a shared digital canvas where every contribution is permanently recorded on the Telos Blockchain.",
-      tech: ["Telos", "Blockchain", "Real-time", "Digital Art"],
-      github: "https://github.com/manobendra/pixel8r",
-      featured: false,
-      icon: Zap,
-      color: "pink",
-      image: "/api/placeholder/400/300"
+      name: "MetaMask Dev Cook-Off",
+      month: "May 2025",
+      projects: [
+        {
+          title: "Linea Legacy",
+          description:
+            "A Linea-based version of Edu Legacy, focusing on preserving educational legacies and offering tokenized proof of contribution. Integrated with MetaMask Smart Wallet and Linea chain.",
+          prize: "3,000 USDT (1st Prize)",
+          tech: ["Linea", "MetaMask", "Educational Tech", "Smart Wallet"],
+          announcement: "https://x.com/MetaMaskDev/status/1910403973120667918",
+          color: "purple",
+          featured: true,
+        },
+      ],
     },
     {
-      title: "PlaiaZone",
-      shortDescription: "Decentralized Crowdfunding Infrastructure for Gaming Communities",
-      description: "PlaiaZone addresses the funding gap in gaming by creating a specialized crowdfunding platform that connects passionate gamers with supporters, featuring flexible funding models and community-driven support.",
-      tech: ["Crowdfunding", "Gaming", "Multi-wallet", "Community"],
-      github: "https://github.com/manobendra/plaiazone",
-      featured: false,
-      icon: Users,
-      color: "orange",
-      image: "/api/placeholder/400/300"
-    }
+      name: "Edu Chain Semester 3 Hackathon",
+      month: "June 2025",
+      projects: [
+        {
+          title: "Edu Legacy",
+          description:
+            "The core Edu Chain project preserving decentralized learning legacies and promoting peer-to-peer education rewards.",
+          prize: "6,000 USDT (5th Place in Earn Track)",
+          tech: ["Edu Chain", "Educational Tech", "P2P Learning"],
+          announcement:
+            "https://x.com/opencampus_xyz/status/1925476891651412133",
+          color: "blue",
+          featured: true,
+        },
+      ],
+    },
   ];
 
   const getColorClasses = (color, theme) => {
     const colors = {
-      purple: theme === "dark" 
-        ? "border-purple-500/50 bg-purple-900/10 text-purple-300" 
-        : "border-purple-300 bg-purple-50 text-purple-700",
-      blue: theme === "dark" 
-        ? "border-blue-500/50 bg-blue-900/10 text-blue-300" 
-        : "border-blue-300 bg-blue-50 text-blue-700",
-      green: theme === "dark" 
-        ? "border-green-500/50 bg-green-900/10 text-green-300" 
-        : "border-green-300 bg-green-50 text-green-700",
-      indigo: theme === "dark" 
-        ? "border-indigo-500/50 bg-indigo-900/10 text-indigo-300" 
-        : "border-indigo-300 bg-indigo-50 text-indigo-700",
-      pink: theme === "dark" 
-        ? "border-pink-500/50 bg-pink-900/10 text-pink-300" 
-        : "border-pink-300 bg-pink-50 text-pink-700",
-      orange: theme === "dark" 
-        ? "border-orange-500/50 bg-orange-900/10 text-orange-300" 
-        : "border-orange-300 bg-orange-50 text-orange-700"
+      purple:
+        theme === "dark"
+          ? "border-purple-500/50 bg-purple-900/10 text-purple-300"
+          : "border-purple-300 bg-purple-50 text-purple-700",
+      blue:
+        theme === "dark"
+          ? "border-blue-500/50 bg-blue-900/10 text-blue-300"
+          : "border-blue-300 bg-blue-50 text-blue-700",
+      green:
+        theme === "dark"
+          ? "border-green-500/50 bg-green-900/10 text-green-300"
+          : "border-green-300 bg-green-50 text-green-700",
+      indigo:
+        theme === "dark"
+          ? "border-indigo-500/50 bg-indigo-900/10 text-indigo-300"
+          : "border-indigo-300 bg-indigo-50 text-indigo-700",
+      pink:
+        theme === "dark"
+          ? "border-pink-500/50 bg-pink-900/10 text-pink-300"
+          : "border-pink-300 bg-pink-50 text-pink-700",
+      orange:
+        theme === "dark"
+          ? "border-orange-500/50 bg-orange-900/10 text-orange-300"
+          : "border-orange-300 bg-orange-50 text-orange-700",
+      red:
+        theme === "dark"
+          ? "border-red-500/50 bg-red-900/10 text-red-300"
+          : "border-red-300 bg-red-50 text-red-700",
     };
     return colors[color] || colors.blue;
   };
+
+  const getPrizeColor = (prize) => {
+    if (
+      prize.includes("1st") ||
+      prize.includes("6,000") ||
+      prize.includes("3,000")
+    ) {
+      return "bg-yellow-500/20 border-yellow-500/50 text-yellow-300";
+    } else if (
+      prize.includes("2nd") ||
+      prize.includes("2,000") ||
+      prize.includes("1,500")
+    ) {
+      return "bg-gray-400/20 border-gray-400/50 text-gray-300";
+    } else if (prize.includes("Track Winner") || prize.includes("600")) {
+      return "bg-orange-500/20 border-orange-500/50 text-orange-300";
+    }
+    return "bg-green-500/20 border-green-500/50 text-green-300";
+  };
+
+  const allProjects = hackathons.flatMap((hackathon) =>
+    hackathon.projects.map((project) => ({
+      ...project,
+      hackathon: hackathon.name,
+      month: hackathon.month,
+    })),
+  );
+
+  const totalPrizeValue = allProjects.reduce((total, project) => {
+    const prizeText = project.prize.toLowerCase();
+    let value = 0;
+
+    if (prizeText.includes("6,000")) value = 6000;
+    else if (prizeText.includes("3,000")) value = 3000;
+    else if (prizeText.includes("2,000")) value = 2000;
+    else if (prizeText.includes("1,500")) value = 1500;
+    else if (prizeText.includes("600")) value = 600;
+    else if (prizeText.includes("500")) value = 500;
+    else if (prizeText.includes("300")) value = 300;
+    else if (prizeText.includes("100")) value = 100;
+    else if (prizeText.includes("50")) value = 50;
+
+    return total + value;
+  }, 0);
 
   return (
     <section
@@ -121,185 +258,268 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
-            Featured Projects
+            🚀 Hackathon Achievements
           </h2>
-          <p className={`text-lg max-w-3xl mx-auto mb-8 ${
-            theme === "dark" ? "text-gray-300" : "text-gray-600"
-          }`}>
-            Real-world solutions built from scratch to tackle serious problems in decentralized finance, governance, and creator economies. Each project represents a step toward a more transparent, efficient, and user-empowered digital ecosystem.
+          <p
+            className={`text-lg max-w-3xl mx-auto mb-8 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
+            A journey through competitive hackathons, building innovative
+            blockchain solutions and earning recognition in the Web3 ecosystem.
+            Over ${totalPrizeValue.toLocaleString()} in prizes won across
+            multiple blockchain platforms.
           </p>
           <div className="w-20 h-0.5 bg-gradient-to-r from-pink-600 to-purple-600 mx-auto" />
         </div>
 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => {
-            const IconComponent = project.icon;
-            return (
-              <div
-                key={project.title}
-                className={`
-                  group rounded-2xl border shadow-sm overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer
-                  ${project.featured ? "lg:col-span-2 md:col-span-2" : ""}
-                  ${
-                    theme === "dark"
-                      ? "bg-gray-900/50 border-gray-700 hover:shadow-2xl hover:border-pink-600/50 backdrop-blur-sm"
-                      : "bg-white/50 border-gray-200 hover:shadow-2xl hover:border-pink-300 backdrop-blur-sm"
-                  }
-                `}
-                onClick={() => setSelectedProject(project)}
-              >
-                {/* Project Image */}
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div
+            className={`text-center p-6 rounded-xl border ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700"
+                : "bg-gray-50 border-gray-200"
+            }`}
+          >
+            <div className="text-2xl font-bold text-pink-600">
+              {hackathons.length}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Hackathons
+            </div>
+          </div>
+          <div
+            className={`text-center p-6 rounded-xl border ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700"
+                : "bg-gray-50 border-gray-200"
+            }`}
+          >
+            <div className="text-2xl font-bold text-green-600">
+              {allProjects.length}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Projects Built
+            </div>
+          </div>
+          <div
+            className={`text-center p-6 rounded-xl border ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700"
+                : "bg-gray-50 border-gray-200"
+            }`}
+          >
+            <div className="text-2xl font-bold text-yellow-600">
+              ${totalPrizeValue.toLocaleString()}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Prize Money
+            </div>
+          </div>
+          <div
+            className={`text-center p-6 rounded-xl border ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700"
+                : "bg-gray-50 border-gray-200"
+            }`}
+          >
+            <div className="text-2xl font-bold text-purple-600">
+              {allProjects.filter((p) => p.featured).length}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Major Wins
+            </div>
+          </div>
+        </div>
+
+        {/* Projects by Hackathon */}
+        <div className="space-y-12">
+          {hackathons.map((hackathon, hackathonIndex) => (
+            <div key={hackathon.name} className="space-y-6">
+              <div className="text-center">
+                <h3
+                  className={`text-2xl font-bold mb-2 ${
+                    theme === "dark" ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  {hackathon.name}
+                </h3>
+                <div className="flex items-center justify-center space-x-2">
+                  <Calendar
+                    size={16}
+                    className={
+                      theme === "dark" ? "text-gray-400" : "text-gray-500"
+                    }
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-4 left-4">
-                    <div className={`p-3 rounded-full border ${getColorClasses(project.color, theme)}`}>
-                      <IconComponent size={24} />
-                    </div>
-                  </div>
-                  {project.award && (
-                    <div className="absolute top-4 right-4">
-                      <div className="flex items-center space-x-1 px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/50 text-yellow-300">
-                        <Award size={14} />
-                        <span className="text-xs font-medium">Award Winner</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3
-                        className={`text-xl font-bold mb-2 transition-colors duration-300 ${
-                          theme === "dark"
-                            ? "text-white group-hover:text-pink-400"
-                            : "text-gray-900 group-hover:text-pink-600"
-                        }`}
-                      >
-                        {project.title}
-                      </h3>
-                      {project.featured && (
-                        <span
-                          className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${
-                            theme === "dark"
-                              ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
-                              : "bg-pink-100 text-pink-800 border border-pink-200"
-                          }`}
-                        >
-                          Featured
-                        </span>
-                      )}
-                      {project.award && (
-                        <div className="mt-2">
-                          <span className="text-xs text-yellow-500 font-medium">
-                            🏆 {project.award}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`p-2 rounded-full transition-all duration-300 ${
-                            theme === "dark"
-                              ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                              : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                          }`}
-                          aria-label="View on GitHub"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Github size={18} />
-                        </a>
-                      )}
-                      {project.live && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`p-2 rounded-full transition-all duration-300 ${
-                            theme === "dark"
-                              ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                              : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                          }`}
-                          aria-label="View live site"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink size={18} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  <p
-                    className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${
-                      theme === "dark" ? "text-gray-300" : "text-gray-600"
+                  <span
+                    className={`text-sm ${
+                      theme === "dark" ? "text-gray-400" : "text-gray-500"
                     }`}
                   >
-                    {project.shortDescription}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${
-                          theme === "dark"
-                            ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                        }`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                    {hackathon.month}
+                  </span>
                 </div>
               </div>
-            );
-          })}
+
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                {hackathon.projects.map((project, projectIndex) => (
+                  <div
+                    key={`${hackathon.name}-${project.title}`}
+                    className={`
+                      group rounded-2xl border shadow-sm overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer
+                      ${project.featured ? "lg:col-span-2 md:col-span-2" : ""}
+                      ${
+                        theme === "dark"
+                          ? "bg-gray-900/50 border-gray-700 hover:shadow-2xl hover:border-pink-600/50 backdrop-blur-sm"
+                          : "bg-white/50 border-gray-200 hover:shadow-2xl hover:border-pink-300 backdrop-blur-sm"
+                      }
+                    `}
+                    onClick={() =>
+                      setSelectedProject({
+                        ...project,
+                        hackathon: hackathon.name,
+                        month: hackathon.month,
+                      })
+                    }
+                  >
+                    {/* Project Header */}
+                    <div className="p-6 border-b border-gray-700/30">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h4
+                            className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                              theme === "dark"
+                                ? "text-white group-hover:text-pink-400"
+                                : "text-gray-900 group-hover:text-pink-600"
+                            }`}
+                          >
+                            {project.title}
+                          </h4>
+                          {project.featured && (
+                            <span
+                              className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${
+                                theme === "dark"
+                                  ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
+                                  : "bg-pink-100 text-pink-800 border border-pink-200"
+                              }`}
+                            >
+                              Major Win
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
+                          {project.demo && (
+                            <a
+                              href={project.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`p-2 rounded-full transition-all duration-300 ${
+                                theme === "dark"
+                                  ? "text-gray-400 hover:text-white hover:bg-gray-800"
+                                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                              }`}
+                              aria-label="View live demo"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <ExternalLink size={18} />
+                            </a>
+                          )}
+                          {project.announcement && (
+                            <a
+                              href={project.announcement}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`p-2 rounded-full transition-all duration-300 ${
+                                theme === "dark"
+                                  ? "text-gray-400 hover:text-white hover:bg-gray-800"
+                                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                              }`}
+                              aria-label="View announcement"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Link size={18} />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Prize */}
+                      <div className="flex items-center space-x-2 mb-4">
+                        <Trophy size={16} className="text-yellow-500" />
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}
+                        >
+                          {project.prize}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <p
+                        className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${
+                          theme === "dark" ? "text-gray-300" : "text-gray-600"
+                        }`}
+                      >
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${
+                              theme === "dark"
+                                ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                            }`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-16">
-          <div className={`inline-block p-1 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 mb-4`}>
-            <div className={`px-6 py-2 rounded-full ${theme === "dark" ? "bg-gray-950" : "bg-white"}`}>
-              <p className={`text-sm font-medium ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                <span className="text-pink-600">Note:</span> While my formal education didn't include blockchain or Web3 coursework, building these projects alongside traditional assignments taught me the discipline to tackle complex problems that textbooks couldn't address.
+          <div
+            className={`inline-block p-1 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 mb-4`}
+          >
+            <div
+              className={`px-6 py-2 rounded-full ${theme === "dark" ? "bg-gray-950" : "bg-white"}`}
+            >
+              <p
+                className={`text-sm font-medium ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+              >
+                <span className="text-pink-600">Achievement Unlocked:</span>{" "}
+                Consistently turning ideas into winning solutions across diverse
+                blockchain ecosystems.
               </p>
             </div>
-          </div>
-          <div className="mt-8">
-            <a
-              href="https://github.com/manobendra"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center space-x-2 font-medium text-lg px-6 py-3 rounded-full border-2 transition-all duration-300 ${
-                theme === "dark"
-                  ? "text-pink-400 border-pink-400 hover:bg-pink-400 hover:text-gray-900"
-                  : "text-pink-600 border-pink-600 hover:bg-pink-600 hover:text-white"
-              }`}
-            >
-              <Github size={20} />
-              <span>Explore All Projects</span>
-              <ExternalLink size={16} />
-            </a>
           </div>
         </div>
       </div>
 
       {/* Project Detail Modal */}
       {selectedProject && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedProject(null)}
         >
-          <div 
+          <div
             className={`max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl ${
               theme === "dark" ? "bg-gray-900" : "bg-white"
             }`}
@@ -308,39 +528,58 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className={`text-2xl font-bold mb-2 ${
-                    theme === "dark" ? "text-white" : "text-gray-900"
-                  }`}>
+                  <h3
+                    className={`text-2xl font-bold mb-2 ${
+                      theme === "dark" ? "text-white" : "text-gray-900"
+                    }`}
+                  >
                     {selectedProject.title}
                   </h3>
-                  <p className={`text-lg ${
-                    theme === "dark" ? "text-gray-300" : "text-gray-600"
-                  }`}>
-                    {selectedProject.shortDescription}
-                  </p>
+                  <div className="flex items-center space-x-4 mb-2">
+                    <span
+                      className={`text-lg ${
+                        theme === "dark" ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {selectedProject.hackathon}
+                    </span>
+                    <span
+                      className={`text-sm ${
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
+                      {selectedProject.month}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Trophy size={16} className="text-yellow-500" />
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium border ${getPrizeColor(selectedProject.prize)}`}
+                    >
+                      {selectedProject.prize}
+                    </span>
+                  </div>
                 </div>
                 <button
                   onClick={() => setSelectedProject(null)}
                   className={`text-2xl font-bold ${
-                    theme === "dark" ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"
+                    theme === "dark"
+                      ? "text-gray-400 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
                   ×
                 </button>
               </div>
-              
-              <img 
-                src={selectedProject.image} 
-                alt={selectedProject.title}
-                className="w-full h-64 object-cover rounded-xl mb-6"
-              />
-              
-              <p className={`text-base leading-relaxed mb-6 ${
-                theme === "dark" ? "text-gray-300" : "text-gray-600"
-              }`}>
+
+              <p
+                className={`text-base leading-relaxed mb-6 ${
+                  theme === "dark" ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
                 {selectedProject.description}
               </p>
-              
+
               <div className="flex flex-wrap gap-2 mb-6">
                 {selectedProject.tech.map((tech) => (
                   <span
@@ -355,11 +594,22 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                   </span>
                 ))}
               </div>
-              
+
               <div className="flex space-x-4">
-                {selectedProject.github && (
+                {selectedProject.demo && (
                   <a
-                    href={selectedProject.github}
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"
+                  >
+                    <ExternalLink size={18} />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+                {selectedProject.announcement && (
+                  <a
+                    href={selectedProject.announcement}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
@@ -368,19 +618,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                         : "border-gray-300 text-gray-700 hover:bg-gray-50"
                     }`}
                   >
-                    <Github size={18} />
-                    <span>View Code</span>
-                  </a>
-                )}
-                {selectedProject.live && (
-                  <a
-                    href={selectedProject.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"
-                  >
-                    <ExternalLink size={18} />
-                    <span>Live Demo</span>
+                    <Link size={18} />
+                    <span>Announcement</span>
                   </a>
                 )}
               </div>
