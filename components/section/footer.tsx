@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface FooterProps {
   theme: string;
@@ -6,15 +6,19 @@ interface FooterProps {
 
 export default function Footer({ theme }: FooterProps) {
   return (
-    <footer className={`border-t py-8 px-6 transition-colors duration-300 ${
-      theme === 'dark' 
-        ? 'bg-gray-950 border-gray-700' 
-        : 'bg-white border-gray-200'
-    }`}>
+    <footer
+      className={`border-t py-8 px-6 transition-colors duration-300 ${
+        theme === "dark"
+          ? "bg-gray-950 border-gray-700"
+          : "bg-white border-gray-200"
+      }`}
+    >
       <div className="max-w-4xl mx-auto text-center">
-        <p className={`transition-colors duration-300 ${
-          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-        }`}>
+        <p
+          className={`font-work-sans transition-colors duration-300 ${
+            theme === "dark" ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
           © 2024 Manobendra Mandal. Built with Next.js and Tailwind CSS.
         </p>
       </div>
