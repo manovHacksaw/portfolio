@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Home, User, FolderOpen, MessageCircle, Sun, Moon } from "lucide-react";
+import { rubik } from "@/app/fonts";
 
 interface FloatingNavbarProps {
   activeSection: string;
@@ -82,7 +83,7 @@ export default function FloatingNavbar({
               {/* Tooltip */}
               <div
                 className={`
-                                absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium font-rubik
+                                                absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium
                 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none
                 ${
                   theme === "dark"
@@ -134,8 +135,8 @@ export default function FloatingNavbar({
           {/* Tooltip */}
           <div
             className={`
-                            absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium font-rubik
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap font-rubik
+                                            absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium
+                                    opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap
             ${
               theme === "dark"
                 ? "bg-gray-800 text-white border border-gray-700"
