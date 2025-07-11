@@ -1,5 +1,7 @@
 "use client";
 
+import { workSans } from "@/app/fonts";
+
 interface FooterProps {
   theme: string;
 }
@@ -15,7 +17,7 @@ export default function Footer({ theme }: FooterProps) {
     >
       <div className="max-w-4xl mx-auto text-center">
         <p
-          className={`font-work-sans transition-colors duration-300 ${
+          className={`${workSans.className} transition-colors duration-300 ${
             theme === "dark" ? "text-gray-400" : "text-gray-600"
           }`}
         >
