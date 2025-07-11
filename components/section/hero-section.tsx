@@ -60,7 +60,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
       <div className="max-w-6xl mx-auto w-full text-left">
         <div className="mb-6">
           <h1
-            className={`text-5xl md:text-6xl lg:text-7xl font-bold leading-tight ${spaceGrotesk.className} transition-colors duration-300 ${
+            className={`text-5xl md:text-6xl lg:text-7xl  leading-tight ${spaceGrotesk.className} transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
@@ -77,7 +77,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
               </motion.span>
             </AnimatePresence>
             <br />
-            I'm <span className={`text-pink-400 ${rubik.className}`}>Manobendra Mandal</span>
+            I'm <span className={`text-pink-400 font-bold ${rubik.className}`}>Manobendra Mandal</span>
           </h1>
         </div>
 

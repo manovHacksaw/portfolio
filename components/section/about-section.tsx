@@ -15,7 +15,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
       }`}
     >
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-left mb-16">
           <h2
             className={`${spaceGrotesk.className} text-3xl md:text-4xl font-bold mb-6 transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
@@ -23,7 +23,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
           >
             About Me
           </h2>
-          <div className="w-20 h-0.5 bg-pink-500 mx-auto" />
+          <div className="w-20 h-0.5 bg-pink-500 " />
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
