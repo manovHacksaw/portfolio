@@ -135,7 +135,7 @@ export default function FloatingNavbar({
           {/* Tooltip */}
           <div
             className={`
-                                            absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium
+                                            absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium ${rubik.className}
                                     opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap
             ${
               theme === "dark"
