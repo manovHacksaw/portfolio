@@ -165,7 +165,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
             {skills.map((skill) => (
               <span
                 key={skill.name}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium font-ibm-plex-sans transition-all duration-300 ${
                   theme === "dark" ? `${skill.color} border` : skill.color
                 }`}
               >
