@@ -199,7 +199,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         <div className="mb-8">
           <div className="flex flex-wrap gap-4 justify-center">
             <button
-              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium font-rubik transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-pink-600 text-white hover:bg-pink-700"
                   : "bg-gray-900 text-white hover:bg-gray-800"
