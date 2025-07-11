@@ -209,7 +209,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
               <ExternalLink size={16} />
             </button>
             <button
-              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium border transition-all duration-300 ${
+              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium font-rubik border transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-gray-900 border-gray-700 text-gray-300 hover:bg-gray-800"
                   : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
