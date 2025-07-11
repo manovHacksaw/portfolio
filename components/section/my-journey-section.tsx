@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Calendar, Code, Trophy, GraduationCap, Rocket, ChevronDown, ChevronUp } from "lucide-react";
 import { spaceGrotesk, firaSans, poppins, ibmPlexSans } from "@/app/fonts";
@@ -18,16 +19,15 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
     {
       id: "early-sparks",
       icon: Rocket,
-      title: "Early Sparks",
+      title: "The Spark: A Curious Beginning",
       period: "2019 – 2020",
-      subtitle: "The Beginning of My Tech Journey",
-      description: "My curiosity for computers started back in school. In 2019 (Class 10), I self-learned Python syntax and dabbled in HTML & CSS basics.",
+      description: "It all started with a simple question: 'How do computers *really* work?' In high school, I dove headfirst into Python and web basics, fueled by pure curiosity and the thrill of making something from nothing.",
       highlights: [
-        "Self-learned Python syntax in Class 10",
-        "Built small static websites with HTML & CSS",
-        "Solved simple problems in Python",
-        "Chose Commerce in 11th-12th due to Economics fascination",
-        "Consistently explored coding during lockdown through Jupyter Notebook"
+        "Ignited my passion by self-learning Python in 10th grade",
+        "Brought my first digital ideas to life with simple HTML & CSS",
+        "Discovered the joy of problem-solving through code",
+        "Balanced my fascination for tech with a formal education in Commerce",
+        "Turned lockdown into an opportunity, spending hours in Jupyter Notebook"
       ],
       technologies: ["Python", "HTML", "CSS", "Jupyter Notebook"],
       color: "from-blue-500 to-purple-500"
@@ -35,16 +35,15 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
     {
       id: "self-learning",
       icon: Code,
-      title: "Self-Learning Phase",
+      title: "The Forge: Full-Stack Foundations",
       period: "2021 – mid-2022",
-      subtitle: "Building Foundation & First Real Projects",
-      description: "Before starting college, I dove deep into web development, building responsive websites and exploring full-stack technologies.",
+      description: "The year before college became my personal bootcamp. I devoured everything I could about web development, transforming myself from a hobbyist into a builder, ready to tackle real-world challenges.",
       highlights: [
-        "Built responsive websites using HTML, CSS, and JavaScript",
-        "Learned React.js and built Weather App & News Application",
-        "Explored Node.js, Express.js, and MongoDB",
-        "Gained understanding of REST APIs",
-        "Created first full-stack applications"
+        "Engineered my first full-stack MERN applications from scratch",
+        "Mastered React.js by building dynamic, data-driven apps",
+        "Understood the power of APIs to connect the digital world",
+        "Learned to sculpt data with Node.js, Express, and MongoDB",
+        "Graduated from static pages to building interactive web experiences"
       ],
       technologies: ["HTML", "CSS", "JavaScript", "React.js", "Node.js", "Express.js", "MongoDB", "REST APIs"],
       color: "from-green-500 to-teal-500"
@@ -52,16 +51,14 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
     {
       id: "year-1",
       icon: GraduationCap,
-      title: "College Begins & CS Fundamentals",
+      title: "Bridging Theory & Practice",
       period: "Autumn 2022 – Spring 2023",
-      subtitle: "College Begins & CS Fundamentals",
-      description: "Started my formal Computer Science education while building several React.js projects and learning core CS concepts.",
+      description: "College wasn't just about lectures; it was about connecting the dots. I merged formal CS fundamentals with my hands-on experience, building more robust projects and solidifying my understanding of software architecture.",
       highlights: [
-        "Built several React.js projects",
-        "Started learning Computer Science fundamentals",
-        "Explored Full Stack development basics",
-        "Improved understanding of databases and backend systems",
-        "Established strong foundation in web development"
+        "Applied academic CS concepts to real-world React projects",
+        "Developed a deeper appreciation for clean code and system design",
+        "Strengthened my grasp of databases and backend architecture",
+        "Built a rock-solid foundation for future, more complex challenges"
       ],
       technologies: ["React.js", "JavaScript", "Database Systems", "Backend Development"],
       color: "from-yellow-500 to-orange-500"
@@ -69,16 +66,14 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
     {
       id: "year-2",
       icon: Code,
-      title: "Deep Dive into CS & MERN Mastery",
+      title: "Mastering the Craft",
       period: "Autumn 2023 – Spring 2024",
-      subtitle: "Deep Dive into CS & MERN Mastery",
-      description: "Focused heavily on core Computer Science concepts while becoming proficient with the MERN stack and building production-ready applications.",
+      description: "This was the year of mastery. I went deep on the hard stuff—Data Structures, Algorithms, OS—while sharpening my MERN stack skills to build production-grade applications that were scalable, efficient, and powerful.",
       highlights: [
-        "Mastered Data Structures & Algorithms",
-        "Studied Operating Systems and DBMS in depth",
-        "Became proficient with the MERN stack",
-        "Built production-ready full-stack projects",
-        "Solidified full-stack development skills"
+        "Conquered complex Data Structures & Algorithms",
+        "Gained proficiency in the full MERN stack for production environments",
+        "Studied the inner workings of Operating Systems and DBMS",
+        "Transitioned from building projects to engineering solutions"
       ],
       technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "Data Structures", "Algorithms", "Operating Systems", "DBMS"],
       color: "from-pink-500 to-red-500"
@@ -86,19 +81,15 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
     {
       id: "year-3",
       icon: Trophy,
-      title: "Blockchain Revolution & Advanced Technologies",
+      title: "The Leap: Blockchain & Hackathon Triumphs",
       period: "Autumn 2024 – Spring 2025",
-      subtitle: "Blockchain Revolution & Advanced Technologies",
-      description: "Entered the blockchain space, won multiple hackathons, and expanded into cutting-edge technologies including Rust and Solana development.",
+      description: "This is where everything accelerated. I plunged into the decentralized world of blockchain, a new frontier of innovation. The high-stakes, high-energy world of hackathons became my arena, pushing my limits and proving my skills.",
       highlights: [
-        "🏆 Won a hackathon at the start of 3rd year",
-        "Entered blockchain space with Solidity and smart contracts",
-        "Learned Java and built blockchain CRUD applications",
-        "Explored NFTs and deployed ERC20-based projects",
-        "Expanded tech stack with Docker, Shell Scripting, and UNIX",
-        "🏆 Won another hackathon at the end of 5th semester",
-        "Final semester focused on Rust and Solana smart contract development",
-        "🏆 Won 5 more hackathons in 6th semester"
+        "🏆 **7x Hackathon Winner:** Conquered multiple hackathons, validating my skills in high-pressure environments and fueling my competitive spirit.",
+        "Pioneered my journey into Web3 with Solidity and smart contracts",
+        "Engineered blockchain applications with Java",
+        "Explored the world of NFTs and deployed my own ERC20 projects",
+        "Ventured into low-level systems with Rust and Solana development"
       ],
       technologies: ["Solidity", "Java", "Smart Contracts", "NFTs", "ERC20", "Docker", "Shell Scripting", "UNIX", "Rust", "Solana"],
       color: "from-purple-500 to-indigo-500"
@@ -106,16 +97,14 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
     {
       id: "present",
       icon: Rocket,
-      title: "Present",
-      period: "2025",
-      subtitle: "Still Curious. Still Building.",
-      description: "Completed BCA and currently sharpening skills in advanced blockchain development and scalable applications.",
+      title: "The Horizon: Still Curious, Still Building",
+      period: "2025 – Beyond",
+      description: "With my degree in hand, my mission is clearer than ever: to build decentralized systems that are scalable, secure, and impactful. The learning never stops, and I'm hungrier than ever to tackle the next big challenge.",
       highlights: [
-        "Completed BCA degree (2022-2025)",
-        "Mastering Solana smart contract development",
-        "Advanced Rust programming skills",
-        "Building scalable full-stack applications",
-        "Continuously learning and adapting to new technologies"
+        "Graduated with a rich portfolio of experience (BCA 2022-2025)",
+        "Deeply focused on mastering Rust for high-performance systems",
+        "Building next-generation dApps on the Solana ecosystem",
+        "Continuously exploring emerging tech and pushing my own boundaries"
       ],
       technologies: ["Rust", "Solana", "Advanced Blockchain", "Full-Stack Development", "Smart Contracts"],
       color: "from-emerald-500 to-cyan-500"
@@ -144,7 +133,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            From curious schoolboy to blockchain developer - here's how my passion for technology evolved
+            From a spark of curiosity to a passion for building the future. This is my developer origin story.
           </p>
         </div>
 
@@ -155,7 +144,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
           }`} />
 
           <div className="space-y-8">
-            {journeyPhases.map((phase, index) => {
+            {journeyPhases.map((phase) => {
               const Icon = phase.icon;
               const isExpanded = expandedPhase === phase.id;
               
@@ -240,7 +229,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                                 theme === "dark" ? "text-white" : "text-gray-900"
                               }`}
                             >
-                              Key Highlights
+                              Key Moments
                             </h4>
                             <ul className="space-y-2">
                               {phase.highlights.map((highlight, idx) => (
@@ -251,7 +240,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                                   }`}
                                 >
                                   <span className="w-2 h-2 bg-pink-600 rounded-full mr-3 mt-2 flex-shrink-0" />
-                                  {highlight}
+                                  <span dangerouslySetInnerHTML={{ __html: highlight }} />
                                 </li>
                               ))}
                             </ul>
@@ -264,7 +253,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                                 theme === "dark" ? "text-white" : "text-gray-900"
                               }`}
                             >
-                              Technologies Learned
+                              Tech Stack
                             </h4>
                             <div className="flex flex-wrap gap-2">
                               {phase.technologies.map((tech) => (
@@ -294,9 +283,9 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
         {/* Summary stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { label: "Years of Coding", value: "3+" },
-            { label: "Technologies Learned", value: "25+" },
-            { label: "Projects Built", value: "20+" },
+            { label: "Years of Coding", value: "6+" },
+            { label: "Technologies Mastered", value: "25+" },
+            { label: "Projects Shipped", value: "20+" },
             { label: "Hackathons Won", value: "7" },
           ].map((stat) => (
             <div
