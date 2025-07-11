@@ -8,127 +8,11 @@ import {
   Award,
   Star,
   TrendingUp,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { useState } from "react";
-import { useCounter } from "@/hooks/use-counter";
 
 interface HackathonWinsSectionProps {
   theme: string;
-}
-
-interface StatsSectionProps {
-  theme: string;
-  hackathonsCount: number;
-  projectsCount: number;
-  totalPrizeValue: number;
-  majorWins: number;
-}
-
-function StatsSection({
-  theme,
-  hackathonsCount,
-  projectsCount,
-  totalPrizeValue,
-  majorWins,
-}: StatsSectionProps) {
-  const { count: hackathonsCounter, countRef: hackathonsRef } = useCounter({
-    end: hackathonsCount,
-    duration: 1500,
-  });
-  const { count: projectsCounter, countRef: projectsRef } = useCounter({
-    end: projectsCount,
-    duration: 2000,
-  });
-  const { count: prizeCounter, countRef: prizeRef } = useCounter({
-    end: totalPrizeValue,
-    duration: 2500,
-  });
-  const { count: winsCounter, countRef: winsRef } = useCounter({
-    end: majorWins,
-    duration: 1800,
-  });
-
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-      <div
-        ref={hackathonsRef}
-        className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
-          theme === "dark"
-            ? "bg-gray-900/50 border-gray-700 hover:border-pink-500/50"
-            : "bg-gray-50 border-gray-200 hover:border-pink-300"
-        }`}
-      >
-        <Trophy className="w-8 h-8 text-pink-500 mx-auto mb-3" />
-        <div className="text-2xl font-bold text-pink-500">
-          {Math.floor(hackathonsCounter)}
-        </div>
-        <div
-          className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
-        >
-          Hackathons
-        </div>
-      </div>
-
-      <div
-        ref={projectsRef}
-        className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
-          theme === "dark"
-            ? "bg-gray-900/50 border-gray-700 hover:border-green-600/50"
-            : "bg-gray-50 border-gray-200 hover:border-green-300"
-        }`}
-      >
-        <Star className="w-8 h-8 text-green-600 mx-auto mb-3" />
-        <div className="text-2xl font-bold text-green-600">
-          {Math.floor(projectsCounter)}
-        </div>
-        <div
-          className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
-        >
-          Projects Built
-        </div>
-      </div>
-
-      <div
-        ref={prizeRef}
-        className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
-          theme === "dark"
-            ? "bg-gray-900/50 border-gray-700 hover:border-yellow-600/50"
-            : "bg-gray-50 border-gray-200 hover:border-yellow-300"
-        }`}
-      >
-        <TrendingUp className="w-8 h-8 text-yellow-600 mx-auto mb-3" />
-        <div className="text-2xl font-bold text-yellow-600">
-          ${Math.floor(prizeCounter).toLocaleString()}
-        </div>
-        <div
-          className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
-        >
-          Prize Money
-        </div>
-      </div>
-
-      <div
-        ref={winsRef}
-        className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
-          theme === "dark"
-            ? "bg-gray-900/50 border-gray-700 hover:border-purple-600/50"
-            : "bg-gray-50 border-gray-200 hover:border-purple-300"
-        }`}
-      >
-        <Award className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-        <div className="text-2xl font-bold text-purple-600">
-          {Math.floor(winsCounter)}
-        </div>
-        <div
-          className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
-        >
-          Major Wins
-        </div>
-      </div>
-    </div>
-  );
 }
 
 interface Project {
@@ -148,7 +32,6 @@ export default function HackathonWinsSection({
   theme,
 }: HackathonWinsSectionProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showAllHackathons, setShowAllHackathons] = useState(false);
 
   const hackathons = [
     {
@@ -391,7 +274,7 @@ export default function HackathonWinsSection({
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
-            🚀 Hackathon Highlights
+            Hackathon Highlights
           </h2>
           <p
             className={`text-lg max-w-3xl mx-auto mb-8 ${
@@ -403,229 +286,261 @@ export default function HackathonWinsSection({
             Over ${totalPrizeValue.toLocaleString()} in prizes won across
             multiple blockchain platforms.
           </p>
-          <div className="w-20 h-0.5 bg-gradient-to-r from-pink-500 to-purple-600 mx-auto" />
+          <div className="w-20 h-0.5 bg-gradient-to-r from-pink-600 to-purple-600 mx-auto" />
         </div>
 
-        {/* Enhanced Stats with Counter Animation */}
-        <StatsSection
-          theme={theme}
-          hackathonsCount={hackathons.length}
-          projectsCount={allProjects.length}
-          totalPrizeValue={totalPrizeValue}
-          majorWins={allProjects.filter((p) => p.featured).length}
-        />
+        {/* Enhanced Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div
+            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700 hover:border-pink-600/50"
+                : "bg-gray-50 border-gray-200 hover:border-pink-300"
+            }`}
+          >
+            <Trophy className="w-8 h-8 text-pink-600 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-pink-600">
+              {hackathons.length}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Hackathons
+            </div>
+          </div>
+          <div
+            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700 hover:border-green-600/50"
+                : "bg-gray-50 border-gray-200 hover:border-green-300"
+            }`}
+          >
+            <Star className="w-8 h-8 text-green-600 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-green-600">
+              {allProjects.length}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Projects Built
+            </div>
+          </div>
+          <div
+            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700 hover:border-yellow-600/50"
+                : "bg-gray-50 border-gray-200 hover:border-yellow-300"
+            }`}
+          >
+            <TrendingUp className="w-8 h-8 text-yellow-600 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-yellow-600">
+              ${totalPrizeValue.toLocaleString()}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Prize Money
+            </div>
+          </div>
+          <div
+            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+              theme === "dark"
+                ? "bg-gray-900/50 border-gray-700 hover:border-purple-600/50"
+                : "bg-gray-50 border-gray-200 hover:border-purple-300"
+            }`}
+          >
+            <Award className="w-8 h-8 text-purple-600 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-purple-600">
+              {allProjects.filter((p) => p.featured).length}
+            </div>
+            <div
+              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+            >
+              Major Wins
+            </div>
+          </div>
+        </div>
 
         {/* Timeline-style hackathon list */}
         <div className="space-y-12">
-          {hackathons
-            .slice(0, showAllHackathons ? hackathons.length : 3)
-            .map((hackathon, hackathonIndex) => (
-              <div key={hackathon.name} className="relative">
-                {/* Timeline line */}
-                {hackathonIndex !==
-                  (showAllHackathons
-                    ? hackathons.length - 1
-                    : Math.min(2, hackathons.length - 1)) && (
-                  <div
-                    className={`absolute left-4 top-16 bottom-0 w-0.5 ${
-                      theme === "dark" ? "bg-gray-800" : "bg-gray-200"
-                    }`}
-                  />
-                )}
+          {hackathons.map((hackathon, hackathonIndex) => (
+            <div key={hackathon.name} className="relative">
+              {/* Timeline line */}
+              {hackathonIndex !== hackathons.length - 1 && (
+                <div
+                  className={`absolute left-4 top-16 bottom-0 w-0.5 ${
+                    theme === "dark" ? "bg-gray-800" : "bg-gray-200"
+                  }`}
+                />
+              )}
 
-                {/* Hackathon header */}
-                <div className="flex items-start space-x-6 mb-6">
-                  <div
-                    className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
-                      theme === "dark"
-                        ? "bg-gray-950 border-pink-500"
-                        : "bg-white border-pink-500"
+              {/* Hackathon header */}
+              <div className="flex items-start space-x-6 mb-6">
+                <div
+                  className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
+                    theme === "dark"
+                      ? "bg-gray-950 border-pink-600"
+                      : "bg-white border-pink-500"
+                  }`}
+                >
+                  <div className="w-2 h-2 bg-pink-600 rounded-full" />
+                </div>
+                <div className="flex-1">
+                  <h3
+                    className={`text-2xl font-bold mb-2 ${
+                      theme === "dark" ? "text-white" : "text-gray-900"
                     }`}
                   >
-                    <div className="w-2 h-2 bg-pink-500 rounded-full" />
-                  </div>
-                  <div className="flex-1">
-                    <h3
-                      className={`text-2xl font-bold mb-2 ${
-                        theme === "dark" ? "text-white" : "text-gray-900"
+                    {hackathon.name}
+                  </h3>
+                  <div className="flex items-center space-x-2">
+                    <Calendar
+                      size={16}
+                      className={
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }
+                    />
+                    <span
+                      className={`text-sm ${
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
                       }`}
                     >
-                      {hackathon.name}
-                    </h3>
-                    <div className="flex items-center space-x-2">
-                      <Calendar
-                        size={16}
-                        className={
-                          theme === "dark" ? "text-gray-400" : "text-gray-500"
-                        }
-                      />
-                      <span
-                        className={`text-sm ${
-                          theme === "dark" ? "text-gray-400" : "text-gray-500"
-                        }`}
-                      >
-                        {hackathon.month}
-                      </span>
-                    </div>
+                      {hackathon.month}
+                    </span>
                   </div>
                 </div>
+              </div>
 
-                {/* Projects grid */}
-                <div className="ml-14 grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-                  {hackathon.projects.map((project, projectIndex) => (
-                    <div
-                      key={`${hackathon.name}-${project.title}`}
-                      className={`
+              {/* Projects grid */}
+              <div className="ml-14 grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                {hackathon.projects.map((project, projectIndex) => (
+                  <div
+                    key={`${hackathon.name}-${project.title}`}
+                    className={`
                       group rounded-2xl border shadow-sm overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer
                       ${project.featured ? "lg:col-span-2 md:col-span-2" : ""}
                       ${
                         theme === "dark"
-                          ? "bg-gray-900/50 border-gray-700 hover:shadow-2xl hover:border-pink-500/50 backdrop-blur-sm"
+                          ? "bg-gray-900/50 border-gray-700 hover:shadow-2xl hover:border-pink-600/50 backdrop-blur-sm"
                           : "bg-white/50 border-gray-200 hover:shadow-2xl hover:border-pink-300 backdrop-blur-sm"
                       }
                     `}
-                      onClick={() =>
-                        setSelectedProject({
-                          ...project,
-                          hackathon: hackathon.name,
-                          month: hackathon.month,
-                        })
-                      }
+                    onClick={() =>
+                      setSelectedProject({
+                        ...project,
+                        hackathon: hackathon.name,
+                        month: hackathon.month,
+                      })
+                    }
+                  >
+                    {/* Project Header */}
+                    <div
+                      className={`p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}
                     >
-                      {/* Project Header */}
-                      <div
-                        className={`p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}
-                      >
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex-1">
-                            <h4
-                              className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h4
+                            className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                              theme === "dark"
+                                ? "text-white group-hover:text-pink-400"
+                                : "text-gray-900 group-hover:text-pink-600"
+                            }`}
+                          >
+                            {project.title}
+                          </h4>
+                          {project.featured && (
+                            <span
+                              className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${
                                 theme === "dark"
-                                  ? "text-white group-hover:text-pink-400"
-                                  : "text-gray-900 group-hover:text-pink-500"
+                                  ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
+                                  : "bg-pink-100 text-pink-800 border border-pink-200"
                               }`}
                             >
-                              {project.title}
-                            </h4>
-                            {project.featured && (
-                              <span
-                                className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${
-                                  theme === "dark"
-                                    ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
-                                    : "bg-pink-100 text-pink-800 border border-pink-200"
-                                }`}
-                              >
-                                Major Win
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
-                            {project.demo && (
-                              <a
-                                href={project.demo}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`p-2 rounded-full transition-all duration-300 ${
-                                  theme === "dark"
-                                    ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                                }`}
-                                aria-label="View live demo"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <ExternalLink size={18} />
-                              </a>
-                            )}
-                            {project.announcement && (
-                              <a
-                                href={project.announcement}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`p-2 rounded-full transition-all duration-300 ${
-                                  theme === "dark"
-                                    ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                                }`}
-                                aria-label="View announcement"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <Link size={18} />
-                              </a>
-                            )}
-                          </div>
+                              Major Win
+                            </span>
+                          )}
                         </div>
-
-                        {/* Prize */}
-                        <div className="flex items-center space-x-2 mb-4">
-                          <Trophy size={16} className="text-yellow-500" />
-                          <span
-                            className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}
-                          >
-                            {project.prize}
-                          </span>
+                        <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
+                          {project.demo && (
+                            <a
+                              href={project.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`p-2 rounded-full transition-all duration-300 ${
+                                theme === "dark"
+                                  ? "text-gray-400 hover:text-white hover:bg-gray-800"
+                                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                              }`}
+                              aria-label="View live demo"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <ExternalLink size={18} />
+                            </a>
+                          )}
+                          {project.announcement && (
+                            <a
+                              href={project.announcement}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`p-2 rounded-full transition-all duration-300 ${
+                                theme === "dark"
+                                  ? "text-gray-400 hover:text-white hover:bg-gray-800"
+                                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                              }`}
+                              aria-label="View announcement"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Link size={18} />
+                            </a>
+                          )}
                         </div>
                       </div>
 
-                      <div className="p-6">
-                        <p
-                          className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${
-                            theme === "dark" ? "text-gray-300" : "text-gray-600"
-                          }`}
+                      {/* Prize */}
+                      <div className="flex items-center space-x-2 mb-4">
+                        <Trophy size={16} className="text-yellow-500" />
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}
                         >
-                          {project.description}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${
-                                theme === "dark"
-                                  ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                              }`}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+                          {project.prize}
+                        </span>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-        </div>
 
-        {/* Show More/Less Button */}
-        {hackathons.length > 3 && (
-          <div className="text-center mt-12">
-            <button
-              onClick={() => setShowAllHackathons(!showAllHackathons)}
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg border transition-all duration-300 hover:scale-105 ${
-                theme === "dark"
-                  ? "bg-gray-900/50 border-gray-700 text-gray-300 hover:border-pink-500/50 hover:text-white"
-                  : "bg-white border-gray-200 text-gray-700 hover:border-pink-300 hover:text-gray-900"
-              }`}
-            >
-              {showAllHackathons ? (
-                <>
-                  Show Less
-                  <ChevronUp size={16} />
-                </>
-              ) : (
-                <>
-                  Show More ({hackathons.length - 3} more)
-                  <ChevronDown size={16} />
-                </>
-              )}
-            </button>
-          </div>
-        )}
+                    <div className="p-6">
+                      <p
+                        className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${
+                          theme === "dark" ? "text-gray-300" : "text-gray-600"
+                        }`}
+                      >
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${
+                              theme === "dark"
+                                ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                            }`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="text-center mt-16">
           <div
-            className={`inline-block p-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 mb-4`}
+            className={`inline-block p-1 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 mb-4`}
           >
             <div
               className={`px-6 py-2 rounded-full ${theme === "dark" ? "bg-gray-950" : "bg-white"}`}
@@ -633,7 +548,7 @@ export default function HackathonWinsSection({
               <p
                 className={`text-sm font-medium ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
               >
-                <span className="text-pink-500">Achievement Unlocked:</span>{" "}
+                <span className="text-pink-600">Achievement Unlocked:</span>{" "}
                 Consistently turning ideas into winning solutions across diverse
                 blockchain ecosystems.
               </p>
@@ -730,7 +645,7 @@ export default function HackathonWinsSection({
                     href={selectedProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-pink-500 text-white hover:bg-pink-700 transition-colors"
+                    className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"
                   >
                     <ExternalLink size={18} />
                     <span>Live Demo</span>

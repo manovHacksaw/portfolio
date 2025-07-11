@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-gray-950' : 'bg-white'
+      theme === 'dark' ? 'bg-black' : 'bg-white'
     }`}>
       <FloatingNavbar 
         activeSection={activeSection} 
