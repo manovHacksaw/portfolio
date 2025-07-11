@@ -94,7 +94,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
         theme === "dark" ? "bg-black" : "bg-gray-50"
       }`}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-16 text-center md:text-left">
           <h2

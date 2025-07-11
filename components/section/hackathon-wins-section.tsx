@@ -222,7 +222,7 @@ export default function HackathonWinsSection({
       prize.includes("6,000") ||
       prize.includes("3,000")
     ) {
-      return "bg-yellow-500/20 border-yellow-500/50 text-yellow-300";
+      return "bg-yellow-500/20 border-yellow-500/50 ";
     } else if (
       prize.includes("2nd") ||
       prize.includes("2,000") ||
