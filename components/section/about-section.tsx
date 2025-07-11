@@ -83,7 +83,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                 ].map((tech) => (
                   <span
                     key={tech}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+                    className={`px-3 py-1 rounded-full text-sm font-medium font-ibm-plex-sans transition-colors duration-300 ${
                       theme === "dark"
                         ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
                         : "bg-pink-100 text-pink-800"
