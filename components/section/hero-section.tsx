@@ -132,7 +132,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         <div className="mb-8">
           <div className="flex items-center justify-center">
             <h2
-              className={`text-3xl font-mono md:text-4xl lg:text-5xl font-bold transition-colors duration-300 ${
+              className={`text-3xl font-jetbrains-mono md:text-4xl lg:text-5xl font-bold transition-colors duration-300 ${
                 theme === "dark" ? "text-white" : "text-gray-900"
               }`}
             >
