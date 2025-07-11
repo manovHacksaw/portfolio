@@ -101,7 +101,7 @@ export function BlogSection() {
                   </div>
                 </div>
 
-                <CardTitle className="text-slate-800 group-hover:text-pink-600 transition-colors leading-tight">
+                <CardTitle className="text-slate-800 group-hover:text-pink-500 transition-colors leading-tight">
                   {post.title}
                 </CardTitle>
 
@@ -123,7 +123,7 @@ export function BlogSection() {
 
                 <Button
                   variant="ghost"
-                  className="text-pink-600 hover:text-pink-700 hover:bg-pink-50 p-0 h-auto font-medium group/btn"
+                  className="text-pink-500 hover:text-pink-700 hover:bg-pink-50 p-0 h-auto font-medium group/btn"
                 >
                   <span className="flex items-center gap-2">
                     Read More

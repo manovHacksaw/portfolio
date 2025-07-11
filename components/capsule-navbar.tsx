@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Home, User, FolderOpen, MessageCircle, Sun, Moon } from "lucide-react";
+import {
+  Home,
+  User,
+  FolderOpen,
+  Trophy,
+  MessageCircle,
+  Sun,
+  Moon,
+} from "lucide-react";
 import { rubik } from "@/app/fonts";
 
 interface FloatingNavbarProps {
@@ -32,6 +40,7 @@ export default function FloatingNavbar({
     { id: "hero", icon: Home, label: "Home" },
     { id: "about", icon: User, label: "About" },
     { id: "projects", icon: FolderOpen, label: "Projects" },
+    { id: "hackathons", icon: Trophy, label: "Hackathons" },
     { id: "contact", icon: MessageCircle, label: "Contact" },
   ];
 
@@ -66,8 +75,8 @@ export default function FloatingNavbar({
                 ${
                   isActive
                     ? theme === "dark"
-                      ? "bg-pink-600 text-white shadow-lg"
-                      : "bg-pink-600 text-white shadow-lg"
+                      ? "bg-pink-500 text-white shadow-lg"
+                      : "bg-pink-500 text-white shadow-lg"
                     : theme === "dark"
                       ? "text-gray-400 hover:text-white hover:bg-gray-800"
                       : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"

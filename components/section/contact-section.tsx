@@ -57,7 +57,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           >
             Let's Connect
           </h2>
-          <div className="w-20 h-0.5 bg-pink-600 mx-auto" />
+          <div className="w-20 h-0.5 bg-pink-500 mx-auto" />
         </div>
 
         <div className="mb-12">
@@ -84,7 +84,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                 rel="noopener noreferrer"
                 className={`group rounded-xl p-6 border shadow-sm transition-all duration-300 ${
                   theme === "dark"
-                    ? "bg-gray-950 border-gray-700 hover:shadow-lg hover:border-pink-600/50"
+                    ? "bg-gray-950 border-gray-700 hover:shadow-lg hover:border-pink-500/50"
                     : "bg-white border-gray-200 hover:shadow-lg hover:border-pink-300"
                 }`}
               >
@@ -96,14 +96,14 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                         : "bg-pink-100 group-hover:bg-pink-200"
                     }`}
                   >
-                    <Icon className="w-6 h-6 text-pink-600" />
+                    <Icon className="w-6 h-6 text-pink-500" />
                   </div>
                   <div>
                     <h3
                       className={`font-semibold ${poppins.className} transition-colors duration-300 ${
                         theme === "dark"
                           ? "text-white group-hover:text-pink-400"
-                          : "text-gray-900 group-hover:text-pink-600"
+                          : "text-gray-900 group-hover:text-pink-500"
                       }`}
                     >
                       {link.label}
@@ -146,7 +146,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           </p>
           <a
             href="mailto:hello@manobendra.dev"
-            className={`inline-flex items-center space-x-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
+            className={`inline-flex items-center space-x-2 bg-pink-500 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
           >
             <Mail size={18} />
             <span>Get in touch</span>

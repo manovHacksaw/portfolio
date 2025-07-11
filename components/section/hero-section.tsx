@@ -38,7 +38,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
 
   // Keep the typewriter for the second line as it is
   const typewriterText = useTypewriter(
-    ["learning Solana Development", "stacking wins on chain", "building"],
+    [`learning Solana Development"`, `debugging life, stacking wins on chain"`, `building to solve real-life problems"`],
     100,
   );
 
@@ -104,11 +104,11 @@ export default function HeroSection({ theme }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className={`min-h-screen flex items-center justify-center px-6 md:px-8 lg:px-12 pt-20 transition-colors duration-300 ${
+      className={`min-h-screen flex items-left  justify-left px-6 md:px-8 lg:px-12 pt-48 pb-20 transition-colors duration-300 ${
         theme === "dark" ? "bg-gray-950" : "bg-white"
       }`}
     >
-      <div className="max-w-6xl mx-auto w-full text-center">
+      <div className="max-w-6xl mx-auto w-full text-left">
         {/* Main title */}
         <div className="mb-6">
           <h1
@@ -124,14 +124,14 @@ export default function HeroSection({ theme }: HeroSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="inline-block" // Ensures smooth transitions
+                className="inline-block pb-8" // Ensures smooth transitions
               >
                 {greetings[greetingIndex]}
               </motion.span>
             </AnimatePresence>
             <br />
             I'm{" "}
-            <span className={`text-pink-600 ${rubik.className}`}>
+            <span className={`text-pink-400  ${rubik.className}`}>
               Manobendra Mandal
             </span>
           </h1>
@@ -139,11 +139,11 @@ export default function HeroSection({ theme }: HeroSectionProps) {
 
         {/* Typewriter line - This remains the same */}
         <div className="mb-8">
-          <div className="flex items-center justify-center">
-            <h2 className={`text-3xl font-mono md:text-4xl lg:text-5xl font-bold transition-colors duration-300 ${
+          <div className="flex items-left justify-left">
+            <h2 className={`text-3xl font-mono md:text-4xl lg:text-3xl font-bold transition-colors duration-300 italic ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
-              {typewriterText}
+              "{typewriterText}
             </h2>
             <div className={`w-0.5 h-8 md:h-10 lg:h-12 ml-2 animate-pulse transition-colors duration-300 ${
               theme === 'dark' ? 'bg-white' : 'bg-gray-900'
@@ -154,19 +154,17 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         {/* Bio */}
         <div className="mb-8">
           <p
-            className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${firaSans.className} transition-colors duration-300 ${
+            className={`text-lg md:text-xl max-w-3xl  leading-relaxed ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            Passionate developer exploring the intersection of web development
-            and blockchain technology. Currently diving deep into Solana
-            development and building innovative solutions.
+           Curious mind building at the edge of Web3 and AI, right now deep in Solana dev. Hackathon junkie with a track record of shipping fast and learning faster. Been serious about the academic grind too—kept my basics sharp. Chasing the next big leap (probably overseas), but always rooted in learning and building cool things with good people.
           </p>
         </div>
 
         {/* Skills */}
         <div className="mb-8">
-          <div className="flex flex-wrap gap-3 max-w-4xl mx-auto justify-center">
+          <div className="flex flex-wrap gap-3 max-w-4xl  justify-left">
             {skills.map((skill) => (
               <span
                 key={skill.name}
@@ -185,8 +183,8 @@ export default function HeroSection({ theme }: HeroSectionProps) {
           <div
             className={`inline-flex items-center px-4 py-2 rounded-full border transition-colors duration-300 ${
               theme === "dark"
-                ? "bg-gray-900 border-gray-700"
-                : "bg-gray-100 border-gray-200"
+                ? " border-gray-700"
+                : " border-gray-200"
             }`}
           >
             <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
@@ -202,11 +200,11 @@ export default function HeroSection({ theme }: HeroSectionProps) {
 
         {/* Action buttons */}
         <div className="mb-8">
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-left">
             <button
-              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} transition-all duration-300 ${
+              className={`inline-flex items-left space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} transition-all duration-300 ${
                 theme === "dark"
-                  ? "bg-pink-600 text-white hover:bg-pink-700"
+                  ? "bg-pink-500 text-white hover:bg-pink-700"
                   : "bg-gray-900 text-white hover:bg-gray-800"
               }`}
             >
@@ -214,7 +212,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
               <ExternalLink size={16} />
             </button>
             <button
-              className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} border transition-all duration-300 ${
+              className={`inline-flex items-left space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} border transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-gray-900 border-gray-700 text-gray-300 hover:bg-gray-800"
                   : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
@@ -228,7 +226,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
 
         {/* Social links */}
         <div>
-          <div className="flex space-x-4 justify-center">
+          <div className="flex space-x-4 justify-left">
             <a
               href="https://github.com/manobendra"
               target="_blank"

@@ -23,7 +23,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
           >
             About Me
           </h2>
-          <div className="w-20 h-0.5 bg-pink-600 mx-auto" />
+          <div className="w-20 h-0.5 bg-pink-500 mx-auto" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -156,15 +156,15 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                 }`}
               >
                 <li className="flex items-center">
-                  <span className="w-2 h-2 bg-pink-600 rounded-full mr-3" />
+                  <span className="w-2 h-2 bg-pink-500 rounded-full mr-3" />
                   Advanced Rust Programming
                 </li>
                 <li className="flex items-center">
-                  <span className="w-2 h-2 bg-pink-600 rounded-full mr-3" />
+                  <span className="w-2 h-2 bg-pink-500 rounded-full mr-3" />
                   Solana Smart Contract Development
                 </li>
                 <li className="flex items-center">
-                  <span className="w-2 h-2 bg-pink-600 rounded-full mr-3" />
+                  <span className="w-2 h-2 bg-pink-500 rounded-full mr-3" />
                   Scalable Full-Stack Applications
                 </li>
               </ul>

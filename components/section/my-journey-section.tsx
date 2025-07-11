@@ -125,9 +125,9 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
-            ✨ My Programming Journey
+            How I Learned to Code
           </h2>
-          <div className="w-20 h-0.5 bg-pink-600 mx-auto mb-4" />
+          <div className="w-20 h-0.5 bg-pink-500 mx-auto mb-4" />
           <p
             className={`${firaSans.className} text-lg max-w-2xl mx-auto transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
@@ -152,7 +152,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                 <div key={phase.id} className="relative">
                   {/* Timeline dot */}
                   <div className={`absolute left-6 w-4 h-4 rounded-full border-4 transition-colors duration-300 ${
-                    theme === "dark" ? "bg-gray-950 border-pink-600" : "bg-white border-pink-600"
+                    theme === "dark" ? "bg-gray-950 border-pink-500" : "bg-white border-pink-500"
                   }`} />
                   
                   {/* Content card */}
@@ -185,9 +185,9 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                                 {phase.title}
                               </h3>
                               <div className="flex items-center space-x-2 mt-1">
-                                <Calendar className="w-4 h-4 text-pink-600" />
+                                <Calendar className="w-4 h-4 text-pink-500" />
                                 <span
-                                  className={`${ibmPlexSans.className} text-sm font-medium text-pink-600`}
+                                  className={`${ibmPlexSans.className} text-sm font-medium text-pink-500`}
                                 >
                                   {phase.period}
                                 </span>
@@ -203,9 +203,9 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                               {isExpanded ? "Less" : "More"}
                             </span>
                             {isExpanded ? (
-                              <ChevronUp className="w-5 h-5 text-pink-600" />
+                              <ChevronUp className="w-5 h-5 text-pink-500" />
                             ) : (
-                              <ChevronDown className="w-5 h-5 text-pink-600" />
+                              <ChevronDown className="w-5 h-5 text-pink-500" />
                             )}
                           </div>
                         </div>
@@ -239,7 +239,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
                                     theme === "dark" ? "text-gray-300" : "text-gray-600"
                                   }`}
                                 >
-                                  <span className="w-2 h-2 bg-pink-600 rounded-full mr-3 mt-2 flex-shrink-0" />
+                                  <span className="w-2 h-2 bg-pink-500 rounded-full mr-3 mt-2 flex-shrink-0" />
                                   <span dangerouslySetInnerHTML={{ __html: highlight }} />
                                 </li>
                               ))}
@@ -297,7 +297,7 @@ export default function ProgrammingJourneySection({ theme }: ProgrammingJourneyS
               }`}
             >
               <div
-                className={`text-2xl font-bold mb-2 ${spaceGrotesk.className} text-pink-600`}
+                className={`text-2xl font-bold mb-2 ${spaceGrotesk.className} text-pink-500`}
               >
                 {stat.value}
               </div>

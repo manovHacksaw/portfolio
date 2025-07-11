@@ -4,6 +4,7 @@ import FloatingNavbar from '@/components/capsule-navbar';
 import AboutSection from '@/components/section/about-section';
 import ContactSection from '@/components/section/contact-section';
 import Footer from '@/components/section/footer';
+import HackathonWinsSection from '@/components/section/hackathon-wins-section';
 import HeroSection from '@/components/section/hero-section';
 import ProgrammingJourneySection from '@/components/section/my-journey-section';
 import ProjectsSection from '@/components/section/projects-section';
@@ -51,6 +52,7 @@ export default function Home() {
 
         <ProjectsSection theme={theme} />
         <ProgrammingJourneySection theme={theme} />
+        <HackathonWinsSection theme={theme} />
         <ContactSection theme={theme} />
       </main>
       
