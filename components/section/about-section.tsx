@@ -1,5 +1,7 @@
 'use client';
 
+import { poppins, rubik } from "@/app/fonts";
+
 interface AboutSectionProps {
   theme: string;
 }
@@ -21,7 +23,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <p className={`font-fira-sans leading-relaxed transition-colors duration-300 ${
+            <p className={`${rubik.className} leading-relaxed transition-colors duration-300 ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               I'm a passionate developer who finds beauty in clean code and

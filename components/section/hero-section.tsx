@@ -80,8 +80,8 @@ export default function HeroSection({ theme }: HeroSectionProps) {
             <h2 className={`text-3xl font-mono md:text-4xl lg:text-5xl font-bold transition-colors duration-300 ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
-              {typewriterText}
-            </h2>
+              {typewriterText} 
+             </h2>
             <div className={`w-0.5 h-8 md:h-10 lg:h-12 ml-2 animate-pulse transition-colors duration-300 ${
               theme === 'dark' ? 'bg-white' : 'bg-gray-900'
             }`}></div>
