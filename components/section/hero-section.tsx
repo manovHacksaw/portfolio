@@ -149,7 +149,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         {/* Bio */}
         <div className="mb-8">
           <p
-            className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed transition-colors duration-300 ${
+            className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-fira-sans transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
