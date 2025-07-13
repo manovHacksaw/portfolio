@@ -102,8 +102,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
   return (
     <section
       id="projects"
-      className={`py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
-        theme === "dark" ? "bg-dark" : "bg-gray-50"
+      className={`py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 transition-smooth ${
+        theme === "dark" ? "bg-dark" : "bg-light-soft"
       }`}
     >
       <div className="max-w-6xl mx-auto">
@@ -111,20 +111,20 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
         <div className="mb-12 sm:mb-16 text-center md:text-left">
           <h2
             className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 tracking-tight ${
-              theme === "dark" ? "text-white" : "text-gray-900"
+              theme === "dark" ? "text-light" : "text-dark"
             } ${spaceGrotesk.className}`}
           >
             Featured Projects
           </h2>
           <p
             className={`text-base sm:text-lg max-w-2xl mx-auto md:mx-0 leading-relaxed ${
-              theme === "dark" ? "text-gray-400" : "text-gray-600"
+              theme === "dark" ? "text-muted-light" : "text-muted-dark"
             } ${workSans.className}`}
           >
             A selection of my recent work, focused on solving real-world
             problems with Web3, DeFi, and innovative technology solutions.
           </p>
-          <div className="w-20 h-0.5 bg-pink-500 mx-auto md:mx-0 mt-6" />
+          <div className="divider-accent mx-auto md:mx-0 mt-6" />
         </div>
 
         {/* Featured Projects Grid */}
@@ -132,11 +132,11 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
           {featuredProjects.map((project) => (
             <div
               key={project.title}
-              className={`group overflow-hidden h-max rounded-xl border transition-all duration-300 ${
+              className={`group overflow-hidden h-max rounded-xl border transition-smooth scale-hover ${
                 theme === "dark"
-                  ? "card-dark hover:border-gray-700"
-                  : "bg-white border-gray-200 hover:border-gray-300"
-              } hover:-translate-y-1 hover:shadow-lg`}
+                  ? "card-dark card-hover-dark shadow-dark"
+                  : "card-light card-hover-light shadow-light"
+              }`}
             >
               <div className="relative">
                 {project.image && (
@@ -150,10 +150,14 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                 )}
                 {project.award && (
                   <div
-                    className={`absolute top-3 right-3 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-lg ${
+                    className={`absolute top-3 right-3 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-light ${
                       project.award.includes("Academic")
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-amber-100 text-amber-800"
+                        ? theme === "dark"
+                          ? "bg-blue-900/80 text-blue-300"
+                          : "bg-blue-50 text-blue-700"
+                        : theme === "dark"
+                          ? "bg-yellow-900/80 text-yellow-300"
+                          : "bg-yellow-50 text-yellow-700"
                     } ${jetbrainsMono.className}`}
                   >
                     <Trophy size={12} />
@@ -166,14 +170,14 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
               <div className="p-4 sm:p-6">
                 <h3
                   className={`text-lg sm:text-xl font-semibold mb-2 ${
-                    theme === "dark" ? "text-white" : "text-gray-900"
+                    theme === "dark" ? "text-light" : "text-dark"
                   } ${poppins.className}`}
                 >
                   {project.title}
                 </h3>
                 <p
                   className={`text-sm mb-4 leading-relaxed ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    theme === "dark" ? "text-muted-light" : "text-muted-dark"
                   } ${workSans.className}`}
                 >
                   {project.shortDescription}
@@ -184,8 +188,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                       key={tech}
                       className={`px-2 sm:px-2.5 py-1 rounded-md text-xs font-medium ${
                         theme === "dark"
-                          ? "bg-gray-800 text-gray-300"
-                          : "bg-gray-100 text-gray-700"
+                          ? "bg-dark-soft text-muted-light"
+                          : "bg-light text-muted-dark border border-dark"
                       } ${jetbrainsMono.className}`}
                     >
                       {tech}
@@ -198,7 +202,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex items-center gap-1.5 text-pink-600 hover:text-pink-700 transition-colors ${poppins.className}`}
+                      className={`flex items-center gap-1.5 accent-primary hover-accent-primary transition-smooth scale-hover ${poppins.className}`}
                     >
                       <ExternalLink size={14} />
                       <span className="hidden sm:inline">Live Demo</span>
@@ -209,10 +213,10 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center gap-1.5 transition-colors ${
+                    className={`flex items-center gap-1.5 transition-smooth scale-hover ${
                       theme === "dark"
-                        ? "text-gray-400 hover:text-white"
-                        : "text-gray-600 hover:text-gray-900"
+                        ? "text-muted-light hover:text-light"
+                        : "text-muted-dark hover:text-dark"
                     } ${poppins.className}`}
                   >
                     <Github size={14} />
@@ -230,14 +234,14 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
           <h3
             id="other-projects"
             className={`text-2xl sm:text-3xl font-bold mb-4 tracking-tight ${
-              theme === "dark" ? "text-white" : "text-gray-900"
+              theme === "dark" ? "text-light" : "text-dark"
             } ${poppins.className}`}
           >
             Other Noteworthy Projects
           </h3>
           <p
             className={`text-base sm:text-lg max-w-2xl mx-auto md:mx-0 ${
-              theme === "dark" ? "text-gray-400" : "text-gray-600"
+              theme === "dark" ? "text-muted-light" : "text-muted-dark"
             } ${workSans.className}`}
           >
             Additional explorations in code, from hackathon prototypes to
@@ -255,20 +259,20 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-all duration-300 ${
+                className={`group flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-smooth scale-hover ${
                   theme === "dark"
-                    ? "card-dark hover:bg-gray-800/50 hover:border-gray-700"
-                    : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
-                } hover:shadow-sm`}
+                    ? "card-dark card-hover-dark shadow-dark"
+                    : "card-light card-hover-light shadow-light"
+                }`}
               >
                 <div
                   className={`p-2 sm:p-3 rounded-lg flex-shrink-0 ${
-                    theme === "dark" ? "bg-gray-800" : "bg-gray-100"
+                    theme === "dark" ? "bg-dark-soft" : "bg-light-soft"
                   }`}
                 >
                   <IconComponent
                     className={
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                      theme === "dark" ? "text-muted-light" : "text-muted-dark"
                     }
                     size={20}
                   />
@@ -276,14 +280,14 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                 <div className="flex-1 min-w-0">
                   <h4
                     className={`font-semibold mb-1 ${
-                      theme === "dark" ? "text-white" : "text-gray-900"
+                      theme === "dark" ? "text-light" : "text-dark"
                     } ${poppins.className}`}
                   >
                     {project.title}
                   </h4>
                   <p
                     className={`text-sm mb-3 leading-relaxed ${
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                      theme === "dark" ? "text-muted-light" : "text-muted-dark"
                     } ${workSans.className}`}
                   >
                     {project.shortDescription}
@@ -294,8 +298,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                         key={tech}
                         className={`px-2 py-1 rounded text-xs font-medium ${
                           theme === "dark"
-                            ? "bg-gray-800 text-gray-300"
-                            : "bg-gray-100 text-gray-700"
+                            ? "bg-dark-soft text-muted-light"
+                            : "bg-light text-muted-dark border border-dark"
                         } ${jetbrainsMono.className}`}
                       >
                         {tech}
@@ -304,10 +308,10 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                   </div>
                 </div>
                 <div
-                  className={`mt-2 sm:mt-0 flex-shrink-0 self-start sm:self-center text-sm font-medium flex items-center gap-2 transition-all duration-300 ${
+                  className={`mt-2 sm:mt-0 flex-shrink-0 self-start sm:self-center text-sm font-medium flex items-center gap-2 transition-smooth ${
                     theme === "dark"
-                      ? "text-gray-400 group-hover:text-white"
-                      : "text-gray-500 group-hover:text-gray-900"
+                      ? "text-muted-light group-hover:text-light"
+                      : "text-muted-dark group-hover:text-dark"
                   } ${poppins.className}`}
                 >
                   <span className="hidden sm:inline">View Code</span>
