@@ -12,6 +12,13 @@ import {
   ChevronUp, // Import the up arrow icon
 } from "lucide-react";
 import { useState } from "react";
+import {
+  spaceGrotesk,
+  firaSans,
+  poppins,
+  jetbrainsMono,
+  workSans,
+} from "@/app/fonts";
 
 interface HackathonWinsSectionProps {
   theme: string;
@@ -246,7 +253,7 @@ export default function HackathonWinsSection({
       ...project,
       hackathon: hackathon.name,
       month: hackathon.month,
-    }))
+    })),
   );
 
   const totalPrizeValue = allProjects.reduce((total, project) => {
@@ -266,9 +273,7 @@ export default function HackathonWinsSection({
     return total + value;
   }, 0);
 
-  const displayedHackathons = isExpanded
-    ? hackathons
-    : hackathons.slice(0, 3);
+  const displayedHackathons = isExpanded ? hackathons : hackathons.slice(0, 3);
 
   // *** NEW: Handler for "Show Less" with smooth scroll ***
   const handleShowLess = () => {
@@ -395,7 +400,7 @@ export default function HackathonWinsSection({
                 {/* Hackathon Header */}
                 <div className="flex items-start space-x-4 sm:space-x-6 mb-6">
                   {/* ... header content ... */}
-                   <div
+                  <div
                     className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full border-4 flex items-center justify-center ${
                       theme === "dark"
                         ? "bg-gray-950 border-pink-600"
@@ -453,41 +458,79 @@ export default function HackathonWinsSection({
                       }
                     >
                       {/* Project Card content */}
-                      <div className={`p-4 sm:p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}>
+                      <div
+                        className={`p-4 sm:p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}
+                      >
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-1">
-                            <h4 className={`text-lg sm:text-xl font-bold mb-2 transition-colors duration-300 ${theme === "dark" ? "text-white group-hover:text-pink-400" : "text-gray-900 group-hover:text-pink-600"}`}>
+                            <h4
+                              className={`text-lg sm:text-xl font-bold mb-2 transition-colors duration-300 ${theme === "dark" ? "text-white group-hover:text-pink-400" : "text-gray-900 group-hover:text-pink-600"}`}
+                            >
                               {project.title}
                             </h4>
-                            {project.featured && <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${theme === "dark" ? "bg-pink-900/30 text-pink-300 border border-pink-700/50" : "bg-pink-100 text-pink-800 border border-pink-200"}`}>Major Win</span>}
+                            {project.featured && (
+                              <span
+                                className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${theme === "dark" ? "bg-pink-900/30 text-pink-300 border border-pink-700/50" : "bg-pink-100 text-pink-800 border border-pink-200"}`}
+                              >
+                                Major Win
+                              </span>
+                            )}
                           </div>
                           {/* ... link icons ... */}
-                           <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
+                          <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
                             {project.demo && (
-                              <a href={project.demo} target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all duration-300 ${theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-800" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}`} aria-label="View live demo" onClick={(e) => e.stopPropagation()}>
+                              <a
+                                href={project.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`p-2 rounded-full transition-all duration-300 ${theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-800" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}`}
+                                aria-label="View live demo"
+                                onClick={(e) => e.stopPropagation()}
+                              >
                                 <ExternalLink size={18} />
                               </a>
                             )}
                             {project.announcement && (
-                              <a href={project.announcement} target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all duration-300 ${theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-800" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}`} aria-label="View announcement" onClick={(e) => e.stopPropagation()}>
+                              <a
+                                href={project.announcement}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`p-2 rounded-full transition-all duration-300 ${theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-800" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}`}
+                                aria-label="View announcement"
+                                onClick={(e) => e.stopPropagation()}
+                              >
                                 <Link size={18} />
                               </a>
                             )}
                           </div>
                         </div>
                         <div className="flex items-center space-x-2 mb-4">
-                          <Trophy size={16} className={`${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`} />
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}>
+                          <Trophy
+                            size={16}
+                            className={`${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`}
+                          />
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}
+                          >
                             {project.prize}
                           </span>
                         </div>
                       </div>
                       <div className="p-4 sm:p-6">
-                        <p className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                        <p
+                          className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                        >
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech) => <span key={tech} className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>{tech}</span>)}
+                          {project.tech.map((tech) => (
+                            <span
+                              key={tech}
+                              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -538,7 +581,7 @@ export default function HackathonWinsSection({
           onClick={() => setSelectedProject(null)}
         >
           {/* ... modal content ... */}
-           <div
+          <div
             className={`max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl ${
               theme === "dark" ? "bg-gray-900" : "bg-white"
             }`}
@@ -547,25 +590,81 @@ export default function HackathonWinsSection({
             <div className="p-6 sm:p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className={`text-2xl font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{selectedProject.title}</h3>
+                  <h3
+                    className={`text-2xl font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+                  >
+                    {selectedProject.title}
+                  </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2">
-                    <span className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{selectedProject.hackathon}</span>
-                    <span className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>{selectedProject.month}</span>
+                    <span
+                      className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                    >
+                      {selectedProject.hackathon}
+                    </span>
+                    <span
+                      className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
+                    >
+                      {selectedProject.month}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Trophy size={16} className={`${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`} />
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getPrizeColor(selectedProject.prize)}`}>{selectedProject.prize}</span>
+                    <Trophy
+                      size={16}
+                      className={`${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`}
+                    />
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium border ${getPrizeColor(selectedProject.prize)}`}
+                    >
+                      {selectedProject.prize}
+                    </span>
                   </div>
                 </div>
-                <button onClick={() => setSelectedProject(null)} className={`text-3xl font-bold -mt-2 -mr-2 p-2 ${theme === "dark" ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"}`} aria-label="Close modal">×</button>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className={`text-3xl font-bold -mt-2 -mr-2 p-2 ${theme === "dark" ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"}`}
+                  aria-label="Close modal"
+                >
+                  ×
+                </button>
               </div>
-              <p className={`text-base leading-relaxed mb-6 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{selectedProject.description}</p>
+              <p
+                className={`text-base leading-relaxed mb-6 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+              >
+                {selectedProject.description}
+              </p>
               <div className="flex flex-wrap gap-2 mb-6">
-                {selectedProject.tech.map((tech) => <span key={tech} className={`px-3 py-1 rounded-full text-sm font-medium ${theme === "dark" ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-700"}`}>{tech}</span>)}
+                {selectedProject.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${theme === "dark" ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-700"}`}
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
               <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                {selectedProject.demo && <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"><ExternalLink size={18} /><span>Live Demo</span></a>}
-                {selectedProject.announcement && <a href={selectedProject.announcement} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${theme === "dark" ? "border-gray-700 text-gray-300 hover:bg-gray-800" : "border-gray-300 text-gray-700 hover:bg-gray-50"}`}><Link size={18} /><span>Announcement</span></a>}
+                {selectedProject.demo && (
+                  <a
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"
+                  >
+                    <ExternalLink size={18} />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+                {selectedProject.announcement && (
+                  <a
+                    href={selectedProject.announcement}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${theme === "dark" ? "border-gray-700 text-gray-300 hover:bg-gray-800" : "border-gray-300 text-gray-700 hover:bg-gray-50"}`}
+                  >
+                    <Link size={18} />
+                    <span>Announcement</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
