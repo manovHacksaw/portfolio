@@ -26,10 +26,16 @@ export default function FloatingNavbar({
   toggleTheme,
 }: FloatingNavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showBottomNav, setShowBottomNav] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const heroSection = document.getElementById("hero");
+      const heroHeight = heroSection?.offsetHeight || 0;
+      const scrollPosition = window.scrollY;
+
+      setIsScrolled(scrollPosition > 50);
+      setShowBottomNav(scrollPosition > heroHeight - 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -47,8 +53,12 @@ export default function FloatingNavbar({
   return (
     <nav
       className={`
-      fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-smooth
-      ${isScrolled ? "scale-95" : "scale-100"}
+      fixed left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500
+      ${
+        showBottomNav
+          ? "bottom-6 scale-95"
+          : "top-6 " + (isScrolled ? "scale-95" : "scale-100")
+      }
     `}
     >
       <div
