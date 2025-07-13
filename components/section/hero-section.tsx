@@ -249,6 +249,9 @@ export default function HeroSection({ theme }: HeroSectionProps) {
           </div>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <ScrollIndicator theme={theme} />
     </section>
   );
 }
