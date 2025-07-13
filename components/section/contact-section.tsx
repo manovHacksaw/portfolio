@@ -18,26 +18,26 @@ export default function ContactSection({ theme }: ContactSectionProps) {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/manobendra",
-      username: "@manobendra",
+      href: "https://github.com/manovHacksaw",
+      username: "@manovHacksaw",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/manobendra",
-      username: "manobendra",
+      href: "https://www.linkedin.com/in/manob-mandal/",
+      username: "@manob-mandal",
     },
     {
       icon: Twitter,
       label: "Twitter",
-      href: "https://twitter.com/manobendra",
-      username: "@manobendra",
+      href: "https://twitter.com/manovmandal",
+      username: "@manovmandal",
     },
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:hello@manobendra.dev",
-      username: "hello@manobendra.dev",
+      href: "mailto:manovmandal@gmail.com",
+      username: "manovmandal@gmail.com",
     },
   ];
 
@@ -145,7 +145,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
             blockchain, and innovative tech projects.
           </p>
           <a
-            href="mailto:hello@manobendra.dev"
+            href="mailto:manovmandal@gmail.com"
             className={`inline-flex items-center space-x-2 bg-pink-500 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
           >
             <Mail size={18} />

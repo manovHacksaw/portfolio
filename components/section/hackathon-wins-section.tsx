@@ -8,6 +8,8 @@ import {
   Award,
   Star,
   TrendingUp,
+  ChevronDown,
+  ChevronUp, // Import the up arrow icon
 } from "lucide-react";
 import { useState } from "react";
 
@@ -32,7 +34,9 @@ export default function HackathonWinsSection({
   theme,
 }: HackathonWinsSectionProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
+  // Data remains the same
   const hackathons = [
     {
       name: "Hacker House Goa",
@@ -216,23 +220,25 @@ export default function HackathonWinsSection({
     },
   ];
 
+  // *** NEW: Accessibility-aware prize color function ***
   const getPrizeColor = (prize: string) => {
+    const isDark = theme === "dark";
     if (
       prize.includes("1st") ||
       prize.includes("6,000") ||
       prize.includes("3,000")
     ) {
-      return "bg-yellow-500/20 border-yellow-500/50 ";
+      return `bg-yellow-500/20 border-yellow-500/50 ${isDark ? "text-yellow-300" : "text-yellow-800"}`;
     } else if (
       prize.includes("2nd") ||
       prize.includes("2,000") ||
       prize.includes("1,500")
     ) {
-      return "bg-gray-400/20 border-gray-400/50 text-gray-300";
+      return `bg-gray-400/20 border-gray-400/50 ${isDark ? "text-gray-300" : "text-gray-700"}`;
     } else if (prize.includes("Track Winner") || prize.includes("600")) {
-      return "bg-orange-500/20 border-orange-500/50 text-orange-300";
+      return `bg-orange-500/20 border-orange-500/50 ${isDark ? "text-orange-300" : "text-orange-800"}`;
     }
-    return "bg-green-500/20 border-green-500/50 text-green-300";
+    return `bg-green-500/20 border-green-500/50 ${isDark ? "text-green-300" : "text-green-800"}`;
   };
 
   const allProjects = hackathons.flatMap((hackathon) =>
@@ -240,7 +246,7 @@ export default function HackathonWinsSection({
       ...project,
       hackathon: hackathon.name,
       month: hackathon.month,
-    })),
+    }))
   );
 
   const totalPrizeValue = allProjects.reduce((total, project) => {
@@ -260,17 +266,30 @@ export default function HackathonWinsSection({
     return total + value;
   }, 0);
 
+  const displayedHackathons = isExpanded
+    ? hackathons
+    : hackathons.slice(0, 3);
+
+  // *** NEW: Handler for "Show Less" with smooth scroll ***
+  const handleShowLess = () => {
+    setIsExpanded(false);
+    const section = document.getElementById("hackathons");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section
       id="hackathons"
-      className={`py-20 px-6 transition-colors duration-300 ${
+      className={`py-20 px-4 sm:px-6 transition-colors duration-300 ${
         theme === "dark" ? "bg-gray-950" : "bg-white"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl md:text-5xl font-bold mb-6 transition-colors duration-300 ${
+            className={`text-4xl sm:text-5xl font-bold mb-6 transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
@@ -282,17 +301,18 @@ export default function HackathonWinsSection({
             }`}
           >
             A journey through competitive hackathons, building innovative
-            blockchain solutions and earning recognition in the Web3 ecosystem.
-            Over ${totalPrizeValue.toLocaleString()} in prizes won across
-            multiple blockchain platforms.
+            blockchain solutions and earning recognition. Over $
+            {totalPrizeValue.toLocaleString()} in prizes won across multiple
+            platforms as a team.
           </p>
           <div className="w-20 h-0.5 bg-gradient-to-r from-pink-600 to-purple-600 mx-auto" />
         </div>
 
         {/* Enhanced Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-16">
+          {/* Stats content remains the same... */}
           <div
-            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
                 ? "bg-gray-900/50 border-gray-700 hover:border-pink-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-pink-300"
@@ -309,7 +329,7 @@ export default function HackathonWinsSection({
             </div>
           </div>
           <div
-            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
                 ? "bg-gray-900/50 border-gray-700 hover:border-green-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-green-300"
@@ -326,7 +346,7 @@ export default function HackathonWinsSection({
             </div>
           </div>
           <div
-            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
                 ? "bg-gray-900/50 border-gray-700 hover:border-yellow-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-yellow-300"
@@ -343,7 +363,7 @@ export default function HackathonWinsSection({
             </div>
           </div>
           <div
-            className={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
                 ? "bg-gray-900/50 border-gray-700 hover:border-purple-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-purple-300"
@@ -361,311 +381,191 @@ export default function HackathonWinsSection({
           </div>
         </div>
 
-        {/* Timeline-style hackathon list */}
-        <div className="space-y-12">
-          {hackathons.map((hackathon, hackathonIndex) => (
-            <div key={hackathon.name} className="relative">
-              {/* Timeline line */}
-              {hackathonIndex !== hackathons.length - 1 && (
-                <div
-                  className={`absolute left-4 top-16 bottom-0 w-0.5 ${
-                    theme === "dark" ? "bg-gray-800" : "bg-gray-200"
-                  }`}
-                />
-              )}
-
-              {/* Hackathon header */}
-              <div className="flex items-start space-x-6 mb-6">
-                <div
-                  className={`w-8 h-8 rounded-full border-4 flex items-center justify-center ${
-                    theme === "dark"
-                      ? "bg-gray-950 border-pink-600"
-                      : "bg-white border-pink-500"
-                  }`}
-                >
-                  <div className="w-2 h-2 bg-pink-600 rounded-full" />
-                </div>
-                <div className="flex-1">
-                  <h3
-                    className={`text-2xl font-bold mb-2 ${
-                      theme === "dark" ? "text-white" : "text-gray-900"
+        <div className="relative">
+          <div className="space-y-12">
+            {displayedHackathons.map((hackathon, hackathonIndex) => (
+              <div key={hackathon.name} className="relative">
+                {hackathonIndex !== hackathons.length - 1 && (
+                  <div
+                    className={`absolute left-3 top-12 bottom-0 w-0.5 sm:left-4 sm:top-16 ${
+                      theme === "dark" ? "bg-gray-800" : "bg-gray-200"
+                    }`}
+                  />
+                )}
+                {/* Hackathon Header */}
+                <div className="flex items-start space-x-4 sm:space-x-6 mb-6">
+                  {/* ... header content ... */}
+                   <div
+                    className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full border-4 flex items-center justify-center ${
+                      theme === "dark"
+                        ? "bg-gray-950 border-pink-600"
+                        : "bg-white border-pink-500"
                     }`}
                   >
-                    {hackathon.name}
-                  </h3>
-                  <div className="flex items-center space-x-2">
-                    <Calendar
-                      size={16}
-                      className={
-                        theme === "dark" ? "text-gray-400" : "text-gray-500"
-                      }
-                    />
-                    <span
-                      className={`text-sm ${
-                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-pink-600 rounded-full" />
+                  </div>
+                  <div className="flex-1">
+                    <h3
+                      className={`text-xl sm:text-2xl font-bold mb-2 ${
+                        theme === "dark" ? "text-white" : "text-gray-900"
                       }`}
                     >
-                      {hackathon.month}
-                    </span>
+                      {hackathon.name}
+                    </h3>
+                    <div className="flex items-center space-x-2">
+                      <Calendar
+                        size={16}
+                        className={
+                          theme === "dark" ? "text-gray-400" : "text-gray-500"
+                        }
+                      />
+                      <span
+                        className={`text-sm ${
+                          theme === "dark" ? "text-gray-400" : "text-gray-500"
+                        }`}
+                      >
+                        {hackathon.month}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Projects grid */}
-              <div className="ml-14 grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-                {hackathon.projects.map((project, projectIndex) => (
-                  <div
-                    key={`${hackathon.name}-${project.title}`}
-                    className={`
+                {/* Projects grid */}
+                <div className="ml-10 sm:ml-14 grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                  {hackathon.projects.map((project) => (
+                    <div
+                      key={`${hackathon.name}-${project.title}`}
+                      className={`
                       group rounded-2xl border shadow-sm overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer
-                      ${project.featured ? "lg:col-span-2 md:col-span-2" : ""}
+                      ${project.featured ? "md:col-span-2" : ""}
                       ${
                         theme === "dark"
                           ? "bg-gray-900/50 border-gray-700 hover:shadow-2xl hover:border-pink-600/50 backdrop-blur-sm"
                           : "bg-white/50 border-gray-200 hover:shadow-2xl hover:border-pink-300 backdrop-blur-sm"
                       }
                     `}
-                    onClick={() =>
-                      setSelectedProject({
-                        ...project,
-                        hackathon: hackathon.name,
-                        month: hackathon.month,
-                      })
-                    }
-                  >
-                    {/* Project Header */}
-                    <div
-                      className={`p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}
+                      onClick={() =>
+                        setSelectedProject({
+                          ...project,
+                          hackathon: hackathon.name,
+                          month: hackathon.month,
+                        })
+                      }
                     >
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex-1">
-                          <h4
-                            className={`text-xl font-bold mb-2 transition-colors duration-300 ${
-                              theme === "dark"
-                                ? "text-white group-hover:text-pink-400"
-                                : "text-gray-900 group-hover:text-pink-600"
-                            }`}
-                          >
-                            {project.title}
-                          </h4>
-                          {project.featured && (
-                            <span
-                              className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${
-                                theme === "dark"
-                                  ? "bg-pink-900/30 text-pink-300 border border-pink-700/50"
-                                  : "bg-pink-100 text-pink-800 border border-pink-200"
-                              }`}
-                            >
-                              Major Win
-                            </span>
-                          )}
+                      {/* Project Card content */}
+                      <div className={`p-4 sm:p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}>
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex-1">
+                            <h4 className={`text-lg sm:text-xl font-bold mb-2 transition-colors duration-300 ${theme === "dark" ? "text-white group-hover:text-pink-400" : "text-gray-900 group-hover:text-pink-600"}`}>
+                              {project.title}
+                            </h4>
+                            {project.featured && <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${theme === "dark" ? "bg-pink-900/30 text-pink-300 border border-pink-700/50" : "bg-pink-100 text-pink-800 border border-pink-200"}`}>Major Win</span>}
+                          </div>
+                          {/* ... link icons ... */}
+                           <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
+                            {project.demo && (
+                              <a href={project.demo} target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all duration-300 ${theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-800" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}`} aria-label="View live demo" onClick={(e) => e.stopPropagation()}>
+                                <ExternalLink size={18} />
+                              </a>
+                            )}
+                            {project.announcement && (
+                              <a href={project.announcement} target="_blank" rel="noopener noreferrer" className={`p-2 rounded-full transition-all duration-300 ${theme === "dark" ? "text-gray-400 hover:text-white hover:bg-gray-800" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}`} aria-label="View announcement" onClick={(e) => e.stopPropagation()}>
+                                <Link size={18} />
+                              </a>
+                            )}
+                          </div>
                         </div>
-                        <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
-                          {project.demo && (
-                            <a
-                              href={project.demo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`p-2 rounded-full transition-all duration-300 ${
-                                theme === "dark"
-                                  ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                              }`}
-                              aria-label="View live demo"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <ExternalLink size={18} />
-                            </a>
-                          )}
-                          {project.announcement && (
-                            <a
-                              href={project.announcement}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`p-2 rounded-full transition-all duration-300 ${
-                                theme === "dark"
-                                  ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                              }`}
-                              aria-label="View announcement"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <Link size={18} />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Prize */}
-                      <div className="flex items-center space-x-2 mb-4">
-                        <Trophy size={16} className="text-yellow-500" />
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}
-                        >
-                          {project.prize}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-6">
-                      <p
-                        className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${
-                          theme === "dark" ? "text-gray-300" : "text-gray-600"
-                        }`}
-                      >
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${
-                              theme === "dark"
-                                ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            }`}
-                          >
-                            {tech}
+                        <div className="flex items-center space-x-2 mb-4">
+                          <Trophy size={16} className={`${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`} />
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getPrizeColor(project.prize)}`}>
+                            {project.prize}
                           </span>
-                        ))}
+                        </div>
+                      </div>
+                      <div className="p-4 sm:p-6">
+                        <p className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((tech) => <span key={tech} className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>{tech}</span>)}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
+            ))}
+          </div>
+
+          {/* Fade Overlay & "Show All" Button */}
+          {!isExpanded && hackathons.length > 3 && (
+            <div
+              className={`absolute -bottom-12 left-0 right-0 h-96 flex items-end justify-center pt-20 bg-gradient-to-t ${
+                theme === "dark"
+                  ? "from-gray-950 to-transparent"
+                  : "from-white to-transparent"
+              }`}
+            >
+              <button
+                onClick={() => setIsExpanded(true)}
+                className="flex items-center space-x-2 px-6 py-3 rounded-full font-semibold text-white bg-pink-600 hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/30"
+              >
+                <span>Show All Wins</span>
+                <ChevronDown size={20} />
+              </button>
             </div>
-          ))}
+          )}
         </div>
 
-        <div className="text-center mt-16">
-          <div
-            className={`inline-block p-1 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 mb-4`}
-          >
-            <div
-              className={`px-6 py-2 rounded-full ${theme === "dark" ? "bg-gray-950" : "bg-white"}`}
+        {/* *** NEW: "Show Less" Button *** */}
+        {isExpanded && (
+          <div className="text-center mt-16">
+            <button
+              onClick={handleShowLess}
+              className="flex items-center mx-auto space-x-2 px-6 py-3 rounded-full font-semibold text-white bg-pink-600 hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30"
             >
-              <p
-                className={`text-sm font-medium ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
-              >
-                <span className="text-pink-600">Achievement Unlocked:</span>{" "}
-                Consistently turning ideas into winning solutions across diverse
-                blockchain ecosystems.
-              </p>
-            </div>
+              <span>Show Less</span>
+              <ChevronUp size={20} />
+            </button>
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Project Detail Modal */}
+      {/* Project Detail Modal (already responsive and theme-aware) */}
       {selectedProject && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedProject(null)}
         >
-          <div
+          {/* ... modal content ... */}
+           <div
             className={`max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl ${
               theme === "dark" ? "bg-gray-900" : "bg-white"
             }`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-8">
+            <div className="p-6 sm:p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3
-                    className={`text-2xl font-bold mb-2 ${
-                      theme === "dark" ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {selectedProject.title}
-                  </h3>
-                  <div className="flex items-center space-x-4 mb-2">
-                    <span
-                      className={`text-lg ${
-                        theme === "dark" ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {selectedProject.hackathon}
-                    </span>
-                    <span
-                      className={`text-sm ${
-                        theme === "dark" ? "text-gray-400" : "text-gray-500"
-                      }`}
-                    >
-                      {selectedProject.month}
-                    </span>
+                  <h3 className={`text-2xl font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{selectedProject.title}</h3>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2">
+                    <span className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{selectedProject.hackathon}</span>
+                    <span className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>{selectedProject.month}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Trophy size={16} className="text-yellow-500" />
-                    <span
-                      className={`px-3 py-1 rounded-full text-sm font-medium border ${getPrizeColor(selectedProject.prize)}`}
-                    >
-                      {selectedProject.prize}
-                    </span>
+                    <Trophy size={16} className={`${theme === "dark" ? "text-yellow-400" : "text-yellow-500"}`} />
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getPrizeColor(selectedProject.prize)}`}>{selectedProject.prize}</span>
                   </div>
                 </div>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className={`text-2xl font-bold ${
-                    theme === "dark"
-                      ? "text-gray-400 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
-                >
-                  ×
-                </button>
+                <button onClick={() => setSelectedProject(null)} className={`text-3xl font-bold -mt-2 -mr-2 p-2 ${theme === "dark" ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"}`} aria-label="Close modal">×</button>
               </div>
-
-              <p
-                className={`text-base leading-relaxed mb-6 ${
-                  theme === "dark" ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
-                {selectedProject.description}
-              </p>
-
+              <p className={`text-base leading-relaxed mb-6 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{selectedProject.description}</p>
               <div className="flex flex-wrap gap-2 mb-6">
-                {selectedProject.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      theme === "dark"
-                        ? "bg-gray-800 text-gray-300"
-                        : "bg-gray-100 text-gray-700"
-                    }`}
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {selectedProject.tech.map((tech) => <span key={tech} className={`px-3 py-1 rounded-full text-sm font-medium ${theme === "dark" ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-700"}`}>{tech}</span>)}
               </div>
-
-              <div className="flex space-x-4">
-                {selectedProject.demo && (
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"
-                  >
-                    <ExternalLink size={18} />
-                    <span>Live Demo</span>
-                  </a>
-                )}
-                {selectedProject.announcement && (
-                  <a
-                    href={selectedProject.announcement}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${
-                      theme === "dark"
-                        ? "border-gray-700 text-gray-300 hover:bg-gray-800"
-                        : "border-gray-300 text-gray-700 hover:bg-gray-50"
-                    }`}
-                  >
-                    <Link size={18} />
-                    <span>Announcement</span>
-                  </a>
-                )}
+              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                {selectedProject.demo && <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"><ExternalLink size={18} /><span>Live Demo</span></a>}
+                {selectedProject.announcement && <a href={selectedProject.announcement} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${theme === "dark" ? "border-gray-700 text-gray-300 hover:bg-gray-800" : "border-gray-300 text-gray-700 hover:bg-gray-50"}`}><Link size={18} /><span>Announcement</span></a>}
               </div>
             </div>
           </div>

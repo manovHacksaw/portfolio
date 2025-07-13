@@ -23,7 +23,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ theme }: HeroSectionProps) {
   const greetings = [
-    "Hello", "Hola", "Bonjour", "こんにちは", "안녕하세요", "你好", 
+    "Hello", "Hola", "Bonjour", "こんにちは", "안녕하세요", "你好",
     "Guten Tag", "नमस्ते", "নমস্কার", "Olá", "Привет", "Halo",
   ];
 
@@ -38,63 +38,31 @@ export default function HeroSection({ theme }: HeroSectionProps) {
     100
   );
 
-  // Refined skill color palettes for better contrast and harmony
   const skills = [
-    {
-      name: "MERN",
-      light: "bg-emerald-100 text-emerald-800",
-      dark: "bg-emerald-950/60 text-emerald-300 border border-emerald-800",
-    },
-    {
-      name: "Next.js",
-      light: "bg-slate-200 text-slate-800",
-      dark: "bg-slate-800/80 text-slate-200 border border-slate-700",
-    },
-    {
-      name: "Rust",
-      light: "bg-orange-100 text-orange-800",
-      dark: "bg-orange-950/60 text-orange-300 border border-orange-800",
-    },
-    {
-      name: "TypeScript",
-      light: "bg-blue-100 text-blue-800",
-      dark: "bg-blue-950/60 text-blue-300 border border-blue-800",
-    },
-    {
-      name: "Node.js",
-      light: "bg-green-100 text-green-800",
-      dark: "bg-green-950/60 text-green-300 border border-green-800",
-    },
-    {
-      name: "Solidity",
-      light: "bg-teal-100 text-teal-800",
-      dark: "bg-teal-950/60 text-teal-300 border border-teal-800",
-    },
-    {
-      name: "Solana",
-      light: "bg-purple-100 text-purple-800",
-      dark: "bg-purple-950/60 text-purple-300 border border-purple-800",
-    },
-    {
-      name: "Web3",
-      light: "bg-indigo-100 text-indigo-800",
-      dark: "bg-indigo-950/60 text-indigo-300 border border-indigo-800",
-    },
+    { name: "MERN", light: "bg-emerald-100 text-emerald-800", dark: "bg-emerald-950/60 text-emerald-300 border border-emerald-800" },
+    { name: "Next.js", light: "bg-slate-200 text-slate-800", dark: "bg-slate-800/80 text-slate-200 border border-slate-700" },
+    { name: "Rust", light: "bg-orange-100 text-orange-800", dark: "bg-orange-950/60 text-orange-300 border border-orange-800" },
+    { name: "TypeScript", light: "bg-blue-100 text-blue-800", dark: "bg-blue-950/60 text-blue-300 border border-blue-800" },
+    { name: "Node.js", light: "bg-green-100 text-green-800", dark: "bg-green-950/60 text-green-300 border border-green-800" },
+    { name: "Solidity", light: "bg-teal-100 text-teal-800", dark: "bg-teal-950/60 text-teal-300 border border-teal-800" },
+    { name: "Solana", light: "bg-purple-100 text-purple-800", dark: "bg-purple-950/60 text-purple-300 border border-purple-800" },
+    { name: "Web3", light: "bg-indigo-100 text-indigo-800", dark: "bg-indigo-950/60 text-indigo-300 border border-indigo-800" },
   ];
 
   return (
     <section
       id="hero"
-      // Refined Color: Using slate for softer backgrounds
-      className={`min-h-screen mx-auto flex items-center justify-start md:px-8 lg:px-40 pt-40 pb-20 transition-colors duration-300 ${
-        theme === "dark" ? "bg-dark" : "bg-slate-50"
+      // CHANGE: Added granular responsive padding for all screen sizes
+      className={`min-h-screen flex items-center px-6 sm:px-8 md:px-12 lg:px-24 pt-32 sm:pt-40 pb-20 transition-colors duration-300 ${
+        theme === "dark" ? "bg-slate-950" : "bg-slate-50" // Using standard slate colors
       }`}
     >
-      <div className="max-w-5xl mx-auto w-full text-center lg:text-left">
+      {/* CHANGE: Removed mx-auto here to use the section's padding */}
+      <div className="max-w-5xl lg:mx-auto w-full text-left">
         <div className="mb-6">
           <h1
-            // Refined Color: Softer text colors to reduce eye strain
-            className={`text-4xl md:text-5xl lg:text-6xl leading-tight ${spaceGrotesk.className} transition-colors duration-300 ${
+            // CHANGE: Adjusted responsive font sizes
+            className={`text-4xl sm:text-5xl lg:text-6xl leading-tight font-bold ${spaceGrotesk.className} transition-colors duration-300 ${
               theme === "dark" ? "text-slate-100" : "text-slate-900"
             }`}
           >
@@ -105,7 +73,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="inline-block pb-8"
+                className="inline-block pb-4 sm:pb-8" // Adjusted padding for mobile
               >
                 {greetings[greetingIndex]}
               </motion.span>
@@ -113,9 +81,8 @@ export default function HeroSection({ theme }: HeroSectionProps) {
             <br />
             I'm{" "}
             <span
-              // Refined Color: Adjusted accent colors for better contrast in each mode
               className={`font-bold ${rubik.className} ${
-                theme == "dark" ? "text-pink-400" : "text-pink-600"
+                theme === "dark" ? "text-pink-400" : "text-pink-600"
               }`}
             >
               Manobendra Mandal
@@ -124,18 +91,17 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         </div>
 
         <div className="mb-8">
-          <div className="flex items-center justify-center lg:justify-start">
+          {/* CHANGE: Aligned typewriter to the left */}
+          <div className="flex items-center justify-start">
             <h2
-              // Refined Color: Muted text for secondary information
-              className={`text-xl md:text-2xl lg:text-3xl font-mono transition-colors duration-300 italic ${
+              className={`text-xl md:text-2xl font-mono transition-colors duration-300 italic ${
                 theme === "dark" ? "text-slate-400" : "text-slate-500"
               }`}
             >
               "{typewriterText}"
             </h2>
             <div
-              // Refined Color: Caret color matches main text color
-              className={`w-0.5 h-8 md:h-9 lg:h-10 ml-2 animate-pulse transition-colors duration-300 ${
+              className={`w-0.5 h-7 md:h-8 ml-2 animate-pulse transition-colors duration-300 ${
                 theme === "dark" ? "bg-slate-100" : "bg-slate-900"
               }`}
             ></div>
@@ -144,8 +110,8 @@ export default function HeroSection({ theme }: HeroSectionProps) {
 
         <div className="mb-8">
           <p
-            // Refined Color: Body text with good readability
-            className={`text-lg md:text-md max-w-3xl text-justify leading-relaxed ${firaSans.className} transition-colors duration-300 ${
+            // CHANGE: Adjusted responsive font size and removed text-justify
+            className={`text-base md:text-lg max-w-3xl leading-relaxed ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-slate-400" : "text-slate-700"
             }`}
           >
@@ -156,8 +122,9 @@ export default function HeroSection({ theme }: HeroSectionProps) {
           </p>
         </div>
 
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-3 max-w-4xl justify-center lg:justify-start">
+        <div className="mb-10">
+          {/* CHANGE: Aligned skills to the left */}
+          <div className="flex flex-wrap gap-2.5 max-w-4xl justify-start">
             {skills.map((skill) => (
               <span
                 key={skill.name}
@@ -173,18 +140,16 @@ export default function HeroSection({ theme }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-10">
           <div
-            // Refined Color: Badge styling harmonized with the theme
             className={`inline-flex items-center px-4 py-2 rounded-full border transition-colors duration-300 ${
               theme === "dark"
-                ? "border-slate-800 bg-slate-800/50"
+                ? "border-slate-800 bg-slate-900"
                 : "border-slate-200 bg-white"
             }`}
           >
             <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
             <span
-              // Refined Color: Text harmonized with the theme
               className={`${firaSans.className} text-sm font-medium transition-colors bg-transparent duration-300 ${
                 theme === "dark" ? "text-slate-300" : "text-slate-600"
               }`}
@@ -195,10 +160,10 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         </div>
 
         <div className="mb-8">
-          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+          {/* CHANGE: Aligned buttons to the left, they will stack on mobile */}
+          <div className="flex flex-wrap gap-4 justify-start">
             <a
               href="#projects"
-              // Refined Color: Harmonized button styles
               className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} transition-all duration-300 focus:outline-none focus:ring-4 ${
                 theme === "dark"
                   ? "bg-pink-500 text-white hover:bg-pink-600 focus:ring-pink-500/50"
@@ -213,7 +178,6 @@ export default function HeroSection({ theme }: HeroSectionProps) {
               target="_blank"
               rel="noopener noreferrer"
               download
-              // Refined Color: Harmonized outline button styles
               className={`inline-flex items-center space-x-2 px-6 py-3 rounded-lg font-medium ${rubik.className} border transition-all duration-300 focus:outline-none focus:ring-4 ${
                 theme === "dark"
                   ? "border-pink-400 text-pink-400 hover:bg-pink-400/10 focus:ring-pink-500/50"
@@ -227,8 +191,8 @@ export default function HeroSection({ theme }: HeroSectionProps) {
         </div>
 
         <div className="">
-          <div className="flex mt-4 space-x-5 justify-center lg:justify-start">
-             {/* Refined Color: Harmonized social icon colors */}
+          {/* CHANGE: Aligned social icons to the left */}
+          <div className="flex mt-4 space-x-5 justify-start">
             <a href="https://github.com/manobendra" target="_blank" rel="noopener noreferrer" className={`transition-colors duration-300 ${ theme === "dark" ? "text-slate-400 hover:text-slate-200" : "text-slate-500 hover:text-slate-900"}`} aria-label="GitHub Profile">
               <Github size={24} />
             </a>
