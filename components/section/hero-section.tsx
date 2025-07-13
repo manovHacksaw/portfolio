@@ -53,7 +53,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
     <section
       id="hero"
       // CHANGE: Added granular responsive padding for all screen sizes
-      className={`min-h-screen flex items-center px-6 sm:px-8 md:px-12 lg:px-24 pt-32 sm:pt-40 pb-20 transition-colors duration-300 ${
+      className={`min-h-screen flex items-center px-6 sm:px-8 md:px-12 lg:px-24 pt-32 sm:pt-40 pb-10 transition-colors duration-300 ${
         theme === "dark" ? "bg-slate-950" : "bg-slate-50" // Using standard slate colors
       }`}
     >

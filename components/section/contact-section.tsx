@@ -44,14 +44,17 @@ export default function ContactSection({ theme }: ContactSectionProps) {
   return (
     <section
       id="contact"
-      className={`py-20 px-6 transition-colors duration-300 ${
+      // CHANGE: Responsive padding for the section
+      className={`py-16 sm:py-20 px-4 sm:px-6 transition-colors duration-300 ${
         theme === "dark" ? "bg-gray-900" : "bg-gray-50"
       }`}
     >
       <div className="max-w-4xl mx-auto text-center">
-        <div className="mb-16">
+        {/* CHANGE: Responsive margin */}
+        <div className="mb-12 md:mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-bold mb-6 ${spaceGrotesk.className} transition-colors duration-300 ${
+            // The text-sizing is already responsive, which is great.
+            className={`text-3xl md:text-4xl font-bold mb-4 sm:mb-6 ${spaceGrotesk.className} transition-colors duration-300 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
@@ -62,7 +65,8 @@ export default function ContactSection({ theme }: ContactSectionProps) {
 
         <div className="mb-12">
           <p
-            className={`text-lg leading-relaxed max-w-2xl mx-auto ${firaSans.className} transition-colors duration-300 ${
+            // CHANGE: Responsive font size for better mobile reading
+            className={`text-base sm:text-lg leading-relaxed max-w-2xl mx-auto ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -73,7 +77,9 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* The grid defaults to a single column, which is perfect for mobile. */}
+        {/* CHANGE: Responsive gap for the grid */}
+        <div className="grid  grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
           {socialLinks.map((link) => {
             const Icon = link.icon;
             return (
@@ -82,6 +88,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                // p-6 works well on both mobile and desktop cards
                 className={`group rounded-xl p-6 border shadow-sm transition-all duration-300 ${
                   theme === "dark"
                     ? "bg-gray-950 border-gray-700 hover:shadow-lg hover:border-pink-500/50"
@@ -123,7 +130,8 @@ export default function ContactSection({ theme }: ContactSectionProps) {
         </div>
 
         <div
-          className={`rounded-xl p-8 border shadow-sm transition-colors duration-300 ${
+          // CHANGE: Responsive padding for the final CTA box
+          className={`rounded-xl p-6 md:p-8 border shadow-sm transition-colors duration-300 ${
             theme === "dark"
               ? "bg-gray-950 border-gray-700"
               : "bg-white border-gray-200"
@@ -137,7 +145,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
             Open to Opportunities
           </h3>
           <p
-            className={`mb-6 ${firaSans.className} transition-colors duration-300 ${
+            className={`mb-6 text-base ${firaSans.className} transition-colors duration-300 ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -146,7 +154,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           </p>
           <a
             href="mailto:manovmandal@gmail.com"
-            className={`inline-flex items-center space-x-2 bg-pink-500 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
+            className={`inline-flex items-center space-x-2 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
           >
             <Mail size={18} />
             <span>Get in touch</span>

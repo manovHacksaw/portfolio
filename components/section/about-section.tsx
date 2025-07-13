@@ -9,7 +9,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
   return (
     <section
       id="about"
-      className={`py-20 px-6 transition-colors duration-300 ${theme === "dark" ? "bg-[#0D0D0D]" : "bg-[#FAFAFA]"}`}
+      className={`py-14 px-6 transition-colors duration-300 ${theme === "dark" ? "bg-[#0D0D0D]" : "bg-[#FAFAFA]"}`}
     >
       <div className="max-w-5xl mx-auto">
         <div className="text-left mb-16">
