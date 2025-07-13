@@ -1,9 +1,20 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, ArrowRight } from "lucide-react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { spaceGrotesk, workSans, poppins } from "@/app/fonts";
+
+interface BlogSectionProps {
+  theme: string;
+}
 
 const blogPosts = [
   {
@@ -60,33 +71,57 @@ const blogPosts = [
     tags: ["AI", "Web3", "Future"],
     slug: "ai-web3-integration-future",
   },
-]
+];
 
-export function BlogSection() {
+export default function BlogSection({ theme }: BlogSectionProps) {
   const openBlogPost = (slug: string) => {
     // In a real implementation, this would navigate to the blog post
-    console.log(`Opening blog post: ${slug}`)
-  }
+    console.log(`Opening blog post: ${slug}`);
+  };
 
   return (
-    <div className="py-20 px-6 relative z-10 bg-gradient-to-b from-transparent to-slate-50/50">
+    <section
+      id="blog"
+      className={`py-16 sm:py-20 px-4 sm:px-6 lg:px-8 transition-smooth ${
+        theme === "dark" ? "bg-dark-soft" : "bg-light-soft"
+      }`}
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Latest Blog Posts</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 ${spaceGrotesk.className} transition-smooth ${
+              theme === "dark" ? "text-light" : "text-dark"
+            }`}
+          >
+            Latest Blog Posts
+          </h2>
+          <p
+            className={`text-base sm:text-lg max-w-2xl mx-auto ${workSans.className} transition-smooth ${
+              theme === "dark" ? "text-muted-light" : "text-muted-dark"
+            }`}
+          >
             Sharing insights, learnings, and thoughts from my Web3 journey
           </p>
+          <div className="divider-accent mx-auto mt-6" />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {blogPosts.map((post, index) => (
             <Card
               key={index}
-              className="bg-white/60 backdrop-blur-sm border-white/50 hover:bg-white/80 transition-all duration-300 group hover:shadow-xl hover:shadow-pink-100/50 rounded-2xl cursor-pointer"
+              className={`transition-smooth scale-hover cursor-pointer rounded-2xl ${
+                theme === "dark"
+                  ? "card-dark card-hover-dark shadow-dark"
+                  : "card-light card-hover-light shadow-light"
+              }`}
               onClick={() => openBlogPost(post.slug)}
             >
               <CardHeader className="pb-4">
-                <div className="flex items-center gap-4 text-sm text-slate-500 mb-3">
+                <div
+                  className={`flex items-center gap-4 text-sm mb-3 ${
+                    theme === "dark" ? "text-muted-light" : "text-muted-dark"
+                  }`}
+                >
                   <div className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
                     {new Date(post.publishDate).toLocaleDateString("en-US", {
@@ -101,11 +136,23 @@ export function BlogSection() {
                   </div>
                 </div>
 
-                <CardTitle className="text-slate-800 group-hover:text-pink-500 transition-colors leading-tight">
+                <CardTitle
+                  className={`transition-smooth leading-tight ${poppins.className} ${
+                    theme === "dark"
+                      ? "text-light group-hover:accent-primary"
+                      : "text-dark group-hover:accent-primary"
+                  }`}
+                >
                   {post.title}
                 </CardTitle>
 
-                <CardDescription className="text-slate-600 leading-relaxed">{post.excerpt}</CardDescription>
+                <CardDescription
+                  className={`leading-relaxed ${workSans.className} transition-smooth ${
+                    theme === "dark" ? "text-muted-light" : "text-muted-dark"
+                  }`}
+                >
+                  {post.excerpt}
+                </CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-4">
@@ -114,7 +161,11 @@ export function BlogSection() {
                     <Badge
                       key={tagIndex}
                       variant="outline"
-                      className="border-pink-200 text-pink-700 bg-pink-50 text-xs"
+                      className={`text-xs transition-smooth ${
+                        theme === "dark"
+                          ? "border-light text-muted-light bg-dark-soft"
+                          : "border-pink-200 text-pink-700 bg-pink-50"
+                      }`}
                     >
                       {tag}
                     </Badge>
@@ -123,7 +174,11 @@ export function BlogSection() {
 
                 <Button
                   variant="ghost"
-                  className="text-pink-500 hover:text-pink-700 hover:bg-pink-50 p-0 h-auto font-medium group/btn"
+                  className={`p-0 h-auto font-medium group/btn transition-smooth ${
+                    theme === "dark"
+                      ? "text-muted-light hover:text-light hover-bg-light"
+                      : "text-muted-dark hover:text-dark hover-bg-dark"
+                  } ${poppins.className}`}
                 >
                   <span className="flex items-center gap-2">
                     Read More
@@ -135,6 +190,6 @@ export function BlogSection() {
           ))}
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }
