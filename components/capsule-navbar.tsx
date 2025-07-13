@@ -47,19 +47,19 @@ export default function FloatingNavbar({
   return (
     <nav
       className={`
-      fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-out
+      fixed top-6 left-1/2 transform -translate-x-1/2 z-50 transition-smooth
       ${isScrolled ? "scale-95" : "scale-100"}
     `}
     >
       <div
         className={`
-        flex items-center space-x-1 px-6 py-3 rounded-full transition-all duration-300
+        flex items-center space-x-1 px-6 py-3 rounded-full transition-smooth
         ${
           theme === "dark"
-            ? `${isScrolled ? "bg-gray-900/90" : "bg-gray-900/70"} backdrop-blur-md border border-gray-700/50`
-            : `${isScrolled ? "bg-white/90" : "bg-white/70"} backdrop-blur-md border border-gray-200/50`
+            ? `${isScrolled ? "bg-dark/90" : "bg-dark/70"} backdrop-blur-md border-light shadow-dark`
+            : `${isScrolled ? "bg-light/90" : "bg-light/70"} backdrop-blur-md border-dark shadow-light`
         }
-        shadow-lg hover:shadow-xl
+        hover:shadow-xl
       `}
       >
         {navItems.map((item) => {
@@ -71,15 +71,13 @@ export default function FloatingNavbar({
               key={item.id}
               onClick={() => onNavigate(item.id)}
               className={`
-                relative p-3 rounded-full transition-all duration-300 group
+                relative p-3 rounded-full transition-smooth group scale-hover
                 ${
                   isActive
-                    ? theme === "dark"
-                      ? "bg-pink-500 text-white shadow-lg"
-                      : "bg-pink-500 text-white shadow-lg"
+                    ? "bg-accent-primary text-white shadow-light"
                     : theme === "dark"
-                      ? "text-gray-400 hover:text-white hover:bg-gray-800"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                      ? "text-muted-light hover:text-light hover-bg-light"
+                      : "text-muted-dark hover:text-dark hover-bg-dark"
                 }
               `}
               title={item.label}
@@ -92,12 +90,12 @@ export default function FloatingNavbar({
               {/* Tooltip */}
               <div
                 className={`
-                                                absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium ${rubik.className}
+                absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium ${rubik.className}
                 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none
                 ${
                   theme === "dark"
-                    ? "bg-gray-800 text-white border border-gray-700"
-                    : "bg-gray-900 text-white"
+                    ? "bg-dark-soft text-light border-light"
+                    : "bg-dark text-light"
                 }
               `}
               >
@@ -105,7 +103,7 @@ export default function FloatingNavbar({
                 <div
                   className={`
                   absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45
-                  ${theme === "dark" ? "bg-gray-800 border-l border-t border-gray-700" : "bg-gray-900"}
+                  ${theme === "dark" ? "bg-dark-soft border-l border-t border-light" : "bg-dark"}
                 `}
                 />
               </div>
@@ -114,15 +112,17 @@ export default function FloatingNavbar({
         })}
 
         {/* Theme Toggle */}
-        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-2" />
+        <div
+          className={`w-px h-6 mx-2 ${theme === "dark" ? "border-light" : "border-dark"}`}
+        />
         <button
           onClick={toggleTheme}
           className={`
-            p-3 rounded-full transition-all duration-300 group
+            p-3 rounded-full transition-smooth group scale-hover
             ${
               theme === "dark"
-                ? "text-yellow-400 hover:text-yellow-300 hover:bg-gray-800"
-                : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                ? "text-yellow-400 hover:text-yellow-300 hover-bg-light"
+                : "text-muted-dark hover:text-dark hover-bg-dark"
             }
           `}
           title={
@@ -144,12 +144,12 @@ export default function FloatingNavbar({
           {/* Tooltip */}
           <div
             className={`
-                                            absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium ${rubik.className}
-                                    opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap
+            absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium ${rubik.className}
+            opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap
             ${
               theme === "dark"
-                ? "bg-gray-800 text-white border border-gray-700"
-                : "bg-gray-900 text-white"
+                ? "bg-dark-soft text-light border-light"
+                : "bg-dark text-light"
             }
           `}
           >
@@ -157,7 +157,7 @@ export default function FloatingNavbar({
             <div
               className={`
               absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rotate-45
-              ${theme === "dark" ? "bg-gray-800 border-l border-t border-gray-700" : "bg-gray-900"}
+              ${theme === "dark" ? "bg-dark-soft border-l border-t border-light" : "bg-dark"}
             `}
             />
           </div>
