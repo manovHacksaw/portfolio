@@ -227,7 +227,6 @@ export default function HackathonWinsSection({
     },
   ];
 
-  // *** NEW: Accessibility-aware prize color function ***
   const getPrizeColor = (prize: string) => {
     const isDark = theme === "dark";
     if (
@@ -275,7 +274,6 @@ export default function HackathonWinsSection({
 
   const displayedHackathons = isExpanded ? hackathons : hackathons.slice(0, 3);
 
-  // *** NEW: Handler for "Show Less" with smooth scroll ***
   const handleShowLess = () => {
     setIsExpanded(false);
     const section = document.getElementById("hackathons");
@@ -291,7 +289,7 @@ export default function HackathonWinsSection({
         theme === "dark" ? "bg-dark" : "bg-white"
       }`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2
             className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 transition-colors duration-300 ${
@@ -315,7 +313,6 @@ export default function HackathonWinsSection({
 
         {/* Enhanced Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-16">
-          {/* Stats content remains the same... */}
           <div
             className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
@@ -323,63 +320,71 @@ export default function HackathonWinsSection({
                 : "bg-gray-50 border-gray-200 hover:border-pink-300"
             }`}
           >
-            <Trophy className="w-8 h-8 text-pink-600 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-pink-600">
+            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600 mx-auto mb-2 sm:mb-3" />
+            <div
+              className={`text-xl sm:text-2xl font-bold text-pink-600 ${poppins.className}`}
+            >
               {hackathons.length}
             </div>
             <div
-              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+              className={`text-xs sm:text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${firaSans.className}`}
             >
               Hackathons
             </div>
           </div>
           <div
-            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
-                ? "bg-gray-900/50 border-gray-700 hover:border-green-600/50"
+                ? "bg-dark border-dark hover:border-green-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-green-300"
             }`}
           >
-            <Star className="w-8 h-8 text-green-600 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-green-600">
+            <Star className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 mx-auto mb-2 sm:mb-3" />
+            <div
+              className={`text-xl sm:text-2xl font-bold text-green-600 ${poppins.className}`}
+            >
               {allProjects.length}
             </div>
             <div
-              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+              className={`text-xs sm:text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${firaSans.className}`}
             >
               Projects Built
             </div>
           </div>
           <div
-            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
-                ? "bg-gray-900/50 border-gray-700 hover:border-yellow-600/50"
+                ? "bg-dark border-dark hover:border-yellow-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-yellow-300"
             }`}
           >
-            <TrendingUp className="w-8 h-8 text-yellow-600 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-yellow-600">
+            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600 mx-auto mb-2 sm:mb-3" />
+            <div
+              className={`text-xl sm:text-2xl font-bold text-yellow-600 ${poppins.className}`}
+            >
               ${totalPrizeValue.toLocaleString()}
             </div>
             <div
-              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+              className={`text-xs sm:text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${firaSans.className}`}
             >
               Prize Money
             </div>
           </div>
           <div
-            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
-                ? "bg-gray-900/50 border-gray-700 hover:border-purple-600/50"
+                ? "bg-dark border-dark hover:border-purple-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-purple-300"
             }`}
           >
-            <Award className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-purple-600">
+            <Award className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600 mx-auto mb-2 sm:mb-3" />
+            <div
+              className={`text-xl sm:text-2xl font-bold text-purple-600 ${poppins.className}`}
+            >
               {allProjects.filter((p) => p.featured).length}
             </div>
             <div
-              className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+              className={`text-xs sm:text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${firaSans.className}`}
             >
               Major Wins
             </div>
@@ -397,13 +402,12 @@ export default function HackathonWinsSection({
                     }`}
                   />
                 )}
-                {/* Hackathon Header */}
+
                 <div className="flex items-start space-x-4 sm:space-x-6 mb-6">
-                  {/* ... header content ... */}
                   <div
                     className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full border-4 flex items-center justify-center ${
                       theme === "dark"
-                        ? "bg-gray-950 border-pink-600"
+                        ? "bg-black border-pink-600"
                         : "bg-white border-pink-500"
                     }`}
                   >
@@ -411,9 +415,9 @@ export default function HackathonWinsSection({
                   </div>
                   <div className="flex-1">
                     <h3
-                      className={`text-xl sm:text-2xl font-bold mb-2 ${
+                      className={`text-lg sm:text-xl lg:text-2xl font-bold mb-2 ${
                         theme === "dark" ? "text-white" : "text-gray-900"
-                      }`}
+                      } ${poppins.className}`}
                     >
                       {hackathon.name}
                     </h3>
@@ -425,9 +429,9 @@ export default function HackathonWinsSection({
                         }
                       />
                       <span
-                        className={`text-sm ${
+                        className={`text-xs sm:text-sm ${
                           theme === "dark" ? "text-gray-400" : "text-gray-500"
-                        }`}
+                        } ${firaSans.className}`}
                       >
                         {hackathon.month}
                       </span>
@@ -436,16 +440,16 @@ export default function HackathonWinsSection({
                 </div>
 
                 {/* Projects grid */}
-                <div className="ml-10 sm:ml-14 grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                <div className="ml-6 sm:ml-10 lg:ml-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {hackathon.projects.map((project) => (
                     <div
                       key={`${hackathon.name}-${project.title}`}
                       className={`
-                      group rounded-2xl border shadow-sm overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer
-                      ${project.featured ? "md:col-span-2" : ""}
+                      group rounded-xl sm:rounded-2xl border shadow-sm overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer
+                      ${project.featured ? "md:col-span-2 lg:col-span-2" : ""}
                       ${
                         theme === "dark"
-                          ? "bg-gray-900/50 border-gray-700 hover:shadow-2xl hover:border-pink-600/50 backdrop-blur-sm"
+                          ? "card-dark hover:shadow-2xl hover:border-pink-600/50 backdrop-blur-sm"
                           : "bg-white/50 border-gray-200 hover:shadow-2xl hover:border-pink-300 backdrop-blur-sm"
                       }
                     `}
@@ -459,24 +463,23 @@ export default function HackathonWinsSection({
                     >
                       {/* Project Card content */}
                       <div
-                        className={`p-4 sm:p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}
+                        className={`p-3 sm:p-4 lg:p-6 border-b ${theme === "dark" ? "border-gray-700/30" : "border-gray-200/50"}`}
                       >
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-1">
                             <h4
-                              className={`text-lg sm:text-xl font-bold mb-2 transition-colors duration-300 ${theme === "dark" ? "text-white group-hover:text-pink-400" : "text-gray-900 group-hover:text-pink-600"}`}
+                              className={`text-base sm:text-lg lg:text-xl font-bold mb-2 transition-colors duration-300 ${theme === "dark" ? "text-white group-hover:text-pink-400" : "text-gray-900 group-hover:text-pink-600"} ${poppins.className}`}
                             >
                               {project.title}
                             </h4>
                             {project.featured && (
                               <span
-                                className={`inline-block px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${theme === "dark" ? "bg-pink-900/30 text-pink-300 border border-pink-700/50" : "bg-pink-100 text-pink-800 border border-pink-200"}`}
+                                className={`inline-block px-2 sm:px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300 ${theme === "dark" ? "bg-pink-900/30 text-pink-300 border border-pink-700/50" : "bg-pink-100 text-pink-800 border border-pink-200"} ${jetbrainsMono.className}`}
                               >
                                 Major Win
                               </span>
                             )}
                           </div>
-                          {/* ... link icons ... */}
                           <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
                             {project.demo && (
                               <a
@@ -516,9 +519,9 @@ export default function HackathonWinsSection({
                           </span>
                         </div>
                       </div>
-                      <div className="p-4 sm:p-6">
+                      <div className="p-3 sm:p-4 lg:p-6">
                         <p
-                          className={`leading-relaxed mb-6 text-sm transition-colors duration-300 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                          className={`leading-relaxed mb-4 sm:mb-6 text-sm transition-colors duration-300 ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${workSans.className}`}
                         >
                           {project.description}
                         </p>
@@ -526,7 +529,7 @@ export default function HackathonWinsSection({
                           {project.tech.map((tech) => (
                             <span
                               key={tech}
-                              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+                              className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${theme === "dark" ? "bg-gray-800 text-gray-300 hover:bg-gray-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200"} ${jetbrainsMono.className}`}
                             >
                               {tech}
                             </span>
@@ -543,15 +546,15 @@ export default function HackathonWinsSection({
           {/* Fade Overlay & "Show All" Button */}
           {!isExpanded && hackathons.length > 3 && (
             <div
-              className={`absolute -bottom-12 left-0 right-0 h-96 flex items-end justify-center pt-20 bg-gradient-to-t ${
+              className={`absolute -bottom-12 left-0 right-0 h-80 sm:h-96 flex items-end justify-center pt-16 sm:pt-20 bg-gradient-to-t ${
                 theme === "dark"
-                  ? "from-gray-950 to-transparent"
+                  ? "from-black to-transparent"
                   : "from-white to-transparent"
               }`}
             >
               <button
                 onClick={() => setIsExpanded(true)}
-                className="flex items-center space-x-2 px-6 py-3 rounded-full font-semibold text-white bg-pink-600 hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/30"
+                className={`flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-white bg-pink-600 hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-500/30 ${poppins.className}`}
               >
                 <span>Show All Wins</span>
                 <ChevronDown size={20} />
@@ -560,12 +563,12 @@ export default function HackathonWinsSection({
           )}
         </div>
 
-        {/* *** NEW: "Show Less" Button *** */}
+        {/* "Show Less" Button */}
         {isExpanded && (
-          <div className="text-center mt-16">
+          <div className="text-center mt-12 sm:mt-16">
             <button
               onClick={handleShowLess}
-              className="flex items-center mx-auto space-x-2 px-6 py-3 rounded-full font-semibold text-white bg-pink-600 hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30"
+              className={`flex items-center mx-auto space-x-2 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-white bg-pink-600 hover:bg-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30 ${poppins.className}`}
             >
               <span>Show Less</span>
               <ChevronUp size={20} />
@@ -574,35 +577,34 @@ export default function HackathonWinsSection({
         )}
       </div>
 
-      {/* Project Detail Modal (already responsive and theme-aware) */}
+      {/* Project Detail Modal */}
       {selectedProject && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedProject(null)}
         >
-          {/* ... modal content ... */}
           <div
-            className={`max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl ${
-              theme === "dark" ? "bg-gray-900" : "bg-white"
+            className={`max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-xl sm:rounded-2xl ${
+              theme === "dark" ? "bg-dark" : "bg-white"
             }`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-6 sm:p-8">
+            <div className="p-4 sm:p-6 lg:p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3
-                    className={`text-2xl font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+                    className={`text-xl sm:text-2xl font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"} ${poppins.className}`}
                   >
                     {selectedProject.title}
                   </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2">
                     <span
-                      className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                      className={`text-base sm:text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${workSans.className}`}
                     >
                       {selectedProject.hackathon}
                     </span>
                     <span
-                      className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}
+                      className={`text-xs sm:text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-500"} ${firaSans.className}`}
                     >
                       {selectedProject.month}
                     </span>
@@ -628,7 +630,7 @@ export default function HackathonWinsSection({
                 </button>
               </div>
               <p
-                className={`text-base leading-relaxed mb-6 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                className={`text-sm sm:text-base leading-relaxed mb-6 ${theme === "dark" ? "text-gray-300" : "text-gray-600"} ${workSans.className}`}
               >
                 {selectedProject.description}
               </p>
@@ -636,7 +638,7 @@ export default function HackathonWinsSection({
                 {selectedProject.tech.map((tech) => (
                   <span
                     key={tech}
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${theme === "dark" ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-700"}`}
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${theme === "dark" ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-700"} ${jetbrainsMono.className}`}
                   >
                     {tech}
                   </span>
@@ -648,7 +650,7 @@ export default function HackathonWinsSection({
                     href={selectedProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-2 px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors"
+                    className={`flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 rounded-lg bg-pink-600 text-white hover:bg-pink-700 transition-colors ${poppins.className}`}
                   >
                     <ExternalLink size={18} />
                     <span>Live Demo</span>
@@ -659,7 +661,7 @@ export default function HackathonWinsSection({
                     href={selectedProject.announcement}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg border transition-colors ${theme === "dark" ? "border-gray-700 text-gray-300 hover:bg-gray-800" : "border-gray-300 text-gray-700 hover:bg-gray-50"}`}
+                    className={`flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 rounded-lg border transition-colors ${theme === "dark" ? "border-gray-700 text-gray-300 hover:bg-gray-800" : "border-gray-300 text-gray-700 hover:bg-gray-50"} ${poppins.className}`}
                   >
                     <Link size={18} />
                     <span>Announcement</span>
