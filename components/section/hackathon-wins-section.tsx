@@ -301,16 +301,16 @@ export default function HackathonWinsSection({
             Hackathon Highlights
           </h2>
           <p
-            className={`text-lg max-w-3xl mx-auto mb-8 ${
+            className={`text-base sm:text-lg max-w-3xl mx-auto mb-8 leading-relaxed ${
               theme === "dark" ? "text-gray-300" : "text-gray-600"
-            }`}
+            } ${workSans.className}`}
           >
             A journey through competitive hackathons, building innovative
             blockchain solutions and earning recognition. Over $
             {totalPrizeValue.toLocaleString()} in prizes won across multiple
             platforms as a team.
           </p>
-          <div className="w-20 h-0.5 bg-gradient-to-r from-pink-600 to-purple-600 mx-auto" />
+          <div className="w-20 h-0.5 bg-pink-500 mx-auto" />
         </div>
 
         {/* Enhanced Stats */}
