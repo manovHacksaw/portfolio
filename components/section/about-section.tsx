@@ -26,7 +26,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
           <div className="space-y-6">
             <p
-              className={`${firaSans.className} text-sm lg:text-md sm:text-lg leading-relaxed transition-smooth ${
+              className={`${firaSans.className} text-sm text-justify lg:text-md sm:text-lg leading-relaxed transition-smooth ${
                 theme === "dark" ? "text-muted-light" : "text-muted-dark"
               }`}
             >
@@ -38,7 +38,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
             </p>
 
             <p
-              className={`${firaSans.className} text-base lg:text-md sm:text-lg leading-relaxed transition-smooth ${
+              className={`${firaSans.className} text-base text-justify lg:text-md sm:text-lg leading-relaxed transition-smooth ${
                 theme === "dark" ? "text-muted-light" : "text-muted-dark"
               }`}
             >
@@ -53,7 +53,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
             </p>
 
             <p
-              className={`${firaSans.className} text-base lg:text-md sm:text-lg leading-relaxed transition-smooth ${
+              className={`${firaSans.className}  text-justify text-base lg:text-md sm:text-lg leading-relaxed transition-smooth ${
                 theme === "dark" ? "text-muted-light" : "text-muted-dark"
               }`}
             >
@@ -81,18 +81,22 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                   theme === "dark" ? "text-light" : "text-dark"
                 }`}
               >
-                Core Technologies
+                Core Stack
               </h3>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "JavaScript",
-                  "React",
                   "Next.js",
+                  "React.js",
+                  "Tailwind CSS",
                   "TypeScript",
                   "Node.js",
+                  "Express.js",
                   "MongoDB",
-                  "Tailwind CSS",
-                  "Python",
+                  "SQL",
+                  "UNIX",
+                  "GitHub", "RestAPI", "VS Code", "Postman", "React Redux"
+                 
+                
                 ].map((tech) => (
                   <span
                     key={tech}
@@ -124,14 +128,15 @@ export default function AboutSection({ theme }: AboutSectionProps) {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {[
+                  "EVM",
+                  "Solidity",
+                  "ethers.js",
+                  "Wagmi",
+                  "Shell Scripting",
+                  "Docker",
                   "Rust",
                   "Solana",
-                  "Solidity",
-                  "Smart Contracts",
-                  "Web3",
-                  "Docker",
-                  "Shell Scripting",
-                  "UNIX",
+                  "Anchor", "Gemini AI"
                 ].map((tech) => (
                   <span
                     key={tech}
@@ -146,7 +151,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                 ))}
               </div>
             </div>
-
+ 
             <div
               className={`rounded-xl p-4 sm:p-6 border transition-smooth ${
                 theme === "dark"
@@ -168,7 +173,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
               >
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-accent-primary rounded-full mr-3 flex-shrink-0" />
-                  Advanced Rust Programming
+                  Exploring AI/ML and its applications
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-accent-primary rounded-full mr-3 flex-shrink-0" />
@@ -180,7 +185,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-accent-primary rounded-full mr-3 flex-shrink-0" />
-                  Exploring AI & Machine Learning
+                  Preparing for MS in CS applications (2026)
                 </li>
               </ul>
             </div>

@@ -30,7 +30,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       title: "EDU Legacy",
       shortDescription:
         "Redefining Digital Asset Inheritance Through Automated Smart Will Systems",
-      tech: ["Solidity", "OpenZeppelin", "Multi-chain", "Smart Contracts"],
+      tech: ["Solidity", "OpenZeppelin", "Multi-chain", "Next.js"],
       github: "https://github.com/manobendra/edu-legacy",
       live: "https://edu-legacy.vercel.app",
       featured: true,
@@ -42,7 +42,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       title: "Fork Work",
       shortDescription:
         "Eliminating Trust Barriers in Decentralized Work Collaboration",
-      tech: ["Ethereum", "Civic Auth", "USDT", "The Graph"],
+      tech: ["Ethereum", "Civic Auth", "Next.js", "Gemini AI"],
       github: "https://github.com/manobendra/fork-work",
       live: "https://fork-work.vercel.app",
       featured: true,
@@ -54,7 +54,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       title: "Coro Tashi",
       shortDescription:
         "Decentralized Liquid Staking Protocol Pioneering Cross-Token Rewards",
-      tech: ["Core Chain", "Solidity", "Hardhat", "Next.js", "Wagmi"],
+      tech: ["Core", "Solidity", "Remix IDE", "Next.js", "ethers.js"],
       github: "https://github.com/manobendra/coro-tashi",
       live: "https://coro-tashi.vercel.app",
       featured: true,
@@ -66,9 +66,9 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       title: "PolyTix",
       shortDescription:
         "Decentralized Governance Platform Eliminating Electoral Manipulation",
-      tech: ["Polygon", "Next.js 15", "The Graph", "Solidity", "ShadCN UI"],
+      tech: ["Polygon", "Next.js 15", "The Graph", "Solidity", "NFTs"],
       github: "https://github.com/manovHacksaw/polytix/tree/v2",
-      live: null,
+      live: "polytix.vercel.app",
       featured: true,
       icon: Globe,
       image: "/projects/polytix.png",
@@ -78,7 +78,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       title: "Pixel8r",
       shortDescription:
         "Collaborative Blockchain Art Canvas Democratizing Digital Creativity",
-      tech: ["Telos", "Blockchain", "Real-time", "Digital Art"],
+      tech: ["Telos", "IPFS", "Pinata", "NFT"],
       github: "https://github.com/ayaanoski/pixel8r",
       live: "https://pixel8r.vercel.app/",
       featured: false,
@@ -88,7 +88,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       title: "PlaiaZone",
       shortDescription:
         "Decentralized Crowdfunding Infrastructure for Gaming Communities",
-      tech: ["Crowdfunding", "Gaming", "Multi-wallet", "Community"],
+      tech: ["AIA Chain", "Solidity", "Next.js", "ethers.js"],
       github: "https://github.com/manovHacksaw/plAIA-zone",
       live: "https://pl-aia-zone.vercel.app/",
       featured: false,
@@ -106,7 +106,7 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
         theme === "dark" ? "bg-dark" : "bg-light-soft"
       }`}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-12 sm:mb-16 text-center md:text-left">
           <h2

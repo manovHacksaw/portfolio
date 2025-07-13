@@ -75,9 +75,9 @@ export default function HackathonWinsSection({
         {
           title: "Plaia Zone",
           description:
-            "A Web3 travel recommendation app where users earn AIA tokens for creating and sharing travel itineraries, supported by AIA blockchain's proof of contribution system.",
+            "Plaia Zone is a decentralized crowdfunding platform designed specifically for gamers. It allows users to create, fund, and manage campaigns that can either seek donations or loans, fostering a supportive community for gamers in need of financial assistance for their gaming endeavors.",
           prize: "500 USDT",
-          tech: ["AIA Blockchain", "Web3", "Travel Tech", "Token Rewards"],
+          tech: ["AIA Chain", "ethers.js", "Solidity", "Next.js"],
           demo: "https://pl-aia-zone.vercel.app/",
           announcement: "https://x.com/HackQuest_/status/1861432015893209373",
           color: "blue",
@@ -89,11 +89,11 @@ export default function HackathonWinsSection({
             "A learn-to-earn platform gamifying DSA and tech learning. Features bug-fixing challenges, generative AI tutors, gamified problem solving, and visual learning through AI-powered mind maps. Users earn AIA tokens for completing challenges and learning modules.",
           prize: "2,000 USDT",
           tech: [
-            "AI/ML",
-            "Gamification",
+            "Gemini AI",
+            "AIA Chain",
             "DSA",
-            "Educational Tech",
-            "AIA Tokens",
+            "Solidity",
+            "Next.js",
           ],
           demo: "https://daccy-aia-learn-to-earn.vercel.app/",
           announcement: "https://x.com/HackQuest_/status/1861432015893209373",
@@ -111,7 +111,7 @@ export default function HackathonWinsSection({
           description:
             "A decentralized legacy management platform enabling users to create and pass on secure educational legacies using Telos blockchain. (Ported from Edu Legacy)",
           prize: "600 USDC",
-          tech: ["Telos Blockchain", "Legacy Management", "Educational Tech"],
+          tech: ["Telos Blockchain", "Solidity", "Next.js", "ethers.js"],
           announcement: "https://x.com/HackQuest_/status/1895021811303358625",
           color: "indigo",
           featured: false,
@@ -121,7 +121,7 @@ export default function HackathonWinsSection({
           description:
             "A milestones-based crowdfunding platform where users can set and achieve funding goals transparently on the Telos blockchain.",
           prize: "300 USDC",
-          tech: ["Crowdfunding", "Milestones", "Telos", "DeFi"],
+          tech: ["Telos Blockchain", "Milestones",  "DeFi"],
           announcement: "https://x.com/HackQuest_/status/1895021811303358625",
           color: "orange",
           featured: false,
@@ -312,7 +312,7 @@ export default function HackathonWinsSection({
         </div>
 
         {/* Enhanced Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-16">
           <div
             className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-smooth scale-hover ${
               theme === "dark"
@@ -370,25 +370,7 @@ export default function HackathonWinsSection({
               Prize Money
             </div>
           </div>
-          <div
-            className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-smooth scale-hover ${
-              theme === "dark"
-                ? "card-dark shadow-dark"
-                : "card-light shadow-light"
-            }`}
-          >
-            <Award className="w-6 h-6 sm:w-8 sm:h-8 status-info mx-auto mb-2 sm:mb-3" />
-            <div
-              className={`text-xl sm:text-2xl font-bold status-info ${poppins.className}`}
-            >
-              {allProjects.filter((p) => p.featured).length}
-            </div>
-            <div
-              className={`text-xs sm:text-sm ${theme === "dark" ? "text-muted-light" : "text-muted-dark"} ${firaSans.className}`}
-            >
-              Major Wins
-            </div>
-          </div>
+        
         </div>
 
         <div className="relative">
@@ -476,13 +458,7 @@ export default function HackathonWinsSection({
                             >
                               {project.title}
                             </h4>
-                            {project.featured && (
-                              <span
-                                className={`inline-block px-2 sm:px-3 py-1 text-xs font-medium rounded-full transition-smooth ${theme === "dark" ? "bg-dark-soft text-muted-light border-light" : "bg-pink-50 text-pink-700 border border-pink-200"} ${jetbrainsMono.className}`}
-                              >
-                                Major Win
-                              </span>
-                            )}
+                          
                           </div>
                           <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity ml-4">
                             {project.demo && (

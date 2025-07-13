@@ -40,7 +40,9 @@ export default function HeroSection({ theme }: HeroSectionProps) {
     [
       "learning Solana Development.",
       "debugging life, stacking wins on chain.",
-      "building to solve real-life problems.",
+      "not powered by coffee — just passion",
+      "building to solve real-world problems",
+      "AI is the next mountain to climb",
     ],
     100,
   );
@@ -192,7 +194,7 @@ export default function HeroSection({ theme }: HeroSectionProps) {
               <ExternalLink size={16} />
             </a>
             <a
-              href="/resume.pdf"
+              href="/Manobendra_Mandal.pdf"
               target="_blank"
               rel="noopener noreferrer"
               download
