@@ -287,8 +287,8 @@ export default function HackathonWinsSection({
   return (
     <section
       id="hackathons"
-      className={`py-20 px-4 sm:px-6 transition-colors duration-300 ${
-        theme === "dark" ? "bg-gray-950" : "bg-white"
+      className={`py-16 sm:py-20 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
+        theme === "dark" ? "bg-dark" : "bg-white"
       }`}
     >
       <div className="max-w-7xl mx-auto">
