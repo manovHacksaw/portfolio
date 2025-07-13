@@ -317,9 +317,9 @@ export default function HackathonWinsSection({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-16">
           {/* Stats content remains the same... */}
           <div
-            className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+            className={`text-center p-3 sm:p-4 lg:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
               theme === "dark"
-                ? "bg-gray-900/50 border-gray-700 hover:border-pink-600/50"
+                ? "bg-dark border-dark hover:border-pink-600/50"
                 : "bg-gray-50 border-gray-200 hover:border-pink-300"
             }`}
           >
