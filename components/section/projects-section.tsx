@@ -12,6 +12,13 @@ import {
   Trophy,
 } from "lucide-react";
 import Image from "next/image";
+import {
+  spaceGrotesk,
+  firaSans,
+  poppins,
+  jetbrainsMono,
+  workSans,
+} from "@/app/fonts";
 
 interface ProjectsSectionProps {
   theme: string;
@@ -21,30 +28,32 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
   const projects = [
     {
       title: "EDU Legacy",
-      shortDescription: "Redefining Digital Asset Inheritance Through Automated Smart Will Systems",
+      shortDescription:
+        "Redefining Digital Asset Inheritance Through Automated Smart Will Systems",
       tech: ["Solidity", "OpenZeppelin", "Multi-chain", "Smart Contracts"],
       github: "https://github.com/manobendra/edu-legacy",
       live: "https://edu-legacy.vercel.app",
       featured: true,
       icon: Shield,
       image: "/projects/edu-legacy.png",
-            award: "Won Multiple Hackathons",
+      award: "Won Multiple Hackathons",
     },
     {
       title: "Fork Work",
-      shortDescription: "Eliminating Trust Barriers in Decentralized Work Collaboration",
+      shortDescription:
+        "Eliminating Trust Barriers in Decentralized Work Collaboration",
       tech: ["Ethereum", "Civic Auth", "USDT", "The Graph"],
       github: "https://github.com/manobendra/fork-work",
       live: "https://fork-work.vercel.app",
       featured: true,
       icon: Users,
       image: "/projects/fork-work.png",
-      award: "Freshly Cooked for Hack4Bengal 4.0"
-
+      award: "Freshly Cooked for Hack4Bengal 4.0",
     },
     {
       title: "Coro Tashi",
-      shortDescription: "Decentralized Liquid Staking Protocol Pioneering Cross-Token Rewards",
+      shortDescription:
+        "Decentralized Liquid Staking Protocol Pioneering Cross-Token Rewards",
       tech: ["Core Chain", "Solidity", "Hardhat", "Next.js", "Wagmi"],
       github: "https://github.com/manobendra/coro-tashi",
       live: "https://coro-tashi.vercel.app",
@@ -55,7 +64,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
     },
     {
       title: "PolyTix",
-      shortDescription: "Decentralized Governance Platform Eliminating Electoral Manipulation",
+      shortDescription:
+        "Decentralized Governance Platform Eliminating Electoral Manipulation",
       tech: ["Polygon", "Next.js 15", "The Graph", "Solidity", "ShadCN UI"],
       github: "https://github.com/manovHacksaw/polytix/tree/v2",
       live: null,
@@ -66,7 +76,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
     },
     {
       title: "Pixel8r",
-      shortDescription: "Collaborative Blockchain Art Canvas Democratizing Digital Creativity",
+      shortDescription:
+        "Collaborative Blockchain Art Canvas Democratizing Digital Creativity",
       tech: ["Telos", "Blockchain", "Real-time", "Digital Art"],
       github: "https://github.com/manobendra/pixel8r",
       live: null,
@@ -75,7 +86,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
     },
     {
       title: "PlaiaZone",
-      shortDescription: "Decentralized Crowdfunding Infrastructure for Gaming Communities",
+      shortDescription:
+        "Decentralized Crowdfunding Infrastructure for Gaming Communities",
       tech: ["Crowdfunding", "Gaming", "Multi-wallet", "Community"],
       github: "https://github.com/manobendra/plaiazone",
       live: null,
@@ -90,37 +102,39 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
   return (
     <section
       id="projects"
-      className={`py-24 px-6 transition-colors duration-300 ${
-        theme === "dark" ? "bg-black" : "bg-gray-50"
+      className={`py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${
+        theme === "dark" ? "bg-dark" : "bg-gray-50"
       }`}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="mb-16 text-center md:text-left">
+        <div className="mb-12 sm:mb-16 text-center md:text-left">
           <h2
-            className={`text-4xl font-bold mb-4 tracking-tight ${
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 tracking-tight ${
               theme === "dark" ? "text-white" : "text-gray-900"
-            }`}
+            } ${spaceGrotesk.className}`}
           >
             Featured Projects
           </h2>
           <p
-            className={`text-lg max-w-2xl mx-auto md:mx-0 leading-relaxed ${
+            className={`text-base sm:text-lg max-w-2xl mx-auto md:mx-0 leading-relaxed ${
               theme === "dark" ? "text-gray-400" : "text-gray-600"
-            }`}
+            } ${workSans.className}`}
           >
-            A selection of my recent work, focused on solving real-world problems with Web3, DeFi, and innovative technology solutions.
+            A selection of my recent work, focused on solving real-world
+            problems with Web3, DeFi, and innovative technology solutions.
           </p>
+          <div className="w-20 h-0.5 bg-pink-500 mx-auto md:mx-0 mt-6" />
         </div>
 
         {/* Featured Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16 sm:mb-20">
           {featuredProjects.map((project) => (
             <div
               key={project.title}
-              className={`group overflow-hidden h-max  rounded-xl border transition-all duration-300 ${
+              className={`group overflow-hidden h-max rounded-xl border transition-all duration-300 ${
                 theme === "dark"
-                  ? "bg-gray-900 border-gray-800 hover:border-gray-700"
+                  ? "card-dark hover:border-gray-700"
                   : "bg-white border-gray-200 hover:border-gray-300"
               } hover:-translate-y-1 hover:shadow-lg`}
             >
@@ -131,56 +145,64 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                     alt={`Screenshot of ${project.title}`}
                     width={700}
                     height={900}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-40 sm:h-48 object-cover"
                   />
                 )}
                 {project.award && (
-                  <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-lg ${
-                    project.award.includes("Academic") 
-                      ? "bg-blue-100 text-blue-800" 
-                      : "bg-amber-100 text-amber-800"
-                  }`}>
-                    <Trophy size={14} />
-                    <span>{project.award}</span>
+                  <div
+                    className={`absolute top-3 right-3 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-lg ${
+                      project.award.includes("Academic")
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-amber-100 text-amber-800"
+                    } ${jetbrainsMono.className}`}
+                  >
+                    <Trophy size={12} />
+                    <span className="hidden sm:inline">{project.award}</span>
+                    <span className="sm:hidden">Award</span>
                   </div>
                 )}
               </div>
-              
-              <div className="p-6">
-                <h3 className={`text-xl font-semibold mb-2 ${
-                  theme === "dark" ? "text-white" : "text-gray-900"
-                }`}>
+
+              <div className="p-4 sm:p-6">
+                <h3
+                  className={`text-lg sm:text-xl font-semibold mb-2 ${
+                    theme === "dark" ? "text-white" : "text-gray-900"
+                  } ${poppins.className}`}
+                >
                   {project.title}
                 </h3>
-                <p className={`text-sm mb-4 leading-relaxed ${
-                  theme === "dark" ? "text-gray-400" : "text-gray-600"
-                }`}>
+                <p
+                  className={`text-sm mb-4 leading-relaxed ${
+                    theme === "dark" ? "text-gray-400" : "text-gray-600"
+                  } ${workSans.className}`}
+                >
                   {project.shortDescription}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-5">
                   {project.tech.map((tech) => (
-                    <span 
-                      key={tech} 
-                      className={`px-2.5 py-1 rounded-md text-xs font-medium ${
-                        theme === "dark" 
-                          ? "bg-gray-800 text-gray-300" 
+                    <span
+                      key={tech}
+                      className={`px-2 sm:px-2.5 py-1 rounded-md text-xs font-medium ${
+                        theme === "dark"
+                          ? "bg-gray-800 text-gray-300"
                           : "bg-gray-100 text-gray-700"
-                      }`}
+                      } ${jetbrainsMono.className}`}
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-                <div className="flex items-center gap-4 text-sm font-medium">
+                <div className="flex items-center gap-3 sm:gap-4 text-sm font-medium">
                   {project.live && (
                     <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 transition-colors"
+                      className={`flex items-center gap-1.5 text-pink-600 hover:text-pink-700 transition-colors ${poppins.className}`}
                     >
                       <ExternalLink size={14} />
-                      Live Demo
+                      <span className="hidden sm:inline">Live Demo</span>
+                      <span className="sm:hidden">Demo</span>
                     </a>
                   )}
                   <a
@@ -188,13 +210,14 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`flex items-center gap-1.5 transition-colors ${
-                      theme === "dark" 
-                        ? "text-gray-400 hover:text-white" 
+                      theme === "dark"
+                        ? "text-gray-400 hover:text-white"
                         : "text-gray-600 hover:text-gray-900"
-                    }`}
+                    } ${poppins.className}`}
                   >
                     <Github size={14} />
-                    Source Code
+                    <span className="hidden sm:inline">Source Code</span>
+                    <span className="sm:hidden">Code</span>
                   </a>
                 </div>
               </div>
@@ -203,19 +226,22 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
         </div>
 
         {/* Other Projects Header */}
-        <div className="mb-12 text-center md:text-left">
+        <div className="mb-8 sm:mb-12 text-center md:text-left">
           <h3
             id="other-projects"
-            className={`text-3xl font-bold mb-4 tracking-tight ${
+            className={`text-2xl sm:text-3xl font-bold mb-4 tracking-tight ${
               theme === "dark" ? "text-white" : "text-gray-900"
-            }`}
+            } ${poppins.className}`}
           >
             Other Noteworthy Projects
           </h3>
-          <p className={`text-lg max-w-2xl mx-auto md:mx-0 ${
-            theme === "dark" ? "text-gray-400" : "text-gray-600"
-          }`}>
-            Additional explorations in code, from hackathon prototypes to personal experiments.
+          <p
+            className={`text-base sm:text-lg max-w-2xl mx-auto md:mx-0 ${
+              theme === "dark" ? "text-gray-400" : "text-gray-600"
+            } ${workSans.className}`}
+          >
+            Additional explorations in code, from hackathon prototypes to
+            personal experiments.
           </p>
         </div>
 
@@ -229,53 +255,67 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex flex-col sm:flex-row items-start gap-4 p-5 rounded-xl border transition-all duration-300 ${
+                className={`group flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-all duration-300 ${
                   theme === "dark"
-                    ? "bg-gray-900 border-gray-800 hover:bg-gray-800/50 hover:border-gray-700"
+                    ? "card-dark hover:bg-gray-800/50 hover:border-gray-700"
                     : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300"
                 } hover:shadow-sm`}
               >
-                <div className={`p-3 rounded-lg flex-shrink-0 ${
-                  theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
-                }`}>
-                  <IconComponent 
-                    className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} 
-                    size={24} 
+                <div
+                  className={`p-2 sm:p-3 rounded-lg flex-shrink-0 ${
+                    theme === "dark" ? "bg-gray-800" : "bg-gray-100"
+                  }`}
+                >
+                  <IconComponent
+                    className={
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }
+                    size={20}
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className={`font-semibold mb-1 ${
-                    theme === "dark" ? "text-white" : "text-gray-900"
-                  }`}>
+                  <h4
+                    className={`font-semibold mb-1 ${
+                      theme === "dark" ? "text-white" : "text-gray-900"
+                    } ${poppins.className}`}
+                  >
                     {project.title}
                   </h4>
-                  <p className={`text-sm mb-3 leading-relaxed ${
-                    theme === "dark" ? "text-gray-400" : "text-gray-600"
-                  }`}>
+                  <p
+                    className={`text-sm mb-3 leading-relaxed ${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    } ${workSans.className}`}
+                  >
                     {project.shortDescription}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.slice(0, 4).map((tech) => (
-                      <span 
-                        key={tech} 
+                      <span
+                        key={tech}
                         className={`px-2 py-1 rounded text-xs font-medium ${
-                          theme === "dark" 
-                            ? "bg-gray-800 text-gray-300" 
+                          theme === "dark"
+                            ? "bg-gray-800 text-gray-300"
                             : "bg-gray-100 text-gray-700"
-                        }`}
+                        } ${jetbrainsMono.className}`}
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className={`mt-2 sm:mt-0 flex-shrink-0 self-start sm:self-center text-sm font-medium flex items-center gap-2 transition-all duration-300 ${
-                  theme === 'dark' 
-                    ? 'text-gray-400 group-hover:text-white' 
-                    : 'text-gray-500 group-hover:text-gray-900'
-                }`}>
-                  View Code 
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <div
+                  className={`mt-2 sm:mt-0 flex-shrink-0 self-start sm:self-center text-sm font-medium flex items-center gap-2 transition-all duration-300 ${
+                    theme === "dark"
+                      ? "text-gray-400 group-hover:text-white"
+                      : "text-gray-500 group-hover:text-gray-900"
+                  } ${poppins.className}`}
+                >
+                  <span className="hidden sm:inline">View Code</span>
+                  <span className="sm:hidden">Code</span>
+                  <ArrowRight
+                    size={16}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
                 </div>
               </a>
             );
