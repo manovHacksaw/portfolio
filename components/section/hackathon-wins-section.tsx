@@ -314,7 +314,7 @@ export default function HackathonWinsSection({
         </div>
 
         {/* Enhanced Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-12 sm:mb-16">
           {/* Stats content remains the same... */}
           <div
             className={`text-center p-4 sm:p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
