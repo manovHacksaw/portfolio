@@ -7,6 +7,7 @@ import {
   poppins,
   jetbrainsMono,
   rubik,
+  workSans,
 } from "@/app/fonts";
 
 interface ContactSectionProps {
@@ -44,26 +45,26 @@ export default function ContactSection({ theme }: ContactSectionProps) {
   return (
     <section
       id="contact"
-      className={`py-20 px-6 transition-colors duration-300 ${
-        theme === "dark" ? "bg-gray-900" : "bg-gray-50"
+      className={`py-16 sm:py-20 px-4 sm:px-6 lg:px-8 transition-smooth ${
+        theme === "dark" ? "bg-dark" : "bg-light-soft"
       }`}
     >
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="mb-16">
+      <div className="max-w-5xl mx-auto text-center">
+        <div className="mb-12 sm:mb-16">
           <h2
-            className={`text-3xl md:text-4xl font-bold mb-6 ${spaceGrotesk.className} transition-colors duration-300 ${
-              theme === "dark" ? "text-white" : "text-gray-900"
+            className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 ${spaceGrotesk.className} transition-smooth ${
+              theme === "dark" ? "text-light" : "text-dark"
             }`}
           >
             Let's Connect
           </h2>
-          <div className="w-20 h-0.5 bg-pink-500 mx-auto" />
+          <div className="divider-accent mx-auto" />
         </div>
 
-        <div className="mb-12">
+        <div className="mb-10 sm:mb-12">
           <p
-            className={`text-lg leading-relaxed max-w-2xl mx-auto ${firaSans.className} transition-colors duration-300 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-600"
+            className={`text-base sm:text-lg leading-relaxed max-w-2xl mx-auto ${workSans.className} transition-smooth ${
+              theme === "dark" ? "text-muted-light" : "text-muted-dark"
             }`}
           >
             I'm always interested in connecting with fellow developers,
@@ -73,7 +74,7 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-12">
           {socialLinks.map((link) => {
             const Icon = link.icon;
             return (
@@ -82,35 +83,37 @@ export default function ContactSection({ theme }: ContactSectionProps) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group rounded-xl p-6 border shadow-sm transition-all duration-300 ${
+                className={`group rounded-xl p-4 sm:p-6 border transition-smooth scale-hover ${
                   theme === "dark"
-                    ? "bg-gray-950 border-gray-700 hover:shadow-lg hover:border-pink-500/50"
-                    : "bg-white border-gray-200 hover:shadow-lg hover:border-pink-300"
+                    ? "card-dark card-hover-dark shadow-dark"
+                    : "card-light card-hover-light shadow-light"
                 }`}
               >
                 <div className="flex flex-col items-center space-y-3">
                   <div
-                    className={`p-3 rounded-full transition-colors duration-300 ${
+                    className={`p-2 sm:p-3 rounded-full transition-smooth ${
                       theme === "dark"
-                        ? "bg-pink-900/30 group-hover:bg-pink-800/50"
-                        : "bg-pink-100 group-hover:bg-pink-200"
+                        ? "bg-dark-soft group-hover:bg-accent-primary/20"
+                        : "bg-pink-50 group-hover:bg-pink-100"
                     }`}
                   >
-                    <Icon className="w-6 h-6 text-pink-500" />
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 accent-primary" />
                   </div>
                   <div>
                     <h3
-                      className={`font-semibold ${poppins.className} transition-colors duration-300 ${
+                      className={`text-sm sm:text-base font-semibold ${poppins.className} transition-smooth ${
                         theme === "dark"
-                          ? "text-white group-hover:text-pink-400"
-                          : "text-gray-900 group-hover:text-pink-500"
+                          ? "text-light group-hover:accent-primary"
+                          : "text-dark group-hover:accent-primary"
                       }`}
                     >
                       {link.label}
                     </h3>
                     <p
-                      className={`text-sm ${jetbrainsMono.className} transition-colors duration-300 ${
-                        theme === "dark" ? "text-gray-400" : "text-gray-600"
+                      className={`text-xs sm:text-sm ${jetbrainsMono.className} transition-smooth ${
+                        theme === "dark"
+                          ? "text-muted-light"
+                          : "text-muted-dark"
                       }`}
                     >
                       {link.username}
@@ -123,22 +126,22 @@ export default function ContactSection({ theme }: ContactSectionProps) {
         </div>
 
         <div
-          className={`rounded-xl p-8 border shadow-sm transition-colors duration-300 ${
+          className={`rounded-xl p-6 sm:p-8 border transition-smooth ${
             theme === "dark"
-              ? "bg-gray-950 border-gray-700"
-              : "bg-white border-gray-200"
+              ? "card-dark shadow-dark"
+              : "card-light shadow-light"
           }`}
         >
           <h3
-            className={`text-xl font-semibold mb-4 ${poppins.className} transition-colors duration-300 ${
-              theme === "dark" ? "text-white" : "text-gray-900"
+            className={`text-lg sm:text-xl font-semibold mb-4 ${poppins.className} transition-smooth ${
+              theme === "dark" ? "text-light" : "text-dark"
             }`}
           >
             Open to Opportunities
           </h3>
           <p
-            className={`mb-6 ${firaSans.className} transition-colors duration-300 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-600"
+            className={`mb-6 text-sm sm:text-base ${workSans.className} transition-smooth ${
+              theme === "dark" ? "text-muted-light" : "text-muted-dark"
             }`}
           >
             Currently exploring new opportunities in web development,
@@ -146,9 +149,9 @@ export default function ContactSection({ theme }: ContactSectionProps) {
           </p>
           <a
             href="mailto:manovmandal@gmail.com"
-            className={`inline-flex items-center space-x-2 bg-pink-500 text-white px-6 py-3 rounded-lg font-medium ${rubik.className} hover:bg-pink-700 transition-colors duration-300`}
+            className={`inline-flex items-center space-x-2 bg-accent-primary text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium ${rubik.className} hover-accent-primary transition-smooth scale-hover focus-accent`}
           >
-            <Mail size={18} />
+            <Mail size={16} />
             <span>Get in touch</span>
           </a>
         </div>
