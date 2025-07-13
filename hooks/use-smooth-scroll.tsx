@@ -5,7 +5,7 @@ export const useSmoothScroll = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'projects', 'journey' ,'hackathons', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {

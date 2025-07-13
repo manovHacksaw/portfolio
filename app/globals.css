@@ -1,15 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@300..700&family=TikTok+Sans:opsz,wght@12..36,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@300..700&family=TikTok+Sans:opsz,wght@12..36,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @custom-variant dark (&:is(.dark *));
-
-/* html{
-  font-size: 87.5%;
-} */
-
-
 
 @theme inline {
   --color-background: var(--background);
@@ -83,49 +76,161 @@
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-
-
-
+--sidebar-ring: oklch(0.708 0 0);
 }
 
-.bg-dark{
-  background-color: #1a1a1a;
+/* ========================================= */
+/* CONSISTENT DARK/LIGHT MODE UTILITY CLASSES */
+/* ========================================= */
+
+/* Light Mode Backgrounds - Soft, accessible whites and off-whites */
+.bg-light {
+  background-color: #fefefe; /* Very soft white */
 }
 
-/* .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-} */
+.bg-light-soft {
+  background-color: #f8f9fa; /* Subtle off-white for cards/sections */
+}
+
+/* Dark Mode Backgrounds - Soft, accessible dark colors */
+.bg-dark {
+  background-color: #1a1a1a; /* Deep charcoal, not harsh black */
+}
+
+.bg-dark-soft {
+  background-color: #242424; /* Slightly lighter for cards/sections */
+}
+
+/* Text Colors */
+.text-light {
+  color: #f1f3f4; /* Soft white for dark backgrounds */
+}
+
+.text-dark {
+  color: #1f2937; /* Deep gray for light backgrounds */
+}
+
+.text-muted-light {
+  color: #d1d5db; /* Muted text on dark backgrounds */
+}
+
+.text-muted-dark {
+  color: #6b7280; /* Muted text on light backgrounds */
+}
+
+/* Border Colors */
+.border-light {
+  border-color: #374151; /* Subtle border on dark backgrounds */
+}
+
+.border-dark {
+  border-color: #e5e7eb; /* Subtle border on light backgrounds */
+}
+
+/* Interactive Elements */
+.hover-bg-light:hover {
+  background-color: #2d2d2d;
+}
+
+.hover-bg-dark:hover {
+  background-color: #f1f3f4;
+}
+
+/* Accent Colors - Pink theme */
+.accent-primary {
+  color: #ec4899;
+}
+
+.bg-accent-primary {
+  background-color: #ec4899;
+}
+
+.border-accent-primary {
+  border-color: #ec4899;
+}
+
+.hover-accent-primary:hover {
+  background-color: #db2777;
+}
+
+/* Focus States */
+.focus-accent:focus {
+  outline-color: #ec4899;
+  outline-offset: 2px;
+  outline-width: 2px;
+}
+
+/* Card Styles */
+.card-light {
+  background-color: #f8f9fa;
+  border-color: #e5e7eb;
+}
+
+.card-dark {
+  background-color: #242424;
+  border-color: #374151;
+}
+
+.card-hover-light:hover {
+  background-color: #f1f3f4;
+  border-color: #d1d5db;
+}
+
+.card-hover-dark:hover {
+  background-color: #2d2d2d;
+  border-color: #4b5563;
+}
+
+/* Status Colors - Accessible variants */
+.status-success {
+  color: #10b981;
+}
+
+.status-warning {
+  color: #f59e0b;
+}
+
+.status-error {
+  color: #ef4444;
+}
+
+.status-info {
+  color: #3b82f6;
+}
+
+/* Shadow Variants */
+.shadow-light {
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.shadow-dark {
+  box-shadow:
+    0 1px 3px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Gradient Replacements - Solid colors only */
+.divider-accent {
+  background-color: #ec4899;
+  height: 2px;
+  width: 80px;
+}
+
+/* Animation Classes */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Typography Enhancement */
+.text-balance {
+  text-wrap: balance;
+}
 
 @layer base {
   * {
