@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTypewriter } from "@/hooks/use-typewriter";
 import { useItemSwitcher } from "@/hooks/use-item-switcher";
 import { spaceGrotesk, firaSans, ibmPlexSans, rubik } from "@/app/fonts";
+import ScrollIndicator from "@/components/scroll-indicator";
 
 interface HeroSectionProps {
   theme: string;
