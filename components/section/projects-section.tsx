@@ -79,8 +79,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       shortDescription:
         "Collaborative Blockchain Art Canvas Democratizing Digital Creativity",
       tech: ["Telos", "Blockchain", "Real-time", "Digital Art"],
-      github: "https://github.com/manobendra/pixel8r",
-      live: null,
+      github: "https://github.com/ayaanoski/pixel8r",
+      live: "https://pixel8r.vercel.app/",
       featured: false,
       icon: Zap,
     },
@@ -89,8 +89,8 @@ export default function ProjectsSection({ theme }: ProjectsSectionProps) {
       shortDescription:
         "Decentralized Crowdfunding Infrastructure for Gaming Communities",
       tech: ["Crowdfunding", "Gaming", "Multi-wallet", "Community"],
-      github: "https://github.com/manobendra/plaiazone",
-      live: null,
+      github: "https://github.com/manovHacksaw/plAIA-zone",
+      live: "https://pl-aia-zone.vercel.app/",
       featured: false,
       icon: Users,
     },
