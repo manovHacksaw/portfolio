@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-onest), var(--font-figtree), system-ui, sans-serif;
+}
+
+@utility inline-flex {
+  display: inline-flex;
+}
+
+@keyframes bounce-twice {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  8% {
+    transform: translateY(-10px);
+  }
+  16% {
+    transform: translateY(0);
+  }
+  24% {
+    transform: translateY(-10px);
+  }
+  32% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  48%, 100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-bounce-twice {
+  animation: bounce-twice 5s ease-in-out;
+}
