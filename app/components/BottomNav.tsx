@@ -9,7 +9,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
   const navItems = [
     { id: "home", icon: Home, label: "Home", path: "/" },
     { id: "folder", icon: Folder, label: "Projects", path: "/projects" },
-    { id: "education", icon: GraduationCap, label: "Education", path: "/" },
+    { id: "education", icon: GraduationCap, label: "Education", path: "/education" },
     { id: "work", icon: Briefcase, label: "Work", path: "/" },
     { id: "contact", icon: Wifi, label: "Contact", path: "/" },
   ];
@@ -17,6 +17,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
   const getActiveItem = () => {
     if (activeItem) return activeItem;
     if (pathname === "/projects") return "folder";
+    if (pathname === "/education") return "education";
     return "home";
   };
 
@@ -38,11 +39,11 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
             >
               <Icon
                 size={20}
-                className={`text-black dark:text-white ${!isActive ? "opacity-70" : ""}`}
+                className={`${isActive ? "text-green-500" : "text-black dark:text-white opacity-70"}`}
                 strokeWidth={1.5}
               />
               {isActive && (
-                <div className="absolute -bottom-2 w-1.5 h-1.5 bg-orange-500 rounded-full" />
+                <div className="absolute -bottom-2 w-1.5 h-1.5 bg-green-500 rounded-full" />
               )}
             </Link>
           );
