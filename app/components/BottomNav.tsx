@@ -24,8 +24,8 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
   const currentActive = getActiveItem();
 
   return (
-    <nav className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-50 mb-4">
-      <div className="flex items-center gap-6 px-6 py-3 bg-white dark:bg-black border border-black dark:border-white rounded-full">
+    <nav className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="flex items-center justify-center gap-6 px-6 py-4 backdrop-blur-xs bg-black/40 dark:bg-black/60 border-t border-white/10">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentActive === item.id;
@@ -39,11 +39,12 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
             >
               <Icon
                 size={20}
-                className={`${isActive ? "text-green-500" : "text-black dark:text-white opacity-70"}`}
+                className={`${isActive ? "text-white" : "text-white opacity-70"}`}
                 strokeWidth={1.5}
+                fill="none"
               />
               {isActive && (
-                <div className="absolute -bottom-2 w-1.5 h-1.5 bg-green-500 rounded-full" />
+                <div className="absolute -bottom-1.5 w-1.5 h-1.5 bg-green-500 rounded-full" />
               )}
             </Link>
           );

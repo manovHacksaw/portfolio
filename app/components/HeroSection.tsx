@@ -28,11 +28,11 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
   const portfolioLink = portfolioLinks.find(link => link.platform === 'Portfolio');
 
   return (
-    <section className="w-full px-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-8 py-8">
+    <section className="w-full px-5 flex flex-col sm:flex-row items-start justify-between gap-6 sm:gap-8 py-8">
       {/* Left Side - Name, Title, Location, Icons */}
       <div className="flex flex-col gap-3 flex-1">
         {/* Name */}
-        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white">
+        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white leading-tight">
           {personalInfo.name}
         </h1>
 
@@ -49,18 +49,18 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
         </div>
 
         {/* SEEKING Section */}
-        <div className="flex flex-col gap-1.5 mt-1.5 p-3 border border-black dark:border-white rounded-lg w-fit">
-          <p className="text-[9px] uppercase tracking-wider text-black dark:text-white font-light">
-            SEEKING
-          </p>
-          <p className="text-sm sm:text-base font-bold text-black dark:text-white">
-            New Opportunities
-          </p>
-          <p className="text-xs text-black dark:text-white font-light opacity-70">
-            Remote | On-site | Contractual | Freelance 
-          </p>
-          
-        </div>
+          {/* <div className="flex flex-col gap-1.5 mt-1.5 p-3 border border-black dark:border-white rounded-lg w-fit">
+            <p className="text-[9px] uppercase tracking-wider text-black dark:text-white font-light">
+              SEEKING
+            </p>
+            <p className="text-sm sm:text-base font-bold text-black dark:text-white">
+              New Opportunities
+            </p>
+            <p className="text-xs text-black dark:text-white font-light opacity-70">
+              Remote | On-site | Contractual | Freelance 
+            </p>
+            
+          </div> */}
 
         {/* Contact Icons Row 1 */}
         <div className="flex items-center gap-2 mt-1.5">
@@ -136,14 +136,15 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
       {/* Right Side - Profile Picture */}
       <div className="shrink-0">
-        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-black dark:border-white bg-gray-100 dark:bg-gray-800">
+        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 overflow-hidden bg-gray-100 dark:bg-gray-800">
           <Image
             src={personalInfo.avatarUrl}
             alt={personalInfo.name}
-            width={192}
-            height={192}
+            width={1024}
+            height={1024}
             className="w-full h-full object-cover"
             priority
+            unoptimized
           />
         </div>
       </div>

@@ -32,6 +32,7 @@ export interface Education {
   location: string;
   startYear: string;
   endYear: string | null;
+  imageUrl?: string; // Optional logo/image URL for the institution
 }
 
 export interface PortfolioLink {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Onest, Figtree } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./components/ThemeProvider";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
@@ -33,9 +34,9 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${onest.variable} ${figtree.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-80 lg:py-10`}
+        className={`${onest.variable} ${figtree.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-96 lg:py-10 bg-white dark:bg-black`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

@@ -2,11 +2,18 @@
 import { Settings, Circle, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 
 export default function Header() {
   const pathname = usePathname();
   const [currentTime, setCurrentTime] = useState("");
   const [isAnimating, setIsAnimating] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -87,6 +94,11 @@ export default function Header() {
         <button
           className="text-black dark:text-white hover:opacity-80 transition-opacity relative z-10 mt-1.5"
           aria-label="Toggle theme"
+          onClick={() => {
+            if (mounted) {
+              setTheme(resolvedTheme === "dark" ? "light" : "dark");
+            }
+          }}
         >
           <Lightbulb size={20} className="rotate-180" />
         </button>
