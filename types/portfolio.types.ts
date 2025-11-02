@@ -14,6 +14,20 @@ export interface Experience {
   startDate: string;
   endDate: string | null; // null means "now" or "present"
   responsibilities: string[];
+  techStack?: string[]; // Optional tech stack
+  websiteUrl?: string; // Optional company website
+}
+
+export interface Hackathon {
+  id: string;
+  name: string;
+  achievement: string; // e.g., "Winner", "1st Place", "Best Web3 Project"
+  date: string;
+  description: string; // Combined description of what was built
+  imageUrl: string; // Project screenshot/image
+  projectUrl?: string; // Link to the project
+  announcementUrl?: string; // Link to hackathon announcement/results
+  prize?: string; // Optional prize/bounty information
 }
 
 export interface Skill {
@@ -71,6 +85,7 @@ export interface PortfolioData {
   personalInfo: PersonalInfo;
   interests: Interest[];
   experience: Experience[];
+  hackathons: Hackathon[];
   skills: Skill[];
   education: Education[];
   projects: Project[];

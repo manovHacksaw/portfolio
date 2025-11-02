@@ -28,9 +28,9 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
   const portfolioLink = portfolioLinks.find(link => link.platform === 'Portfolio');
 
   return (
-    <section className="w-full px-5 flex flex-col sm:flex-row items-start justify-between gap-6 sm:gap-8 py-8">
+    <section className="w-full px-5 flex flex-row items-start justify-between gap-6 sm:gap-8 py-8">
       {/* Left Side - Name, Title, Location, Icons */}
-      <div className="flex flex-col gap-3 flex-1">
+      <div className="flex flex-col justify-between flex-1 h-32 sm:h-36 md:h-40 lg:h-44">
         {/* Name */}
         <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white leading-tight">
           {personalInfo.name}
@@ -135,14 +135,13 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
       </div>
 
       {/* Right Side - Profile Picture */}
-      <div className="shrink-0">
-        <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 overflow-hidden bg-gray-100 dark:bg-gray-800">
+      <div className="shrink-0 flex items-start">
+        <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-40 bg-white dark:bg-black rounded-lg">
           <Image
             src={personalInfo.avatarUrl}
             alt={personalInfo.name}
-            width={1024}
-            height={1024}
-            className="w-full h-full object-cover"
+            fill
+            className="object-contain rounded-lg"
             priority
             unoptimized
           />

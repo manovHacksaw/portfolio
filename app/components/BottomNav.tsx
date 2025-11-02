@@ -10,7 +10,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     { id: "home", icon: Home, label: "Home", path: "/" },
     { id: "folder", icon: Folder, label: "Projects", path: "/projects" },
     { id: "education", icon: GraduationCap, label: "Education", path: "/education" },
-    { id: "work", icon: Briefcase, label: "Work", path: "/" },
+    { id: "work", icon: Briefcase, label: "Work", path: "/experience" },
     { id: "contact", icon: Wifi, label: "Contact", path: "/" },
   ];
 
@@ -18,6 +18,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     if (activeItem) return activeItem;
     if (pathname === "/projects") return "folder";
     if (pathname === "/education") return "education";
+    if (pathname === "/experience") return "work";
     return "home";
   };
 
@@ -25,7 +26,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="flex items-center justify-center gap-6 px-6 py-4 backdrop-blur-xs bg-black/40 dark:bg-black/60 border-t border-white/10">
+      <div className="flex items-center justify-center gap-6 px-6 py-4 backdrop-blur-md bg-white/80 dark:bg-black/60 border-t border-black/10 dark:border-white/10" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentActive === item.id;
@@ -39,7 +40,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
             >
               <Icon
                 size={20}
-                className={`${isActive ? "text-white" : "text-white opacity-70"}`}
+                className={`${isActive ? "text-black dark:text-white" : "text-black dark:text-white opacity-70"}`}
                 strokeWidth={1.5}
                 fill="none"
               />

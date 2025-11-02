@@ -7,7 +7,7 @@ import { mockPortfolioData } from "@/data/mockData";
 
 export default function Home() {
   return (
-    <div className="min-h-screen  pb-20 bg-white dark:bg-black">
+    <div className="min-h-screen pb-24 sm:pb-20 bg-white dark:bg-black">
       <Header />
       <HeroSection
         personalInfo={mockPortfolioData.personalInfo}

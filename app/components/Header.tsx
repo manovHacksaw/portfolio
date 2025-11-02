@@ -96,7 +96,8 @@ export default function Header() {
           aria-label="Toggle theme"
           onClick={() => {
             if (mounted) {
-              setTheme(resolvedTheme === "dark" ? "light" : "dark");
+              const newTheme = resolvedTheme === "dark" ? "light" : "dark";
+              setTheme(newTheme);
             }
           }}
         >
