@@ -8,14 +8,14 @@ export default function EducationPage() {
   return (
     <div className="min-h-screen pb-24 sm:pb-20 bg-white dark:bg-black">
       <Header />
-      <main className="w-full px-5 py-8">
-        <div className="flex flex-col gap-8">
+      <main className="w-full px-5 py-6">
+        <div className="flex flex-col gap-6">
           {/* Education List */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             {mockPortfolioData.education.map((education, index) => (
               <div
                 key={education.id}
-                className="flex items-start gap-4 p-4 rounded-lg bg-white dark:bg-black hover:opacity-80 transition-opacity"
+                className="flex items-start gap-3 p-3 rounded-lg bg-white dark:bg-black hover:opacity-80 transition-opacity"
               >
                 {/* Institution Logo */}
                 {education.imageUrl && (
@@ -30,9 +30,9 @@ export default function EducationPage() {
                 )}
 
                 {/* Content */}
-                <div className="flex-1 flex flex-col gap-2">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                    <div className="flex flex-col gap-1">
+                <div className="flex-1 flex flex-col gap-1.5">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5">
+                    <div className="flex flex-col gap-0.5">
                       <h2 className="text-base sm:text-sm font-bold text-black dark:text-white">
                         {education.institution}
                       </h2>
@@ -59,7 +59,7 @@ export default function EducationPage() {
           </div>
 
           {/* Quote Section */}
-          <div className="mt-8 flex flex-col gap-2">
+          <div className="mt-6 flex flex-col gap-2">
             <p className="text-sm sm:text-sm text-black dark:text-white font-light italic">
               "The best time to repair the roof is when the sun is shining."
             </p>

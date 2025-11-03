@@ -1,5 +1,5 @@
 "use client";
-import { Home, Folder, GraduationCap, Briefcase, Wifi } from "lucide-react";
+import { Home, Folder, GraduationCap, Briefcase, Trophy } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,7 +11,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     { id: "folder", icon: Folder, label: "Projects", path: "/projects" },
     { id: "education", icon: GraduationCap, label: "Education", path: "/education" },
     { id: "work", icon: Briefcase, label: "Work", path: "/experience" },
-    { id: "contact", icon: Wifi, label: "Contact", path: "/" },
+    { id: "hackathons", icon: Trophy, label: "Hackathons", path: "/hackathons" },
   ];
 
   const getActiveItem = () => {
@@ -19,6 +19,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     if (pathname === "/projects") return "folder";
     if (pathname === "/education") return "education";
     if (pathname === "/experience") return "work";
+    if (pathname === "/hackathons") return "hackathons";
     return "home";
   };
 

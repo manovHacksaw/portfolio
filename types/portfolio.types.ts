@@ -21,6 +21,7 @@ export interface Experience {
 export interface Hackathon {
   id: string;
   name: string;
+  projectName?: string; // Optional project name (for multiple projects from same hackathon)
   achievement: string; // e.g., "Winner", "1st Place", "Best Web3 Project"
   date: string;
   description: string; // Combined description of what was built
