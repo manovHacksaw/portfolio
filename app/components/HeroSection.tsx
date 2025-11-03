@@ -3,7 +3,6 @@ import { PersonalInfo, PortfolioLink } from '@/types/portfolio.types';
 import Image from 'next/image';
 import { MapPin, Github, Linkedin, Phone, Mail, FileText, Info, Sun } from 'lucide-react';
 import Link from 'next/link';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeroSectionProps {
   personalInfo: PersonalInfo;
@@ -11,8 +10,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectionProps) {
-  const { language, setLanguage, t } = useLanguage();
-  
   // Map portfolio links to icons
   const getIcon = (platform: string) => {
     const iconMap: Record<string, React.ReactElement> = {
@@ -29,10 +26,6 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
   const linkedInLink = portfolioLinks.find(link => link.platform === 'LinkedIn');
   const emailLink = portfolioLinks.find(link => link.platform === 'Email');
   const portfolioLink = portfolioLinks.find(link => link.platform === 'Portfolio');
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'hi' : 'en');
-  };
 
   return (
     <section className="w-full bg-[var(--background)] px-5 py-8">
@@ -56,21 +49,16 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
           {/* Small Icon - Right, Upper Portion */}
           <div className="flex items-start justify-end mt-2">
-            <button
-              onClick={toggleLanguage}
-              className="text-2xl cursor-pointer hover:opacity-80 transition-opacity"
-              aria-label={`Switch to ${language === 'en' ? 'Hindi' : 'English'}`}
-              title={`Switch to ${language === 'en' ? 'Hindi' : 'English'}`}
-            >
+            <span className="text-2xl" aria-label={personalInfo.location}>
               {personalInfo.locationFlag}
-            </button>
+            </span>
           </div>
         </div>
 
         {/* Text Below - Two Lines */}
         <div className="flex flex-col gap-0.5">
           <h1 className="text-xl font-bold text-[var(--foreground)] leading-tight">
-            {t('hero.greeting')} {personalInfo.name} 
+            Hi, I'm {personalInfo.name} 
           </h1>
           <p className="text-base text-[var(--foreground-muted)] font-light">
             {personalInfo.title}
@@ -123,17 +111,15 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
               <Mail size={14} />
             </Link>
           )}
-          {portfolioLink && (
-            <Link
-              href={portfolioLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
-              aria-label="Resume"
-            >
-              <FileText size={14} />
-            </Link>
-          )}
+          <Link
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
+            aria-label="Resume"
+          >
+            <FileText size={14} />
+          </Link>
           <button
             className="text-[var(--foreground)] hover:opacity-70 transition-opacity"
             aria-label="Information"
@@ -204,29 +190,22 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
                 <Mail size={14} />
               </Link>
             )}
-            {portfolioLink && (
-              <Link
-                href={portfolioLink.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
-                aria-label="Resume"
-              >
-                <FileText size={14} />
-              </Link>
-            )}
+            <Link
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
+              aria-label="Resume"
+            >
+              <FileText size={14} />
+            </Link>
           </div>
 
           {/* Contact Icons Row 2 - Flag, Info */}
           <div className="flex items-center gap-2 mt-1">
-            <button
-              onClick={toggleLanguage}
-              className="text-base cursor-pointer hover:opacity-80 transition-opacity"
-              aria-label={`Switch to ${language === 'en' ? 'Hindi' : 'English'}`}
-              title={`Switch to ${language === 'en' ? 'Hindi' : 'English'}`}
-            >
+            <span className="text-base" aria-label={personalInfo.location}>
               {personalInfo.locationFlag}
-            </button>
+            </span>
             <button
               className="text-[var(--foreground)] hover:opacity-70 transition-opacity"
               aria-label="Information"

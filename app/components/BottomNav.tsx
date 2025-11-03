@@ -2,19 +2,17 @@
 import { Home, Folder, GraduationCap, Briefcase, Trophy, Network, WifiPen } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function BottomNav({ activeItem }: { activeItem?: string }) {
   const pathname = usePathname();
-  const { t } = useLanguage();
 
   const navItems = [
-    { id: "home", icon: Home, label: t("common.home"), path: "/" },
-    { id: "folder", icon: Folder, label: t("common.projects"), path: "/projects" },
-    { id: "education", icon: GraduationCap, label: t("common.education"), path: "/education" },
-    { id: "work", icon: Briefcase, label: t("common.work"), path: "/experience" },
-    { id: "achievements", icon: Trophy, label: t("common.achievements"), path: "/achievements" },
-    { id: "contact", icon: WifiPen, label: t("common.contact"), path: "/contact" },
+    { id: "home", icon: Home, label: "Home", path: "/" },
+    { id: "folder", icon: Folder, label: "Projects", path: "/projects" },
+    { id: "education", icon: GraduationCap, label: "Education", path: "/education" },
+    { id: "work", icon: Briefcase, label: "Work", path: "/experience" },
+    { id: "achievements", icon: Trophy, label: "Achievements", path: "/achievements" },
+    { id: "contact", icon: WifiPen, label: "Contact", path: "/contact" },
   ];
 
   const getActiveItem = () => {

@@ -1,14 +1,12 @@
 "use client";
 import { Skill } from '@/types/portfolio.types';
 import * as Si from "react-icons/si";
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SkillsSectionProps {
   skills: Skill[];
 }
 
 export default function SkillsSection({ skills }: SkillsSectionProps) {
-  const { t } = useLanguage();
   // List of skills to display (exact matches)
   const targetSkills = [
     'Next.js',
@@ -111,7 +109,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
         <div className="flex items-center gap-2">
           
           <h2 className="text-lg sm:text-xl font-bold text-[var(--foreground)]">
-            {t('common.skillsAndTechnologies')}
+            Skills and Technologies
           </h2>
         </div>
 

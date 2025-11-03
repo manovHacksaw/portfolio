@@ -188,12 +188,12 @@ export default function AchievementsPage() {
                           <div key={hackathon.id} className="flex flex-col gap-1.5">
                             {/* Project Name if different from hackathon name */}
                             {hackathon.projectName && (
-                              <div className="text-sm sm:text-xs font-medium text-[var(--foreground)]">
+                              <div className="text-sm md:text-base font-medium text-[var(--foreground)]">
                                 {hackathon.projectName}
                               </div>
                             )}
                             {/* Description */}
-                            <p className="text-sm sm:text-xs text-[var(--foreground-muted)] font-light leading-relaxed">
+                            <p className="text-sm md:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
                               {hackathon.description}
                             </p>
                           </div>
