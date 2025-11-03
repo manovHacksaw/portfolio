@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="bg-white text-black dark:bg-black dark:text-white">
       <head>
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
@@ -39,8 +39,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${onest.variable} ${figtree.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-78 lg:py-10`}
-        style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
+        className={`${onest.variable} ${figtree.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-78 lg:py-10 bg-white text-black dark:bg-black dark:text-white`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>

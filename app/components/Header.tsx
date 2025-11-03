@@ -75,7 +75,7 @@ export default function Header() {
           />
           
           {/* Timestamp */}
-          <span className="text-black dark:text-white text-xs sm:text-sm font-light opacity-70">
+          <span className="text-black dark:text-white text-xs sm:text-sm font-semibold">
             {currentTime}
           </span>
 

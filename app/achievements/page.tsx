@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import BottomNav from "../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
 import { Hackathon } from "@/types/portfolio.types";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Globe } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -124,8 +124,17 @@ export default function AchievementsPage() {
 
           {/* Timeline */}
           <div className="relative">
-            {/* Vertical Timeline Line */}
-            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-500 dark:bg-gray-400 opacity-40" />
+            {/* Vertical Timeline Line - thinner, starts after first logo, ends before last logo */}
+            {groupedHackathons.length > 1 && (
+              <div 
+                className="absolute left-6 bg-gray-500 dark:bg-gray-400 opacity-40"
+                style={{
+                  width: '1px',
+                  top: 'calc(24px + 1.5rem)', // Start after first logo center (24px = half of 48px logo) + py-6 (1.5rem)
+                  bottom: 'calc(24px + 1.5rem)', // End before last logo center (24px = half of 48px logo) + py-6 (1.5rem)
+                }}
+              />
+            )}
 
             {/* Timeline Entries */}
             <div className="flex flex-col">
@@ -186,17 +195,41 @@ export default function AchievementsPage() {
                       </div>
 
                       {/* Links - Button Style */}
-                      {group.projects[0]?.projectUrl && group.projects[0].projectUrl !== '#' && (
+                      {(group.projects.some(p => p.projectUrl && p.projectUrl !== '#') || group.projects.some(p => (p as any).githubUrl) || group.projects.some(p => p.announcementUrl && p.announcementUrl !== '#')) && (
                         <div className="flex flex-wrap items-center gap-2 mt-2">
-                          <Link
-                            href={group.projects[0].projectUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-80 transition-opacity text-xs font-medium"
-                          >
-                            <Github size={12} />
-                            <span>GitHub Link</span>
-                          </Link>
+                          {(() => {
+                            const p = group.projects[0];
+                            if (!p) return null;
+                            const isGithub = p.projectUrl && p.projectUrl.includes('github.com');
+                            const liveUrl = p.projectUrl && !isGithub ? p.projectUrl : undefined;
+                            const githubUrl = (p as any).githubUrl || (isGithub ? p.projectUrl : undefined);
+                            return (
+                              <>
+                                {liveUrl && (
+                                  <Link
+                                    href={liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-80 transition-opacity text-xs font-medium"
+                                  >
+                                    <Globe size={12} />
+                                    <span>{p.projectName || 'Live'}</span>
+                                  </Link>
+                                )}
+                                {githubUrl && (
+                                  <Link
+                                    href={githubUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black text-white dark:bg-white dark:text-black border border-black/10 dark:border-white/20 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition text-xs font-medium"
+                                  >
+                                    <Github size={12} />
+                                    <span>Code</span>
+                                  </Link>
+                                )}
+                              </>
+                            );
+                          })()}
                           {group.projects[0]?.announcementUrl && group.projects[0].announcementUrl !== '#' && (
                             <Link
                               href={group.projects[0].announcementUrl}

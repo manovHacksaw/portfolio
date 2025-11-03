@@ -77,6 +77,7 @@ export const mockPortfolioData: PortfolioData = {
       description: 'Developed Plaia Zone, a decentralized crowdfunding platform designed for the gaming community. The platform allows gamers to create, fund, and manage campaigns—either donation-based or loan-based—fostering collaboration and support among players.',
       imageUrl: '/projects/polytix.png',
       projectUrl: 'https://pl-aia-zone.vercel.app/',
+      githubUrl: 'https://github.com/manovHacksaw/Plaia-Zone',
       announcementUrl: 'https://x.com/HackQuest_/status/1861432015893209373',
       prize: '500 USDT',
       techStack: ['AIA Chain', 'ethers.js', 'Solidity', 'Next.js'],
