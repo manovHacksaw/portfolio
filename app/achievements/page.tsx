@@ -108,14 +108,14 @@ export default function AchievementsPage() {
   }, [hackathons]);
 
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-white dark:bg-black">
+    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
       <Header />
       <main className="w-full px-5 py-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-base sm:text-sm font-bold text-black dark:text-white">
+          <h1 className="text-base sm:text-sm font-bold text-[var(--foreground)]">
             Hackathon Achievements
           </h1>
-          <p className="text-xs sm:text-xs text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+          <p className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light leading-relaxed">
             Hackathons have been my proving ground — where learning, innovation, and teamwork meet.
             <br />
             <br />
@@ -127,7 +127,7 @@ export default function AchievementsPage() {
             {/* Vertical Timeline Line - thinner, starts after first logo, ends before last logo */}
             {groupedHackathons.length > 1 && (
               <div 
-                className="absolute left-6 bg-gray-500 dark:bg-gray-400 opacity-40"
+                className="absolute left-6 bg-[var(--foreground)] opacity-40"
                 style={{
                   width: '1px',
                   top: 'calc(24px + 1.5rem)', // Start after first logo center (24px = half of 48px logo) + py-6 (1.5rem)
@@ -142,13 +142,13 @@ export default function AchievementsPage() {
                 <div key={`${group.name}_${group.date}`} className="relative">
                   {/* Dotted Horizontal Separator (except for first item) */}
                   {groupIndex > 0 && (
-                    <div className="absolute left-6 top-0 right-0 border-t border-dashed border-gray-500 dark:border-gray-400 opacity-40" />
+                    <div className="absolute left-6 top-0 right-0 border-t border-dashed border-[var(--foreground)] opacity-40" />
                   )}
 
                   <div className="relative flex items-start gap-4 py-6">
                     {/* Hackathon Logo */}
                     <div className="relative shrink-0">
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-white flex items-center justify-center overflow-hidden border-0">
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
                         {group.logoUrl ? (
                           <Image
                             src={group.logoUrl}
@@ -157,7 +157,7 @@ export default function AchievementsPage() {
                             className="object-cover rounded-full"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gray-200 dark:bg-gray-300 flex items-center justify-center">
+                          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
                             <span className="text-xs font-bold text-gray-500">
                               {group.name.substring(0, 2).toUpperCase()}
                             </span>
@@ -169,18 +169,18 @@ export default function AchievementsPage() {
                     {/* Content */}
                     <div className="flex-1 flex flex-col gap-2">
                       {/* Date */}
-                      <div className="text-xs sm:text-xs text-gray-600 dark:text-gray-400 font-light">
+                      <div className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light">
                         {group.date}
                       </div>
 
                       {/* Hackathon Title */}
-                      <h2 className="text-base sm:text-base font-bold text-black dark:text-white">
+                      <h2 className="text-base sm:text-base font-bold text-[var(--foreground)]">
                         {group.name}
                       </h2>
 
                       {/* Location */}
                       {group.location && (
-                        <div className="text-xs sm:text-xs text-gray-600 dark:text-gray-400 font-light">
+                        <div className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light">
                           {group.location}
                         </div>
                       )}
@@ -188,7 +188,7 @@ export default function AchievementsPage() {
                       {/* Projects Descriptions */}
                       <div className="flex flex-col gap-2 mt-1">
                         {group.projects.map((hackathon) => (
-                          <p key={hackathon.id} className="text-xs sm:text-xs text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                          <p key={hackathon.id} className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light leading-relaxed">
                             {hackathon.description}
                           </p>
                         ))}
@@ -210,7 +210,7 @@ export default function AchievementsPage() {
                                     href={liveUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-80 transition-opacity text-xs font-medium"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--foreground)] text-[var(--background)] rounded hover:opacity-80 transition-opacity text-xs font-medium"
                                   >
                                     <Globe size={12} />
                                     <span>{p.projectName || 'Live'}</span>
@@ -221,7 +221,7 @@ export default function AchievementsPage() {
                                     href={githubUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black text-white dark:bg-white dark:text-black border border-black/10 dark:border-white/20 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition text-xs font-medium"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] border border-[var(--foreground)]/10 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition text-xs font-medium"
                                   >
                                     <Github size={12} />
                                     <span>Code</span>
@@ -235,7 +235,7 @@ export default function AchievementsPage() {
                               href={group.projects[0].announcementUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-80 transition-opacity text-xs font-medium"
+                              className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--foreground)] text-[var(--background)] rounded hover:opacity-80 transition-opacity text-xs font-medium"
                             >
                               <ExternalLink size={12} />
                               <span>Announcement</span>

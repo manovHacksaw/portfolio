@@ -22,28 +22,28 @@ export default function ExperiencePage() {
     return (
       <div
         key={experience.id}
-        className="flex flex-col gap-4 p-4 border border-black dark:border-white rounded-lg bg-white dark:bg-black"
+        className="flex flex-col gap-4 p-4 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
       >
         {/* Company and Role Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <Briefcase size={16} className="text-black dark:text-white shrink-0" />
-              <h2 className="text-base sm:text-lg font-bold text-black dark:text-white underline">
+              <Briefcase size={16} className="text-[var(--foreground)] shrink-0" />
+              <h2 className="text-base sm:text-lg font-bold text-[var(--foreground)] underline">
                 {experience.company}
               </h2>
             </div>
-            <p className="text-sm sm:text-base text-black dark:text-white font-light">
+            <p className="text-sm sm:text-base text-[var(--foreground)] font-light">
               {experience.role}
             </p>
           </div>
-          <div className="text-xs sm:text-sm text-black dark:text-white font-light shrink-0 self-start sm:self-start">
+          <div className="text-xs sm:text-sm text-[var(--foreground)] font-light shrink-0 self-start sm:self-start">
             {dateRange}
           </div>
         </div>
 
         {/* Description as justified paragraph */}
-        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-light leading-relaxed text-justify">
+        <p className="text-xs sm:text-sm text-[var(--foreground)]/70 font-light leading-relaxed text-justify">
           {description}
         </p>
 
@@ -53,7 +53,7 @@ export default function ExperiencePage() {
             {experience.techStack.map((tech, idx) => (
               <span
                 key={idx}
-                className="text-xs sm:text-sm text-black dark:text-white border border-black dark:border-white px-2 py-1 rounded"
+                className="text-xs sm:text-sm text-[var(--foreground)] border border-[var(--foreground)] px-2 py-1 rounded"
               >
                 {tech}
               </span>
@@ -67,7 +67,7 @@ export default function ExperiencePage() {
             href={experience.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs sm:text-sm text-black dark:text-white font-light hover:opacity-80 transition-opacity w-fit"
+            className="flex items-center gap-1.5 text-xs sm:text-sm text-[var(--foreground)] font-light hover:opacity-80 transition-opacity w-fit"
           >
             <ExternalLink size={14} className="sm:w-3 sm:h-3" />
             <span>Company Website</span>
@@ -78,7 +78,7 @@ export default function ExperiencePage() {
   };
 
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-white dark:bg-black">
+    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
       <Header />
       <main className="w-full px-5 py-8">
         <div className="flex flex-col gap-8">
@@ -91,7 +91,7 @@ export default function ExperiencePage() {
 
           {/* Quote Section */}
           <div className="mt-8 flex flex-col gap-2">
-            <p className="text-sm sm:text-sm text-black dark:text-white font-light italic">
+            <p className="text-sm sm:text-sm text-[var(--foreground)] font-light italic">
               "The best time to repair the roof is when the sun is shining."
             </p>
             <span className="text-sm sm:text-sm text-green-500 border border-green-500 px-2 py-1 w-fit rounded">

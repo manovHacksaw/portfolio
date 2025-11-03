@@ -77,7 +77,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-white dark:bg-black">
+    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
       <Header />
       <main className="w-full px-5 py-6">
         <div className="flex flex-col gap-6">
@@ -89,12 +89,12 @@ export default function ProjectsPage() {
               return (
                 <div
                   key={project.id}
-                  className="flex flex-col md:flex-row md:items-start gap-6 md:gap-6 p-4 border border-black dark:border-white rounded-lg bg-white dark:bg-black"
+                  className="flex flex-col md:flex-row md:items-start gap-6 md:gap-6 p-4 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
                 >
                   {/* Screenshot - First on Mobile, Right on Desktop */}
                   {project.imageUrl && (
                     <div className="w-full md:w-80 lg:w-96 shrink-0 md:order-2">
-                      <div className="relative w-full aspect-video rounded-lg overflow-hidden border bg-gray-100 dark:bg-gray-900">
+                      <div className="relative w-full aspect-video rounded-lg overflow-hidden border bg-gray-100">
                         <Image
                           src={project.imageUrl}
                           alt={project.title}
@@ -109,11 +109,11 @@ export default function ProjectsPage() {
                   <div className="flex-1 flex flex-col gap-3 md:h-full md:justify-between md:order-1">
                     {/* Title and Year */}
                     <div className="flex items-start justify-between gap-4">
-                      <h2 className="text-base sm:text-lg md:text-base lg:text-lg font-bold text-black dark:text-white">
+                      <h2 className="text-base sm:text-lg md:text-base lg:text-lg font-bold text-[var(--foreground)]">
                         {project.title}
                       </h2>
                       {year && (
-                        <span className="text-xs sm:text-sm md:text-xs lg:text-sm text-gray-500 dark:text-gray-400 font-light shrink-0">
+                        <span className="text-xs sm:text-sm md:text-xs lg:text-sm text-[var(--foreground)]/60 font-light shrink-0">
                           {year}
                         </span>
                       )}
@@ -130,7 +130,7 @@ export default function ProjectsPage() {
                               className="flex items-center justify-center"
                               title={tech}
                             >
-                              <IconComponent size={18} className="md:w-4 md:h-4 lg:w-5 lg:h-5 text-black dark:text-white" />
+                              <IconComponent size={18} className="md:w-4 md:h-4 lg:w-5 lg:h-5 text-[var(--foreground)]" />
                             </div>
                           );
                         })}
@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                     )}
 
                     {/* Description */}
-                    <p className="text-xs sm:text-sm md:text-xs lg:text-sm text-gray-600 dark:text-gray-400 font-light leading-relaxed text-justify">
+                    <p className="text-xs sm:text-sm md:text-xs lg:text-sm text-[var(--foreground)]/70 font-light leading-relaxed text-justify">
                       {project.longDescription || project.description}
                     </p>
 
@@ -149,7 +149,7 @@ export default function ProjectsPage() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-3 py-1.5 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 rounded-lg text-white font-medium text-xs md:text-xs lg:text-sm transition-colors"
+                              className="flex items-center gap-1.5 px-3 py-1.5 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 bg-[var(--foreground)] hover:opacity-80 rounded-lg text-[var(--background)] font-medium text-xs md:text-xs lg:text-sm transition-opacity"
                           aria-label="View Code"
                         >
                           <Github size={16} className="md:w-3 md:h-3 lg:w-4 lg:h-4" />
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-3 py-1.5 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 bg-gray-900 dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 rounded-lg text-white font-medium text-xs md:text-xs lg:text-sm transition-colors"
+                              className="flex items-center gap-1.5 px-3 py-1.5 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 bg-[var(--foreground)] hover:opacity-80 rounded-lg text-[var(--background)] font-medium text-xs md:text-xs lg:text-sm transition-opacity"
                           aria-label="View Live"
                         >
                           <ExternalLink size={16} className="md:w-3 md:h-3 lg:w-4 lg:h-4" />

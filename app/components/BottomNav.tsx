@@ -27,7 +27,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="flex items-center justify-center gap-6 px-6 py-4 backdrop-blur-md bg-white/80 dark:bg-black/60 border-t border-black/10 dark:border-white/10" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
+      <div className="flex items-center justify-center gap-6 px-6 py-4 backdrop-blur-md bg-[var(--background)]/80 border-t border-[var(--foreground)]/10" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentActive === item.id;
@@ -41,7 +41,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
             >
               <Icon
                 size={20}
-                className={`${isActive ? "text-black dark:text-white" : "text-black dark:text-white opacity-70"}`}
+                className={`${isActive ? "text-[var(--foreground)]" : "text-[var(--foreground)] opacity-70"}`}
                 strokeWidth={1.5}
                 fill="none"
               />

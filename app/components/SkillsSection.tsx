@@ -108,7 +108,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
         {/* Header */}
         <div className="flex items-center gap-2">
           
-          <h2 className="text-lg sm:text-xl font-bold text-black dark:text-white">
+          <h2 className="text-lg sm:text-xl font-bold text-[var(--foreground)]">
             Skills and Technologies
           </h2>
         </div>
@@ -118,17 +118,17 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
           {displaySkills.map((skill) => (
             <div
               key={skill.id}
-              className="flex items-center gap-1.5 px-2 py-1.5 border border-black dark:border-white rounded-lg bg-white dark:bg-black"
+              className="flex items-center gap-1.5 px-2 py-1.5 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
             >
               {/* Icon */}
               {(() => {
                 const IconComponent = getSkillIcon(skill.name);
                 return (
-                  <IconComponent size={14} className="text-black dark:text-white shrink-0" />
+                  <IconComponent size={14} className="text-[var(--foreground)] shrink-0" />
                 );
               })()}
               {/* Skill name */}
-              <span className="text-[10px] sm:text-xs text-black dark:text-white font-light">
+              <span className="text-[10px] sm:text-xs text-[var(--foreground)] font-light">
                 {skill.name}
               </span>
             </div>
