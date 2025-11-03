@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import BottomNav from "../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
 import { Hackathon } from "@/types/portfolio.types";
-import { ExternalLink, Github, Globe } from "lucide-react";
+import { ExternalLink, Github, Globe, MapPin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -112,15 +112,7 @@ export default function AchievementsPage() {
       <Header />
       <main className="w-full px-5 py-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-base sm:text-sm font-bold text-[var(--foreground)]">
-            Hackathon Achievements
-          </h1>
-          <p className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light leading-relaxed">
-            Hackathons have been my proving ground — where learning, innovation, and teamwork meet.
-            <br />
-            <br />
-            I've won 10 hackathons so far, including global competitions held both online and offline.
-          </p>
+          
 
           {/* Timeline */}
           <div className="relative">
@@ -169,28 +161,50 @@ export default function AchievementsPage() {
                     {/* Content */}
                     <div className="flex-1 flex flex-col gap-2">
                       {/* Date */}
-                      <div className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light">
+                      <div className="text-sm sm:text-xs text-[var(--foreground-muted)] font-light">
                         {group.date}
                       </div>
 
                       {/* Hackathon Title */}
-                      <h2 className="text-base sm:text-base font-bold text-[var(--foreground)]">
+                      <h2 className="text-lg sm:text-base font-bold text-[var(--foreground)]">
                         {group.name}
                       </h2>
 
-                      {/* Location */}
+                      {/* Location - with icon for better visibility */}
                       {group.location && (
-                        <div className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light">
-                          {group.location}
+                        <div className="flex items-center gap-1.5 text-sm sm:text-xs text-[var(--foreground-secondary)] font-medium mt-0.5">
+                          {group.location.toLowerCase() === 'online' ? (
+                            <Globe size={14} className="sm:w-[12px] sm:h-[12px] shrink-0" />
+                          ) : (
+                            <MapPin size={14} className="sm:w-[12px] sm:h-[12px] shrink-0" />
+                          )}
+                          <span>{group.location}</span>
                         </div>
                       )}
 
                       {/* Projects Descriptions */}
-                      <div className="flex flex-col gap-2 mt-1">
+                      <div className="flex flex-col gap-3 mt-2">
                         {group.projects.map((hackathon) => (
-                          <p key={hackathon.id} className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light leading-relaxed">
-                            {hackathon.description}
-                          </p>
+                          <div key={hackathon.id} className="flex flex-col gap-1.5">
+                            {/* Achievement/Prize */}
+                            {(hackathon.achievement || hackathon.prize) && (
+                              <div className="text-sm sm:text-xs text-[var(--foreground-secondary)] font-semibold">
+                                {hackathon.prize && hackathon.achievement 
+                                  ? `${hackathon.achievement} • ${hackathon.prize}`
+                                  : hackathon.achievement || hackathon.prize}
+                              </div>
+                            )}
+                            {/* Project Name if different from hackathon name */}
+                            {hackathon.projectName && (
+                              <div className="text-sm sm:text-xs font-medium text-[var(--foreground)]">
+                                {hackathon.projectName}
+                              </div>
+                            )}
+                            {/* Description */}
+                            <p className="text-sm sm:text-xs text-[var(--foreground-muted)] font-light leading-relaxed">
+                              {hackathon.description}
+                            </p>
+                          </div>
                         ))}
                       </div>
 

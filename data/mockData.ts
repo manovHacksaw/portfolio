@@ -243,7 +243,7 @@ export const mockPortfolioData: PortfolioData = {
       achievement: 'ETH India Track Prize Winner',
       date: 'Jun 20 - Jun 22 2025',
       location: "Sister Nivedita University, Kolkata, West Bengal, India",
-      description: 'Fork Work - A decentralized platform for managing work contributions and rewards.',
+      description: 'Developed Fork Work, a Web3 platform connecting freelancers with clients through smart contracts, eliminating platform fees. The platform features competitive bounties, escrow with staking mechanisms, USDT payments, and automated deadline enforcement to ensure fair and transparent work agreements.',
       imageUrl: '/projects/fork-work.png',
       projectUrl: "https://fork-your-work.vercel.app/",
       githubUrl: 'https://github.com/manovHacksaw/fork-your-work',
