@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Onest, Figtree } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -41,7 +42,9 @@ export default function RootLayout({
       <body
             className={`${onest.variable} ${figtree.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-78 lg:py-10 bg-[var(--background)] text-[var(--foreground)]`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

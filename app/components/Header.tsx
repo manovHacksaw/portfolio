@@ -166,21 +166,21 @@ export default function Header() {
 
   return (
     <header className="w-full flex flex-col" style={{ fontFamily: "'Clash Display', sans-serif" }}>
-      <div className="w-full px-5 flex items-start justify-between">
+      <div className="w-full px-5 flex items-center justify-between gap-2">
         {/* Left side - @manovmandal /ROUTE */}
-        <div className="flex items-start gap-2">
-          <h1 className="text-[var(--foreground)] text-sm sm:text-base font-light">
+        <div className="flex items-center gap-1 sm:gap-2 min-w-0 flex-shrink">
+          <h1 className="text-[var(--foreground)] text-[11px] sm:text-base font-light whitespace-nowrap">
             @manovmandal
           </h1>
           {pathname !== "/" && (
-            <span className="text-[var(--foreground-secondary)] text-sm sm:text-base font-light">
+            <span className="text-[var(--foreground-secondary)] text-[10px] sm:text-base font-light truncate max-w-[120px] sm:max-w-none">
               {pathname.toUpperCase()}
             </span>
           )}
         </div>
 
-        {/* Right side - Indicator, Time, and Gear icon */}
-        <div className="flex items-center gap-2">
+        {/* Right side - Indicator and Time */}
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
           {/* Circular indicator - clickable to cycle accent colors */}
           <button
             onClick={() => {
@@ -189,22 +189,20 @@ export default function Header() {
               updateAccentColor(nextIndex);
               localStorage.setItem('accentColorIndex', nextIndex.toString());
             }}
-            className="cursor-pointer hover:opacity-80 transition-opacity"
+            className="cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
             aria-label="Cycle accent color"
           >
             <Circle 
-              size={16} 
+              size={12} 
               fill="currentColor" 
-              className={`text-[var(--accent)] ${isAnimating ? 'animate-bounce-twice' : ''}`}
+              className={`text-[var(--accent)] ${isAnimating ? 'animate-bounce-twice' : ''} sm:w-4 sm:h-4`}
             />
           </button>
           
-          {/* Timestamp */}
-          <span className="text-[var(--foreground)] text-xs sm:text-sm font-semibold">
+          {/* Timestamp - Hide on very small screens, show compact on mobile */}
+          <span className="text-[var(--foreground)] text-[9px] sm:text-sm font-semibold whitespace-nowrap">
             {currentTime}
           </span>
-
-          
         </div>
       </div>
 
