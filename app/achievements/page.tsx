@@ -186,14 +186,6 @@ export default function AchievementsPage() {
                       <div className="flex flex-col gap-3 mt-2">
                         {group.projects.map((hackathon) => (
                           <div key={hackathon.id} className="flex flex-col gap-1.5">
-                            {/* Achievement/Prize */}
-                            {(hackathon.achievement || hackathon.prize) && (
-                              <div className="text-sm sm:text-xs text-[var(--foreground-secondary)] font-semibold">
-                                {hackathon.prize && hackathon.achievement 
-                                  ? `${hackathon.achievement} • ${hackathon.prize}`
-                                  : hackathon.achievement || hackathon.prize}
-                              </div>
-                            )}
                             {/* Project Name if different from hackathon name */}
                             {hackathon.projectName && (
                               <div className="text-sm sm:text-xs font-medium text-[var(--foreground)]">
