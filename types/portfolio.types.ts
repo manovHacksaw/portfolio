@@ -24,11 +24,14 @@ export interface Hackathon {
   projectName?: string; // Optional project name (for multiple projects from same hackathon)
   achievement: string; // e.g., "Winner", "1st Place", "Best Web3 Project"
   date: string;
+  location?: string; // Optional location (e.g., "Online", "Kolkata", "Delhi")
   description: string; // Combined description of what was built
   imageUrl: string; // Project screenshot/image
+  logoUrl?: string; // Hackathon logo/icon (circular placeholder for now)
   projectUrl?: string; // Link to the project
   announcementUrl?: string; // Link to hackathon announcement/results
   prize?: string; // Optional prize/bounty information
+  techStack?: string[]; // Optional tech stack
 }
 
 export interface Skill {

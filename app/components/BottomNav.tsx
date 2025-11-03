@@ -11,7 +11,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     { id: "folder", icon: Folder, label: "Projects", path: "/projects" },
     { id: "education", icon: GraduationCap, label: "Education", path: "/education" },
     { id: "work", icon: Briefcase, label: "Work", path: "/experience" },
-    { id: "hackathons", icon: Trophy, label: "Hackathons", path: "/hackathons" },
+    { id: "achievements", icon: Trophy, label: "Achievements", path: "/achievements" },
   ];
 
   const getActiveItem = () => {
@@ -19,7 +19,7 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     if (pathname === "/projects") return "folder";
     if (pathname === "/education") return "education";
     if (pathname === "/experience") return "work";
-    if (pathname === "/hackathons") return "hackathons";
+    if (pathname === "/achievements") return "achievements";
     return "home";
   };
 
