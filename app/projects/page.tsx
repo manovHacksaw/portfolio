@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                     )}
 
                     {/* Description */}
-                    <p className="text-xs sm:text-sm md:text-xs lg:text-sm text-[var(--foreground)]/70 font-light leading-relaxed text-justify">
+                    <p className="text-xs sm:text-sm md:text-xs lg:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
                       {project.longDescription || project.description}
                     </p>
 

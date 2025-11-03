@@ -115,7 +115,7 @@ export default function AchievementsPage() {
           <h1 className="text-base sm:text-sm font-bold text-[var(--foreground)]">
             Hackathon Achievements
           </h1>
-          <p className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light leading-relaxed">
+          <p className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light leading-relaxed">
             Hackathons have been my proving ground — where learning, innovation, and teamwork meet.
             <br />
             <br />
@@ -169,7 +169,7 @@ export default function AchievementsPage() {
                     {/* Content */}
                     <div className="flex-1 flex flex-col gap-2">
                       {/* Date */}
-                      <div className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light">
+                      <div className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light">
                         {group.date}
                       </div>
 
@@ -180,7 +180,7 @@ export default function AchievementsPage() {
 
                       {/* Location */}
                       {group.location && (
-                        <div className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light">
+                        <div className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light">
                           {group.location}
                         </div>
                       )}
@@ -188,7 +188,7 @@ export default function AchievementsPage() {
                       {/* Projects Descriptions */}
                       <div className="flex flex-col gap-2 mt-1">
                         {group.projects.map((hackathon) => (
-                          <p key={hackathon.id} className="text-xs sm:text-xs text-[var(--foreground)]/70 font-light leading-relaxed">
+                          <p key={hackathon.id} className="text-xs sm:text-xs text-[var(--foreground-muted)] font-light leading-relaxed">
                             {hackathon.description}
                           </p>
                         ))}
@@ -221,7 +221,7 @@ export default function AchievementsPage() {
                                     href={githubUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] border border-[var(--foreground)]/10 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition text-xs font-medium"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] border border-[var(--foreground-border)] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition text-xs font-medium"
                                   >
                                     <Github size={12} />
                                     <span>Code</span>

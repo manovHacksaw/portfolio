@@ -43,7 +43,7 @@ export default function ExperiencePage() {
         </div>
 
         {/* Description as justified paragraph */}
-        <p className="text-xs sm:text-sm text-[var(--foreground)]/70 font-light leading-relaxed text-justify">
+        <p className="text-xs sm:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
           {description}
         </p>
 

@@ -13,7 +13,7 @@ export default function AboutSection({ personalInfo }: AboutSectionProps) {
           About Me
         </h2>
         <p 
-          className="text-xs sm:text-sm text-[var(--foreground)]/70 font-light leading-relaxed max-w-3xl text-justify"
+          className="text-xs sm:text-sm text-[var(--foreground-muted)] font-light leading-relaxed max-w-3xl text-justify"
           style={{ fontFamily: 'var(--font-onest)' }}
         >
           {personalInfo.bio}

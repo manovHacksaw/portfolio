@@ -56,7 +56,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             <p className="text-sm sm:text-base font-bold text-[var(--foreground)]">
               New Opportunities
             </p>
-            <p className="text-xs text-[var(--foreground)] font-light opacity-70">
+            <p className="text-xs text-[var(--foreground-secondary)] font-light">
               Remote | On-site | Contractual | Freelance 
             </p>
             

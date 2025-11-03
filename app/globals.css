@@ -2,7 +2,10 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #000000;
+  --foreground: #1a1a1a; /* Dark gray instead of pure black */
+  --foreground-secondary: #4a4a4a; /* Medium gray for secondary text */
+  --foreground-muted: #6b6b6b; /* Light gray for muted/subtle text */
+  --foreground-border: #e0e0e0; /* Very light gray for borders */
   --accent: #a8e6cf; /* Default pastel green */
   --nav-accent: #00ff88; /* Default bright mint for BottomNav */
   --accent-dark: #66c9a0; /* Default dark shade of accent for text/borders */
@@ -12,6 +15,9 @@
 html.dark {
   --background: #000000;
   --foreground: #ffffff;
+  --foreground-secondary: #d0d0d0;
+  --foreground-muted: #b0b0b0;
+  --foreground-border: #333333;
 }
 
 html {

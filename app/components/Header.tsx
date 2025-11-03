@@ -1,6 +1,6 @@
 "use client";
 import { Settings, Circle, Lightbulb, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -14,6 +14,7 @@ export default function Header() {
   const [showToast, setShowToast] = useState(false);
   const [toastClosing, setToastClosing] = useState(false);
   const [accentIndex, setAccentIndex] = useState(0);
+  const splashAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Pastel accent colors: red, blue, green, orange, lavender
   const accentColors = [
@@ -26,6 +27,10 @@ export default function Header() {
 
   useEffect(() => {
     setMounted(true);
+    // Initialize audio element
+    splashAudioRef.current = new Audio('/splash.mp3');
+    splashAudioRef.current.preload = 'auto';
+    
     // Load accent color preference from localStorage
     const savedAccentIndex = localStorage.getItem('accentColorIndex');
     if (savedAccentIndex !== null) {
@@ -38,6 +43,14 @@ export default function Header() {
       updateAccentColor(2); // Default to green (index 2)
       setAccentIndex(2);
     }
+
+    // Cleanup audio on unmount
+    return () => {
+      if (splashAudioRef.current) {
+        splashAudioRef.current.pause();
+        splashAudioRef.current = null;
+      }
+    };
   }, []);
 
   // Helper function to lighten a color (mix with white)
@@ -160,7 +173,7 @@ export default function Header() {
             @manovmandal
           </h1>
           {pathname !== "/" && (
-            <span className="text-[var(--foreground)] text-sm sm:text-base font-light opacity-70">
+            <span className="text-[var(--foreground-secondary)] text-sm sm:text-base font-light">
               {pathname.toUpperCase()}
             </span>
           )}
@@ -210,6 +223,15 @@ export default function Header() {
             if (mounted) {
               const root = document.documentElement;
               const newTheme = resolvedTheme === "dark" ? "light" : "dark";
+              
+              // Play splash sound effect
+              if (splashAudioRef.current) {
+                splashAudioRef.current.currentTime = 0; // Reset to start
+                splashAudioRef.current.play().catch((err) => {
+                  // Ignore audio play errors (user interaction required on some browsers)
+                  console.log('Audio play failed:', err);
+                });
+              }
               
               // Trigger splash animation from bottom-right corner
               // Black splash for dark mode, white splash for light mode

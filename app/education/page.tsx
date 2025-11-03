@@ -40,7 +40,7 @@ export default function EducationPage() {
                         {education.degree}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1 text-xs sm:text-xs text-[var(--foreground)]/70 font-light shrink-0">
+                    <div className="flex items-center gap-1 text-xs sm:text-xs text-[var(--foreground-muted)] font-light shrink-0">
                       <Calendar size={12} className="sm:w-[10px] sm:h-[10px]" />
                       <span>{education.startYear ? `${education.startYear} - ${education.endYear}` : education.endYear}</span>
                     </div>
@@ -48,7 +48,7 @@ export default function EducationPage() {
 
                   {/* Location */}
                   {education.location && (
-                    <div className="flex items-center gap-1.5 text-xs sm:text-xs text-[var(--foreground)]/70 font-light">
+                    <div className="flex items-center gap-1.5 text-xs sm:text-xs text-[var(--foreground-muted)] font-light">
                       <MapPin size={12} className="sm:w-[10px] sm:h-[10px]" />
                       <span>{education.location}</span>
                     </div>
