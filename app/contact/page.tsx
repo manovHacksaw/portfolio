@@ -2,7 +2,7 @@
 import Header from "../components/Header";
 import BottomNav from "../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
-import { Mail, MapPin, Github, Linkedin, Globe, ExternalLink, Send, Sparkles } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Globe, ExternalLink, Send, Sparkles, Music, Play } from "lucide-react";
 import Link from "next/link";
 
 export default function ContactPage() {
