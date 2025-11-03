@@ -28,7 +28,8 @@ export interface Hackathon {
   description: string; // Combined description of what was built
   imageUrl: string; // Project screenshot/image
   logoUrl?: string; // Hackathon logo/icon (circular placeholder for now)
-  projectUrl?: string; // Link to the project
+  projectUrl?: string; // Link to the project (live demo)
+  githubUrl?: string; // Link to the GitHub repository
   announcementUrl?: string; // Link to hackathon announcement/results
   prize?: string; // Optional prize/bounty information
   techStack?: string[]; // Optional tech stack

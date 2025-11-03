@@ -195,14 +195,14 @@ export default function AchievementsPage() {
                       </div>
 
                       {/* Links - Button Style */}
-                      {(group.projects.some(p => p.projectUrl && p.projectUrl !== '#') || group.projects.some(p => (p as any).githubUrl) || group.projects.some(p => p.announcementUrl && p.announcementUrl !== '#')) && (
+                      {(group.projects.some(p => p.projectUrl && p.projectUrl !== '#') || group.projects.some(p => p.githubUrl) || group.projects.some(p => p.announcementUrl && p.announcementUrl !== '#')) && (
                         <div className="flex flex-wrap items-center gap-2 mt-2">
                           {(() => {
                             const p = group.projects[0];
                             if (!p) return null;
                             const isGithub = p.projectUrl && p.projectUrl.includes('github.com');
                             const liveUrl = p.projectUrl && !isGithub ? p.projectUrl : undefined;
-                            const githubUrl = (p as any).githubUrl || (isGithub ? p.projectUrl : undefined);
+                            const githubUrl = p.githubUrl || (isGithub ? p.projectUrl : undefined);
                             return (
                               <>
                                 {liveUrl && (

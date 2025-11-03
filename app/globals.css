@@ -3,6 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #000000;
+  --accent: #a8e6cf; /* Default pastel green */
+  --nav-accent: #00ff88; /* Default bright mint for BottomNav */
+  --accent-dark: #66c9a0; /* Default dark shade of accent for text/borders */
+  --splash-color: #ffffff; /* Splash color for light mode transition */
 }
 
 html.dark {
@@ -143,7 +147,7 @@ html.theme-splash-light::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: #ffffff;
+  background: var(--splash-color);
   pointer-events: none;
   z-index: 99999;
   animation: splash-mask 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;

@@ -13,10 +13,93 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastClosing, setToastClosing] = useState(false);
+  const [accentIndex, setAccentIndex] = useState(0);
+
+  // Pastel accent colors: red, blue, green, orange, lavender
+  const accentColors = [
+    { name: 'red', value: '#ff9a9e', navColor: '#ff4444' },      // Pastel red → Bright red
+    { name: 'blue', value: '#a8c5ff', navColor: '#00d9ff' },     // Pastel blue → Bright cyan
+    { name: 'green', value: '#a8e6cf', navColor: '#00ff88' },    // Pastel green → Bright mint
+    { name: 'orange', value: '#ffd3a5', navColor: '#ff8800' },   // Pastel orange → Bright amber
+    { name: 'lavender', value: '#c7b9ff', navColor: '#aa44ff' }, // Pastel lavender → Bright purple
+  ];
 
   useEffect(() => {
     setMounted(true);
+    // Load accent color preference from localStorage
+    const savedAccentIndex = localStorage.getItem('accentColorIndex');
+    if (savedAccentIndex !== null) {
+      const index = parseInt(savedAccentIndex, 10);
+      if (index >= 0 && index < accentColors.length) {
+        setAccentIndex(index);
+        updateAccentColor(index);
+      }
+    } else {
+      updateAccentColor(2); // Default to green (index 2)
+      setAccentIndex(2);
+    }
   }, []);
+
+  // Helper function to lighten a color (mix with white)
+  const lightenColor = (hex: string, percentage: number): string => {
+    const hexClean = hex.replace('#', '');
+    const r = parseInt(hexClean.substring(0, 2), 16);
+    const g = parseInt(hexClean.substring(2, 4), 16);
+    const b = parseInt(hexClean.substring(4, 6), 16);
+    
+    // Mix with white (255, 255, 255) based on percentage
+    // percentage: 0 = original color, 100 = white
+    const newR = Math.round(r + (255 - r) * (percentage / 100));
+    const newG = Math.round(g + (255 - g) * (percentage / 100));
+    const newB = Math.round(b + (255 - b) * (percentage / 100));
+    
+    return `rgb(${newR}, ${newG}, ${newB})`;
+  };
+
+  // Helper function to darken a color (mix with black)
+  const darkenColor = (hex: string, percentage: number): string => {
+    const hexClean = hex.replace('#', '');
+    const r = parseInt(hexClean.substring(0, 2), 16);
+    const g = parseInt(hexClean.substring(2, 4), 16);
+    const b = parseInt(hexClean.substring(4, 6), 16);
+    
+    // Mix with black (0, 0, 0) based on percentage
+    // percentage: 0 = original color, 100 = black
+    const newR = Math.round(r * (1 - percentage / 100));
+    const newG = Math.round(g * (1 - percentage / 100));
+    const newB = Math.round(b * (1 - percentage / 100));
+    
+    return `rgb(${newR}, ${newG}, ${newB})`;
+  };
+
+  // Update accent color CSS variable
+  const updateAccentColor = (index: number) => {
+    const root = document.documentElement;
+    const color = accentColors[index];
+    root.style.setProperty('--accent', color.value);
+    root.style.setProperty('--nav-accent', color.navColor); // Bright techy color for BottomNav
+    
+    // Create dark shade of accent color (for text/borders, ~40% darker)
+    const darkAccentColor = darkenColor(color.value, 40);
+    root.style.setProperty('--accent-dark', darkAccentColor);
+    
+    // Update background to be a very light shade of accent color in light mode
+    if (resolvedTheme === 'light') {
+      // Mix accent color with white at ~92% white (very light shade)
+      const lightBgColor = lightenColor(color.value, 92);
+      root.style.setProperty('--background', lightBgColor);
+    } else {
+      // Dark mode: keep black background
+      root.style.setProperty('--background', '#000000');
+    }
+  };
+
+  // Update background tint when theme changes
+  useEffect(() => {
+    if (mounted) {
+      updateAccentColor(accentIndex);
+    }
+  }, [resolvedTheme, accentIndex, mounted]);
 
   // Hide toast after 5 seconds with fade-out animation
   useEffect(() => {
@@ -85,12 +168,23 @@ export default function Header() {
 
         {/* Right side - Indicator, Time, and Gear icon */}
         <div className="flex items-center gap-2">
-          {/* Circular indicator */}
-          <Circle 
-            size={16} 
-            fill="currentColor" 
-            className={`text-[var(--foreground)] ${isAnimating ? 'animate-bounce-twice' : ''}`}
-          />
+          {/* Circular indicator - clickable to cycle accent colors */}
+          <button
+            onClick={() => {
+              const nextIndex = (accentIndex + 1) % accentColors.length;
+              setAccentIndex(nextIndex);
+              updateAccentColor(nextIndex);
+              localStorage.setItem('accentColorIndex', nextIndex.toString());
+            }}
+            className="cursor-pointer hover:opacity-80 transition-opacity"
+            aria-label="Cycle accent color"
+          >
+            <Circle 
+              size={16} 
+              fill="currentColor" 
+              className={`text-[var(--accent)] ${isAnimating ? 'animate-bounce-twice' : ''}`}
+            />
+          </button>
           
           {/* Timestamp */}
           <span className="text-[var(--foreground)] text-xs sm:text-sm font-semibold">
@@ -129,6 +223,10 @@ export default function Header() {
                   root.classList.remove('theme-splash-dark'); // Remove after animation completes
                 }, 1000);
               } else {
+                // Set the splash color to the same very light shade as the background
+                const currentColor = accentColors[accentIndex];
+                const lightBgColor = lightenColor(currentColor.value, 92);
+                root.style.setProperty('--splash-color', lightBgColor);
                 root.classList.add('theme-splash-light');
                 setTimeout(() => {
                   setTheme(newTheme); // Switch theme at 80% coverage

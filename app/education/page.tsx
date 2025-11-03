@@ -63,7 +63,7 @@ export default function EducationPage() {
             <p className="text-sm sm:text-sm text-[var(--foreground)] font-light italic">
               "The best time to repair the roof is when the sun is shining."
             </p>
-            <span className="text-sm sm:text-sm text-green-500 border border-green-500 px-2 py-1 w-fit rounded">
+            <span className="text-sm sm:text-sm px-2 py-1 w-fit rounded" style={{ color: 'var(--nav-accent)', borderColor: 'var(--nav-accent)', borderWidth: '1px', borderStyle: 'solid' }}>
               — John F. Kennedy
             </span>
           </div>

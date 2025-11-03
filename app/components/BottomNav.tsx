@@ -36,17 +36,17 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
             <Link
               key={item.id}
               href={item.path}
-              className="relative flex flex-col items-center justify-center focus:outline-none"
+              className="relative flex flex-col items-center justify-center focus:outline-none pb-1"
               aria-label={item.label}
             >
               <Icon
                 size={20}
-                className={`${isActive ? "text-[var(--foreground)]" : "text-[var(--foreground)] opacity-70"}`}
+                className={`${isActive ? "text-[var(--foreground)]" : "text-[var(--foreground)] opacity-70"} mb-1`}
                 strokeWidth={1.5}
                 fill="none"
               />
               {isActive && (
-                <div className="absolute -bottom-1.5 w-1.5 h-1.5 bg-green-500 rounded-full" />
+                <div className="absolute bottom-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--nav-accent)' }} />
               )}
             </Link>
           );
