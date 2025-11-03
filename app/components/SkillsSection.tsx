@@ -114,7 +114,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 pr-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 max-w-3xl">
           {displaySkills.map((skill) => (
             <div
               key={skill.id}

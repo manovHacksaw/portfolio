@@ -219,7 +219,7 @@ export default function Header() {
         <button
           className="text-[var(--foreground)] hover:opacity-80 transition-opacity relative z-10 mt-1.5 hover-swing"
           aria-label="Toggle theme"
-          onClick={() => {
+          onClick={(e) => {
             if (mounted) {
               const root = document.documentElement;
               const newTheme = resolvedTheme === "dark" ? "light" : "dark";
@@ -233,8 +233,21 @@ export default function Header() {
                 });
               }
               
-              // Trigger splash animation from bottom-right corner
-              // Black splash for dark mode, white splash for light mode
+              // Calculate lightbulb position for splash origin (for both light and dark mode)
+              const button = e.currentTarget;
+              const rect = button.getBoundingClientRect();
+              const buttonCenterX = rect.left + rect.width / 2;
+              const buttonCenterY = rect.top + rect.height / 2;
+              
+              // Convert to percentage of viewport
+              const originX = (buttonCenterX / window.innerWidth) * 100;
+              const originY = (buttonCenterY / window.innerHeight) * 100;
+              
+              // Set CSS variables for splash origin
+              root.style.setProperty('--splash-origin-x', `${originX}%`);
+              root.style.setProperty('--splash-origin-y', `${originY}%`);
+              
+              // Trigger splash animation from lightbulb for both themes
               // Switch theme at 80% (960ms) when 80% screen is covered
               if (newTheme === "dark") {
                 root.classList.add('theme-splash-dark');

@@ -126,7 +126,7 @@ body {
   transform-origin: top center;
 }
 
-/* Theme water splash transition (from bottom-right, covers screen) */
+/* Theme water splash transition */
 @keyframes splash-mask {
   0% {
     clip-path: circle(0% at 100% 100%);
@@ -139,6 +139,18 @@ body {
   }
 }
 
+@keyframes splash-mask-from-lightbulb {
+  0% {
+    clip-path: circle(0% at var(--splash-origin-x) var(--splash-origin-y));
+    opacity: 1;
+  }
+  100% {
+    /* 150% radius safely covers ultra-wide screens */
+    clip-path: circle(150% at var(--splash-origin-x) var(--splash-origin-y));
+    opacity: 1;
+  }
+}
+
 html.theme-splash-dark::before {
   content: '';
   position: fixed;
@@ -146,7 +158,7 @@ html.theme-splash-dark::before {
   background: #000000;
   pointer-events: none;
   z-index: 99999;
-  animation: splash-mask 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: splash-mask-from-lightbulb 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 html.theme-splash-light::before {
@@ -156,7 +168,7 @@ html.theme-splash-light::before {
   background: var(--splash-color);
   pointer-events: none;
   z-index: 99999;
-  animation: splash-mask 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: splash-mask-from-lightbulb 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .pb-safe {
