@@ -242,7 +242,7 @@ export const mockPortfolioData: PortfolioData = {
       projectName: 'Fork Work',
       achievement: 'ETH India Track Prize Winner',
       date: 'Jun 20 - Jun 22 2025',
-      location: "Sister Nivedita University, Kolkata, West Bengal, India",
+      location: " Kolkata, West Bengal, India",
       description: 'Built Fork Work, a Web3 platform connecting freelancers with clients via smart contracts. Won ETH India Track Prize at Hack 4 Bengal 4.0.',
       imageUrl: '/projects/fork-work.png',
       projectUrl: "https://fork-your-work.vercel.app/",

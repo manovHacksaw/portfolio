@@ -110,8 +110,8 @@ export default function AchievementsPage() {
   return (
     <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
       <Header />
-      <main className="w-full px-5 py-6">
-        <div className="flex flex-col gap-6">
+      <main className="w-full px-5 py-4 sm:py-6">
+        <div className="flex flex-col gap-4 sm:gap-6">
           
 
           {/* Timeline */}
@@ -119,11 +119,11 @@ export default function AchievementsPage() {
             {/* Vertical Timeline Line - thinner, starts after first logo, ends before last logo */}
             {groupedHackathons.length > 1 && (
               <div 
-                className="absolute left-6 bg-[var(--foreground)] opacity-40"
+                className="absolute left-5 sm:left-6 bg-[var(--foreground)] opacity-40"
                 style={{
                   width: '1px',
-                  top: 'calc(24px + 1.5rem)', // Start after first logo center (24px = half of 48px logo) + py-6 (1.5rem)
-                  bottom: 'calc(24px + 1.5rem)', // End before last logo center (24px = half of 48px logo) + py-6 (1.5rem)
+                  top: 'calc(20px + 0.75rem)', // Start after first logo center (20px = half of 40px logo on mobile) + py-3 (0.75rem)
+                  bottom: 'calc(20px + 0.75rem)', // End before last logo center
                 }}
               />
             )}
@@ -134,13 +134,13 @@ export default function AchievementsPage() {
                 <div key={`${group.name}_${group.date}`} className="relative">
                   {/* Dotted Horizontal Separator (except for first item) */}
                   {groupIndex > 0 && (
-                    <div className="absolute left-6 top-0 right-0 border-t border-dashed border-[var(--foreground)] opacity-40" />
+                    <div className="absolute left-5 sm:left-6 top-0 right-0 border-t border-dashed border-[var(--foreground)] opacity-40" />
                   )}
 
-                  <div className="relative flex items-start gap-4 py-6">
+                  <div className="relative flex items-start gap-3 sm:gap-4 py-3 sm:py-6">
                     {/* Hackathon Logo */}
                     <div className="relative shrink-0">
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
+                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
                         {group.logoUrl ? (
                           <Image
                             src={group.logoUrl}
@@ -159,41 +159,41 @@ export default function AchievementsPage() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 flex flex-col gap-2">
+                    <div className="flex-1 flex flex-col gap-1.5 sm:gap-2">
                       {/* Date */}
-                      <div className="text-sm sm:text-xs text-[var(--foreground-muted)] font-light">
+                      <div className="text-xs sm:text-sm md:text-xs text-[var(--foreground-muted)] font-light">
                         {group.date}
                       </div>
 
                       {/* Hackathon Title */}
-                      <h2 className="text-lg sm:text-base font-bold text-[var(--foreground)]">
+                      <h2 className="text-base sm:text-lg md:text-base font-bold text-[var(--foreground)]">
                         {group.name}
                       </h2>
 
                       {/* Location - with icon for better visibility */}
                       {group.location && (
-                        <div className="flex items-center gap-1.5 text-sm sm:text-xs text-[var(--foreground-secondary)] font-medium mt-0.5">
+                        <div className="flex items-start gap-1.5 text-xs sm:text-sm md:text-xs text-[var(--foreground-secondary)] font-medium mt-0.5">
                           {group.location.toLowerCase() === 'online' ? (
-                            <Globe size={14} className="sm:w-[12px] sm:h-[12px] shrink-0" />
+                            <Globe size={12} className="sm:w-[14px] sm:h-[14px] md:w-[12px] md:h-[12px] shrink-0 mt-0.5" />
                           ) : (
-                            <MapPin size={14} className="sm:w-[12px] sm:h-[12px] shrink-0" />
+                            <MapPin size={12} className="sm:w-[14px] sm:h-[14px] md:w-[12px] md:h-[12px] shrink-0 mt-0.5" />
                           )}
                           <span>{group.location}</span>
                         </div>
                       )}
 
                       {/* Projects Descriptions */}
-                      <div className="flex flex-col gap-3 mt-2">
+                      <div className="flex flex-col gap-2 sm:gap-3 mt-1.5 sm:mt-2">
                         {group.projects.map((hackathon) => (
-                          <div key={hackathon.id} className="flex flex-col gap-1.5">
+                          <div key={hackathon.id} className="flex flex-col gap-1 sm:gap-1.5">
                             {/* Project Name if different from hackathon name */}
                             {hackathon.projectName && (
-                              <div className="text-sm md:text-base font-medium text-[var(--foreground)]">
+                              <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--foreground)]">
                                 {hackathon.projectName}
                               </div>
                             )}
                             {/* Description */}
-                            <p className="text-sm md:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
+                            <p className="text-xs sm:text-sm md:text-base text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
                               {hackathon.description}
                             </p>
                           </div>
@@ -202,7 +202,7 @@ export default function AchievementsPage() {
 
                       {/* Links - Button Style */}
                       {(group.projects.some(p => p.projectUrl && p.projectUrl !== '#') || group.projects.some(p => p.githubUrl) || group.projects.some(p => p.announcementUrl && p.announcementUrl !== '#')) && (
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2">
                           {(() => {
                             const p = group.projects[0];
                             if (!p) return null;
