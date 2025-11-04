@@ -46,13 +46,14 @@ export default function ContactClient() {
         ]);
         
         // Handle errors gracefully - allow now-playing to work even if profile fails
-        let nowPlaying = { isPlaying: false };
-        let profile = { displayName: null, followers: 0, product: 'free', spotifyUrl: null, images: [] };
-        let recentlyPlayed = null;
+        let nowPlaying: { isPlaying: boolean; title?: string; artist?: string; album?: string; albumArt?: string; trackUrl?: string; progress?: number; duration?: number } = { isPlaying: false };
+        let profile: { displayName?: string | null; followers?: number; product?: string; spotifyUrl?: string | null; images?: Array<{ url: string; height?: number; width?: number }> } = { displayName: null, followers: 0, product: 'free', spotifyUrl: null, images: [] };
+        let recentlyPlayed: { tracks?: Array<{ name?: string; artist?: string; album?: string; albumArt?: string; trackUrl?: string; duration?: number; playedAt?: string }> } | null = null;
         
         if (nowPlayingRes.ok) {
           try {
-            nowPlaying = await nowPlayingRes.json();
+            const data = await nowPlayingRes.json();
+            nowPlaying = { isPlaying: false, ...data };
           } catch (e) {
             console.error('Failed to parse now-playing response:', e);
           }
@@ -63,7 +64,8 @@ export default function ContactClient() {
         
         if (profileRes.ok) {
           try {
-            profile = await profileRes.json();
+            const data = await profileRes.json();
+            profile = { displayName: null, followers: 0, product: 'free', spotifyUrl: null, images: [], ...data };
           } catch (e) {
             console.error('Failed to parse profile response:', e);
           }
@@ -109,10 +111,10 @@ export default function ContactClient() {
           duration: isCurrentlyPlaying 
             ? nowPlaying.duration 
             : (lastPlayedTrack?.duration || undefined),
-          displayName: profile.displayName,
+          displayName: profile.displayName || undefined,
           followers: profile.followers,
           product: profile.product,
-          spotifyUrl: profile.spotifyUrl,
+          spotifyUrl: profile.spotifyUrl || undefined,
           profileImage: (profile.images && profile.images.length > 0) 
             ? (profile.images[0]?.url || profile.images[1]?.url) 
             : undefined,
