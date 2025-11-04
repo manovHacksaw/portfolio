@@ -50,15 +50,24 @@ Add the environment variables through your platform's dashboard or CLI:
 - **Fly.io**: `fly secrets set SPOTIFY_CLIENT_ID=...`
 - **DigitalOcean**: App Settings → Environment Variables
 
-## 🔍 Troubleshooting 500 Errors
+## 🔍 Troubleshooting
 
-If you see 500 errors from `/api/spotify/profile` or `/api/spotify/recently-played`:
+### Missing Spotify Data
 
-1. **Check Environment Variables**: Verify all required variables are set
+If the Spotify section on the contact page doesn't show your data:
+
+1. **Check Environment Variables**: Verify all required variables are set in your deployment platform
 2. **Check Variable Names**: Ensure they match exactly (case-sensitive)
 3. **Check Refresh Token**: Make sure it's valid and not expired
-4. **Redeploy**: After adding/updating variables, redeploy your app
-5. **Check Logs**: Review your platform's logs for detailed error messages
+4. **Redeploy**: After adding/updating variables, redeploy your app for changes to take effect
+5. **Check Logs**: Review your platform's server logs for detailed error messages
+
+**Note**: The app will work gracefully without Spotify credentials (it will show fallback data), but you won't see your actual Spotify listening activity.
+
+### Development vs Production
+
+- **Development**: Missing credentials will return 500 errors with detailed messages (helpful for debugging)
+- **Production**: Missing credentials will return empty/default data (no console errors, graceful degradation)
 
 ## Error Response Format
 

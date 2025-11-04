@@ -90,14 +90,17 @@ export async function GET() {
   try {
     const { token: accessToken, error: tokenError } = await getAccessToken();
     if (!accessToken) {
-      return NextResponse.json(
-        { 
-          error: 'Failed to get access token',
-          details: tokenError || 'Missing Spotify credentials or failed token refresh',
-          hint: 'Make sure SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_REFRESH_TOKEN are set in your environment variables'
-        },
-        { status: 500 }
-      );
+      // Always return empty profile instead of error to avoid console noise
+      // The frontend will use fallback data
+      // Log server-side only (won't appear in browser console)
+      console.error('Spotify profile API: Missing credentials or token refresh failed:', tokenError || 'Unknown error');
+      return NextResponse.json({
+        displayName: null,
+        followers: 0,
+        product: 'free',
+        spotifyUrl: null,
+        images: [],
+      });
     }
 
     const response = await fetch('https://api.spotify.com/v1/me', {
