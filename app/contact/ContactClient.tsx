@@ -45,17 +45,43 @@ export default function ContactClient() {
           fetch('/api/spotify/recently-played?limit=1'),
         ]);
         
-        if (!nowPlayingRes.ok || !profileRes.ok) {
-          console.error('API request failed:', {
-            nowPlaying: nowPlayingRes.status,
-            profile: profileRes.status,
-          });
-          return;
+        // Handle errors gracefully - allow now-playing to work even if profile fails
+        let nowPlaying = { isPlaying: false };
+        let profile = { displayName: null, followers: 0, product: 'free', spotifyUrl: null, images: [] };
+        let recentlyPlayed = null;
+        
+        if (nowPlayingRes.ok) {
+          try {
+            nowPlaying = await nowPlayingRes.json();
+          } catch (e) {
+            console.error('Failed to parse now-playing response:', e);
+          }
+        } else {
+          const errorData = await nowPlayingRes.json().catch(() => ({}));
+          console.error('Now-playing API failed:', nowPlayingRes.status, errorData);
         }
         
-        const nowPlaying = await nowPlayingRes.json();
-        const profile = await profileRes.json();
-        const recentlyPlayed = recentlyPlayedRes.ok ? await recentlyPlayedRes.json() : null;
+        if (profileRes.ok) {
+          try {
+            profile = await profileRes.json();
+          } catch (e) {
+            console.error('Failed to parse profile response:', e);
+          }
+        } else {
+          const errorData = await profileRes.json().catch(() => ({}));
+          console.error('Profile API failed:', profileRes.status, errorData);
+        }
+        
+        if (recentlyPlayedRes.ok) {
+          try {
+            recentlyPlayed = await recentlyPlayedRes.json();
+          } catch (e) {
+            console.error('Failed to parse recently-played response:', e);
+          }
+        } else {
+          const errorData = await recentlyPlayedRes.json().catch(() => ({}));
+          console.error('Recently-played API failed:', recentlyPlayedRes.status, errorData);
+        }
         
         console.log('Spotify data fetched:', { nowPlaying, profile, recentlyPlayed });
         

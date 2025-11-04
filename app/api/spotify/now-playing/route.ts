@@ -43,12 +43,12 @@ interface SpotifyCurrentlyPlaying {
   progress_ms: number;
 }
 
-async function getAccessToken(): Promise<string | null> {
+async function getAccessToken(): Promise<{ token: string | null; error?: string }> {
   // Temporary: Allow direct access token override for testing
   // Note: Access tokens expire in 1 hour, refresh tokens don't expire
   const directAccessToken = process.env.SPOTIFY_ACCESS_TOKEN;
   if (directAccessToken) {
-    return directAccessToken;
+    return { token: directAccessToken };
   }
 
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -56,7 +56,14 @@ async function getAccessToken(): Promise<string | null> {
   const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
   if (!clientId || !clientSecret || !refreshToken) {
-    return null;
+    const missing = [];
+    if (!clientId) missing.push('SPOTIFY_CLIENT_ID');
+    if (!clientSecret) missing.push('SPOTIFY_CLIENT_SECRET');
+    if (!refreshToken) missing.push('SPOTIFY_REFRESH_TOKEN');
+    return { 
+      token: null, 
+      error: `Missing environment variables: ${missing.join(', ')}. Please configure these in your deployment platform.` 
+    };
   }
 
   try {
@@ -73,19 +80,33 @@ async function getAccessToken(): Promise<string | null> {
     });
 
     if (!response.ok) {
-      return null;
+      const errorText = await response.text();
+      let errorDetails;
+      try {
+        errorDetails = JSON.parse(errorText);
+      } catch {
+        errorDetails = errorText;
+      }
+      console.error('Spotify token refresh failed:', response.status, errorDetails);
+      return { 
+        token: null, 
+        error: `Token refresh failed: ${response.status} ${response.statusText}. ${JSON.stringify(errorDetails)}` 
+      };
     }
 
     const data: SpotifyTokenResponse = await response.json();
-    return data.access_token;
+    return { token: data.access_token };
   } catch (error) {
     console.error('Error getting Spotify access token:', error);
-    return null;
+    return { 
+      token: null, 
+      error: error instanceof Error ? error.message : 'Unknown error during token refresh' 
+    };
   }
 }
 
 async function getNowPlaying(): Promise<SpotifyCurrentlyPlaying | null> {
-  const accessToken = await getAccessToken();
+  const { token: accessToken } = await getAccessToken();
   if (!accessToken) {
     return null;
   }
