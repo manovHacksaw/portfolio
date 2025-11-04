@@ -28,7 +28,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
   const portfolioLink = portfolioLinks.find(link => link.platform === 'Portfolio');
 
   return (
-    <section className="w-full bg-[var(--background)] px-5 py-8">
+    <section className="w-full bg-[var(--background)] px-5 py-8 max-w-4xl">
       {/* Mobile Layout - Profile pic left, icon right, text below */}
       <div className="flex flex-col sm:hidden">
         {/* Top Row - Profile Picture (left) and Icon (right) */}
@@ -217,7 +217,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
         {/* Right Side - Profile Picture */}
         <div className="shrink-0 flex items-start">
-          <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-40 bg-[var(--background)] rounded-lg">
+          <div className="relative left-8 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-40 bg-[var(--background)] rounded-lg">
             <Image
               src={personalInfo.avatarUrl}
               alt={personalInfo.name}

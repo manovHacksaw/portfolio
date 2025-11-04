@@ -7,14 +7,16 @@ import { mockPortfolioData } from "@/data/mockData";
 
 export default function Home() {
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 ">
+    <div className="min-h-screen pb-24 sm:pb-20">
       <Header />
-      <HeroSection
-        personalInfo={mockPortfolioData.personalInfo}
-        portfolioLinks={mockPortfolioData.portfolioLinks}
-      />
-      <AboutSection personalInfo={mockPortfolioData.personalInfo} />
-      <SkillsSection skills={mockPortfolioData.skills} />
+      <div className="max-w-4xl mx-auto">
+        <HeroSection
+          personalInfo={mockPortfolioData.personalInfo}
+          portfolioLinks={mockPortfolioData.portfolioLinks}
+        />
+        <AboutSection personalInfo={mockPortfolioData.personalInfo} />
+        <SkillsSection skills={mockPortfolioData.skills} />
+      </div>
       <BottomNav activeItem="home" />
     </div>
   );

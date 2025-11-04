@@ -90,14 +90,7 @@ export default function ExperiencePage() {
           {/* Hackathons moved to /hackathons */}
 
           {/* Quote Section */}
-          <div className="mt-8 flex flex-col gap-2">
-            <p className="text-sm sm:text-sm text-[var(--foreground)] font-light italic">
-              "The best time to repair the roof is when the sun is shining."
-            </p>
-            <span className="text-sm sm:text-sm px-2 py-1 w-fit rounded" style={{ color: 'var(--nav-accent)', borderColor: 'var(--nav-accent)', borderWidth: '1px', borderStyle: 'solid' }}>
-              — John F. Kennedy
-            </span>
-          </div>
+         
         </div>
       </main>
       <BottomNav activeItem="work" />

@@ -112,7 +112,13 @@ export default function AchievementsPage() {
       <Header />
       <main className="w-full px-5 py-4 sm:py-6">
         <div className="flex flex-col gap-4 sm:gap-6">
-          
+          {/* Introduction */}
+          <p className="text-sm px-4 sm:text-base text-[var(--foreground-muted)] font-light leading-relaxed">
+     
+I love taking part in hackathons — they’re where I learn the most, meet amazing people, and turn crazy ideas into working projects. I’ve attended quite a few, mostly focused on Web3 and blockchain, and each one has helped me level up my skills while building real, usable stuff under tight deadlines.
+</p>
+
+
 
           {/* Timeline */}
           <div className="relative">
@@ -122,8 +128,8 @@ export default function AchievementsPage() {
                 className="absolute left-5 sm:left-6 bg-[var(--foreground)] opacity-40"
                 style={{
                   width: '1px',
-                  top: 'calc(20px + 0.75rem)', // Start after first logo center (20px = half of 40px logo on mobile) + py-3 (0.75rem)
-                  bottom: 'calc(20px + 0.75rem)', // End before last logo center
+                  top: 'calc(24px + 0.75rem)', // Start after first logo center (24px = half of 48px logo on mobile) + py-3 (0.75rem)
+                  bottom: 'calc(24px + 0.75rem)', // End before last logo center (updated for larger logos)
                 }}
               />
             )}
@@ -138,9 +144,9 @@ export default function AchievementsPage() {
                   )}
 
                   <div className="relative flex items-start gap-3 sm:gap-4 py-3 sm:py-6">
-                    {/* Hackathon Logo */}
-                    <div className="relative shrink-0">
-                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
+                    {/* Hackathon Logo - Centered with vertical line */}
+                    <div className="absolute left-5 sm:left-6 shrink-0" style={{ transform: 'translateX(-50%)' }}>
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
                         {group.logoUrl ? (
                           <Image
                             src={group.logoUrl}
@@ -158,8 +164,8 @@ export default function AchievementsPage() {
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <div className="flex-1 flex flex-col gap-1.5 sm:gap-2">
+                    {/* Content - Add left margin to account for logo */}
+                    <div className="flex-1 flex flex-col gap-1.5 sm:gap-2 ml-16 sm:ml-20 md:ml-24">
                       {/* Date */}
                       <div className="text-xs sm:text-sm md:text-xs text-[var(--foreground-muted)] font-light">
                         {group.date}
@@ -193,7 +199,7 @@ export default function AchievementsPage() {
                               </div>
                             )}
                             {/* Description */}
-                            <p className="text-xs sm:text-sm md:text-base text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
+                            <p className="text-xs sm:text-sm md:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
                               {hackathon.description}
                             </p>
                           </div>

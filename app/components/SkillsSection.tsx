@@ -104,7 +104,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
 
   return (
     <section className="w-full px-5 py-8">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-w-4xl">
         {/* Header */}
         <div className="flex items-center gap-2">
           
@@ -114,7 +114,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 max-w-3xl">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
           {displaySkills.map((skill) => (
             <div
               key={skill.id}
