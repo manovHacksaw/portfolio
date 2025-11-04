@@ -1,6 +1,6 @@
 "use client";
-import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
+import Header from "../../components/Header";
+import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
 import Image from "next/image";
 import Link from "next/link";

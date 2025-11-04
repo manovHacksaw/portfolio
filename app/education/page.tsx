@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
+import Header from "../../components/Header";
+import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
 import { MapPin, Calendar } from "lucide-react";
 import Image from "next/image";

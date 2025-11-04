@@ -1,6 +1,6 @@
 "use client";
-import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
+import Header from "../../components/Header";
+import BottomNav from "../../components/BottomNav";
 import { FileText, ExternalLink, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 

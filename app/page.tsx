@@ -1,9 +1,10 @@
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
-import AboutSection from "./components/AboutSection";
-import SkillsSection from "./components/SkillsSection";
-import BottomNav from "./components/BottomNav";
+import Header from "../components/Header";
+import HeroSection from "../components/sections/HeroSection";
+import AboutSection from "../components/sections/AboutSection";
+import SkillsSection from "../components/sections/SkillsSection";
+import BottomNav from "../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
+import GithubContributions from "@/components/GithubContributions";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         />
         <AboutSection personalInfo={mockPortfolioData.personalInfo} />
         <SkillsSection skills={mockPortfolioData.skills} />
+        <GithubContributions />
       </div>
       <BottomNav activeItem="home" />
     </div>

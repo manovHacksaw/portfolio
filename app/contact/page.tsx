@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import Header from "../components/Header";
-import BottomNav from "../components/BottomNav";
+import Header from "../../components/Header";
+import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
 import { Mail, MapPin, Github, Linkedin, Instagram, ArrowRight, ArrowLeftRight, Flame, Music, Play, Pause, Sparkles } from "lucide-react";
 import Link from "next/link";
