@@ -466,7 +466,7 @@ export const mockPortfolioData: PortfolioData = {
       title: "Cupid",
       artist: "FIFTY FIFTY",
       audioSrc: "/audio/cupid.mp3",
-      spotifyUrl: "https://open.spotify.com/track/4RaqT3ttA6yZFYoOKR6F6d",
+      spotifyUrl: "https://open.spotify.com/track/5pMPNxZz50iup8cXchRHxm",
     },
     socialLinks: {
       instagram: "#", // Add your Instagram URL here

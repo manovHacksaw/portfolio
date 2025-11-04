@@ -1,11 +1,11 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
-import { Mail, MapPin, Github, Linkedin, Instagram, ArrowRight, ArrowLeftRight, Flame, Music, Play, Pause, Sparkles } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Instagram, ArrowRight, ArrowLeftRight, Flame, Play, Pause } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 
 export default function ContactPage() {
   const personalInfo = mockPortfolioData.personalInfo;
@@ -17,150 +17,11 @@ export default function ContactPage() {
   const linkedInLink = portfolioLinks.find(link => link.icon === 'linkedin');
   const emailLink = portfolioLinks.find(link => link.icon === 'email');
 
-  // Audio player state
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  // Use global audio player context
+  const { isPlaying, currentTime, duration, isLoading, hasError, togglePlay, handleSeek, formatTime } = useAudioPlayer();
 
   // Audio metadata from data
-  const audioSrc = contactPageData?.nowPlaying.audioSrc || "/audio/cupid.mp3";
-  const spotifyUrl = contactPageData?.nowPlaying.spotifyUrl || "https://open.spotify.com/track/4RaqT3ttA6yZFYoOKR6F6d";
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    
-    const updateDuration = () => {
-      if (audio.duration && !isNaN(audio.duration)) {
-        setDuration(audio.duration);
-        setIsLoading(false);
-      }
-    };
-    
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setCurrentTime(0);
-    };
-    
-    const handleCanPlay = () => {
-      if (audio.duration && !isNaN(audio.duration)) {
-        setDuration(audio.duration);
-      }
-      setIsLoading(false);
-    };
-    
-    const handleCanPlayThrough = () => {
-      setIsLoading(false);
-    };
-    
-    const handleLoadedData = () => {
-      if (audio.duration && !isNaN(audio.duration)) {
-        setDuration(audio.duration);
-        setIsLoading(false);
-      }
-    };
-    
-    const handleError = (e: Event) => {
-      setIsLoading(false);
-      setHasError(true);
-      const error = audio.error;
-      if (error) {
-        console.error("Audio error:", {
-          code: error.code,
-          message: error.message,
-          MEDIA_ERR_ABORTED: error.MEDIA_ERR_ABORTED,
-          MEDIA_ERR_NETWORK: error.MEDIA_ERR_NETWORK,
-          MEDIA_ERR_DECODE: error.MEDIA_ERR_DECODE,
-          MEDIA_ERR_SRC_NOT_SUPPORTED: error.MEDIA_ERR_SRC_NOT_SUPPORTED,
-        });
-      }
-    };
-
-    audio.addEventListener("timeupdate", updateTime);
-    audio.addEventListener("loadedmetadata", updateDuration);
-    audio.addEventListener("loadeddata", handleLoadedData);
-    audio.addEventListener("canplay", handleCanPlay);
-    audio.addEventListener("canplaythrough", handleCanPlayThrough);
-    audio.addEventListener("ended", handleEnded);
-    audio.addEventListener("error", handleError);
-
-    // Check initial state and load if needed
-    const checkInitialState = () => {
-      if (audio.readyState >= 2 && audio.duration && !isNaN(audio.duration)) {
-        setDuration(audio.duration);
-        setIsLoading(false);
-      } else if (audio.readyState >= 1) {
-        setIsLoading(false);
-      } else {
-        // Try to load the audio
-        audio.load();
-      }
-    };
-
-    // Wait a tick to ensure audio element is mounted
-    setTimeout(checkInitialState, 100);
-
-    // Fallback: Set a timeout to stop loading if audio takes too long
-    const loadingTimeout = setTimeout(() => {
-      if (audio.readyState >= 2) {
-        // Metadata loaded
-        if (audio.duration && !isNaN(audio.duration)) {
-          setDuration(audio.duration);
-        }
-        setIsLoading(false);
-      } else if (audio.readyState >= 1) {
-        // Some data loaded
-        setIsLoading(false);
-      }
-    }, 5000); // 5 second timeout
-
-    return () => {
-      clearTimeout(loadingTimeout);
-      audio.removeEventListener("timeupdate", updateTime);
-      audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("loadeddata", handleLoadedData);
-      audio.removeEventListener("canplay", handleCanPlay);
-      audio.removeEventListener("canplaythrough", handleCanPlayThrough);
-      audio.removeEventListener("ended", handleEnded);
-      audio.removeEventListener("error", handleError);
-    };
-  }, []);
-
-  const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play().catch((error) => {
-        console.error("Playback failed:", error);
-        setIsPlaying(false);
-      });
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const newTime = parseFloat(e.target.value);
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-  const formatTime = (time: number) => {
-    if (isNaN(time)) return "0:00";
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
+  const spotifyUrl = contactPageData?.nowPlaying.spotifyUrl || "https://open.spotify.com/track/5pMPNxZz50iup8cXchRHxm";
 
   const socialLinks = [
     {
@@ -278,13 +139,6 @@ export default function ContactPage() {
             </div>
             
             <div className="border-t border-[var(--foreground-border)] pt-4">
-              {/* Hidden audio element */}
-              <audio ref={audioRef} preload="auto">
-                <source src={audioSrc} type="audio/mpeg" />
-                <source src={audioSrc.replace('.mp3', '.m4a')} type="audio/mp4" />
-                Your browser does not support the audio element.
-              </audio>
-              
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-4">
                   {/* Spotify Icon - Orange rounded square */}
@@ -340,7 +194,7 @@ export default function ContactPage() {
                     min="0"
                     max={duration || 0}
                     value={currentTime}
-                    onChange={handleSeek}
+                    onChange={(e) => handleSeek(parseFloat(e.target.value))}
                     disabled={isLoading || duration === 0}
                     className="flex-1 h-1.5 bg-[var(--foreground-border)] rounded-full appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                     style={{
