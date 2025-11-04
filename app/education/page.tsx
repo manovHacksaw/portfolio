@@ -59,14 +59,16 @@ export default function EducationPage() {
           </div>
 
           {/* Quote Section */}
-          <div className="mt-6 flex flex-col gap-2">
-            <p className="text-sm sm:text-sm text-[var(--foreground)] font-light italic">
-              "Study hard and get out of this stupid place."
-            </p>
-            <span className="text-sm sm:text-sm px-2 py-1 w-fit rounded" style={{ color: 'var(--nav-accent)', borderColor: 'var(--nav-accent)', borderWidth: '1px', borderStyle: 'solid' }}>
-              — I picked it from Pinterest
-            </span>
-          </div>
+          {mockPortfolioData.educationPage?.quote && (
+            <div className="mt-6 flex flex-col gap-2">
+              <p className="text-sm sm:text-sm text-[var(--foreground)] font-light italic">
+                "{mockPortfolioData.educationPage.quote.text}"
+              </p>
+              <span className="text-sm sm:text-sm px-2 py-1 w-fit rounded" style={{ color: 'var(--nav-accent)', borderColor: 'var(--nav-accent)', borderWidth: '1px', borderStyle: 'solid' }}>
+                {mockPortfolioData.educationPage.quote.attribution}
+              </span>
+            </div>
+          )}
         </div>
       </main>
       <BottomNav activeItem="education" />

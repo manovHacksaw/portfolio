@@ -456,5 +456,33 @@ export const mockPortfolioData: PortfolioData = {
     { id: '3', platform: 'Portfolio', url: 'https://maybe-manov.vercel.app/', icon: 'globe' },
     { id: '4', platform: 'Email', url: 'mailto:manovmandal@gmail.com', icon: 'email' },
   ],
+  contactPage: {
+    header: {
+      title: "Let's Work Together",
+      subheading: "Suggestion/Idea/Thought?",
+      description: "Let's create the website you've always wanted. Send me a message to begin.",
+    },
+    nowPlaying: {
+      title: "Cupid",
+      artist: "FIFTY FIFTY",
+      audioSrc: "/audio/cupid.mp3",
+      spotifyUrl: "https://open.spotify.com/track/4RaqT3ttA6yZFYoOKR6F6d",
+    },
+    socialLinks: {
+      instagram: "#", // Add your Instagram URL here
+    },
+    footer: {
+      text: "", // Footer uses location from personalInfo instead
+    },
+  },
+  educationPage: {
+    quote: {
+      text: "Study hard and get out of this stupid place.",
+      attribution: "— I picked it from Pinterest",
+    },
+  },
+  achievementsPage: {
+    introduction: "I love taking part in hackathons — they're where I learn the most, meet amazing people, and turn crazy ideas into working projects. I've attended quite a few, mostly focused on Web3 and blockchain, and each one has helped me level up my skills while building real, usable stuff under tight deadlines.",
+  },
 };
 

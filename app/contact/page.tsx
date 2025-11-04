@@ -10,6 +10,7 @@ import Image from "next/image";
 export default function ContactPage() {
   const personalInfo = mockPortfolioData.personalInfo;
   const portfolioLinks = mockPortfolioData.portfolioLinks;
+  const contactPageData = mockPortfolioData.contactPage;
 
   // Get specific links
   const githubLink = portfolioLinks.find(link => link.icon === 'github');
@@ -24,9 +25,9 @@ export default function ContactPage() {
   const [hasError, setHasError] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Audio metadata
-  const audioSrc = "/audio/cupid.mp3"; // File should be in public/audio/cupid.mp3
-  const spotifyUrl = "https://open.spotify.com/track/4RaqT3ttA6yZFYoOKR6F6d";
+  // Audio metadata from data
+  const audioSrc = contactPageData?.nowPlaying.audioSrc || "/audio/cupid.mp3";
+  const spotifyUrl = contactPageData?.nowPlaying.spotifyUrl || "https://open.spotify.com/track/4RaqT3ttA6yZFYoOKR6F6d";
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -184,7 +185,7 @@ export default function ContactPage() {
       id: 'instagram',
       icon: Instagram,
       label: 'Instagram',
-      href: '#',
+      href: contactPageData?.socialLinks.instagram || '#',
     },
   ];
 
@@ -197,7 +198,7 @@ export default function ContactPage() {
           {/* Let's Work Together Section */}
           <div className="flex flex-col items-center gap-6">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--foreground)] text-center">
-              Let's Work Together
+              {contactPageData?.header.title || "Let's Work Together"}
             </h1>
             
             {/* Profile Pictures with Arrow */}
@@ -225,12 +226,12 @@ export default function ContactPage() {
             
             {/* Subheading */}
             <h2 className="text-lg sm:text-xl font-medium text-[var(--foreground)] text-center">
-              Suggestion/Idea/Thought?
+              {contactPageData?.header.subheading || "Suggestion/Idea/Thought?"}
             </h2>
             
             {/* Description */}
-            <p className="text-sm sm:text-base text-[var(--foreground-muted)] font-light text-center max-w-lg">
-              I'll help you get the website that you've been dreaming for. Just send me a message
+            <p className="text-sm sm:text-sm text-[var(--foreground-muted)] font-light text-center max-w-lg">
+              {contactPageData?.header.description || "Let's create the website you've always wanted. Send me a message to begin."}
             </p>
             
             {/* Flame Icon */}
@@ -299,10 +300,10 @@ export default function ContactPage() {
                       className="text-2xl sm:text-3xl font-semibold text-[var(--nav-accent)]"
                       style={{ fontFamily: 'var(--font-caveat)' }}
                     >
-                      Cupid
+                      {contactPageData?.nowPlaying.title || "Cupid"}
                     </span>
                     <span className="text-sm sm:text-base text-[var(--foreground-muted)] font-light">
-                      FIFTY FIFTY
+                      {contactPageData?.nowPlaying.artist || "FIFTY FIFTY"}
                     </span>
                   </div>
                   

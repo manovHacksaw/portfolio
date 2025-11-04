@@ -86,6 +86,37 @@ export interface PersonalInfo {
   locationFlag: string; // Flag emoji or identifier
 }
 
+export interface ContactPageData {
+  header: {
+    title: string;
+    subheading: string;
+    description: string;
+  };
+  nowPlaying: {
+    title: string;
+    artist: string;
+    audioSrc: string;
+    spotifyUrl: string;
+  };
+  socialLinks: {
+    instagram?: string; // Instagram URL (other links come from portfolioLinks)
+  };
+  footer?: {
+    text?: string; // Optional footer text
+  };
+}
+
+export interface EducationPageData {
+  quote?: {
+    text: string;
+    attribution: string;
+  };
+}
+
+export interface AchievementsPageData {
+  introduction?: string; // Optional introduction text
+}
+
 export interface PortfolioData {
   personalInfo: PersonalInfo;
   interests: Interest[];
@@ -95,5 +126,8 @@ export interface PortfolioData {
   education: Education[];
   projects: Project[];
   portfolioLinks: PortfolioLink[];
+  contactPage?: ContactPageData; // Optional contact page data
+  educationPage?: EducationPageData; // Optional education page data
+  achievementsPage?: AchievementsPageData; // Optional achievements page data
 }
 

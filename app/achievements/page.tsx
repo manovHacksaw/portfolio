@@ -113,10 +113,11 @@ export default function AchievementsPage() {
       <main className="w-full px-5 py-4 sm:py-6">
         <div className="flex flex-col gap-4 sm:gap-6">
           {/* Introduction */}
-          <p className="text-sm px-4 sm:text-base text-[var(--foreground-muted)] font-light leading-relaxed">
-     
-I love taking part in hackathons — they’re where I learn the most, meet amazing people, and turn crazy ideas into working projects. I’ve attended quite a few, mostly focused on Web3 and blockchain, and each one has helped me level up my skills while building real, usable stuff under tight deadlines.
-</p>
+          {mockPortfolioData.achievementsPage?.introduction && (
+            <p className="text-sm px-4 sm:text-base text-[var(--foreground-muted)] font-light leading-relaxed">
+              {mockPortfolioData.achievementsPage.introduction}
+            </p>
+          )}
 
 
 
@@ -165,7 +166,7 @@ I love taking part in hackathons — they’re where I learn the most, meet amaz
                     </div>
 
                     {/* Content - Add left margin to account for logo */}
-                    <div className="flex-1 flex flex-col gap-1.5 sm:gap-2 ml-16 sm:ml-20 md:ml-24">
+                    <div className="flex-1 flex flex-col gap-1.5 sm:gap-2 ml-16 sm:ml-20 md:ml-16 lg:ml-20 ">
                       {/* Date */}
                       <div className="text-xs sm:text-sm md:text-xs text-[var(--foreground-muted)] font-light">
                         {group.date}
