@@ -5,7 +5,11 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 
-export default function Header() {
+interface HeaderProps {
+  displayRoute?: string;
+}
+
+export default function Header({ displayRoute }: HeaderProps = {}) {
   const pathname = usePathname();
   const [currentTime, setCurrentTime] = useState("");
   const [isAnimating, setIsAnimating] = useState(false);
@@ -174,7 +178,7 @@ export default function Header() {
           </h1>
           {pathname !== "/" && (
             <span className="text-[var(--foreground-secondary)] text-[10px] sm:text-base font-light truncate max-w-[120px] sm:max-w-none">
-              {pathname.toUpperCase()}
+              {displayRoute ? displayRoute.toUpperCase() : pathname.toUpperCase()}
             </span>
           )}
         </div>

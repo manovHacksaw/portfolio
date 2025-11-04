@@ -1,114 +1,31 @@
-"use client";
-import { motion } from "framer-motion";
-import Header from "../../components/Header";
-import BottomNav from "../../components/BottomNav";
-import { mockPortfolioData } from "@/data/mockData";
-import { Experience } from "@/types/portfolio.types";
-import { Briefcase, ExternalLink } from "lucide-react";
-import Link from "next/link";
+import type { Metadata } from "next";
+import ExperienceClient from "./ExperienceClient";
+
+export const metadata: Metadata = {
+  title: "Experience",
+  description: "My professional work experience as a web developer and software engineer. Building scalable applications with Next.js, React, Express, MongoDB, and modern web technologies.",
+  keywords: ["Work Experience", "Professional Experience", "Web Developer", "Software Engineer", "Full Stack Developer", "Next.js", "React", "Express", "MongoDB"],
+  openGraph: {
+    title: "Experience | Manobendra Mandal",
+    description: "My professional work experience as a web developer and software engineer. Building scalable applications with modern web technologies.",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"}/experience`,
+    images: [
+      {
+        url: "/avatar.png",
+        width: 1200,
+        height: 630,
+        alt: "Manobendra Mandal - Experience",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Experience | Manobendra Mandal",
+    description: "My professional work experience as a web developer and software engineer.",
+    images: ["/avatar.png"],
+  },
+};
 
 export default function ExperiencePage() {
-  const workExperience = mockPortfolioData.experience; // Get all work experiences
-
-  const renderExperienceCard = (experience: Experience, index: number) => {
-    if (!experience) return null;
-    
-    // Combine responsibilities into a single paragraph
-    const description = experience.responsibilities.join(' ');
-    const dateRange = experience.endDate && experience.endDate !== experience.startDate
-      ? `${experience.startDate} - ${experience.endDate}`
-      : experience.endDate === null
-      ? `${experience.startDate} - Present`
-      : experience.startDate;
-    
-    return (
-      <motion.div
-        key={experience.id}
-        className="flex flex-col gap-4 p-4 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{
-          duration: 0.7,
-          delay: index * 0.15,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
-        whileHover={{
-          y: -4,
-          transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
-        }}
-      >
-        {/* Company and Role Header */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
-              <Briefcase size={16} className="text-[var(--foreground)] shrink-0" />
-              <h2 className="text-base sm:text-lg font-bold text-[var(--foreground)] underline">
-                {experience.company}
-              </h2>
-            </div>
-            <p className="text-sm sm:text-base text-[var(--foreground)] font-light">
-              {experience.role}
-            </p>
-          </div>
-          <div className="text-xs sm:text-sm text-[var(--foreground)] font-light shrink-0 self-start sm:self-start">
-            {dateRange}
-          </div>
-        </div>
-
-        {/* Description as justified paragraph */}
-        <p className="text-xs sm:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
-          {description}
-        </p>
-
-        {/* Tech Stack */}
-        {experience.techStack && experience.techStack.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
-            {experience.techStack.map((tech, idx) => (
-              <span
-                key={idx}
-                className="text-xs sm:text-sm text-[var(--foreground)] border border-[var(--foreground)] px-2 py-1 rounded"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Website Link */}
-        {experience.websiteUrl && experience.websiteUrl !== '#' && (
-          <Link
-            href={experience.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs sm:text-sm text-[var(--foreground)] font-light hover:opacity-80 transition-opacity w-fit"
-          >
-            <ExternalLink size={14} className="sm:w-3 sm:h-3" />
-            <span>Company Website</span>
-          </Link>
-        )}
-      </motion.div>
-    );
-  };
-
-  return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
-      <Header />
-      <main className="w-full px-5 py-8">
-        <div className="flex flex-col gap-8">
-          {/* Work Experience */}
-          <div className="flex flex-col gap-6">
-            {workExperience.map((experience, index) => renderExperienceCard(experience, index))}
-          </div>
-
-          {/* Hackathons moved to /hackathons */}
-
-          {/* Quote Section */}
-         
-        </div>
-      </main>
-      <BottomNav activeItem="work" />
-    </div>
-  );
+  return <ExperienceClient />;
 }
-

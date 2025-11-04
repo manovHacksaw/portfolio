@@ -20,6 +20,8 @@ interface SpotifyTokenResponse {
   access_token: string;
   token_type: string;
   expires_in: number;
+  refresh_token?: string; // Optional - may be included in refresh response
+  scope?: string; // Scopes granted with the token
 }
 
 interface SpotifyTrack {
@@ -42,6 +44,13 @@ interface SpotifyCurrentlyPlaying {
 }
 
 async function getAccessToken(): Promise<string | null> {
+  // Temporary: Allow direct access token override for testing
+  // Note: Access tokens expire in 1 hour, refresh tokens don't expire
+  const directAccessToken = process.env.SPOTIFY_ACCESS_TOKEN;
+  if (directAccessToken) {
+    return directAccessToken;
+  }
+
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;

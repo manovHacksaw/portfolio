@@ -23,13 +23,53 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Manobendra Mandal | Blockchain & Full Stack Developer",
+  title: {
+    default: "Manobendra Mandal | Blockchain & Full Stack Developer",
+    template: "%s | Manobendra Mandal",
+  },
   description: "Web3 and full-stack developer. Won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech.",
+  keywords: ["Blockchain Developer", "Full Stack Developer", "Web3", "React", "Next.js", "Solidity", "Portfolio"],
+  authors: [{ name: "Manobendra Mandal" }],
+  creator: "Manobendra Mandal",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com",
+    siteName: "Manobendra Mandal Portfolio",
+    title: "Manobendra Mandal | Blockchain & Full Stack Developer",
+    description: "Web3 and full-stack developer. Won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech.",
+    images: [
+      {
+        url: "/avatar.png",
+        width: 1200,
+        height: 630,
+        alt: "Manobendra Mandal",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Manobendra Mandal | Blockchain & Full Stack Developer",
+    description: "Web3 and full-stack developer. Won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech.",
+    images: ["/avatar.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/avatar.png',
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"),
 };
 
 export default function RootLayout({

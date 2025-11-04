@@ -32,8 +32,6 @@ export default function NavbarHint() {
         
         if (timeSinceCooldown < thirtyMinutes) {
           // Still in cooldown period
-          const remainingMinutes = Math.ceil((thirtyMinutes - timeSinceCooldown) / (60 * 1000));
-          console.log(`NavbarHint: In cooldown period, ${remainingMinutes} minutes remaining`);
           hasBeenDismissed.current = true;
           return;
         } else {
@@ -61,21 +59,17 @@ export default function NavbarHint() {
         // Find the nav element
         const nav = document.querySelector('nav');
         if (!nav) {
-          console.log('NavbarHint: Nav not found');
           return;
         }
 
         // Find the projects link by href
         const projectsLink = nav.querySelector('a[href="/projects"]') as HTMLElement;
         if (!projectsLink) {
-          console.log('NavbarHint: Projects link not found');
           // Try finding by index as fallback
           const allLinks = nav.querySelectorAll('a[href]');
-          console.log('NavbarHint: Found', allLinks.length, 'links');
           if (allLinks.length >= 2) {
             const fallbackLink = allLinks[1] as HTMLElement;
             const rect = fallbackLink.getBoundingClientRect();
-            console.log('NavbarHint: Using fallback link, rect:', rect);
             const iconCenterX = rect.left + rect.width / 2;
             const pointerSize = 20;
             setPosition({
@@ -88,8 +82,6 @@ export default function NavbarHint() {
         }
 
         const rect = projectsLink.getBoundingClientRect();
-        console.log('NavbarHint: Projects link found, rect:', rect);
-        console.log('NavbarHint: window.innerHeight:', window.innerHeight);
         
         // Position very close to the bottom nav, just above the icon
         // Use rect.bottom (bottom edge of icon) to position pointer just above it
@@ -101,18 +93,9 @@ export default function NavbarHint() {
           left: iconCenterX - pointerSize / 2 + 4 , // Shift right by 8px
           bottom: bottomPosition,
         });
-        console.log('NavbarHint: Position set to', {
-          left: iconCenterX - pointerSize / 2,
-          bottom: bottomPosition,
-          iconCenterX,
-          rectBottom: rect.bottom,
-          innerHeight: window.innerHeight,
-          calculated: `innerHeight(${window.innerHeight}) - rect.bottom(${rect.bottom}) - 20 = ${bottomPosition}`,
-        });
         
         // Ensure position is valid (not negative)
         if (bottomPosition < 0 || iconCenterX - pointerSize / 2 < 0) {
-          console.warn('NavbarHint: Invalid position calculated, using fallback');
           setPosition({
             left: Math.max(0, iconCenterX - pointerSize / 2),
             bottom: Math.max(20, bottomPosition),
@@ -181,13 +164,6 @@ export default function NavbarHint() {
 
   if (pathname !== "/") return null;
 
-  // Debug: log state
-  useEffect(() => {
-    if (isVisible) {
-      console.log('NavbarHint: isVisible=true, position:', position);
-    }
-  }, [isVisible, position]);
-
   return (
     <AnimatePresence>
       {isVisible && (
@@ -228,10 +204,10 @@ export default function NavbarHint() {
                 transform: "rotate(180deg)",
               }}
               onError={(e) => {
-                console.error('NavbarHint: Image failed to load', e);
-              }}
-              onLoad={() => {
-                console.log('NavbarHint: Image loaded successfully');
+                // Silently handle image load errors
+                if (process.env.NODE_ENV === 'development') {
+                  console.error('NavbarHint: Image failed to load', e);
+                }
               }}
             />
           </motion.div>
