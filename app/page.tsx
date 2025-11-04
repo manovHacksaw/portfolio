@@ -5,6 +5,7 @@ import HeroSection from "../components/sections/HeroSection";
 import AboutSection from "../components/sections/AboutSection";
 import SkillsSection from "../components/sections/SkillsSection";
 import BottomNav from "../components/BottomNav";
+import NavbarHint from "../components/NavbarHint";
 import { mockPortfolioData } from "@/data/mockData";
 import GithubContributions from "@/components/GithubContributions";
 
@@ -58,6 +59,7 @@ export default function Home() {
         </motion.div>
       </div>
       <BottomNav activeItem="home" />
+      <NavbarHint />
     </motion.div>
   );
 }

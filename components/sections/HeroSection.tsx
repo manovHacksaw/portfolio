@@ -94,7 +94,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
         {/* Contact Icons */}
         <motion.div
-          className="flex items-center gap-2 mt-3"
+          className="flex items-center  gap-2 mt-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
@@ -194,10 +194,10 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             whileTap={{ scale: 0.95 }}
           >
             <button
-              className="text-[var(--foreground)] hover:opacity-70 transition-opacity"
+              className="flex items-center justify-center w-7 h-7 rounded-lg  text-[var(--foreground)] hover:opacity-80 transition-opacity"
               aria-label="Information"
             >
-              <Info size={18} />
+              <Info size={16} />
             </button>
           </motion.div>
         </motion.div>
