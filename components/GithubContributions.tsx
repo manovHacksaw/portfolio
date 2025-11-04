@@ -90,9 +90,111 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
     const handleMediaChange = () => updateTheme()
     mediaQuery.addEventListener('change', handleMediaChange)
     
+    // Hide "Less" and "More" labels on mobile - aggressive continuous approach
+    const hideLegendLabels = () => {
+      if (typeof window !== 'undefined' && window.innerWidth <= 639) {
+        // Try multiple selectors
+        const svg = document.querySelector('.react-github-calendar svg')
+        if (svg) {
+          // Get all text elements
+          const textElements = svg.querySelectorAll('text')
+          textElements.forEach((text) => {
+            const textContent = text.textContent?.trim()
+            if (textContent === 'Less' || textContent === 'More') {
+              const element = text as SVGTextElement
+              element.style.display = 'none'
+              element.style.visibility = 'hidden'
+              element.style.opacity = '0'
+              element.style.pointerEvents = 'none'
+              element.setAttribute('display', 'none')
+              element.setAttribute('visibility', 'hidden')
+              element.remove() // Actually remove from DOM
+            }
+          })
+          
+          // Also try finding by text-anchor attribute and remove them
+          const startTexts = svg.querySelectorAll('text[text-anchor="start"]')
+          const endTexts = svg.querySelectorAll('text[text-anchor="end"]')
+          
+          startTexts.forEach((text) => {
+            const textContent = text.textContent?.trim()
+            if (textContent === 'Less') {
+              text.remove()
+            }
+          })
+          
+          endTexts.forEach((text) => {
+            const textContent = text.textContent?.trim()
+            if (textContent === 'More') {
+              text.remove()
+            }
+          })
+          
+          // Also check the last group (legend area) and remove all text there
+          const groups = svg.querySelectorAll('g')
+          if (groups.length > 0) {
+            const lastGroup = groups[groups.length - 1]
+            const legendTexts = lastGroup.querySelectorAll('text')
+            legendTexts.forEach((text) => {
+              const textContent = text.textContent?.trim()
+              if (textContent === 'Less' || textContent === 'More') {
+                text.remove()
+              }
+            })
+          }
+        }
+      }
+    }
+    
+    // Run continuously with intervals to catch calendar rendering
+    const intervalId = setInterval(hideLegendLabels, 100)
+    
+    // Also run multiple times with different delays
+    const timers = [
+      setTimeout(hideLegendLabels, 100),
+      setTimeout(hideLegendLabels, 300),
+      setTimeout(hideLegendLabels, 500),
+      setTimeout(hideLegendLabels, 1000),
+      setTimeout(hideLegendLabels, 2000),
+    ]
+    
+    // Also run on resize
+    window.addEventListener('resize', hideLegendLabels)
+    
+    // Use MutationObserver to watch for calendar updates
+    const calendarObserver = new MutationObserver(() => {
+      hideLegendLabels()
+    })
+    const calendarContainer = document.querySelector('.react-github-calendar')
+    if (calendarContainer) {
+      calendarObserver.observe(calendarContainer, {
+        childList: true,
+        subtree: true,
+        attributes: false,
+        characterData: false,
+      })
+    }
+    
+    // Also observe the entire document for calendar appearance
+    const documentObserver = new MutationObserver(() => {
+      const calendar = document.querySelector('.react-github-calendar')
+      if (calendar) {
+        hideLegendLabels()
+      }
+    })
+    documentObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    })
+    
     return () => {
       observer.disconnect()
       mediaQuery.removeEventListener('change', handleMediaChange)
+      window.removeEventListener('resize', hideLegendLabels)
+      calendarObserver.disconnect()
+      documentObserver.disconnect()
+      clearInterval(intervalId)
+      timers.forEach(timer => clearTimeout(timer))
     }
   }, [])
   
@@ -100,7 +202,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
   
   return (
     <div className="w-full px-5 py-8">
-      <h3 className="text-lg sm:text-xl font-bold text-[var(--foreground)] mb-4">
+      <h3 className="text-base sm:text-lg md:text-xl font-bold text-[var(--foreground)] mb-4">
         GitHub Contributions
       </h3>
       <div className="overflow-x-auto">
@@ -127,7 +229,12 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
         }
         :global(.react-github-calendar text) {
           fill: var(--foreground-muted);
-          font-size: 10px;
+          font-size: 7px;
+        }
+        @media (min-width: 640px) {
+          :global(.react-github-calendar text) {
+            font-size: 10px;
+          }
         }
         :global(.react-github-calendar rect) {
           rx: 2;
@@ -136,6 +243,23 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
         :global(.react-github-calendar rect[data-level="0"]) {
           stroke: var(--foreground-border);
           stroke-width: 1;
+        }
+        /* Hide "Less" and "More" labels on mobile - aggressive approach */
+        @media (max-width: 639px) {
+          /* Hide all text elements that might be Less/More */
+          :global(.react-github-calendar svg text[text-anchor="start"]),
+          :global(.react-github-calendar svg text[text-anchor="end"]) {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+          }
+          /* Hide by finding all text and checking if it's at the legend position */
+          :global(.react-github-calendar svg g:last-child text) {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+          }
         }
       `}</style>
     </div>

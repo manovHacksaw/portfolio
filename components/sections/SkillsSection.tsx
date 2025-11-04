@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { Skill } from '@/types/portfolio.types';
 import * as Si from "react-icons/si";
 
@@ -114,11 +115,42 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-          {displaySkills.map((skill) => (
-            <div
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.05,
+                delayChildren: 0.2,
+              },
+            },
+          }}
+        >
+          {displaySkills.map((skill, index) => (
+            <motion.div
               key={skill.id}
               className="flex items-center gap-1.5 px-2 py-1.5 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
+              variants={{
+                hidden: { opacity: 0, scale: 0.8, y: 10 },
+                visible: {
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.5,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+              }}
             >
               {/* Icon */}
               {(() => {
@@ -131,9 +163,9 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
               <span className="text-[10px] sm:text-xs text-[var(--foreground)] font-light">
                 {skill.name}
               </span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
@@ -114,23 +115,57 @@ export default function AchievementsPage() {
         <div className="flex flex-col gap-4 sm:gap-6">
           {/* Introduction */}
           {mockPortfolioData.achievementsPage?.introduction && (
-            <p className="text-sm px-4 sm:text-base text-[var(--foreground-muted)] font-light leading-relaxed">
+            <motion.p
+              className="text-sm px-4 sm:text-base text-[var(--foreground-muted)] font-light leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
               {mockPortfolioData.achievementsPage.introduction}
-            </p>
+            </motion.p>
           )}
 
 
 
           {/* Timeline */}
-          <div className="relative">
-            {/* Vertical Timeline Line - thinner, starts after first logo, ends before last logo */}
+          <motion.div
+            className="relative"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  delayChildren: 0.5, // Wait 500ms after intro
+                  staggerChildren: 0.2, // Stagger each entry
+                },
+              },
+            }}
+          >
+            {/* Vertical Timeline Line - animate with first entry */}
             {groupedHackathons.length > 1 && (
-              <div 
+              <motion.div 
                 className="absolute left-5 sm:left-6 bg-[var(--foreground)] opacity-40"
                 style={{
                   width: '1px',
                   top: 'calc(24px + 0.75rem)', // Start after first logo center (24px = half of 48px logo on mobile) + py-3 (0.75rem)
                   bottom: 'calc(24px + 0.75rem)', // End before last logo center (updated for larger logos)
+                }}
+                variants={{
+                  hidden: { opacity: 0, scaleY: 0, transformOrigin: 'top' },
+                  visible: {
+                    opacity: 0.4,
+                    scaleY: 1,
+                    transition: {
+                      duration: 0.7,
+                      delay: 0.5, // Start with first entry
+                      ease: [0.25, 0.1, 0.25, 1],
+                    },
+                  },
                 }}
               />
             )}
@@ -138,7 +173,21 @@ export default function AchievementsPage() {
             {/* Timeline Entries */}
             <div className="flex flex-col">
               {groupedHackathons.map((group, groupIndex) => (
-                <div key={`${group.name}_${group.date}`} className="relative">
+                <motion.div
+                  key={`${group.name}_${group.date}`}
+                  className="relative"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.7,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      },
+                    },
+                  }}
+                >
                   {/* Dotted Horizontal Separator (except for first item) */}
                   {groupIndex > 0 && (
                     <div className="absolute left-5 sm:left-6 top-0 right-0 border-t border-dashed border-[var(--foreground)] opacity-40" />
@@ -146,7 +195,28 @@ export default function AchievementsPage() {
 
                   <div className="relative flex items-start gap-3 sm:gap-4 py-3 sm:py-6">
                     {/* Hackathon Logo - Centered with vertical line */}
-                    <div className="absolute left-5 sm:left-6 shrink-0" style={{ transform: 'translateX(-50%)' }}>
+                    <motion.div 
+                      className="absolute left-5 sm:left-6 shrink-0"
+                      style={{
+                        transformOrigin: 'center center',
+                      }}
+                      variants={{
+                        hidden: { 
+                          opacity: 0, 
+                          scale: 0.3,
+                          x: '-50%',
+                        },
+                        visible: {
+                          opacity: 1,
+                          scale: 1,
+                          x: '-50%',
+                          transition: {
+                            duration: 0.6,
+                            ease: [0.25, 0.1, 0.25, 1],
+                          },
+                        },
+                      }}
+                    >
                       <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
                         {group.logoUrl ? (
                           <Image
@@ -163,10 +233,24 @@ export default function AchievementsPage() {
                           </div>
                         )}
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* Content - Add left margin to account for logo */}
-                    <div className="flex-1 flex flex-col gap-1.5 sm:gap-2 ml-16 sm:ml-20 md:ml-16 lg:ml-20 ">
+                    <motion.div
+                      className="flex-1 flex flex-col gap-1.5 sm:gap-2 ml-16 sm:ml-20 md:ml-16 lg:ml-20"
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: {
+                          opacity: 1,
+                          x: 0,
+                          transition: {
+                            duration: 0.7,
+                            delay: 0.2, // Slight delay after logo
+                            ease: [0.25, 0.1, 0.25, 1],
+                          },
+                        },
+                      }}
+                    >
                       {/* Date */}
                       <div className="text-xs sm:text-sm md:text-xs text-[var(--foreground-muted)] font-light">
                         {group.date}
@@ -256,12 +340,12 @@ export default function AchievementsPage() {
                           )}
                         </div>
                       )}
-                    </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </main>
       <BottomNav activeItem="achievements" />

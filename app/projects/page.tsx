@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
@@ -82,14 +83,42 @@ export default function ProjectsPage() {
       <main className="w-full px-5 py-6">
         <div className="flex flex-col gap-6">
           {/* Projects List - Vertical Layout */}
-          <div className="flex flex-col gap-4">
-            {mockPortfolioData.projects.map((project) => {
+          <motion.div
+            className="flex flex-col gap-4"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15,
+                },
+              },
+            }}
+          >
+            {mockPortfolioData.projects.map((project, index) => {
               const year = project.endDate ? getYear(project.endDate) : (project.startDate ? getYear(project.startDate) : '');
               
               return (
-                <div
+                <motion.div
                   key={project.id}
                   className="flex flex-col md:flex-row md:items-start gap-6 md:gap-6 p-4 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.7,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      },
+                    },
+                  }}
+                  whileHover={{
+                    y: -4,
+                    transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+                  }}
                 >
                   {/* Screenshot - First on Mobile, Right on Desktop */}
                   {project.imageUrl && (
@@ -170,10 +199,10 @@ export default function ProjectsPage() {
                       )}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </main>
       <BottomNav activeItem="folder" />

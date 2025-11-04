@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
@@ -8,7 +10,7 @@ import Link from "next/link";
 export default function ExperiencePage() {
   const workExperience = mockPortfolioData.experience; // Get all work experiences
 
-  const renderExperienceCard = (experience: Experience) => {
+  const renderExperienceCard = (experience: Experience, index: number) => {
     if (!experience) return null;
     
     // Combine responsibilities into a single paragraph
@@ -20,9 +22,21 @@ export default function ExperiencePage() {
       : experience.startDate;
     
     return (
-      <div
+      <motion.div
         key={experience.id}
         className="flex flex-col gap-4 p-4 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{
+          duration: 0.7,
+          delay: index * 0.15,
+          ease: [0.25, 0.1, 0.25, 1],
+        }}
+        whileHover={{
+          y: -4,
+          transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+        }}
       >
         {/* Company and Role Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
@@ -73,7 +87,7 @@ export default function ExperiencePage() {
             <span>Company Website</span>
           </Link>
         )}
-      </div>
+      </motion.div>
     );
   };
 
@@ -84,7 +98,7 @@ export default function ExperiencePage() {
         <div className="flex flex-col gap-8">
           {/* Work Experience */}
           <div className="flex flex-col gap-6">
-            {workExperience.map((experience) => renderExperienceCard(experience))}
+            {workExperience.map((experience, index) => renderExperienceCard(experience, index))}
           </div>
 
           {/* Hackathons moved to /hackathons */}

@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
@@ -11,11 +13,39 @@ export default function EducationPage() {
       <main className="w-full px-5 py-6">
         <div className="flex flex-col gap-6">
           {/* Education List */}
-          <div className="flex flex-col gap-4">
+          <motion.div
+            className="flex flex-col gap-4"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.2,
+                },
+              },
+            }}
+          >
             {mockPortfolioData.education.map((education, index) => (
-              <div
+              <motion.div
                 key={education.id}
                 className="flex items-start gap-3 p-3 rounded-lg bg-[var(--background)] hover:opacity-80 transition-opacity"
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    transition: {
+                      duration: 0.7,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    },
+                  },
+                }}
+                whileHover={{
+                  x: 4,
+                  transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+                }}
               >
                 {/* Institution Logo */}
                 {education.imageUrl && (
@@ -54,20 +84,39 @@ export default function EducationPage() {
                     </div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Quote Section */}
           {mockPortfolioData.educationPage?.quote && (
-            <div className="mt-6 flex flex-col gap-2">
-              <p className="text-sm sm:text-sm text-[var(--foreground)] font-light italic">
+            <motion.div
+              className="mt-6 flex flex-col gap-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <motion.p
+                className="text-sm sm:text-sm text-[var(--foreground)] font-light italic"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              >
                 "{mockPortfolioData.educationPage.quote.text}"
-              </p>
-              <span className="text-sm sm:text-sm px-2 py-1 w-fit rounded" style={{ color: 'var(--nav-accent)', borderColor: 'var(--nav-accent)', borderWidth: '1px', borderStyle: 'solid' }}>
+              </motion.p>
+              <motion.span
+                className="text-sm sm:text-sm px-2 py-1 w-fit rounded"
+                style={{ color: 'var(--nav-accent)', borderColor: 'var(--nav-accent)', borderWidth: '1px', borderStyle: 'solid' }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              >
                 {mockPortfolioData.educationPage.quote.attribution}
-              </span>
-            </div>
+              </motion.span>
+            </motion.div>
           )}
         </div>
       </main>

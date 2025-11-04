@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Header from "../../components/Header";
 import BottomNav from "../../components/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
@@ -54,18 +55,76 @@ export default function ContactPage() {
     <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
       <Header />
       <main className="w-full px-5 py-8">
-        <div className="max-w-4xl mx-auto flex flex-col gap-12">
+        <motion.div
+          className="max-w-4xl mx-auto flex flex-col gap-12"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1,
+              },
+            },
+          }}
+        >
           
           {/* Let's Work Together Section */}
-          <div className="flex flex-col items-center gap-6">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--foreground)] text-center">
+          <motion.div
+            className="flex flex-col items-center gap-6"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.7,
+                  ease: [0.25, 0.1, 0.25, 1],
+                },
+              },
+            }}
+          >
+            <motion.h1
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[var(--foreground)] text-center"
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+            >
               {contactPageData?.header.title || "Let's Work Together"}
-            </h1>
+            </motion.h1>
             
             {/* Profile Pictures with Arrow */}
-            <div className="flex items-center gap-4">
+            <motion.div
+              className="flex items-center gap-4"
+              variants={{
+                hidden: { opacity: 0, scale: 0.9 },
+                visible: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: {
+                    duration: 0.6,
+                    delay: 0.2,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+            >
               {/* Left Profile Picture */}
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-lg overflow-hidden border border-[var(--foreground-border)]">
+              <motion.div
+                className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-lg overflow-hidden border border-[var(--foreground-border)]"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Image
                   src={personalInfo.avatarUrl}
                   alt={personalInfo.name}
@@ -74,82 +133,244 @@ export default function ContactPage() {
                   priority
                   unoptimized
                 />
-              </div>
+              </motion.div>
               
               {/* Double Arrow */}
-              <ArrowLeftRight size={24} className="text-[var(--foreground)] shrink-0" />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <ArrowLeftRight size={24} className="text-[var(--foreground)] shrink-0" />
+              </motion.div>
               
               {/* Right Placeholder */}
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-lg bg-[var(--background)] border border-[var(--foreground-border)] flex items-center justify-center">
+              <motion.div
+                className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-lg bg-[var(--background)] border border-[var(--foreground-border)] flex items-center justify-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
                 <div className="w-16 h-16 border-2 border-[var(--foreground)] rounded-full opacity-50" />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
             {/* Subheading */}
-            <h2 className="text-lg sm:text-xl font-medium text-[var(--foreground)] text-center">
+            <motion.h2
+              className="text-lg sm:text-xl font-medium text-[var(--foreground)] text-center"
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+            >
               {contactPageData?.header.subheading || "Suggestion/Idea/Thought?"}
-            </h2>
+            </motion.h2>
             
             {/* Description */}
-            <p className="text-sm sm:text-sm text-[var(--foreground-muted)] font-light text-center max-w-lg">
+            <motion.p
+              className="text-sm sm:text-sm text-[var(--foreground-muted)] font-light text-center max-w-lg"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    duration: 0.7,
+                    delay: 0.4,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+            >
               {contactPageData?.header.description || "Let's create the website you've always wanted. Send me a message to begin."}
-            </p>
+            </motion.p>
             
             {/* Flame Icon */}
-            <Link href={`mailto:${personalInfo.email}`} className="mt-2 hover:opacity-80 transition-opacity">
-              <Flame size={32} className="text-[var(--nav-accent)]" />
-            </Link>
-          </div>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, scale: 0.5 },
+                visible: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: {
+                    duration: 0.5,
+                    delay: 0.5,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Link href={`mailto:${personalInfo.email}`} className="mt-2 hover:opacity-80 transition-opacity">
+                <Flame size={32} className="text-[var(--nav-accent)]" />
+              </Link>
+            </motion.div>
+          </motion.div>
 
           {/* Social Links Section */}
-          <div className="flex flex-col">
+          <motion.div
+            className="flex flex-col"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
             {socialLinks.map((link, index) => {
               const IconComponent = link.icon;
               return (
-                <div key={link.id}>
-                  <Link
-                    href={link.href || '#'}
-                    target={link.href?.startsWith('http') || link.href?.startsWith('mailto') ? '_blank' : undefined}
-                    rel={link.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="flex items-center justify-between py-4 hover:opacity-80 transition-opacity"
+                <motion.div
+                  key={link.id}
+                  variants={{
+                    hidden: { opacity: 0, x: -20 },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        duration: 0.6,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      },
+                    },
+                  }}
+                >
+                  <motion.div
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <div className="flex items-center gap-3">
-                      <IconComponent size={20} className="text-[var(--foreground)]" />
-                      <span className="text-base sm:text-lg text-[var(--foreground)] font-medium">
-                        {link.label}
-                      </span>
-                    </div>
-                    <ArrowRight size={18} className="text-[var(--foreground)] shrink-0" />
-                  </Link>
+                    <Link
+                      href={link.href || '#'}
+                      target={link.href?.startsWith('http') || link.href?.startsWith('mailto') ? '_blank' : undefined}
+                      rel={link.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="flex items-center justify-between py-4 hover:opacity-80 transition-opacity"
+                    >
+                      <div className="flex items-center gap-3">
+                        <IconComponent size={20} className="text-[var(--foreground)]" />
+                        <span className="text-base sm:text-lg text-[var(--foreground)] font-medium">
+                          {link.label}
+                        </span>
+                      </div>
+                      <ArrowRight size={18} className="text-[var(--foreground)] shrink-0" />
+                    </Link>
+                  </motion.div>
                   {index < socialLinks.length - 1 && (
                     <div className="border-t border-[var(--foreground-border)]" />
                   )}
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Now Playing Section */}
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2" style={{ fontFamily: 'var(--font-caveat)' }}>
+          <motion.div
+            className="flex flex-col gap-4"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.7,
+                  ease: [0.25, 0.1, 0.25, 1],
+                },
+              },
+            }}
+          >
+            <motion.div
+              className="flex items-center gap-2"
+              style={{ fontFamily: 'var(--font-caveat)' }}
+              variants={{
+                hidden: { opacity: 0, x: -10 },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: [0.25, 0.1, 0.25, 1],
+                  },
+                },
+              }}
+            >
               <h2 className="text-xl sm:text-2xl font-medium text-[var(--foreground)]">
                 Now Playing
               </h2>
-              <span className="text-xl sm:text-2xl text-[var(--foreground)]">♪</span>
-            </div>
+              <motion.span
+                className="text-xl sm:text-2xl text-[var(--foreground)]"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                }}
+              >
+                ♪
+              </motion.span>
+            </motion.div>
             
             <div className="border-t border-[var(--foreground-border)] pt-4">
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-4">
+              <motion.div
+                className="flex flex-col gap-4"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                    },
+                  },
+                }}
+              >
+                <motion.div
+                  className="flex items-center gap-4"
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.6,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      },
+                    },
+                  }}
+                >
                   {/* Spotify Icon - Orange rounded square */}
-                  <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-[var(--nav-accent)] shrink-0">
+                  <motion.div
+                    className="flex items-center justify-center w-14 h-14 rounded-lg bg-[var(--nav-accent)] shrink-0"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <svg className="w-9 h-9 text-white" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.179-.84-.66 0-.359.24-.66.54-.779 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.24 1.021zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.78-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
                     </svg>
-                  </div>
+                  </motion.div>
                   
                   {/* Song Info */}
-                  <div className="flex-1 flex flex-col gap-0.5">
+                  <motion.div
+                    className="flex-1 flex flex-col gap-0.5"
+                    variants={{
+                      hidden: { opacity: 0, x: -10 },
+                      visible: {
+                        opacity: 1,
+                        x: 0,
+                        transition: {
+                          duration: 0.6,
+                          delay: 0.1,
+                          ease: [0.25, 0.1, 0.25, 1],
+                        },
+                      },
+                    }}
+                  >
                     <span 
                       className="text-2xl sm:text-3xl font-semibold text-[var(--nav-accent)]"
                       style={{ fontFamily: 'var(--font-caveat)' }}
@@ -159,7 +380,7 @@ export default function ContactPage() {
                     <span className="text-sm sm:text-base text-[var(--foreground-muted)] font-light">
                       {contactPageData?.nowPlaying.artist || "FIFTY FIFTY"}
                     </span>
-                  </div>
+                  </motion.div>
                   
                   {/* Play/Pause Button */}
                   {hasError ? (
@@ -167,11 +388,25 @@ export default function ContactPage() {
                       Audio unavailable
                     </div>
                   ) : (
-                    <button
+                    <motion.button
                       onClick={togglePlay}
                       disabled={isLoading}
                       className="shrink-0 hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center w-10 h-10 rounded-full bg-[var(--foreground-border)] hover:bg-[var(--foreground-border)] active:scale-95 transition-all"
                       aria-label={isPlaying ? "Pause" : "Play"}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.8 },
+                        visible: {
+                          opacity: 1,
+                          scale: 1,
+                          transition: {
+                            duration: 0.5,
+                            delay: 0.2,
+                            ease: [0.25, 0.1, 0.25, 1],
+                          },
+                        },
+                      }}
                     >
                       {isLoading ? (
                         <div className="w-4 h-4 border-2 border-[var(--foreground)] border-t-transparent rounded-full animate-spin" />
@@ -180,12 +415,26 @@ export default function ContactPage() {
                       ) : (
                         <Play size={16} className="text-[var(--foreground)] ml-0.5" fill="currentColor" />
                       )}
-                    </button>
+                    </motion.button>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Progress Bar */}
-                <div className="flex items-center gap-2">
+                <motion.div
+                  className="flex items-center gap-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 0.6,
+                        delay: 0.2,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      },
+                    },
+                  }}
+                >
                   <span className="text-xs text-[var(--foreground-muted)] min-w-[2.5rem] text-right font-mono">
                     {formatTime(currentTime)}
                   </span>
@@ -204,33 +453,65 @@ export default function ContactPage() {
                   <span className="text-xs text-[var(--foreground-muted)] min-w-[2.5rem] font-mono">
                     {formatTime(duration)}
                   </span>
-                </div>
+                </motion.div>
 
                 {/* Spotify Link */}
-                <div className="flex justify-end">
-                  <a
+                <motion.div
+                  className="flex justify-end"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        delay: 0.3,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      },
+                    },
+                  }}
+                >
+                  <motion.a
                     href={spotifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors underline"
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
                   >
                     Open in Spotify →
-                  </a>
-                </div>
-              </div>
+                  </motion.a>
+                </motion.div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Footer Stats */}
-          <div className="border-t border-[var(--foreground-border)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--foreground-muted)] font-light">
+          <motion.div
+            className="border-t border-[var(--foreground-border)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--foreground-muted)] font-light"
+            variants={{
+              hidden: { opacity: 0, y: 10 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.6,
+                  ease: [0.25, 0.1, 0.25, 1],
+                },
+              },
+            }}
+          >
            <div>  </div>
-            <div className="flex items-center gap-2">
+            <motion.div
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
               <MapPin size={16} />
               <span>{personalInfo.location}</span>
               <span>{personalInfo.locationFlag}</span>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </main>
       <BottomNav activeItem="contact" />
     </div>
