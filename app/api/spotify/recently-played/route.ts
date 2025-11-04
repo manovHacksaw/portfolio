@@ -104,6 +104,13 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
 }
 
 export async function GET(request: Request) {
+  // Add CORS headers (though Next.js handles this automatically for same-origin)
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   try {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '20', 10);
@@ -114,7 +121,7 @@ export async function GET(request: Request) {
     if (limit < 1 || limit > 50) {
       return NextResponse.json(
         { error: 'Limit must be between 1 and 50' },
-        { status: 400 }
+        { status: 400, headers }
       );
     }
 
@@ -124,9 +131,10 @@ export async function GET(request: Request) {
       // The frontend will use fallback data
       // Log server-side only (won't appear in browser console)
       console.error('Spotify recently-played API: Missing credentials or token refresh failed:', tokenError || 'Unknown error');
-      return NextResponse.json({
-        tracks: [],
-      });
+      return NextResponse.json(
+        { tracks: [] },
+        { headers }
+      );
     }
 
     // Build query parameters
@@ -192,20 +200,33 @@ export async function GET(request: Request) {
       playedAt: item.played_at,
     }));
 
-    return NextResponse.json({
-      tracks,
-      next: data.next,
-      cursors: data.cursors,
-    });
+    return NextResponse.json(
+      {
+        tracks,
+        next: data.next,
+        cursors: data.cursors,
+      },
+      { headers }
+    );
   } catch (error) {
     console.error('Error in Spotify recently played API route:', error);
     return NextResponse.json(
       {
-        error: 'Failed to fetch recently played tracks',
-        details: error instanceof Error ? error.message : 'Unknown error',
+        tracks: [],
       },
-      { status: 500 }
+      { headers }
     );
   }
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
 }
 

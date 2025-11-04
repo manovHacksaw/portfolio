@@ -26,9 +26,14 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
    - `SPOTIFY_CLIENT_SECRET`
    - `SPOTIFY_REFRESH_TOKEN`
    - `NEXT_PUBLIC_SITE_URL`
-4. Select environment: **Production**, **Preview**, and **Development** (or as needed)
+4. **IMPORTANT**: Select environment: **Production**, **Preview**, and **Development** (or as needed)
+   - If Preview works but Production doesn't, your variables are likely only set for Preview
+   - Make sure to check the **Production** checkbox when adding/editing variables
 5. Click **Save**
 6. **Redeploy** your application for changes to take effect
+   - Go to **Deployments** → Click the **⋯** menu on your production deployment → **Redeploy**
+
+**Note**: Vercel has separate environment variable settings for Production, Preview, and Development. If your preview deployment works but production doesn't, the variables are likely only set for Preview. Make sure to set them for Production as well.
 
 ### Netlify
 
@@ -52,15 +57,27 @@ Add the environment variables through your platform's dashboard or CLI:
 
 ## 🔍 Troubleshooting
 
+### Preview Works But Production Doesn't
+
+If your preview deployment (e.g., `portfolio-xxxxx.vercel.app`) works but production doesn't:
+
+1. **Check Environment Scope**: In Vercel, environment variables can be set for specific environments
+   - Go to **Settings** → **Environment Variables**
+   - Check if your variables have **Production** checked (not just Preview)
+   - If not, edit each variable and ensure **Production** is selected
+2. **Redeploy Production**: After updating variables, redeploy your production deployment
+   - Go to **Deployments** → Find your production deployment → Click **⋯** → **Redeploy**
+
 ### Missing Spotify Data
 
 If the Spotify section on the contact page doesn't show your data:
 
 1. **Check Environment Variables**: Verify all required variables are set in your deployment platform
 2. **Check Variable Names**: Ensure they match exactly (case-sensitive)
-3. **Check Refresh Token**: Make sure it's valid and not expired
-4. **Redeploy**: After adding/updating variables, redeploy your app for changes to take effect
-5. **Check Logs**: Review your platform's server logs for detailed error messages
+3. **Check Environment Scope**: Make sure variables are set for the correct environment (Production vs Preview)
+4. **Check Refresh Token**: Make sure it's valid and not expired
+5. **Redeploy**: After adding/updating variables, redeploy your app for changes to take effect
+6. **Check Logs**: Review your platform's server logs for detailed error messages
 
 **Note**: The app will work gracefully without Spotify credentials (it will show fallback data), but you won't see your actual Spotify listening activity.
 

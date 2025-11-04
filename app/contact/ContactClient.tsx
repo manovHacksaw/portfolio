@@ -34,10 +34,16 @@ export default function ContactClient() {
   const { resolvedTheme } = useTheme();
   
   const [spotifyStatus, setSpotifyStatus] = useState<SpotifyStatus | null>(null);
+  const [isLoadingSpotify, setIsLoadingSpotify] = useState(true);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
   useEffect(() => {
     // Fetch Spotify status
     const fetchStatus = async () => {
+      // Only show loading skeleton on initial load
+      if (!hasLoadedOnce) {
+        setIsLoadingSpotify(true);
+      }
       try {
         const [nowPlayingRes, profileRes, recentlyPlayedRes] = await Promise.all([
           fetch('/api/spotify/now-playing'),
@@ -123,8 +129,12 @@ export default function ContactClient() {
         
         console.log('Setting Spotify status:', status);
         setSpotifyStatus(status);
+        setHasLoadedOnce(true);
       } catch (err) {
         console.error('Failed to fetch Spotify status:', err);
+        setHasLoadedOnce(true);
+      } finally {
+        setIsLoadingSpotify(false);
       }
     };
 
@@ -439,34 +449,53 @@ export default function ContactClient() {
             </motion.div>
             
             <div className="border-t border-[var(--foreground-border)] pt-4">
-              <motion.div
-                className="flex flex-col gap-4"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      staggerChildren: 0.1,
-                    },
-                  },
-                }}
-              >
+              {isLoadingSpotify ? (
+                // Loading Skeleton
+                <div className="flex items-start gap-3 sm:gap-4">
+                  {/* Album Art Skeleton */}
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-20 md:h-20 rounded-lg bg-[var(--foreground-border)] shrink-0 animate-pulse" />
+                  
+                  {/* Content Skeleton */}
+                  <div className="flex-1 flex flex-col gap-1.5 sm:gap-2 min-w-0">
+                    {/* Title Skeleton */}
+                    <div className="h-4 sm:h-5 w-3/4 bg-[var(--foreground-border)] rounded animate-pulse" style={{ animationDelay: '0.1s' }} />
+                    {/* Artist Skeleton */}
+                    <div className="h-3 sm:h-4 w-1/2 bg-[var(--foreground-border)] rounded animate-pulse" style={{ animationDelay: '0.2s' }} />
+                    {/* Links Skeleton */}
+                    <div className="h-3 w-1/3 bg-[var(--foreground-border)] rounded mt-1 animate-pulse" style={{ animationDelay: '0.3s' }} />
+                  </div>
+                </div>
+              ) : (
                 <motion.div
-                  className="flex items-start gap-3 sm:gap-4"
+                  className="flex flex-col gap-4"
                   variants={{
-                    hidden: { opacity: 0, y: 10 },
+                    hidden: { opacity: 0 },
                     visible: {
                       opacity: 1,
-                      y: 0,
                       transition: {
-                        duration: 0.6,
-                        ease: [0.25, 0.1, 0.25, 1],
+                        staggerChildren: 0.1,
                       },
                     },
                   }}
+                  initial="hidden"
+                  animate="visible"
                 >
-                  {/* Album Art or Spotify Icon */}
-                  {spotifyStatus?.albumArt ? (
+                  <motion.div
+                    className="flex items-start gap-3 sm:gap-4"
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 0.6,
+                          ease: [0.25, 0.1, 0.25, 1],
+                        },
+                      },
+                    }}
+                  >
+                    {/* Album Art or Spotify Icon */}
+                    {spotifyStatus?.albumArt ? (
                     <motion.a
                       href={spotifyStatus.trackUrl || '#'}
                       target="_blank"
@@ -621,9 +650,9 @@ export default function ContactClient() {
                       )}
                     </div>
                   </motion.div>
+                  </motion.div>
                 </motion.div>
-
-              </motion.div>
+              )}
             </div>
           </motion.div>
 

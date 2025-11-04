@@ -87,6 +87,13 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
 }
 
 export async function GET() {
+  // Add CORS headers (though Next.js handles this automatically for same-origin)
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   try {
     const { token: accessToken, error: tokenError } = await getAccessToken();
     if (!accessToken) {
@@ -94,13 +101,16 @@ export async function GET() {
       // The frontend will use fallback data
       // Log server-side only (won't appear in browser console)
       console.error('Spotify profile API: Missing credentials or token refresh failed:', tokenError || 'Unknown error');
-      return NextResponse.json({
-        displayName: null,
-        followers: 0,
-        product: 'free',
-        spotifyUrl: null,
-        images: [],
-      });
+      return NextResponse.json(
+        {
+          displayName: null,
+          followers: 0,
+          product: 'free',
+          spotifyUrl: null,
+          images: [],
+        },
+        { headers }
+      );
     }
 
     const response = await fetch('https://api.spotify.com/v1/me', {
@@ -119,22 +129,42 @@ export async function GET() {
 
     const profile: SpotifyUserProfile = await response.json();
 
-    return NextResponse.json({
-      id: profile.id,
-      displayName: profile.display_name,
-      email: profile.email,
-      country: profile.country,
-      images: profile.images,
-      followers: profile.followers?.total || 0,
-      product: profile.product,
-      spotifyUrl: profile.external_urls?.spotify,
-    });
+    return NextResponse.json(
+      {
+        id: profile.id,
+        displayName: profile.display_name,
+        email: profile.email,
+        country: profile.country,
+        images: profile.images,
+        followers: profile.followers?.total || 0,
+        product: profile.product,
+        spotifyUrl: profile.external_urls?.spotify,
+      },
+      { headers }
+    );
   } catch (error) {
     console.error('Error in Spotify profile API route:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch profile', details: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
+      {
+        displayName: null,
+        followers: 0,
+        product: 'free',
+        spotifyUrl: null,
+        images: [],
+      },
+      { headers }
     );
   }
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
 }
 
