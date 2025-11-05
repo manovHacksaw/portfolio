@@ -269,41 +269,71 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
           
           {/* Loading Skeleton - shown while loading */}
           {isLoading && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 pointer-events-none">
-              {/* Calendar skeleton - approximate size of GitHub calendar */}
-              <div className="relative w-full max-w-[663px]">
-                {/* Grid skeleton - 53 columns (weeks) x 7 rows (days) = 371 blocks */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              {/* Calendar skeleton - matches GitHub calendar layout exactly */}
+              <div className="relative" style={{ width: '844px', maxWidth: '100%' }}>
+                {/* Month labels skeleton - positioned above grid, aligned with month starts */}
+                <div className="mb-2" style={{ height: '14px', position: 'relative' }}>
+                  {/* Month labels positioned at approximate month start positions */}
+                  {[0, 4, 9, 13, 17, 22, 26, 30, 35, 39, 43, 48].map((startWeek, i) => (
+                    <div
+                      key={i}
+                      className="absolute bg-[var(--foreground-border)] rounded animate-pulse"
+                      style={{
+                        left: `${startWeek * 16}px`, // 12px block + 4px gap = 16px per week
+                        width: '24px',
+                        height: '12px',
+                        animationDelay: `${i * 0.1}s`,
+                        opacity: 0.4,
+                      }}
+                    />
+                  ))}
+                </div>
+                
+                {/* Grid skeleton - 7 rows x 53 columns = 371 blocks */}
+                {/* blockSize=12, blockMargin=4 means: 12px blocks with 4px gap */}
                 <div 
-                  className="grid gap-1 mx-auto" 
+                  className="grid mx-auto" 
                   style={{ 
-                    gridTemplateColumns: 'repeat(53, minmax(8px, 12px))', 
-                    width: '100%', 
-                    maxWidth: '663px',
-                    height: '112px' 
+                    gridTemplateColumns: 'repeat(53, 12px)', 
+                    gridTemplateRows: 'repeat(7, 12px)',
+                    gap: '4px',
+                    width: '844px', // 53 * 12 + 52 * 4 = 636 + 208 = 844px
                   }}
                 >
                   {Array.from({ length: 371 }).map((_, i) => (
                     <div
                       key={i}
-                      className="w-full aspect-square rounded-sm bg-[var(--foreground-border)] animate-pulse"
+                      className="w-3 h-3 rounded-sm bg-[var(--foreground-border)] animate-pulse"
                       style={{
-                        animationDelay: `${(i % 10) * 0.1}s`,
+                        animationDelay: `${(i % 20) * 0.05}s`,
                       }}
                     />
                   ))}
                 </div>
-                {/* Month labels skeleton */}
-                <div className="flex justify-between mt-2 px-2 w-full max-w-[663px]">
-                  {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
-                    <div
-                      key={month}
-                      className="h-3 w-6 sm:w-8 bg-[var(--foreground-border)] rounded animate-pulse"
-                      style={{
-                        animationDelay: `${i * 0.1}s`,
-                        opacity: i % 3 === 0 ? 1 : 0.3, // Simulate some months being visible
-                      }}
-                    />
-                  ))}
+                
+                {/* Bottom info skeleton */}
+                <div className="flex justify-between items-center mt-3" style={{ width: '844px' }}>
+                  {/* Contributions count text */}
+                  <div className="h-4 w-40 bg-[var(--foreground-border)] rounded animate-pulse" style={{ animationDelay: '0.2s' }} />
+                  
+                  {/* Legend: Less + color squares + More */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-[var(--foreground-muted)] opacity-60">Less</span>
+                    <div className="flex gap-1">
+                      {[0, 1, 2, 3, 4].map((level) => (
+                        <div
+                          key={level}
+                          className="w-3 h-3 rounded-sm bg-[var(--foreground-border)] animate-pulse"
+                          style={{
+                            animationDelay: `${level * 0.1}s`,
+                            opacity: 0.2 + (level * 0.15),
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs text-[var(--foreground-muted)] opacity-60">More</span>
+                  </div>
                 </div>
               </div>
             </div>

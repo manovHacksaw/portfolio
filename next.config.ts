@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'api.spotify.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.scdn.co',
+      },
       // Add other domains as needed
     ],
     // Optimize images by default
