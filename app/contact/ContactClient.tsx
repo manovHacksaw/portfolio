@@ -91,7 +91,9 @@ export default function ContactClient() {
           console.error('Recently-played API failed:', recentlyPlayedRes.status, errorData);
         }
         
-        console.log('Spotify data fetched:', { nowPlaying, profile, recentlyPlayed });
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Spotify data fetched:', { nowPlaying, profile, recentlyPlayed });
+        }
         
         // If currently playing, use that data
         // Otherwise, use the most recently played track
@@ -127,11 +129,15 @@ export default function ContactClient() {
           playedAt: lastPlayedTrack?.playedAt,
         };
         
-        console.log('Setting Spotify status:', status);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Setting Spotify status:', status);
+        }
         setSpotifyStatus(status);
         setHasLoadedOnce(true);
       } catch (err) {
-        console.error('Failed to fetch Spotify status:', err);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Failed to fetch Spotify status:', err);
+        }
         setHasLoadedOnce(true);
       } finally {
         setIsLoadingSpotify(false);
@@ -159,7 +165,7 @@ export default function ContactClient() {
       id: 'email',
       icon: Mail,
       label: 'Email',
-      href: `mailto:${personalInfo.email}`,
+      href: `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(personalInfo.email)}`,
     },
     {
       id: 'linkedin',
@@ -337,7 +343,7 @@ export default function ContactClient() {
               whileHover={{ scale: 1.2, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
             >
-              <Link href={`mailto:${personalInfo.email}`} className="mt-2 hover:opacity-80 transition-opacity">
+              <Link href={`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(personalInfo.email)}`} target="_blank" rel="noopener noreferrer" className="mt-2 hover:opacity-80 transition-opacity">
                 <Flame size={32} className="text-[var(--nav-accent)]" />
               </Link>
             </motion.div>

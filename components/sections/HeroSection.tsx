@@ -144,11 +144,13 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             whileTap={{ scale: 0.95 }}
           >
             <Link
-              href={`tel:${personalInfo.email}`}
+              href={`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(personalInfo.email)}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
-              aria-label="Phone"
+              aria-label="Email"
             >
-              <Phone size={14} />
+              <Mail size={14} />
             </Link>
           </motion.div>
           {emailLink && (
@@ -160,7 +162,9 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href={emailLink.url}
+                href={`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(personalInfo.email)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
                 aria-label="Email"
               >
@@ -192,12 +196,13 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            <button
-              className="flex items-center justify-center w-7 h-7 rounded-lg  text-[var(--foreground)] hover:opacity-80 transition-opacity"
-              aria-label="Information"
+            <Link
+              href="/contact"
+              className="flex items-center justify-center w-7 h-7 rounded-lg text-[var(--foreground)] hover:opacity-80 transition-opacity"
+              aria-label="Contact Information"
             >
               <Info size={16} />
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -257,16 +262,12 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
                 <Linkedin size={14} />
               </Link>
             )}
-            <Link
-              href={`tel:${personalInfo.email}`}
-              className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
-              aria-label="Phone"
-            >
-              <Phone size={14} />
-            </Link>
+            
             {emailLink && (
               <Link
-                href={emailLink.url}
+                href={`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(personalInfo.email)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
                 aria-label="Email"
               >
@@ -289,12 +290,13 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             <span className="text-base" aria-label={personalInfo.location}>
               {personalInfo.locationFlag}
             </span>
-            <button
+            <Link
+              href="/contact"
               className="text-[var(--foreground)] hover:opacity-70 transition-opacity"
-              aria-label="Information"
+              aria-label="Contact Information"
             >
               <Info size={14} />
-            </button>
+            </Link>
           </div>
         </div>
 

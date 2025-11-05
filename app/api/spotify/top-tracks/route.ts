@@ -69,7 +69,9 @@ async function getAccessToken(): Promise<string | null> {
     const data: SpotifyTokenResponse = await response.json();
     return data.access_token;
   } catch (error) {
-    console.error('Error getting Spotify access token:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error getting Spotify access token:', error);
+    }
     return null;
   }
 }
@@ -80,7 +82,9 @@ async function fetchWebApi(endpoint: string, method: string = 'GET', body?: any)
     throw new Error('Failed to get access token');
   }
 
-  console.log(`Making Spotify API request: ${method} ${endpoint}`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Making Spotify API request: ${method} ${endpoint}`);
+  }
 
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -92,7 +96,9 @@ async function fetchWebApi(endpoint: string, method: string = 'GET', body?: any)
   });
 
   const responseText = await res.text();
-  console.log(`Spotify API response status: ${res.status} ${res.statusText}`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Spotify API response status: ${res.status} ${res.statusText}`);
+  }
 
   if (!res.ok) {
     let errorDetails;
@@ -101,7 +107,9 @@ async function fetchWebApi(endpoint: string, method: string = 'GET', body?: any)
     } catch {
       errorDetails = responseText;
     }
-    console.error('Spotify API error details:', errorDetails);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Spotify API error details:', errorDetails);
+    }
     throw new Error(`Spotify API error: ${res.status} ${res.statusText} - ${JSON.stringify(errorDetails)}`);
   }
 
@@ -117,15 +125,22 @@ async function getTopTracks(timeRange: string = 'long_term', limit: number = 5):
     `v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`,
     'GET'
   );
-  console.log('Top tracks response:', {
-    hasItems: !!data.items,
-    itemsCount: data.items?.length || 0,
-    firstItem: data.items?.[0]?.name || 'N/A',
-  });
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Top tracks response:', {
+      hasItems: !!data.items,
+      itemsCount: data.items?.length || 0,
+      firstItem: data.items?.[0]?.name || 'N/A',
+    });
+  }
   return data.items || [];
 }
 
 export async function GET(request: Request) {
+  // Cache headers for better performance
+  const headers = {
+    'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+  };
+
   try {
     const { searchParams } = new URL(request.url);
     const timeRange = searchParams.get('time_range') || 'long_term'; // long_term, medium_term, short_term
@@ -135,7 +150,7 @@ export async function GET(request: Request) {
     if (!['long_term', 'medium_term', 'short_term'].includes(timeRange)) {
       return NextResponse.json(
         { error: 'Invalid time_range. Must be long_term, medium_term, or short_term' },
-        { status: 400 }
+        { status: 400, headers }
       );
     }
 
@@ -143,7 +158,7 @@ export async function GET(request: Request) {
     if (limit < 1 || limit > 50) {
       return NextResponse.json(
         { error: 'Limit must be between 1 and 50' },
-        { status: 400 }
+        { status: 400, headers }
       );
     }
 
@@ -152,14 +167,16 @@ export async function GET(request: Request) {
       topTracks = await getTopTracks(timeRange, limit);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      console.error('Failed to get top tracks:', errorMessage);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to get top tracks:', errorMessage);
+      }
       return NextResponse.json(
         {
           error: 'Failed to fetch top tracks',
           details: errorMessage,
           hint: 'Make sure your access token has the user-top-read scope'
         },
-        { status: 500 }
+        { status: 500, headers }
       );
     }
 
@@ -168,7 +185,7 @@ export async function GET(request: Request) {
         tracks: [],
         message: 'No top tracks found',
         hint: 'This might mean you don\'t have enough listening history, or the token doesn\'t have user-top-read scope'
-      });
+      }, { headers });
     }
 
     // Format the response
@@ -193,12 +210,14 @@ export async function GET(request: Request) {
       tracks: formattedTracks,
       timeRange,
       limit,
-    });
+    }, { headers });
   } catch (error) {
-    console.error('Error in Spotify top tracks API route:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in Spotify top tracks API route:', error);
+    }
     return NextResponse.json(
       { error: 'Failed to fetch top tracks' },
-      { status: 500 }
+      { status: 500, headers: { 'Cache-Control': 'no-store' } }
     );
   }
 }

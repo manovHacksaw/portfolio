@@ -51,7 +51,9 @@ async function getAccessToken(): Promise<string | null> {
   // Note: Access tokens expire in 1 hour, refresh tokens don't expire
   const directAccessToken = process.env.SPOTIFY_ACCESS_TOKEN;
   if (directAccessToken) {
-    console.log('Using direct access token (temporary - expires in 1 hour)');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Using direct access token (temporary - expires in 1 hour)');
+    }
     return directAccessToken;
   }
 
@@ -60,11 +62,13 @@ async function getAccessToken(): Promise<string | null> {
   const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
   if (!clientId || !clientSecret || !refreshToken) {
-    console.error('Missing Spotify credentials:', {
-      hasClientId: !!clientId,
-      hasClientSecret: !!clientSecret,
-      hasRefreshToken: !!refreshToken,
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Missing Spotify credentials:', {
+        hasClientId: !!clientId,
+        hasClientSecret: !!clientSecret,
+        hasRefreshToken: !!refreshToken,
+      });
+    }
     return null;
   }
 
@@ -83,7 +87,9 @@ async function getAccessToken(): Promise<string | null> {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Failed to get access token:', response.status, errorText);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to get access token:', response.status, errorText);
+      }
       return null;
     }
 
@@ -92,17 +98,23 @@ async function getAccessToken(): Promise<string | null> {
     // According to Spotify docs: A new refresh_token may be returned
     // If included, we should update it (though we can't modify .env at runtime)
     if (data.refresh_token) {
-      console.log('New refresh token received (note: update .env.local manually if needed)');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('New refresh token received (note: update .env.local manually if needed)');
+      }
     }
     
-    console.log('Access token refreshed successfully', {
-      expiresIn: data.expires_in,
-      scopes: data.scope || 'N/A',
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Access token refreshed successfully', {
+        expiresIn: data.expires_in,
+        scopes: data.scope || 'N/A',
+      });
+    }
     
     return data.access_token;
   } catch (error) {
-    console.error('Error getting Spotify access token:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error getting Spotify access token:', error);
+    }
     return null;
   }
 }
@@ -113,7 +125,9 @@ async function fetchWebApi(endpoint: string, method: string = 'GET', body?: any)
     throw new Error('Failed to get access token');
   }
 
-  console.log(`Making Spotify API request: ${method} ${endpoint}`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Making Spotify API request: ${method} ${endpoint}`);
+  }
 
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -125,7 +139,9 @@ async function fetchWebApi(endpoint: string, method: string = 'GET', body?: any)
   });
 
   const responseText = await res.text();
-  console.log(`Spotify API response status: ${res.status} ${res.statusText}`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Spotify API response status: ${res.status} ${res.statusText}`);
+  }
 
   if (!res.ok) {
     let errorDetails;
@@ -134,7 +150,9 @@ async function fetchWebApi(endpoint: string, method: string = 'GET', body?: any)
     } catch {
       errorDetails = responseText;
     }
-    console.error('Spotify API error details:', errorDetails);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Spotify API error details:', errorDetails);
+    }
     throw new Error(`Spotify API error: ${res.status} ${res.statusText} - ${JSON.stringify(errorDetails)}`);
   }
 
@@ -153,7 +171,9 @@ async function getTopTracks(timeRange: string = 'long_term', limit: number = 5):
     );
     return data.items?.map(track => track.uri) || [];
   } catch (error) {
-    console.error('Error fetching top tracks:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching top tracks:', error);
+      }
     return [];
   }
 }
@@ -164,11 +184,13 @@ async function createPlaylist(tracksUri: string[]): Promise<SpotifyPlaylist | nu
     // According to Spotify API: GET https://api.spotify.com/v1/me
     // Requires: user-read-private scope
     const user: SpotifyUser = await fetchWebApi('v1/me', 'GET');
-    console.log('Got user profile:', {
-      id: user.id,
-      displayName: user.display_name || 'N/A',
-      product: user.product || 'N/A',
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Got user profile:', {
+        id: user.id,
+        displayName: user.display_name || 'N/A',
+        product: user.product || 'N/A',
+      });
+    }
     
     if (!user.id) {
       throw new Error('Unable to get user ID. Make sure you have user-read-private scope.');
@@ -190,12 +212,16 @@ async function createPlaylist(tracksUri: string[]): Promise<SpotifyPlaylist | nu
       throw new Error('Playlist creation succeeded but no playlist ID returned');
     }
     
-    console.log('Created playlist:', playlist.id, playlist.name);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Created playlist:', playlist.id, playlist.name);
+    }
 
     // Add tracks to playlist
     // According to Spotify API: POST https://api.spotify.com/v1/playlists/{playlist_id}/tracks
     if (tracksUri.length > 0) {
-      console.log('Adding tracks to playlist:', tracksUri.length);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Adding tracks to playlist:', tracksUri.length);
+      }
       
       // Spotify API requires tracks to be added in batches of max 100
       // For multiple tracks, we need to format them properly
@@ -206,12 +232,16 @@ async function createPlaylist(tracksUri: string[]): Promise<SpotifyPlaylist | nu
         'POST'
       );
       
-      console.log('Tracks added successfully:', addTracksResponse);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Tracks added successfully:', addTracksResponse);
+      }
     }
 
     return playlist;
   } catch (error) {
-    console.error('Error creating playlist:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error creating playlist:', error);
+    }
     throw error; // Re-throw to get more details in the API route
   }
 }
@@ -254,7 +284,9 @@ export async function POST(request: Request) {
       playlist = await createPlaylist(tracksUri);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      console.error('Playlist creation failed:', errorMessage);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Playlist creation failed:', errorMessage);
+      }
       return NextResponse.json(
         { 
           error: 'Failed to create playlist',

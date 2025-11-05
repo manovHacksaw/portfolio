@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AchievementsClient from "./AchievementsClient";
+import AchievementsStructuredData from "../../components/AchievementsStructuredData";
 
 export const metadata: Metadata = {
   title: "Achievements",
@@ -27,5 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default function AchievementsPage() {
-  return <AchievementsClient />;
+  return (
+    <>
+      <AchievementsStructuredData />
+      <AchievementsClient />
+    </>
+  );
 }

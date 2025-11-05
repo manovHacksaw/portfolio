@@ -454,7 +454,7 @@ export const mockPortfolioData: PortfolioData = {
     { id: '1', platform: 'GitHub', url: 'https://github.com/manovHacksaw', icon: 'github' },
     { id: '2', platform: 'LinkedIn', url: 'https://linkedin.com/in/manobendra-mandal-513ba7214/', icon: 'linkedin' },
     { id: '3', platform: 'Portfolio', url: 'https://maybe-manov.vercel.app/', icon: 'globe' },
-    { id: '4', platform: 'Email', url: 'mailto:manovmandal@gmail.com', icon: 'email' },
+    { id: '4', platform: 'Email', url: 'https://mail.google.com/mail/?view=cm&to=manovmandal@gmail.com', icon: 'email' },
   ],
   contactPage: {
     header: {

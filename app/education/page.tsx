@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import EducationClient from "./EducationClient";
+import EducationStructuredData from "../../components/EducationStructuredData";
 
 export const metadata: Metadata = {
   title: "Education",
@@ -27,5 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default function EducationPage() {
-  return <EducationClient />;
+  return (
+    <>
+      <EducationStructuredData />
+      <EducationClient />
+    </>
+  );
 }

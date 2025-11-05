@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ExperienceClient from "./ExperienceClient";
+import ExperienceStructuredData from "../../components/ExperienceStructuredData";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -27,5 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
-  return <ExperienceClient />;
+  return (
+    <>
+      <ExperienceStructuredData />
+      <ExperienceClient />
+    </>
+  );
 }

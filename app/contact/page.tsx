@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
+import ContactStructuredData from "../../components/ContactStructuredData";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -27,5 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactClient />;
+  return (
+    <>
+      <ContactStructuredData />
+      <ContactClient />
+    </>
+  );
 }

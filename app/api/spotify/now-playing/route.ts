@@ -87,7 +87,9 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
       } catch {
         errorDetails = errorText;
       }
-      console.error('Spotify token refresh failed:', response.status, errorDetails);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Spotify token refresh failed:', response.status, errorDetails);
+      }
       return { 
         token: null, 
         error: `Token refresh failed: ${response.status} ${response.statusText}. ${JSON.stringify(errorDetails)}` 
@@ -97,7 +99,9 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
     const data: SpotifyTokenResponse = await response.json();
     return { token: data.access_token };
   } catch (error) {
-    console.error('Error getting Spotify access token:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error getting Spotify access token:', error);
+    }
     return { 
       token: null, 
       error: error instanceof Error ? error.message : 'Unknown error during token refresh' 
@@ -130,19 +134,26 @@ async function getNowPlaying(): Promise<SpotifyCurrentlyPlaying | null> {
     const data: SpotifyCurrentlyPlaying = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching Spotify now playing:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching Spotify now playing:', error);
+    }
     return null;
   }
 }
 
 export async function GET() {
+  // Cache headers for better performance
+  const headers = {
+    'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+  };
+
   try {
     const nowPlaying = await getNowPlaying();
 
     if (!nowPlaying || !nowPlaying.item || !nowPlaying.is_playing) {
       return NextResponse.json({
         isPlaying: false,
-      });
+      }, { headers });
     }
 
     const track = nowPlaying.item;
@@ -159,12 +170,14 @@ export async function GET() {
       trackUrl: track.external_urls.spotify,
       progress: nowPlaying.progress_ms,
       duration: track.duration_ms,
-    });
+    }, { headers });
   } catch (error) {
-    console.error('Error in Spotify API route:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in Spotify API route:', error);
+    }
     return NextResponse.json(
       { error: 'Failed to fetch Spotify data' },
-      { status: 500 }
+      { status: 500, headers }
     );
   }
 }

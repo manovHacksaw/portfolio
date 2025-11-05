@@ -85,7 +85,9 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
       } catch {
         errorDetails = errorText;
       }
-      console.error('Spotify token refresh failed:', response.status, errorDetails);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Spotify token refresh failed:', response.status, errorDetails);
+      }
       return { 
         token: null, 
         error: `Token refresh failed: ${response.status} ${response.statusText}. ${JSON.stringify(errorDetails)}` 
@@ -95,7 +97,9 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
     const data: SpotifyTokenResponse = await response.json();
     return { token: data.access_token };
   } catch (error) {
-    console.error('Error getting Spotify access token:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error getting Spotify access token:', error);
+    }
     return { 
       token: null, 
       error: error instanceof Error ? error.message : 'Unknown error during token refresh' 
@@ -104,11 +108,9 @@ async function getAccessToken(): Promise<{ token: string | null; error?: string 
 }
 
 export async function GET(request: Request) {
-  // Add CORS headers (though Next.js handles this automatically for same-origin)
+  // Cache headers for better performance
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
   };
 
   try {
@@ -130,7 +132,9 @@ export async function GET(request: Request) {
       // Always return empty tracks instead of error to avoid console noise
       // The frontend will use fallback data
       // Log server-side only (won't appear in browser console)
-      console.error('Spotify recently-played API: Missing credentials or token refresh failed:', tokenError || 'Unknown error');
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Spotify recently-played API: Missing credentials or token refresh failed:', tokenError || 'Unknown error');
+      }
       return NextResponse.json(
         { tracks: [] },
         { headers }
@@ -168,11 +172,13 @@ export async function GET(request: Request) {
         errorDetails = errorText;
       }
 
-      console.error('Spotify API error:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorDetails,
-      });
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Spotify API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorDetails,
+        });
+      }
 
       return NextResponse.json(
         {
@@ -209,7 +215,9 @@ export async function GET(request: Request) {
       { headers }
     );
   } catch (error) {
-    console.error('Error in Spotify recently played API route:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in Spotify recently played API route:', error);
+    }
     return NextResponse.json(
       {
         tracks: [],
@@ -217,16 +225,5 @@ export async function GET(request: Request) {
       { headers }
     );
   }
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
 }
 
