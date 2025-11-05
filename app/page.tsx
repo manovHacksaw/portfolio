@@ -8,6 +8,7 @@ import BottomNav from "../components/BottomNav";
 import NavbarHint from "../components/NavbarHint";
 import { mockPortfolioData } from "@/data/mockData";
 import GithubContributions from "@/components/GithubContributions";
+import { ErrorBoundary } from "../components/ErrorBoundary";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -52,10 +53,14 @@ export default function Home() {
           <AboutSection personalInfo={mockPortfolioData.personalInfo} />
         </motion.div>
         <motion.div variants={itemVariants}>
-          <SkillsSection skills={mockPortfolioData.skills} />
+          <ErrorBoundary>
+            <SkillsSection skills={mockPortfolioData.skills} />
+          </ErrorBoundary>
         </motion.div>
         <motion.div variants={itemVariants}>
-          <GithubContributions />
+          <ErrorBoundary>
+            <GithubContributions />
+          </ErrorBoundary>
         </motion.div>
       </div>
       <BottomNav activeItem="home" />

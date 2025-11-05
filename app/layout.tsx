@@ -3,6 +3,7 @@ import { Onest, Figtree, Caveat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ThemeProvider";
 import { AudioPlayerProvider } from "../contexts/AudioPlayerContext";
+import ErrorBoundaryWrapper from "../components/ErrorBoundaryWrapper";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -90,7 +91,9 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <AudioPlayerProvider>
-            {children}
+            <ErrorBoundaryWrapper>
+              {children}
+            </ErrorBoundaryWrapper>
           </AudioPlayerProvider>
         </ThemeProvider>
       </body>

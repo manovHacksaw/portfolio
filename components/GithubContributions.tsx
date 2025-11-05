@@ -61,6 +61,49 @@ const generateColorScale = (accentColor: string, isDark: boolean): string[] => {
 const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsProps) => {
   const [accentColor, setAccentColor] = useState('#00ff88') // Default to nav-accent
   const [isDark, setIsDark] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  
+  useEffect(() => {
+    // Check if calendar has loaded by looking for the SVG element
+    const checkCalendarLoaded = () => {
+      const calendar = document.querySelector('.react-github-calendar svg')
+      if (calendar) {
+        setIsLoading(false)
+        return true
+      }
+      return false
+    }
+    
+    let checkInterval: NodeJS.Timeout | null = null
+    let timeout: NodeJS.Timeout | null = null
+    
+    // Wait a bit for component to mount
+    const initialDelay = setTimeout(() => {
+      if (checkCalendarLoaded()) {
+        return
+      }
+      
+      // Check periodically until calendar loads
+      checkInterval = setInterval(() => {
+        if (checkCalendarLoaded()) {
+          if (checkInterval) clearInterval(checkInterval)
+          if (timeout) clearTimeout(timeout)
+        }
+      }, 100)
+      
+      // Timeout after 10 seconds to prevent infinite loading
+      timeout = setTimeout(() => {
+        if (checkInterval) clearInterval(checkInterval)
+        setIsLoading(false)
+      }, 10000)
+    }, 200)
+    
+    return () => {
+      clearTimeout(initialDelay)
+      if (checkInterval) clearInterval(checkInterval)
+      if (timeout) clearTimeout(timeout)
+    }
+  }, [username])
   
   useEffect(() => {
     // Get accent color and theme from CSS variables
@@ -206,20 +249,65 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
         GitHub Contributions
       </h3>
       <div className="overflow-x-auto">
-        <div className="flex justify-center py-4">
-          <GitHubCalendar
-            username={username}
-            blockSize={12}
-            blockMargin={4}
-            fontSize={12}
-            theme={{
-              light: colorScale,
-              dark: colorScale,
-            }}
-            style={{
-              color: 'var(--foreground)',
-            }}
-          />
+        <div className="flex justify-center py-4 relative">
+          {/* Always render calendar */}
+          <div className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}>
+            <GitHubCalendar
+              username={username}
+              blockSize={12}
+              blockMargin={4}
+              fontSize={12}
+              theme={{
+                light: colorScale,
+                dark: colorScale,
+              }}
+              style={{
+                color: 'var(--foreground)',
+              }}
+            />
+          </div>
+          
+          {/* Loading Skeleton - shown while loading */}
+          {isLoading && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 pointer-events-none">
+              {/* Calendar skeleton - approximate size of GitHub calendar */}
+              <div className="relative w-full max-w-[663px]">
+                {/* Grid skeleton - 53 columns (weeks) x 7 rows (days) = 371 blocks */}
+                <div 
+                  className="grid gap-1 mx-auto" 
+                  style={{ 
+                    gridTemplateColumns: 'repeat(53, minmax(8px, 12px))', 
+                    width: '100%', 
+                    maxWidth: '663px',
+                    height: '112px' 
+                  }}
+                >
+                  {Array.from({ length: 371 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-full aspect-square rounded-sm bg-[var(--foreground-border)] animate-pulse"
+                      style={{
+                        animationDelay: `${(i % 10) * 0.1}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+                {/* Month labels skeleton */}
+                <div className="flex justify-between mt-2 px-2 w-full max-w-[663px]">
+                  {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
+                    <div
+                      key={month}
+                      className="h-3 w-6 sm:w-8 bg-[var(--foreground-border)] rounded animate-pulse"
+                      style={{
+                        animationDelay: `${i * 0.1}s`,
+                        opacity: i % 3 === 0 ? 1 : 0.3, // Simulate some months being visible
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       

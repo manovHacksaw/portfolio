@@ -53,7 +53,6 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
                 fill
                 className="object-contain rounded-lg"
                 priority
-                unoptimized
               />
             </div>
           </motion.div>
@@ -313,7 +312,6 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
               fill
               className="object-contain rounded-lg"
               priority
-              unoptimized
             />
           </div>
         </motion.div>

@@ -261,7 +261,6 @@ export default function ContactClient() {
                   fill
                   className="object-cover"
                   priority
-                  unoptimized
                 />
               </motion.div>
               
@@ -509,7 +508,6 @@ export default function ContactClient() {
                         alt={spotifyStatus.album || 'Album art'}
                         fill
                         className="object-cover"
-                        unoptimized
                       />
                       <div className="absolute inset-0 bg-[var(--nav-accent)]/0 group-hover:bg-[var(--nav-accent)]/20 transition-colors flex items-center justify-center">
                         <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -640,7 +638,6 @@ export default function ContactClient() {
                                 width={14}
                                 height={14}
                                 className="sm:w-4 sm:h-4 rounded-full object-cover shrink-0"
-                                unoptimized
                               />
                             ) : null}
                             <span className="truncate">{spotifyStatus.displayName || 'Spotify'}</span>

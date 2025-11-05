@@ -296,7 +296,6 @@ export default function Header({ displayRoute }: HeaderProps = {}) {
               width={320}
               height={240}
               className="w-full h-auto object-cover rounded-md"
-              unoptimized
             />
           </div>
         </div>
