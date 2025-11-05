@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Onest, Figtree, Caveat } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "../components/ThemeProvider";
+import { ThemeProvider } from "../components/ui/ThemeProvider";
 import { AudioPlayerProvider } from "../contexts/AudioPlayerContext";
-import ErrorBoundaryWrapper from "../components/ErrorBoundaryWrapper";
-import StructuredData from "../components/StructuredData";
+import ErrorBoundaryWrapper from "../components/ui/ErrorBoundaryWrapper";
+import StructuredData from "../components/structured-data/StructuredData";
 // Validate environment variables (only runs in development/server)
 import "../lib/env-validation";
 
@@ -74,12 +74,13 @@ export const metadata: Metadata = {
     apple: '/avatar.png',
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"),
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#000000' },

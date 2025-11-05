@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
-import ContactStructuredData from "../../components/ContactStructuredData";
+import ContactStructuredData from "../../components/structured-data/ContactStructuredData";
 
 export const metadata: Metadata = {
   title: "Contact",

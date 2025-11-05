@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ExperienceClient from "./ExperienceClient";
-import ExperienceStructuredData from "../../components/ExperienceStructuredData";
+import ExperienceStructuredData from "../../components/structured-data/ExperienceStructuredData";
 
 export const metadata: Metadata = {
   title: "Experience",

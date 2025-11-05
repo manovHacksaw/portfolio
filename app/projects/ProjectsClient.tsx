@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import Header from "../../components/Header";
-import BottomNav from "../../components/BottomNav";
+import Header from "../../components/layout/Header";
+import BottomNav from "../../components/layout/BottomNav";
 import { mockPortfolioData } from "@/data/mockData";
 import Image from "next/image";
 import Link from "next/link";

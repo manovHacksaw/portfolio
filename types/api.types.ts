@@ -3,6 +3,29 @@
  */
 
 // Spotify API Response Types
+export interface SpotifyTokenResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  refresh_token?: string; // Optional - may be included in refresh response
+  scope?: string; // Scopes granted with the token
+}
+
+export interface SpotifyUserProfile {
+  id: string;
+  display_name: string | null;
+  email?: string;
+  country?: string;
+  images?: Array<{ url: string; height?: number; width?: number }>;
+  followers?: {
+    total: number;
+  };
+  product: string;
+  external_urls?: {
+    spotify: string;
+  };
+}
+
 export interface SpotifyNowPlayingResponse {
   isPlaying: boolean;
   title?: string;

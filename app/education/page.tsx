@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import EducationClient from "./EducationClient";
-import EducationStructuredData from "../../components/EducationStructuredData";
+import EducationStructuredData from "../../components/structured-data/EducationStructuredData";
 
 export const metadata: Metadata = {
   title: "Education",

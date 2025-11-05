@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { ErrorBoundary } from "../components/ErrorBoundary";
+import { ErrorBoundary } from "../components/ui/ErrorBoundary";
 import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 import Link from "next/link";
 

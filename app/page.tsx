@@ -1,14 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
-import Header from "../components/Header";
+import Header from "../components/layout/Header";
 import HeroSection from "../components/sections/HeroSection";
 import AboutSection from "../components/sections/AboutSection";
 import SkillsSection from "../components/sections/SkillsSection";
-import BottomNav from "../components/BottomNav";
-import NavbarHint from "../components/NavbarHint";
+import BottomNav from "../components/layout/BottomNav";
+import NavbarHint from "../components/layout/NavbarHint";
 import { mockPortfolioData } from "@/data/mockData";
 import GithubContributions from "@/components/GithubContributions";
-import { ErrorBoundary } from "../components/ErrorBoundary";
+import { ErrorBoundary } from "../components/ui/ErrorBoundary";
 
 const containerVariants = {
   hidden: { opacity: 0 },

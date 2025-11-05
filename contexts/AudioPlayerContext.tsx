@@ -17,7 +17,7 @@ const AudioPlayerContext = createContext<AudioPlayerContextType | undefined>(und
 
 export function AudioPlayerProvider({ children }: { children: ReactNode }) {
   const contactPageData = mockPortfolioData.contactPage;
-  const audioSrc = contactPageData?.nowPlaying.audioSrc || "/audio/cupid.mp3";
+  const audioSrc = contactPageData?.nowPlaying.audioSrc || "/images/audio/cupid.mp3";
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);

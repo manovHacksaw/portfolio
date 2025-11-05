@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ProjectsClient from "./ProjectsClient";
-import ProjectsStructuredData from "../../components/ProjectsStructuredData";
+import ProjectsStructuredData from "../../components/structured-data/ProjectsStructuredData";
 
 export const metadata: Metadata = {
   title: "Projects",

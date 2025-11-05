@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AchievementsClient from "./AchievementsClient";
-import AchievementsStructuredData from "../../components/AchievementsStructuredData";
+import AchievementsStructuredData from "../../components/structured-data/AchievementsStructuredData";
 
 export const metadata: Metadata = {
   title: "Achievements",
