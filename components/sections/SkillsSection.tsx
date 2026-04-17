@@ -31,7 +31,8 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
     'Solidity',
     'Envio',
     'Vercel',
-    'Rust'
+    'Rust',
+    'Docker'
   ];
 
   // Create a mapping for name variations
@@ -67,6 +68,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
       'Envio': Si.SiCoder,
       'Vercel': Si.SiVercel,
       'Rust': Si.SiRust,
+      'Docker': Si.SiDocker,
     };
 
     // Try exact match first

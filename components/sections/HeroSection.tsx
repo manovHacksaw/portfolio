@@ -180,7 +180,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             whileTap={{ scale: 0.95 }}
           >
             <Link
-              href="/resume.pdf"
+              href="/Manobendra-Mandal.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"
@@ -275,7 +275,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
               </Link>
             )}
             <Link
-              href="/resume.pdf"
+              href="/Manobendra-Mandal.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--foreground)] text-[var(--background)] hover:opacity-80 transition-opacity"

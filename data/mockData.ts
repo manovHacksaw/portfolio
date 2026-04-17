@@ -6,9 +6,9 @@ import { PortfolioData } from '@/types/portfolio.types';
 export const mockPortfolioData: PortfolioData = {
   personalInfo: {
     name: 'Manobendra Mandal',
-    title: 'Blockchain & Full Stack Developer',
-    bio: 'Hey! I\'m a Web3 and full-stack developer who loves building things that actually work and scale. I\'ve won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech. My toolbox includes Solidity, Rust, Next.js, and everything MERN, and I\'m currently deep-diving into system design and DevOps to level up from a good dev to a great engineer. I care about clean architecture, real-world impact, and products people actually use. When I\'m not coding, I\'m probably cooking, jamming on my guitar, or sketching the next crazy project idea.',
-    avatarUrl: '/avatar.png', 
+    title: 'Lead Backend & Web3 Developer',
+    bio: 'I build backend systems and ship smart contracts across Ethereum, Solana, Starknet, and Celo — in production, not just in hackathons. Currently leading backend at Aris, where I architect Web3 APIs, gasless transaction infrastructure, and on-chain agent systems. I\'ve won 10 hackathons across fintech, DeFi, and edtech, and I care about developer experience as much as clean architecture. I explain things well, document what I build, and show up at hacker houses. When not coding: guitar, cooking, or designing the next project on a napkin.',
+    avatarUrl: '/avatar.png',
     age: 21,
     email: 'manovmandal@gmail.com',
     location: 'Kolkata, West Bengal, India',
@@ -20,6 +20,22 @@ export const mockPortfolioData: PortfolioData = {
     { id: '3', name: 'Traveling', icon: 'suitcase' },
   ],
   experience: [
+    {
+      id: '3',
+      company: 'Aris – Agent Zero',
+      role: 'Lead Backend Developer (Contract) · Remote',
+      startDate: 'Jan 2026',
+      endDate: null,
+      responsibilities: [
+        'Architected the backend for Agent Zero, an autonomous Web3 AI agent system — designed service boundaries, API contracts, and data flow across agent orchestration, wallet management, and on-chain execution layers.',
+        'Built and maintained RESTful APIs and WebSocket services powering real-time agent state updates, tool routing, and multi-wallet coordination.',
+        'Implemented gasless transaction infrastructure using ERC-4337 Account Abstraction with Paymaster integration, eliminating native token requirements for end users.',
+        'Designed event-driven pipelines for on-chain indexing and agent-triggered smart contract interactions across multiple EVM-compatible networks.',
+        'Owned infrastructure: CI/CD setup, environment configuration, Docker-based deployment, and secrets management across dev/staging/production.',
+      ],
+      techStack: ['Node.js', 'TypeScript', 'Express', 'ERC-4337', 'Account Abstraction', 'Paymaster', 'WebSockets', 'PostgreSQL', 'Docker', 'REST APIs', 'ethers.js'],
+      websiteUrl: 'https://aristhrottle.org',
+    },
     {
       id: '1',
       company: 'Newscope',
@@ -358,6 +374,32 @@ export const mockPortfolioData: PortfolioData = {
     }
   ],
   projects: [
+    {
+      id: '9',
+      title: 'Stellalpha',
+      description: 'On-chain copy-trading protocol on Solana — follow top wallets and mirror their trades automatically via smart vaults.',
+      longDescription: 'A Solana-native copy-trading protocol where users subscribe to top-performing wallets ("leaders") and automatically mirror their DEX trades via on-chain vaults. Leaders set their own performance fees; followers deposit once and let the protocol handle execution. Built with Anchor (Rust) for the smart contract layer, Jupiter aggregator for DEX routing, and a TypeScript indexer tracking leader activity in real time. Designed for capital efficiency: funds stay in smart vaults, not with custodians.',
+      imageUrl: '/images/projects/stellalpha.png',
+      technologies: ['Rust', 'Anchor', 'Solana', 'TypeScript', 'Jupiter', 'Next.js'],
+      githubUrl: '#',
+      liveUrl: '#',
+      featured: true,
+      startDate: 'Mar 2026',
+      endDate: null,
+    },
+    {
+      id: '10',
+      title: 'Unzap Contract Lab',
+      description: 'Starknet developer studio — deploy, verify, and interact with Cairo contracts from a browser-based IDE.',
+      longDescription: 'A browser-based developer studio for Starknet that lets developers deploy, verify, and call Cairo smart contracts without local tooling. Includes a contract ABI explorer, live call interface, transaction history viewer, and Scarb-compatible deployment flow. Backed by a Node.js API layer that proxies Starknet RPC calls, handles multicall batching, and caches contract metadata. Built to reduce the onboarding friction that makes Starknet development painful for developers coming from EVM chains.',
+      imageUrl: '/images/projects/unzap.png',
+      technologies: ['Cairo', 'TypeScript', 'Starknet.js', 'Next.js', 'Node.js', 'PostgreSQL'],
+      githubUrl: '#',
+      liveUrl: '#',
+      featured: true,
+      startDate: 'Feb 2026',
+      endDate: null,
+    },
     {
       id: '1',
       title: 'Mizu Pay',
