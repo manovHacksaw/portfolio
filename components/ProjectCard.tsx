@@ -19,21 +19,29 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.article variants={fadeUp} className="flex flex-col gap-4">
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)]">
-        {project.imageUrl && !imageError ? (
-          <Image
-            src={project.imageUrl}
-            alt={project.title}
-            fill
-            sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover"
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="label-mono">{project.title}</span>
-          </div>
-        )}
+      {/* Outer frame matches the reference's inset "device window" card —
+          a padded, bordered container around the screenshot rather than a
+          full-bleed image. */}
+      <div className="rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] p-3 sm:p-4">
+        <span className="label-mono mb-3 block normal-case tracking-normal text-[var(--foreground-muted)]">
+          {project.title}
+        </span>
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-[var(--foreground-border)] bg-[var(--background)]">
+          {project.imageUrl && !imageError ? (
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <span className="label-mono">No preview</span>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col gap-2">
