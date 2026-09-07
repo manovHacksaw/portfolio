@@ -28,6 +28,11 @@ export default function ExperienceItem({ experience, defaultOpen = false }: Expe
   const roleTag = tagMatch?.[1];
   const roleLabel = experience.role.replace(/\s*\([^)]+\)/, "").trim();
 
+  // No company-logo assets exist in the data, so fall back to the
+  // company's initial in a bordered mark — same pattern already used for
+  // hackathon logos in AchievementsClient — rather than inventing imagery.
+  const initial = experience.company.trim().charAt(0).toUpperCase();
+
   return (
     <motion.div variants={fadeUp} className="border-b border-[var(--foreground-border)]">
       <button
@@ -35,41 +40,47 @@ export default function ExperienceItem({ experience, defaultOpen = false }: Expe
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left"
+        className="flex w-full items-start gap-3 py-5 text-left sm:gap-4"
       >
-        <div className="flex min-w-0 flex-col gap-1">
-          <span className="flex flex-wrap items-center gap-2 text-base font-medium tracking-tight text-[var(--foreground)] sm:text-lg">
-            {experience.company}
-            {roleTag && (
-              <span className="label-mono rounded-full border border-[var(--foreground-border)] px-2 py-0.5 normal-case tracking-normal">
-                {roleTag}
-              </span>
-            )}
-            {isCurrent && (
-              <span
-                className="h-1.5 w-1.5 shrink-0 rounded-full"
-                style={{ backgroundColor: "var(--accent)" }}
-                aria-label="Current"
-              />
-            )}
-          </span>
-          <span className="truncate text-sm font-light text-[var(--foreground-muted)]">
-            {roleLabel}
-          </span>
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--foreground-border)] bg-[var(--surface)] text-sm font-semibold text-[var(--foreground-muted)] sm:h-14 sm:w-14">
+          {initial}
         </div>
-        <div className="flex shrink-0 items-center gap-3">
-          <span className="label-mono hidden sm:inline">{dateRange}</span>
-          <motion.span
-            animate={{ rotate: open ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            className="text-[var(--foreground-muted)]"
-          >
-            <ChevronDown size={16} />
-          </motion.span>
+
+        <div className="flex flex-1 items-center justify-between gap-4 min-w-0">
+          <div className="flex min-w-0 flex-col gap-1">
+            <span className="flex flex-wrap items-center gap-2 text-base font-medium tracking-tight text-[var(--foreground)] sm:text-lg">
+              {experience.company}
+              {roleTag && (
+                <span className="label-mono rounded-full border border-[var(--foreground-border)] px-2 py-0.5 normal-case tracking-normal">
+                  {roleTag}
+                </span>
+              )}
+              {isCurrent && (
+                <span
+                  className="h-1.5 w-1.5 shrink-0 rounded-full"
+                  style={{ backgroundColor: "var(--accent)" }}
+                  aria-label="Current"
+                />
+              )}
+            </span>
+            <span className="truncate text-sm font-light text-[var(--foreground-muted)]">
+              {roleLabel}
+            </span>
+          </div>
+          <div className="flex shrink-0 items-center gap-3">
+            <span className="label-mono hidden sm:inline">{dateRange}</span>
+            <motion.span
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.3, ease: EASE }}
+              className="text-[var(--foreground-muted)]"
+            >
+              <ChevronDown size={16} />
+            </motion.span>
+          </div>
         </div>
       </button>
 
-      <span className="label-mono -mt-3 block pb-3 sm:hidden">{dateRange}</span>
+      <span className="label-mono -mt-3 block pb-3 pl-[3.75rem] sm:hidden">{dateRange}</span>
 
       <AnimatePresence initial={false}>
         {open && (

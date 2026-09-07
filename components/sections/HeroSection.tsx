@@ -36,8 +36,8 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
     >
-      <motion.div variants={fadeUpItem} className="flex items-center gap-4 sm:gap-5">
-        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] sm:h-20 sm:w-20">
+      <motion.div variants={fadeUpItem} className="flex items-center gap-3 sm:gap-4">
+        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] sm:h-24 sm:w-24">
           <Image src={personalInfo.avatarUrl} alt={personalInfo.name} fill className="object-cover" priority />
         </div>
         <div className="flex flex-col gap-0.5">
