@@ -32,14 +32,14 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
   return (
     <motion.section
-      className="flex w-full flex-col gap-6 pb-10 pt-6 sm:pb-14 sm:pt-8"
+      className="flex w-full flex-col gap-4 pb-8 pt-3 sm:pb-10"
       initial="hidden"
       animate="visible"
-      variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+      variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
     >
       <motion.div variants={fadeUpItem} className="flex items-start justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-3 sm:gap-4">
-          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] sm:h-24 sm:w-24">
+          <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)]">
             <Image src={personalInfo.avatarUrl} alt={personalInfo.name} fill className="object-cover" priority />
           </div>
           <div className="flex flex-col gap-0.5">
@@ -54,7 +54,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
       <motion.p
         variants={fadeUpItem}
-        className="w-full text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base"
+        className="w-full text-base leading-relaxed text-[var(--foreground-secondary)]"
       >
         {personalInfo.bio}
       </motion.p>
@@ -80,7 +80,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
         </Link>
       </motion.div>
 
-      <motion.div variants={fadeUpItem} className="flex flex-col gap-3 pt-2">
+      <motion.div variants={fadeUpItem} className="flex flex-col gap-2.5">
         <p className="text-sm text-[var(--foreground-muted)]">
           Here are my <span className="font-medium text-[var(--foreground)]">socials</span>
         </p>

@@ -1,6 +1,7 @@
 import HeroSection from "../components/sections/HeroSection";
 import ExperiencePreview from "../components/sections/ExperiencePreview";
 import ProjectsPreview from "../components/sections/ProjectsPreview";
+import AchievementsPreview from "../components/sections/AchievementsPreview";
 import SkillsSection from "../components/sections/SkillsSection";
 import QuoteSection from "../components/sections/QuoteSection";
 import DotGridBanner from "../components/sections/DotGridBanner";
@@ -25,6 +26,7 @@ export default function Home() {
           </ErrorBoundary>
           <ExperiencePreview experience={mockPortfolioData.experience} />
           <ProjectsPreview projects={mockPortfolioData.projects} />
+          <AchievementsPreview hackathons={mockPortfolioData.hackathons} />
           <SkillsSection skills={mockPortfolioData.skills} />
           {quote && <QuoteSection text={quote.text} attribution={quote.attribution} />}
         </div>

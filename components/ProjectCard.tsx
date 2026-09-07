@@ -21,11 +21,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <motion.article variants={fadeUp} className="flex flex-col gap-4">
       {/* Outer frame matches the reference's inset "device window" card —
           a padded, bordered container around the screenshot rather than a
-          full-bleed image. */}
-      <div className="rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] p-3 sm:p-4">
-        <span className="label-mono mb-3 block normal-case tracking-normal text-[var(--foreground-muted)]">
-          {project.title}
-        </span>
+          full-bleed image. The title stays hidden until hover, where it
+          reveals large and centered over the image instead of sitting as a
+          static caption above it. */}
+      <div className="group rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] p-3 sm:p-4">
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-[var(--foreground-border)] bg-[var(--background)]">
           {project.imageUrl && !imageError ? (
             <Image
@@ -41,6 +40,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               <span className="label-mono">No preview</span>
             </div>
           )}
+
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 backdrop-blur-0 transition-all duration-300 ease-out group-hover:bg-black/35 group-hover:opacity-100 group-hover:backdrop-blur-[2px]">
+            <span className="scale-90 px-4 text-center text-2xl font-semibold tracking-tight text-white opacity-0 transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 sm:text-3xl">
+              {project.title}
+            </span>
+          </div>
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useId } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ExternalLink } from "lucide-react";
@@ -28,9 +29,9 @@ export default function ExperienceItem({ experience, defaultOpen = false }: Expe
   const roleTag = tagMatch?.[1];
   const roleLabel = experience.role.replace(/\s*\([^)]+\)/, "").trim();
 
-  // No company-logo assets exist in the data, so fall back to the
-  // company's initial in a bordered mark — same pattern already used for
-  // hackathon logos in AchievementsClient — rather than inventing imagery.
+  // Falls back to the company's initial in a bordered mark — same pattern
+  // used for hackathon logos in AchievementsClient — when no logo asset
+  // exists for that entry.
   const initial = experience.company.trim().charAt(0).toUpperCase();
 
   return (
@@ -42,8 +43,12 @@ export default function ExperienceItem({ experience, defaultOpen = false }: Expe
         aria-controls={panelId}
         className="flex w-full items-start gap-3 py-5 text-left sm:gap-4"
       >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--foreground-border)] bg-[var(--surface)] text-sm font-semibold text-[var(--foreground-muted)] sm:h-14 sm:w-14">
-          {initial}
+        <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[var(--foreground-border)] bg-[var(--surface)] text-sm font-semibold text-[var(--foreground-muted)] sm:h-14 sm:w-14">
+          {experience.logoUrl ? (
+            <Image src={experience.logoUrl} alt={experience.company} fill className="object-cover" />
+          ) : (
+            initial
+          )}
         </div>
 
         <div className="flex flex-1 items-center justify-between gap-4 min-w-0">

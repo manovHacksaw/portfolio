@@ -6,7 +6,6 @@ import { AudioPlayerProvider } from "../contexts/AudioPlayerContext";
 import ErrorBoundaryWrapper from "../components/ui/ErrorBoundaryWrapper";
 import StructuredData from "../components/structured-data/StructuredData";
 import PageTransition from "../components/motion/PageTransition";
-import CustomCursor from "../components/motion/CustomCursor";
 import BackToTop from "../components/BackToTop";
 // Validate environment variables (only runs in development/server)
 import "../lib/env-validation";
@@ -104,7 +103,6 @@ export default function RootLayout({
         <ThemeProvider>
           <AudioPlayerProvider>
             <ErrorBoundaryWrapper>
-              <CustomCursor />
               <main id="main-content" tabIndex={-1}>
                 <PageTransition>{children}</PageTransition>
               </main>

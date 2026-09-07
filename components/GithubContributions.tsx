@@ -6,64 +6,17 @@ interface GithubContributionsProps {
   username?: string
 }
 
-// Helper function to convert hex to RGB
-const hexToRgb = (hex: string): [number, number, number] | null => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result
-    ? [
-        parseInt(result[1], 16),
-        parseInt(result[2], 16),
-        parseInt(result[3], 16),
-      ]
-    : null
+// Reference uses a plain grayscale contribution graph — no brand/accent
+// color. Empty cells sit close to the background; the highest-activity
+// cells read as near-black (light mode) / near-white (dark mode).
+const GRAYSCALE = {
+  light: ['#ebedf0', '#c6c6c6', '#8f8f8f', '#525252', '#171717'],
+  dark: ['#242424', '#3a3a3a', '#5c5c5c', '#8a8a8a', '#d4d4d4'],
 }
 
-// Helper function to convert RGB to hex
-const rgbToHex = (r: number, g: number, b: number): string => {
-  return '#' + [r, g, b].map(x => {
-    const hex = x.toString(16)
-    return hex.length === 1 ? '0' + hex : hex
-  }).join('')
-}
-
-// Generate color scale from accent color
-const generateColorScale = (accentColor: string, isDark: boolean): string[] => {
-  const rgb = hexToRgb(accentColor)
-  if (!rgb) {
-    return isDark
-      ? ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
-      : ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
-  }
-
-  const [r, g, b] = rgb
-
-  // Empty (zero-contribution) cells need a theme-appropriate neutral —
-  // GitHub's own dark-grey (#161b22) reads as a near-black square in light
-  // mode, so this switches to a light grey there instead.
-  const emptyColor = isDark ? '#161b22' : '#ebedf0'
-  const intensity1 = rgbToHex(
-    Math.max(0, Math.min(255, Math.floor(r * 0.25))),
-    Math.max(0, Math.min(255, Math.floor(g * 0.25))),
-    Math.max(0, Math.min(255, Math.floor(b * 0.25)))
-  )
-  
-  const intensity2 = rgbToHex(
-    Math.max(0, Math.min(255, Math.floor(r * 0.5))),
-    Math.max(0, Math.min(255, Math.floor(g * 0.5))),
-    Math.max(0, Math.min(255, Math.floor(b * 0.5)))
-  )
-  
-  const intensity3 = rgbToHex(
-    Math.max(0, Math.min(255, Math.floor(r * 0.75))),
-    Math.max(0, Math.min(255, Math.floor(g * 0.75))),
-    Math.max(0, Math.min(255, Math.floor(b * 0.75)))
-  )
-  
-  return [emptyColor, intensity1, intensity2, intensity3, accentColor]
-}
+const generateColorScale = (isDark: boolean): string[] => (isDark ? GRAYSCALE.dark : GRAYSCALE.light)
 
 const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsProps) => {
-  const [accentColor, setAccentColor] = useState('#00ff88') // Default to nav-accent
   const [isDark, setIsDark] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   
@@ -110,19 +63,14 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
   }, [username])
   
   useEffect(() => {
-    // Get accent color and theme from CSS variables
+    // Track dark/light so the calendar's grayscale ramp can flip with it
     const updateTheme = () => {
       if (typeof window !== 'undefined') {
-        const computedStyle = getComputedStyle(document.documentElement)
-        const accent = computedStyle.getPropertyValue('--nav-accent').trim() || '#00ff88'
-        setAccentColor(accent)
-        
-        // Check if dark mode is active
         const isDarkMode = document.documentElement.classList.contains('dark')
         setIsDark(isDarkMode)
       }
     }
-    
+
     updateTheme()
     
     // Watch for theme changes
@@ -245,15 +193,12 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
     }
   }, [])
   
-  const colorScale = useMemo(() => generateColorScale(accentColor, isDark), [accentColor, isDark])
+  const colorScale = useMemo(() => generateColorScale(isDark), [isDark])
   
   return (
-    <div className="w-full py-8 sm:py-10">
-      <h2 className="mb-6 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
-        GitHub Activity
-      </h2>
+    <div className="w-full py-6 sm:py-8">
       <div className="overflow-x-auto">
-        <div className="flex justify-center py-4 relative">
+        <div className="flex justify-center py-2 relative">
           {/* Always render calendar */}
           <div className={isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}>
             <GitHubCalendar

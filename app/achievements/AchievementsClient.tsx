@@ -5,100 +5,15 @@ import DotGridBanner from "@/components/sections/DotGridBanner";
 import SectionReveal from "@/components/motion/SectionReveal";
 import { fadeUp, stagger } from "@/components/motion/variants";
 import { mockPortfolioData } from "@/data/mockData";
-import { Hackathon } from "@/types/portfolio.types";
+import { groupHackathons } from "@/lib/groupHackathons";
 import { ExternalLink, Github, Globe, MapPin, Trophy } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
 
-interface GroupedHackathon {
-  name: string;
-  date: string;
-  location?: string;
-  logoUrl?: string;
-  projects: Hackathon[];
-}
-
 export default function AchievementsClient() {
   const hackathons = mockPortfolioData.hackathons;
-
-  // Group hackathons by name and date, and sort chronologically
-  const groupedHackathons = useMemo(() => {
-    const groups = new Map<string, GroupedHackathon>();
-
-    hackathons.forEach((hackathon) => {
-      const key = `${hackathon.name}_${hackathon.date}`;
-      if (!groups.has(key)) {
-        groups.set(key, {
-          name: hackathon.name,
-          date: hackathon.date,
-          location: hackathon.location,
-          logoUrl: hackathon.logoUrl,
-          projects: [],
-        });
-      }
-      groups.get(key)!.projects.push(hackathon);
-    });
-
-    return Array.from(groups.values()).sort((a, b) => {
-      const dateOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-      const parseDate = (dateStr: string) => {
-        if (dateStr.includes(' - ')) {
-          const parts = dateStr.split(' - ');
-          const endDate = parts[1].trim();
-          const endParts = endDate.split(' ');
-
-          let month = '';
-          let year = '';
-
-          for (const part of endParts) {
-            if (dateOrder.includes(part)) {
-              month = part;
-            } else if (!isNaN(parseInt(part)) && part.length === 4) {
-              year = part;
-            }
-          }
-
-          if (!month && endParts.length >= 3) {
-            month = endParts[1];
-            year = endParts[2];
-          }
-
-          const monthIndex = dateOrder.indexOf(month);
-          return { year: parseInt(year) || 0, monthIndex: monthIndex >= 0 ? monthIndex : 0 };
-        }
-
-        const parts = dateStr.trim().split(' ');
-        let month = '';
-        let year = '';
-
-        for (const part of parts) {
-          if (dateOrder.includes(part)) {
-            month = part;
-          } else if (!isNaN(parseInt(part)) && part.length === 4) {
-            year = part;
-          }
-        }
-
-        const monthIndex = dateOrder.indexOf(month);
-        return { year: parseInt(year) || 0, monthIndex: monthIndex >= 0 ? monthIndex : 0 };
-      };
-
-      const aDate = parseDate(a.date);
-      const bDate = parseDate(b.date);
-
-      if (aDate.year !== bDate.year) {
-        return bDate.year - aDate.year;
-      }
-
-      if (aDate.monthIndex !== bDate.monthIndex) {
-        return bDate.monthIndex - aDate.monthIndex;
-      }
-
-      return 0;
-    });
-  }, [hackathons]);
+  const groupedHackathons = useMemo(() => groupHackathons(hackathons), [hackathons]);
 
   return (
     <div className="min-h-screen pb-16">

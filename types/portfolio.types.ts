@@ -16,6 +16,7 @@ export interface Experience {
   responsibilities: string[];
   techStack?: string[]; // Optional tech stack
   websiteUrl?: string; // Optional company website
+  logoUrl?: string; // Optional company logo — falls back to initials when absent
 }
 
 export interface Hackathon {
