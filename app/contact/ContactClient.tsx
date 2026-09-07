@@ -154,11 +154,11 @@ export default function ContactClient() {
 
   return (
     <div className="min-h-screen pb-28 sm:pb-24">
-      <Header />
       <DotGridBanner />
-      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 py-12 sm:px-6 sm:py-16">
+      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-8">
+        <Header />
         <motion.div
-          className="flex flex-col gap-16"
+          className="mt-8 flex flex-col gap-16 sm:mt-10"
           initial="hidden"
           animate="visible"
           variants={stagger(0.12)}

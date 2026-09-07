@@ -7,7 +7,7 @@ export const mockPortfolioData: PortfolioData = {
   personalInfo: {
     name: 'Manobendra Mandal',
     title: 'Lead Backend & Web3 Developer',
-    bio: 'I build backend systems and ship smart contracts across Ethereum, Solana, Starknet, and Celo — in production, not just in hackathons. Currently leading backend at Aris, where I architect Web3 APIs, gasless transaction infrastructure, and on-chain agent systems. I\'ve won 10 hackathons across fintech, DeFi, and edtech, and I care about developer experience as much as clean architecture. I explain things well, document what I build, and show up at hacker houses. When not coding: guitar, cooking, or designing the next project on a napkin.',
+    bio: 'I care a lot about clean architecture and probably have a little OCD when it comes to building websites. I enjoy digging into protocols, cloud infrastructure, and low-level stuff, and I\'m always curious about how things work under the hood. When I\'m not coding, you\'ll probably find me taking a stroll through a park, hanging out at a momo shop, playing guitar, or figuring out what to cook for dinner.',
     avatarUrl: '/avatar.png',
     age: 21,
     email: 'manovmandal@gmail.com',

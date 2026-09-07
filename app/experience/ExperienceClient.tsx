@@ -13,10 +13,10 @@ export default function ExperienceClient() {
 
   return (
     <div className="min-h-screen pb-28 sm:pb-24">
-      <Header />
       <DotGridBanner />
-      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 py-12 sm:px-6 sm:py-16">
-        <SectionReveal variants={fadeUp} className="mb-10">
+      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-8">
+        <Header />
+        <SectionReveal variants={fadeUp} className="mb-10 mt-8 sm:mt-10">
           <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
             Experience
           </h1>

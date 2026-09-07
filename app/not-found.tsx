@@ -53,14 +53,14 @@ const rotateVariants = {
 export default function NotFound() {
   return (
     <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
-      <Header displayRoute="/oops" />
       <motion.main
-        className="w-full px-5 py-8"
+        className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pb-8 pt-6 sm:px-6 sm:pt-8"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <div className="max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[60vh] gap-8">
+        <Header displayRoute="/oops" />
+        <div className="mt-8 flex flex-col items-center justify-center min-h-[60vh] gap-8 sm:mt-10">
           {/* Animated 404 Number */}
           <motion.div
             className="relative"

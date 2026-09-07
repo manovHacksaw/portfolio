@@ -73,39 +73,37 @@ export default function Header({ displayRoute }: HeaderProps = {}) {
   };
 
   return (
-    <header className="sticky top-0 z-40 -mx-6 -mt-4 mb-2 border-b border-[var(--foreground-border)] bg-[var(--background)]/85 px-6 py-3 backdrop-blur-md sm:-mx-8 sm:-mt-6 sm:px-8 md:-mx-12 md:-mt-8 md:px-12 lg:-mx-78 lg:-mt-10 lg:px-78">
-      <div className="flex w-full items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="font-mono text-[11px] font-medium tracking-widest text-[var(--foreground)] uppercase transition-opacity hover:opacity-70 sm:text-xs"
-        >
-          Manobendra Mandal
-        </Link>
+    <header className="flex w-full items-center justify-between gap-4">
+      <Link
+        href="/"
+        className="font-mono text-[11px] font-medium tracking-widest text-[var(--foreground)] uppercase transition-opacity hover:opacity-70 sm:text-xs"
+      >
+        Manobendra Mandal
+      </Link>
 
-        <div className="flex items-center gap-3 sm:gap-4">
-          {pathname !== "/" && (
-            <motion.span
-              key={routeLabel}
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="label-mono hidden sm:inline"
-            >
-              {routeLabel}
-            </motion.span>
-          )}
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--foreground-border)] text-[var(--foreground)] transition-colors hover:border-[var(--foreground)]"
-            aria-label="Toggle theme"
+      <div className="flex items-center gap-3 sm:gap-4">
+        {pathname !== "/" && (
+          <motion.span
+            key={routeLabel}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="label-mono hidden sm:inline"
           >
-            {mounted && resolvedTheme === "dark" ? (
-              <Sun size={14} strokeWidth={1.75} />
-            ) : (
-              <Moon size={14} strokeWidth={1.75} />
-            )}
-          </button>
-        </div>
+            {routeLabel}
+          </motion.span>
+        )}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--foreground-border)] text-[var(--foreground)] transition-colors hover:border-[var(--foreground)]"
+          aria-label="Toggle theme"
+        >
+          {mounted && resolvedTheme === "dark" ? (
+            <Sun size={14} strokeWidth={1.75} />
+          ) : (
+            <Moon size={14} strokeWidth={1.75} />
+          )}
+        </button>
       </div>
     </header>
   );

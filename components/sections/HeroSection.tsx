@@ -31,7 +31,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
   return (
     <motion.section
-      className="flex w-full flex-col gap-6 py-10 sm:py-14"
+      className="flex w-full flex-col gap-6 pb-10 pt-6 sm:pb-14 sm:pt-8"
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
@@ -50,7 +50,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
 
       <motion.p
         variants={fadeUpItem}
-        className="max-w-xl text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base"
+        className="w-full text-sm leading-relaxed text-[var(--foreground-secondary)] sm:text-base"
       >
         {personalInfo.bio}
       </motion.p>

@@ -15,20 +15,22 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-28 sm:pb-24">
-      <Header />
       <DotGridBanner />
-      <div className="mx-auto max-w-4xl divide-y divide-dashed divide-[var(--foreground-border)] border-x border-dashed border-[var(--foreground-border)] px-4 sm:px-6">
-        <HeroSection
-          personalInfo={mockPortfolioData.personalInfo}
-          portfolioLinks={mockPortfolioData.portfolioLinks}
-        />
-        <ErrorBoundary>
-          <GithubContributions />
-        </ErrorBoundary>
-        <ExperiencePreview experience={mockPortfolioData.experience} />
-        <ProjectsPreview projects={mockPortfolioData.projects} />
-        <SkillsSection skills={mockPortfolioData.skills} />
-        {quote && <QuoteSection text={quote.text} attribution={quote.attribution} />}
+      <div className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pt-6 sm:px-6 sm:pt-8">
+        <Header />
+        <div className="divide-y divide-dashed divide-[var(--foreground-border)]">
+          <HeroSection
+            personalInfo={mockPortfolioData.personalInfo}
+            portfolioLinks={mockPortfolioData.portfolioLinks}
+          />
+          <ErrorBoundary>
+            <GithubContributions />
+          </ErrorBoundary>
+          <ExperiencePreview experience={mockPortfolioData.experience} />
+          <ProjectsPreview projects={mockPortfolioData.projects} />
+          <SkillsSection skills={mockPortfolioData.skills} />
+          {quote && <QuoteSection text={quote.text} attribution={quote.attribution} />}
+        </div>
       </div>
       <DotGridBanner />
       <BottomNav activeItem="home" />
