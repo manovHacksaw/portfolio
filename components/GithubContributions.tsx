@@ -66,7 +66,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
   useEffect(() => {
     // Check if calendar has loaded by looking for the SVG element
     const checkCalendarLoaded = () => {
-      const calendar = document.querySelector('.react-github-calendar svg')
+      const calendar = document.querySelector('.react-activity-calendar svg')
       if (calendar) {
         setIsLoading(false)
         return true
@@ -137,7 +137,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
     const hideLegendLabels = () => {
       if (typeof window !== 'undefined' && window.innerWidth <= 639) {
         // Try multiple selectors
-        const svg = document.querySelector('.react-github-calendar svg')
+        const svg = document.querySelector('.react-activity-calendar svg')
         if (svg) {
           // Get all text elements
           const textElements = svg.querySelectorAll('text')
@@ -208,7 +208,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
     const calendarObserver = new MutationObserver(() => {
       hideLegendLabels()
     })
-    const calendarContainer = document.querySelector('.react-github-calendar')
+    const calendarContainer = document.querySelector('.react-activity-calendar')
     if (calendarContainer) {
       calendarObserver.observe(calendarContainer, {
         childList: true,
@@ -220,7 +220,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
     
     // Also observe the entire document for calendar appearance
     const documentObserver = new MutationObserver(() => {
-      const calendar = document.querySelector('.react-github-calendar')
+      const calendar = document.querySelector('.react-activity-calendar')
       if (calendar) {
         hideLegendLabels()
       }
@@ -244,10 +244,10 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
   const colorScale = useMemo(() => generateColorScale(accentColor, isDark), [accentColor, isDark])
   
   return (
-    <div className="w-full px-5 py-8">
-      <h3 className="text-base sm:text-lg md:text-xl font-bold text-[var(--foreground)] mb-4">
-        GitHub Contributions
-      </h3>
+    <div className="w-full py-16 sm:py-20">
+      <h2 className="mb-6 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
+        GitHub Activity
+      </h2>
       <div className="overflow-x-auto">
         <div className="flex justify-center py-4 relative">
           {/* Always render calendar */}
@@ -342,38 +342,38 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
       </div>
       
       <style jsx>{`
-        :global(.react-github-calendar) {
+        :global(.react-activity-calendar) {
           font-family: inherit;
         }
-        :global(.react-github-calendar text) {
+        :global(.react-activity-calendar text) {
           fill: var(--foreground-muted);
           font-size: 7px;
         }
         @media (min-width: 640px) {
-          :global(.react-github-calendar text) {
+          :global(.react-activity-calendar text) {
             font-size: 10px;
           }
         }
-        :global(.react-github-calendar rect) {
+        :global(.react-activity-calendar rect) {
           rx: 2;
         }
         /* Style empty days (count = 0) with grey */
-        :global(.react-github-calendar rect[data-level="0"]) {
+        :global(.react-activity-calendar rect[data-level="0"]) {
           stroke: var(--foreground-border);
           stroke-width: 1;
         }
         /* Hide "Less" and "More" labels on mobile - aggressive approach */
         @media (max-width: 639px) {
           /* Hide all text elements that might be Less/More */
-          :global(.react-github-calendar svg text[text-anchor="start"]),
-          :global(.react-github-calendar svg text[text-anchor="end"]) {
+          :global(.react-activity-calendar svg text[text-anchor="start"]),
+          :global(.react-activity-calendar svg text[text-anchor="end"]) {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
           }
           /* Hide by finding all text and checking if it's at the legend position */
-          :global(.react-github-calendar svg g:last-child text) {
+          :global(.react-activity-calendar svg g:last-child text) {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;

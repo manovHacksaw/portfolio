@@ -88,10 +88,7 @@ export default function NotFound() {
               transition={{ delay: 1 }}
             />
             
-            <h1
-              className="text-6xl sm:text-8xl md:text-9xl font-bold text-[var(--foreground)] relative"
-              style={{ fontFamily: "'Clash Display', sans-serif" }}
-            >
+            <h1 className="text-6xl sm:text-8xl md:text-9xl font-medium tracking-tight text-[var(--foreground)] relative">
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}

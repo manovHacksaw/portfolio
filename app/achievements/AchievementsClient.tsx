@@ -2,14 +2,16 @@
 import { motion } from "framer-motion";
 import Header from "../../components/layout/Header";
 import BottomNav from "../../components/layout/BottomNav";
+import DotGridBanner from "@/components/sections/DotGridBanner";
+import SectionReveal from "@/components/motion/SectionReveal";
+import { fadeUp, stagger } from "@/components/motion/variants";
 import { mockPortfolioData } from "@/data/mockData";
 import { Hackathon } from "@/types/portfolio.types";
-import { ExternalLink, Github, Globe, MapPin } from "lucide-react";
+import { ExternalLink, Github, Globe, MapPin, Trophy } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
 
-// Group hackathons by name and date
 interface GroupedHackathon {
   name: string;
   date: string;
@@ -24,7 +26,7 @@ export default function AchievementsClient() {
   // Group hackathons by name and date, and sort chronologically
   const groupedHackathons = useMemo(() => {
     const groups = new Map<string, GroupedHackathon>();
-    
+
     hackathons.forEach((hackathon) => {
       const key = `${hackathon.name}_${hackathon.date}`;
       if (!groups.has(key)) {
@@ -39,23 +41,18 @@ export default function AchievementsClient() {
       groups.get(key)!.projects.push(hackathon);
     });
 
-    // Convert to array and sort by date (newest first - reverse chronological)
     return Array.from(groups.values()).sort((a, b) => {
-      // Parse dates - handle both "MMM YYYY" and "DD MMM - DD MMM YYYY" formats
       const dateOrder = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      
-      // Extract year and month from date string
+
       const parseDate = (dateStr: string) => {
-        // Handle date range format: "Sep 21 - Sep 25 2025" or "26 Oct - 27 Oct 2025"
         if (dateStr.includes(' - ')) {
           const parts = dateStr.split(' - ');
-          const endDate = parts[1].trim(); // "Sep 25 2025" or "27 Oct 2025"
+          const endDate = parts[1].trim();
           const endParts = endDate.split(' ');
-          
-          // Find the month and year
+
           let month = '';
           let year = '';
-          
+
           for (const part of endParts) {
             if (dateOrder.includes(part)) {
               month = part;
@@ -63,22 +60,20 @@ export default function AchievementsClient() {
               year = part;
             }
           }
-          
-          // If format is "DD MMM YYYY", the month might be at index 1
+
           if (!month && endParts.length >= 3) {
             month = endParts[1];
             year = endParts[2];
           }
-          
+
           const monthIndex = dateOrder.indexOf(month);
           return { year: parseInt(year) || 0, monthIndex: monthIndex >= 0 ? monthIndex : 0 };
         }
-        
-        // Handle single date format: "Aug 2024" or "Dec 2024"
+
         const parts = dateStr.trim().split(' ');
         let month = '';
         let year = '';
-        
+
         for (const part of parts) {
           if (dateOrder.includes(part)) {
             month = part;
@@ -86,270 +81,162 @@ export default function AchievementsClient() {
             year = part;
           }
         }
-        
+
         const monthIndex = dateOrder.indexOf(month);
         return { year: parseInt(year) || 0, monthIndex: monthIndex >= 0 ? monthIndex : 0 };
       };
-      
+
       const aDate = parseDate(a.date);
       const bDate = parseDate(b.date);
-      
-      // Sort by year first (newest first)
+
       if (aDate.year !== bDate.year) {
         return bDate.year - aDate.year;
       }
-      
-      // Then by month (newest first)
+
       if (aDate.monthIndex !== bDate.monthIndex) {
         return bDate.monthIndex - aDate.monthIndex;
       }
-      
+
       return 0;
     });
   }, [hackathons]);
 
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
+    <div className="min-h-screen pb-28 sm:pb-24">
       <Header />
-      <main className="w-full px-5 py-4 sm:py-6">
-        <div className="flex flex-col gap-4 sm:gap-6">
-          {/* Introduction */}
+      <DotGridBanner />
+      <main className="mx-auto max-w-4xl py-12 sm:py-16">
+        <SectionReveal variants={fadeUp} className="mb-10 flex flex-col gap-3">
+          <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
+            Achievements
+          </h1>
           {mockPortfolioData.achievementsPage?.introduction && (
-            <motion.p
-              className="text-sm px-4 sm:text-base text-[var(--foreground-muted)] font-light leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.7,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
-            >
+            <p className="max-w-2xl text-sm leading-relaxed text-[var(--foreground-muted)]">
               {mockPortfolioData.achievementsPage.introduction}
-            </motion.p>
+            </p>
           )}
+        </SectionReveal>
 
-
-
-          {/* Timeline */}
-          <motion.div
-            className="relative"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  delayChildren: 0.5, // Wait 500ms after intro
-                  staggerChildren: 0.2, // Stagger each entry
-                },
-              },
-            }}
-          >
-            {/* Vertical Timeline Line - animate with first entry */}
-            {groupedHackathons.length > 1 && (
-              <motion.div 
-                className="absolute left-5 sm:left-6 bg-[var(--foreground)] opacity-40"
-                style={{
-                  width: '1px',
-                  top: 'calc(24px + 0.75rem)', // Start after first logo center (24px = half of 48px logo on mobile) + py-3 (0.75rem)
-                  bottom: 'calc(24px + 0.75rem)', // End before last logo center (updated for larger logos)
-                }}
-                variants={{
-                  hidden: { opacity: 0, scaleY: 0, transformOrigin: 'top' },
-                  visible: {
-                    opacity: 0.4,
-                    scaleY: 1,
-                    transition: {
-                      duration: 0.7,
-                      delay: 0.5, // Start with first entry
-                      ease: [0.25, 0.1, 0.25, 1],
-                    },
-                  },
-                }}
-              />
-            )}
-
-            {/* Timeline Entries */}
-            <div className="flex flex-col">
-              {groupedHackathons.map((group, groupIndex) => (
-                <motion.div
-                  key={`${group.name}_${group.date}`}
-                  className="relative"
-                  variants={{
-                    hidden: { opacity: 0, y: 30 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        duration: 0.7,
-                        ease: [0.25, 0.1, 0.25, 1],
-                      },
-                    },
-                  }}
-                >
-                  {/* Dotted Horizontal Separator (except for first item) */}
-                  {groupIndex > 0 && (
-                    <div className="absolute left-5 sm:left-6 top-0 right-0 border-t border-dashed border-[var(--foreground)] opacity-40" />
+        <motion.div initial="hidden" animate="visible" variants={stagger(0.12)}>
+          {groupedHackathons.map((group, groupIndex) => (
+            <motion.div
+              key={`${group.name}_${group.date}`}
+              variants={fadeUp}
+              className="flex gap-4 border-b border-[var(--foreground-border)] py-8 sm:gap-6"
+            >
+              <div className="flex shrink-0 flex-col items-center gap-3">
+                <span className="label-mono">{String(groupIndex + 1).padStart(2, "0")}</span>
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-[var(--foreground-border)] bg-white sm:h-12 sm:w-12">
+                  {group.logoUrl ? (
+                    <Image src={group.logoUrl} alt={group.name} fill className="object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-[var(--surface)] text-xs font-bold text-[var(--foreground-muted)]">
+                      {group.name.substring(0, 2).toUpperCase()}
+                    </div>
                   )}
+                </div>
+              </div>
 
-                  <div className="relative flex items-start gap-3 sm:gap-4 py-3 sm:py-6">
-                    {/* Hackathon Logo - Centered with vertical line */}
-                    <motion.div 
-                      className="absolute left-5 sm:left-6 shrink-0"
-                      style={{
-                        transformOrigin: 'center center',
-                      }}
-                      variants={{
-                        hidden: { 
-                          opacity: 0, 
-                          scale: 0.3,
-                          x: '-50%',
-                        },
-                        visible: {
-                          opacity: 1,
-                          scale: 1,
-                          x: '-50%',
-                          transition: {
-                            duration: 0.6,
-                            ease: [0.25, 0.1, 0.25, 1],
-                          },
-                        },
-                      }}
-                    >
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border-0">
-                        {group.logoUrl ? (
-                          <Image
-                            src={group.logoUrl}
-                            alt={group.name}
-                            fill
-                            className="object-cover rounded-full"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                            <span className="text-xs font-bold text-gray-500">
-                              {group.name.substring(0, 2).toUpperCase()}
-                            </span>
-                          </div>
+              <div className="flex flex-1 flex-col gap-2">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h2 className="text-base font-medium tracking-tight text-[var(--foreground)] sm:text-lg">
+                    {group.name}
+                  </h2>
+                  <span className="label-mono">{group.date}</span>
+                </div>
+
+                {group.location && (
+                  <div className="flex items-center gap-1.5 text-xs text-[var(--foreground-muted)]">
+                    {group.location.toLowerCase() === "online" ? (
+                      <Globe size={12} />
+                    ) : (
+                      <MapPin size={12} />
+                    )}
+                    <span>{group.location}</span>
+                  </div>
+                )}
+
+                <div className="mt-1 flex flex-col gap-4">
+                  {group.projects.map((hackathon) => (
+                    <div key={hackathon.id} className="flex flex-col gap-1.5">
+                      <div className="flex flex-wrap items-center gap-2">
+                        {hackathon.projectName && (
+                          <span className="text-sm font-medium text-[var(--foreground)]">
+                            {hackathon.projectName}
+                          </span>
+                        )}
+                        {hackathon.prize && (
+                          <span
+                            className="label-mono flex items-center gap-1 rounded-full px-2 py-0.5 normal-case tracking-normal"
+                            style={{ backgroundColor: "color-mix(in srgb, var(--accent) 15%, transparent)", color: "var(--accent)" }}
+                          >
+                            <Trophy size={10} />
+                            {hackathon.prize}
+                          </span>
                         )}
                       </div>
-                    </motion.div>
+                      <p className="text-sm leading-relaxed text-[var(--foreground-muted)]">
+                        {hackathon.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-                    {/* Content - Add left margin to account for logo */}
-                    <motion.div
-                      className="flex-1 flex flex-col gap-1.5 sm:gap-2 ml-16 sm:ml-20 md:ml-16 lg:ml-20"
-                      variants={{
-                        hidden: { opacity: 0, x: -20 },
-                        visible: {
-                          opacity: 1,
-                          x: 0,
-                          transition: {
-                            duration: 0.7,
-                            delay: 0.2, // Slight delay after logo
-                            ease: [0.25, 0.1, 0.25, 1],
-                          },
-                        },
-                      }}
-                    >
-                      {/* Date */}
-                      <div className="text-xs sm:text-sm md:text-xs text-[var(--foreground-muted)] font-light">
-                        {group.date}
-                      </div>
+                {(() => {
+                  const p = group.projects[0];
+                  if (!p) return null;
+                  const isGithub = p.projectUrl && p.projectUrl.includes("github.com");
+                  const liveUrl = p.projectUrl && !isGithub ? p.projectUrl : undefined;
+                  const githubUrl = p.githubUrl || (isGithub ? p.projectUrl : undefined);
+                  const hasAnnouncement = p.announcementUrl && p.announcementUrl !== "#";
 
-                      {/* Hackathon Title */}
-                      <h2 className="text-base sm:text-lg md:text-base font-bold text-[var(--foreground)]">
-                        {group.name}
-                      </h2>
+                  if (!liveUrl && !githubUrl && !hasAnnouncement) return null;
 
-                      {/* Location - with icon for better visibility */}
-                      {group.location && (
-                        <div className="flex items-start gap-1.5 text-xs sm:text-sm md:text-xs text-[var(--foreground-secondary)] font-medium mt-0.5">
-                          {group.location.toLowerCase() === 'online' ? (
-                            <Globe size={12} className="sm:w-[14px] sm:h-[14px] md:w-[12px] md:h-[12px] shrink-0 mt-0.5" />
-                          ) : (
-                            <MapPin size={12} className="sm:w-[14px] sm:h-[14px] md:w-[12px] md:h-[12px] shrink-0 mt-0.5" />
-                          )}
-                          <span>{group.location}</span>
-                        </div>
+                  return (
+                    <div className="mt-1 flex flex-wrap items-center gap-4">
+                      {liveUrl && (
+                        <Link
+                          href={liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-sm text-[var(--foreground)] hover:opacity-70"
+                        >
+                          <Globe size={13} />
+                          Live
+                        </Link>
                       )}
-
-                      {/* Projects Descriptions */}
-                      <div className="flex flex-col gap-2 sm:gap-3 mt-1.5 sm:mt-2">
-                        {group.projects.map((hackathon) => (
-                          <div key={hackathon.id} className="flex flex-col gap-1 sm:gap-1.5">
-                            {/* Project Name if different from hackathon name */}
-                            {hackathon.projectName && (
-                              <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--foreground)]">
-                                {hackathon.projectName}
-                              </div>
-                            )}
-                            {/* Description */}
-                            <p className="text-xs sm:text-sm md:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
-                              {hackathon.description}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Links - Button Style */}
-                      {(group.projects.some(p => p.projectUrl && p.projectUrl !== '#') || group.projects.some(p => p.githubUrl) || group.projects.some(p => p.announcementUrl && p.announcementUrl !== '#')) && (
-                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1.5 sm:mt-2">
-                          {(() => {
-                            const p = group.projects[0];
-                            if (!p) return null;
-                            const isGithub = p.projectUrl && p.projectUrl.includes('github.com');
-                            const liveUrl = p.projectUrl && !isGithub ? p.projectUrl : undefined;
-                            const githubUrl = p.githubUrl || (isGithub ? p.projectUrl : undefined);
-                            return (
-                              <>
-                                {liveUrl && (
-                                  <Link
-                                    href={liveUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--foreground)] text-[var(--background)] rounded hover:opacity-80 transition-opacity text-xs font-medium"
-                                  >
-                                    <Globe size={12} />
-                                    <span>{p.projectName || 'Live'}</span>
-                                  </Link>
-                                )}
-                                {githubUrl && (
-                                  <Link
-                                    href={githubUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] border border-[var(--foreground-border)] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition text-xs font-medium"
-                                  >
-                                    <Github size={12} />
-                                    <span>Code</span>
-                                  </Link>
-                                )}
-                              </>
-                            );
-                          })()}
-                          {group.projects[0]?.announcementUrl && group.projects[0].announcementUrl !== '#' && (
-                            <Link
-                              href={group.projects[0].announcementUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--foreground)] text-[var(--background)] rounded hover:opacity-80 transition-opacity text-xs font-medium"
-                            >
-                              <ExternalLink size={12} />
-                              <span>Announcement</span>
-                            </Link>
-                          )}
-                        </div>
+                      {githubUrl && (
+                        <Link
+                          href={githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-sm text-[var(--foreground)] hover:opacity-70"
+                        >
+                          <Github size={13} />
+                          Code
+                        </Link>
                       )}
-                    </motion.div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+                      {hasAnnouncement && (
+                        <Link
+                          href={p.announcementUrl!}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-sm text-[var(--foreground)] hover:opacity-70"
+                        >
+                          <ExternalLink size={13} />
+                          Announcement
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })()}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </main>
+      <DotGridBanner />
       <BottomNav activeItem="achievements" />
     </div>
   );
 }
-

@@ -1,38 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, Figtree, Caveat } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/ui/ThemeProvider";
 import { AudioPlayerProvider } from "../contexts/AudioPlayerContext";
 import ErrorBoundaryWrapper from "../components/ui/ErrorBoundaryWrapper";
 import StructuredData from "../components/structured-data/StructuredData";
+import PageTransition from "../components/motion/PageTransition";
+import CustomCursor from "../components/motion/CustomCursor";
+import BackToTop from "../components/BackToTop";
 // Validate environment variables (only runs in development/server)
 import "../lib/env-validation";
 
-const onest = Onest({
-  variable: "--font-onest",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
 });
 
-const figtree = Figtree({
-  variable: "--font-figtree",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Manobendra Mandal | Blockchain & Full Stack Developer",
+    default: "Manobendra Mandal | Web3 & Blockchain Developer",
     template: "%s | Manobendra Mandal",
   },
-  description: "Web3 and full-stack developer. Won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech.",
-  keywords: ["Blockchain Developer", "Full Stack Developer", "Web3", "React", "Next.js", "Solidity", "Portfolio"],
+  description: "Web3 and blockchain developer building on Ethereum, Solana, Starknet, and Celo. Winner of 10+ hackathons across fintech, DeFi, and edtech.",
+  keywords: ["Web3 Developer", "Blockchain Developer", "Full Stack Developer", "Solidity", "Rust", "Solana", "React", "Next.js", "Portfolio"],
   authors: [{ name: "Manobendra Mandal" }],
   creator: "Manobendra Mandal",
   openGraph: {
@@ -40,8 +35,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com",
     siteName: "Manobendra Mandal Portfolio",
-    title: "Manobendra Mandal | Blockchain & Full Stack Developer",
-    description: "Web3 and full-stack developer. Won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech.",
+    title: "Manobendra Mandal | Web3 & Blockchain Developer",
+    description: "Web3 and blockchain developer building on Ethereum, Solana, Starknet, and Celo. Winner of 10+ hackathons across fintech, DeFi, and edtech.",
     images: [
       {
         url: "/avatar.png",
@@ -53,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Manobendra Mandal | Blockchain & Full Stack Developer",
-    description: "Web3 and full-stack developer. Won 10 hackathons, creating decentralized platforms in fintech, AI, and edtech.",
+    title: "Manobendra Mandal | Web3 & Blockchain Developer",
+    description: "Web3 and blockchain developer building on Ethereum, Solana, Starknet, and Celo. Winner of 10+ hackathons across fintech, DeFi, and edtech.",
     images: ["/avatar.png"],
   },
   robots: {
@@ -83,7 +78,7 @@ export const viewport: Viewport = {
   userScalable: true,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
   ],
 };
 
@@ -94,16 +89,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Preconnect to Fontshare for faster font loading */}
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
-            className={`${onest.variable} ${figtree.variable} ${caveat.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-78 lg:py-10 bg-[var(--background)] text-[var(--foreground)]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased px-6 py-4 sm:px-8 sm:py-6 md:px-12 md:py-8 lg:px-78 lg:py-10 bg-[var(--background)] text-[var(--foreground)]`}
       >
         {/* Skip to main content link for accessibility */}
         <a
@@ -117,9 +104,11 @@ export default function RootLayout({
         <ThemeProvider>
           <AudioPlayerProvider>
             <ErrorBoundaryWrapper>
+              <CustomCursor />
               <main id="main-content" tabIndex={-1}>
-                {children}
+                <PageTransition>{children}</PageTransition>
               </main>
+              <BackToTop />
             </ErrorBoundaryWrapper>
           </AudioPlayerProvider>
         </ThemeProvider>

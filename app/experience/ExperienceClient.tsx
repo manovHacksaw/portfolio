@@ -2,113 +2,34 @@
 import { motion } from "framer-motion";
 import Header from "../../components/layout/Header";
 import BottomNav from "../../components/layout/BottomNav";
+import DotGridBanner from "@/components/sections/DotGridBanner";
+import ExperienceItem from "@/components/ExperienceItem";
+import SectionReveal from "@/components/motion/SectionReveal";
+import { fadeUp, stagger } from "@/components/motion/variants";
 import { mockPortfolioData } from "@/data/mockData";
-import { Experience } from "@/types/portfolio.types";
-import { Briefcase, ExternalLink } from "lucide-react";
-import Link from "next/link";
 
 export default function ExperienceClient() {
-  const workExperience = mockPortfolioData.experience; // Get all work experiences
-
-  const renderExperienceCard = (experience: Experience, index: number) => {
-    if (!experience) return null;
-    
-    // Combine responsibilities into a single paragraph
-    const description = experience.responsibilities.join(' ');
-    const dateRange = experience.endDate && experience.endDate !== experience.startDate
-      ? `${experience.startDate} - ${experience.endDate}`
-      : experience.endDate === null
-      ? `${experience.startDate} - Present`
-      : experience.startDate;
-    
-    return (
-      <motion.div
-        key={experience.id}
-        className="flex flex-col gap-4 p-4 border border-[var(--foreground)] rounded-lg bg-[var(--background)]"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{
-          duration: 0.7,
-          delay: index * 0.15,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
-        whileHover={{
-          y: -4,
-          transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
-        }}
-      >
-        {/* Company and Role Header */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
-              <Briefcase size={16} className="text-[var(--foreground)] shrink-0" />
-              <h2 className="text-base sm:text-lg font-bold text-[var(--foreground)] underline">
-                {experience.company}
-              </h2>
-            </div>
-            <p className="text-sm sm:text-base text-[var(--foreground)] font-light">
-              {experience.role}
-            </p>
-          </div>
-          <div className="text-xs sm:text-sm text-[var(--foreground)] font-light shrink-0 self-start sm:self-start">
-            {dateRange}
-          </div>
-        </div>
-
-        {/* Description as justified paragraph */}
-        <p className="text-xs sm:text-sm text-[var(--foreground-muted)] font-light leading-relaxed text-justify">
-          {description}
-        </p>
-
-        {/* Tech Stack */}
-        {experience.techStack && experience.techStack.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
-            {experience.techStack.map((tech, idx) => (
-              <span
-                key={idx}
-                className="text-xs sm:text-sm text-[var(--foreground)] border border-[var(--foreground)] px-2 py-1 rounded"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Website Link */}
-        {experience.websiteUrl && experience.websiteUrl !== '#' && (
-          <Link
-            href={experience.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs sm:text-sm text-[var(--foreground)] font-light hover:opacity-80 transition-opacity w-fit"
-          >
-            <ExternalLink size={14} className="sm:w-3 sm:h-3" />
-            <span>Company Website</span>
-          </Link>
-        )}
-      </motion.div>
-    );
-  };
+  const experience = mockPortfolioData.experience;
 
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
+    <div className="min-h-screen pb-28 sm:pb-24">
       <Header />
-      <main className="w-full px-5 py-8">
-        <div className="flex flex-col gap-8">
-          {/* Work Experience */}
-          <div className="flex flex-col gap-6">
-            {workExperience.map((experience, index) => renderExperienceCard(experience, index))}
-          </div>
+      <DotGridBanner />
+      <main className="mx-auto max-w-4xl py-12 sm:py-16">
+        <SectionReveal variants={fadeUp} className="mb-10">
+          <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
+            Experience
+          </h1>
+        </SectionReveal>
 
-          {/* Hackathons moved to /hackathons */}
-
-          {/* Quote Section */}
-         
-        </div>
+        <motion.div initial="hidden" animate="visible" variants={stagger(0.12)}>
+          {experience.map((exp, i) => (
+            <ExperienceItem key={exp.id} experience={exp} defaultOpen={i === 0} />
+          ))}
+        </motion.div>
       </main>
+      <DotGridBanner />
       <BottomNav activeItem="work" />
     </div>
   );
 }
-

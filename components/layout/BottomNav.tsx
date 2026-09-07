@@ -1,18 +1,19 @@
 "use client";
-import { Home, Folder, GraduationCap, Briefcase, Trophy, Network, WifiPen } from "lucide-react";
+import { Home, FolderOpen, GraduationCap, Briefcase, Trophy, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function BottomNav({ activeItem }: { activeItem?: string }) {
   const pathname = usePathname();
 
   const navItems = [
     { id: "home", icon: Home, label: "Home", path: "/" },
-    { id: "folder", icon: Folder, label: "Projects", path: "/projects" },
+    { id: "folder", icon: FolderOpen, label: "Projects", path: "/projects" },
     { id: "education", icon: GraduationCap, label: "Education", path: "/education" },
-    { id: "work", icon: Briefcase, label: "Work", path: "/experience" },
+    { id: "work", icon: Briefcase, label: "Experience", path: "/experience" },
     { id: "achievements", icon: Trophy, label: "Achievements", path: "/achievements" },
-    { id: "contact", icon: WifiPen, label: "Contact", path: "/contact" },
+    { id: "contact", icon: MessageCircle, label: "Contact", path: "/contact" },
   ];
 
   const getActiveItem = () => {
@@ -28,8 +29,11 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
   const currentActive = getActiveItem();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="flex items-center justify-center gap-6 px-6 py-4 backdrop-blur-md bg-[var(--background)]/80" style={{ borderTop: '1px solid var(--foreground-border)', paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
+    <nav
+      className="pb-safe fixed inset-x-0 bottom-4 z-40 flex justify-center px-4"
+      aria-label="Primary"
+    >
+      <div className="flex items-center gap-1 rounded-full border border-[var(--foreground-border)] bg-[var(--background)]/85 p-1.5 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.25)] backdrop-blur-md">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentActive === item.id;
@@ -38,18 +42,29 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
             <Link
               key={item.id}
               href={item.path}
-              className="relative flex flex-col items-center justify-center focus:outline-none pb-1"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline-none sm:h-10 sm:w-auto sm:px-3.5"
               aria-label={item.label}
+              aria-current={isActive ? "page" : undefined}
             >
-              <Icon
-                size={20}
-                className={`${isActive ? "text-[var(--foreground)]" : "text-[var(--foreground-muted)]"} mb-1`}
-                strokeWidth={1.5}
-                fill="none"
-              />
               {isActive && (
-                <div className="absolute bottom-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--nav-accent)' }} />
+                <motion.span
+                  layoutId="bottom-nav-active"
+                  className="absolute inset-0 rounded-full bg-[var(--foreground)]"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                />
               )}
+              <span className="relative z-10 flex items-center gap-1.5">
+                <Icon
+                  size={17}
+                  strokeWidth={1.75}
+                  className={isActive ? "text-[var(--background)]" : "text-[var(--foreground-muted)]"}
+                />
+                {isActive && (
+                  <span className="hidden text-xs font-medium text-[var(--background)] sm:inline">
+                    {item.label}
+                  </span>
+                )}
+              </span>
             </Link>
           );
         })}
@@ -57,4 +72,3 @@ export default function BottomNav({ activeItem }: { activeItem?: string }) {
     </nav>
   );
 }
-

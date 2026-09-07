@@ -1,23 +1,41 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Design tokens
+   Grayscale/editorial palette with one deliberate accent. Variable *names*
+   are kept stable (--background, --foreground, --foreground-secondary,
+   --foreground-muted, --foreground-border, --accent, --nav-accent) so
+   every component already written against them keeps working.
+   ========================================================================== */
+
 :root {
   --background: #ffffff;
-  --foreground: #1a1a1a; /* Dark gray instead of pure black */
-  --foreground-secondary: #4a4a4a; /* Medium gray for secondary text */
-  --foreground-muted: #6b6b6b; /* Light gray for muted/subtle text */
-  --foreground-border: #e0e0e0; /* Very light gray for borders */
-  --accent: #a8e6cf; /* Default pastel green */
-  --nav-accent: #00ff88; /* Default bright mint for BottomNav */
-  --accent-dark: #66c9a0; /* Default dark shade of accent for text/borders */
-  --splash-color: #ffffff; /* Splash color for light mode transition */
+  --surface: #fafafa;
+  --foreground: #121212;
+  --foreground-secondary: #45454a;
+  --foreground-muted: #78787f;
+  --foreground-border: #e3e3e6;
+
+  --accent: #00d68f;
+  --accent-foreground: #04140d;
+  --nav-accent: var(--accent);
+  --grid-dot: #c9c9cd;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 html.dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --foreground-secondary: #d0d0d0;
-  --foreground-muted: #b0b0b0;
-  --foreground-border: #333333;
+  --background: #0a0a0a;
+  --surface: #141414;
+  --foreground: #f5f5f4;
+  --foreground-secondary: #c8c8cc;
+  --foreground-muted: #8b8b92;
+  --foreground-border: #242426;
+
+  --accent: #00e6a0;
+  --accent-foreground: #04140d;
+  --grid-dot: #3a3a3d;
 }
 
 html {
@@ -27,12 +45,46 @@ html {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--foreground-secondary);
   background: var(--background);
-  font-family: var(--font-onest), var(--font-figtree), system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
-/* Custom Scrollbar - Webkit browsers (Chrome, Safari, Edge) */
+.font-mono {
+  font-family: var(--font-mono-stack);
+}
+
+/* Reusable label style: small, uppercase, tracked-out, monospace — the
+   "eyebrow" treatment used across sections for dates/categories/metadata. */
+.label-mono {
+  font-family: var(--font-mono-stack);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--foreground-muted);
+}
+
+/* ==========================================================================
+   Background texture — subtle dot grid, faded at the edges so it never
+   competes with content.
+   ========================================================================== */
+
+.bg-dot-grid {
+  background-image: radial-gradient(var(--grid-dot) 1.25px, transparent 1.25px);
+  background-size: 22px 22px;
+}
+
+.bg-dot-grid-fade {
+  background-image: radial-gradient(var(--grid-dot) 1.25px, transparent 1.25px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+/* ==========================================================================
+   Custom Scrollbar
+   ========================================================================== */
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -64,7 +116,6 @@ body {
   background-clip: padding-box;
 }
 
-/* Custom Scrollbar - Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
@@ -74,108 +125,75 @@ body {
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-@utility inline-flex {
-  display: inline-flex;
-}
+/* ==========================================================================
+   Focus states — visible everywhere, styled to match the accent system.
+   ========================================================================== */
 
-@keyframes bounce-twice {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  8% {
-    transform: translateY(-10px);
-  }
-  16% {
-    transform: translateY(0);
-  }
-  24% {
-    transform: translateY(-10px);
-  }
-  32% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  48%, 100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes swing {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-8deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-  75% {
-    transform: rotate(8deg);
-  }
-}
-
-.animate-bounce-twice {
-  animation: bounce-twice 5s ease-in-out;
-}
-
-.hover-swing:hover {
-  animation: swing 0.5s ease-in-out infinite;
-  transform-origin: top center;
-}
-
-/* Theme water splash transition */
-@keyframes splash-mask {
-  0% {
-    clip-path: circle(0% at 100% 100%);
-    opacity: 1;
-  }
-  100% {
-    /* 150% radius safely covers ultra-wide screens */
-    clip-path: circle(150% at 100% 100%);
-    opacity: 1;
-  }
-}
-
-@keyframes splash-mask-from-lightbulb {
-  0% {
-    clip-path: circle(0% at var(--splash-origin-x) var(--splash-origin-y));
-    opacity: 1;
-  }
-  100% {
-    /* 150% radius safely covers ultra-wide screens */
-    clip-path: circle(150% at var(--splash-origin-x) var(--splash-origin-y));
-    opacity: 1;
-  }
-}
-
-html.theme-splash-dark::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: #000000;
-  pointer-events: none;
-  z-index: 99999;
-  animation: splash-mask-from-lightbulb 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-html.theme-splash-light::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: var(--splash-color);
-  pointer-events: none;
-  z-index: 99999;
-  animation: splash-mask-from-lightbulb 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0.75rem);
 }
 
-/* Toast animation */
+/* ==========================================================================
+   Theme toggle — native View Transitions, circle-reveal from the toggle
+   button. Falls back to an instant swap when unsupported (handled in JS by
+   simply not requesting a transition), so no @supports fallback is needed
+   here.
+   ========================================================================== */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+html.vt-expanding::view-transition-new(root) {
+  animation: vt-circle-reveal 0.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes vt-circle-reveal {
+  from {
+    clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+  to {
+    clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
+/* ==========================================================================
+   Motion-safety — respected globally, on top of the per-component checks
+   the JS animation primitives already do.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.vt-expanding::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* Toast entrance/exit used by small transient UI (e.g. copy-to-clipboard). */
 @keyframes toast-fade-in {
   0% {
     opacity: 0;
@@ -199,7 +217,7 @@ html.theme-splash-light::before {
 }
 
 .animate-toast-fade-in {
-  animation: toast-fade-in 0.1s ease-out forwards;
+  animation: toast-fade-in 0.2s ease-out forwards;
 }
 
 .animate-toast-fade-out {
