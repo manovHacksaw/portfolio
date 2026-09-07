@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Trophy } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Hackathon } from "@/types/portfolio.types";
 import { groupHackathons } from "@/lib/groupHackathons";
 import SectionReveal from "../motion/SectionReveal";
@@ -31,12 +31,11 @@ export default function AchievementsPreview({ hackathons }: AchievementsPreviewP
         variants={stagger(0.1)}
       >
         {preview.map((group) => {
-          const prize = group.projects.find((p) => p.prize)?.prize;
           return (
             <motion.div
               key={`${group.name}_${group.date}`}
               variants={fadeUp}
-              className="flex items-center gap-4 border-b border-[var(--foreground-border)] py-4"
+              className="flex items-start gap-4 border-b border-[var(--foreground-border)] py-4"
             >
               <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-[var(--foreground-border)] bg-white">
                 {group.logoUrl ? (
@@ -48,23 +47,12 @@ export default function AchievementsPreview({ hackathons }: AchievementsPreviewP
                 )}
               </div>
 
-              <div className="flex flex-1 flex-wrap items-center justify-between gap-x-4 gap-y-1">
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-sm font-medium text-[var(--foreground)]">{group.name}</span>
-                  {group.projects[0]?.projectName && (
-                    <span className="text-xs text-[var(--foreground-muted)]">
-                      {group.projects[0].projectName}
-                    </span>
-                  )}
-                </div>
-                {prize && (
-                  <span
-                    className="label-mono flex items-center gap-1 rounded-full px-2 py-0.5 normal-case tracking-normal"
-                    style={{ backgroundColor: "color-mix(in srgb, var(--accent) 15%, transparent)", color: "var(--accent)" }}
-                  >
-                    <Trophy size={10} />
-                    {prize}
-                  </span>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-[var(--foreground)]">{group.name}</span>
+                {group.projects[0]?.description && (
+                  <p className="line-clamp-2 text-xs leading-relaxed text-[var(--foreground-muted)]">
+                    {group.projects[0].description}
+                  </p>
                 )}
               </div>
             </motion.div>
