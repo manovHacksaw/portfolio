@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import Header from "../../components/layout/Header";
-import BottomNav from "../../components/layout/BottomNav";
+import ThemeToggle from "../../components/layout/ThemeToggle";
 import DotGridBanner from "@/components/sections/DotGridBanner";
 import { mockPortfolioData } from "@/data/mockData";
 import { Mail, MapPin, Github, Linkedin, Instagram, ArrowUpRight, ExternalLink, Music2 } from "lucide-react";
@@ -153,12 +152,14 @@ export default function ContactClient() {
   ].filter((l) => l.href && l.href !== '#');
 
   return (
-    <div className="min-h-screen pb-28 sm:pb-24">
+    <div className="min-h-screen pb-16">
       <DotGridBanner />
-      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-8">
-        <Header />
+      <main className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)] px-4 pt-6 sm:px-6 sm:pt-8">
+        <div className="mb-2 flex items-center justify-end">
+          <ThemeToggle />
+        </div>
         <motion.div
-          className="mt-8 flex flex-col gap-16 sm:mt-10"
+          className="flex flex-col gap-16"
           initial="hidden"
           animate="visible"
           variants={stagger(0.12)}
@@ -319,7 +320,6 @@ export default function ContactClient() {
         </motion.div>
       </main>
       <DotGridBanner />
-      <BottomNav activeItem="contact" />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Github, Linkedin, Mail, FileText, Globe } from "lucide-react";
 import Link from "next/link";
 import { EASE } from "../motion/variants";
+import ThemeToggle from "../layout/ThemeToggle";
 
 interface HeroSectionProps {
   personalInfo: PersonalInfo;
@@ -36,16 +37,19 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
     >
-      <motion.div variants={fadeUpItem} className="flex items-center gap-3 sm:gap-4">
-        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] sm:h-24 sm:w-24">
-          <Image src={personalInfo.avatarUrl} alt={personalInfo.name} fill className="object-cover" priority />
+      <motion.div variants={fadeUpItem} className="flex items-start justify-between gap-3 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)] sm:h-24 sm:w-24">
+            <Image src={personalInfo.avatarUrl} alt={personalInfo.name} fill className="object-cover" priority />
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
+              {personalInfo.name}
+            </h1>
+            <p className="text-sm text-[var(--foreground-muted)] sm:text-base">{personalInfo.title}</p>
+          </div>
         </div>
-        <div className="flex flex-col gap-0.5">
-          <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
-            {personalInfo.name}
-          </h1>
-          <p className="text-sm text-[var(--foreground-muted)] sm:text-base">{personalInfo.title}</p>
-        </div>
+        <ThemeToggle />
       </motion.div>
 
       <motion.p

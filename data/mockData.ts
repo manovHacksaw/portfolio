@@ -7,7 +7,7 @@ export const mockPortfolioData: PortfolioData = {
   personalInfo: {
     name: 'Manobendra Mandal',
     title: 'Lead Backend & Web3 Developer',
-    bio: 'I care a lot about clean architecture and probably have a little OCD when it comes to building websites. I enjoy digging into protocols, cloud infrastructure, and low-level stuff, and I\'m always curious about how things work under the hood. When I\'m not coding, you\'ll probably find me taking a stroll through a park, hanging out at a momo shop, playing guitar, or figuring out what to cook for dinner.',
+    bio: 'Ayyoh! You don\'t have to read my full name — call me Manov or Mandal. I care a lot about clean architecture and probably have a little OCD when building websites. I enjoy digging into protocols, cloud infrastructure, and low-level stuff, always curious about how things work under the hood. When I\'m not coding, you\'ll find me strolling through a park, at a momo shop, playing guitar, or cooking dinner.',
     avatarUrl: '/avatar.png',
     age: 21,
     email: 'manovmandal@gmail.com',

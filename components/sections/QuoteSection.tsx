@@ -10,7 +10,7 @@ interface QuoteSectionProps {
 
 export default function QuoteSection({ text, attribution }: QuoteSectionProps) {
   return (
-    <section className="flex w-full flex-col items-center gap-6 py-20 text-center sm:py-28">
+    <section className="flex w-full flex-col items-center gap-6 py-10 text-center sm:py-14">
       <SectionReveal variants={fadeUp}>
         <Quote size={28} className="text-[var(--foreground-border)]" fill="currentColor" />
       </SectionReveal>

@@ -29,14 +29,18 @@ const rgbToHex = (r: number, g: number, b: number): string => {
 // Generate color scale from accent color
 const generateColorScale = (accentColor: string, isDark: boolean): string[] => {
   const rgb = hexToRgb(accentColor)
-  if (!rgb) return ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
-  
+  if (!rgb) {
+    return isDark
+      ? ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
+      : ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
+  }
+
   const [r, g, b] = rgb
-  
-  // First color is for empty days (count = 0) - use same grey for both themes
-  const emptyColor = '#161b22' // Same dark grey for both light and dark mode
-  
-  // Use same color generation for both light and dark mode
+
+  // Empty (zero-contribution) cells need a theme-appropriate neutral —
+  // GitHub's own dark-grey (#161b22) reads as a near-black square in light
+  // mode, so this switches to a light grey there instead.
+  const emptyColor = isDark ? '#161b22' : '#ebedf0'
   const intensity1 = rgbToHex(
     Math.max(0, Math.min(255, Math.floor(r * 0.25))),
     Math.max(0, Math.min(255, Math.floor(g * 0.25))),
@@ -244,7 +248,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
   const colorScale = useMemo(() => generateColorScale(accentColor, isDark), [accentColor, isDark])
   
   return (
-    <div className="w-full py-16 sm:py-20">
+    <div className="w-full py-8 sm:py-10">
       <h2 className="mb-6 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
         GitHub Activity
       </h2>

@@ -1,8 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Header from "../../components/layout/Header";
-import BottomNav from "../../components/layout/BottomNav";
+import ThemeToggle from "../../components/layout/ThemeToggle";
 import DotGridBanner from "@/components/sections/DotGridBanner";
 import SectionReveal from "@/components/motion/SectionReveal";
 import { fadeUp, stagger } from "@/components/motion/variants";
@@ -13,14 +12,14 @@ export default function EducationClient() {
   const quote = mockPortfolioData.educationPage?.quote;
 
   return (
-    <div className="min-h-screen pb-28 sm:pb-24">
+    <div className="min-h-screen pb-16">
       <DotGridBanner />
-      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-8">
-        <Header />
-        <SectionReveal variants={fadeUp} className="mb-10 mt-8 sm:mt-10">
+      <main className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)] px-4 pt-6 sm:px-6 sm:pt-8">
+        <SectionReveal variants={fadeUp} className="mb-10 flex items-center justify-between gap-4">
           <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
             Education
           </h1>
+          <ThemeToggle />
         </SectionReveal>
 
         <motion.div
@@ -71,7 +70,6 @@ export default function EducationClient() {
         )}
       </main>
       <DotGridBanner />
-      <BottomNav activeItem="education" />
     </div>
   );
 }

@@ -29,7 +29,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
   const items = dedupedTechSkills(skills);
 
   return (
-    <section className="w-full py-16 sm:py-20">
+    <section className="w-full py-8 sm:py-10">
       <SectionReveal variants={fadeUp} className="mb-8">
         <h2 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
           Skills &amp; Technologies

@@ -1,8 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Header from "../components/layout/Header";
-import BottomNav from "../components/layout/BottomNav";
+import ThemeToggle from "../components/layout/ThemeToggle";
 import { Home, Compass, ArrowRight, Search } from "lucide-react";
 
 const containerVariants = {
@@ -52,14 +51,16 @@ const rotateVariants = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen pb-24 sm:pb-20 bg-[var(--background)]">
+    <div className="min-h-screen pb-16 bg-[var(--background)]">
       <motion.main
-        className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 pb-8 pt-6 sm:px-6 sm:pt-8"
+        className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)] px-4 pb-8 pt-6 sm:px-6 sm:pt-8"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <Header displayRoute="/oops" />
+        <div className="flex items-center justify-end">
+          <ThemeToggle />
+        </div>
         <div className="mt-8 flex flex-col items-center justify-center min-h-[60vh] gap-8 sm:mt-10">
           {/* Animated 404 Number */}
           <motion.div
@@ -246,7 +247,6 @@ export default function NotFound() {
           </motion.div>
         </div>
       </motion.main>
-      <BottomNav />
     </div>
   );
 }
