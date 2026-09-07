@@ -17,7 +17,7 @@ export default function Home() {
     <div className="min-h-screen pb-28 sm:pb-24">
       <Header />
       <DotGridBanner />
-      <div className="mx-auto max-w-4xl divide-y divide-[var(--foreground-border)]">
+      <div className="mx-auto max-w-4xl divide-y divide-dashed divide-[var(--foreground-border)] border-x border-dashed border-[var(--foreground-border)] px-4 sm:px-6">
         <HeroSection
           personalInfo={mockPortfolioData.personalInfo}
           portfolioLinks={mockPortfolioData.portfolioLinks}

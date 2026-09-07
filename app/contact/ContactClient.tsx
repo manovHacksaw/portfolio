@@ -156,7 +156,7 @@ export default function ContactClient() {
     <div className="min-h-screen pb-28 sm:pb-24">
       <Header />
       <DotGridBanner />
-      <main className="mx-auto max-w-4xl py-12 sm:py-16">
+      <main className="mx-auto max-w-4xl border-x border-dashed border-[var(--foreground-border)] px-4 py-12 sm:px-6 sm:py-16">
         <motion.div
           className="flex flex-col gap-16"
           initial="hidden"
