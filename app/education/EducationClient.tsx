@@ -33,7 +33,7 @@ export default function EducationClient() {
             <motion.div
               key={edu.id}
               variants={fadeUp}
-              className="flex items-center gap-4 border-b border-[var(--foreground-border)] py-6"
+              className="flex items-center gap-4 py-6"
             >
               {edu.imageUrl && (
                 <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-[var(--foreground-border)] bg-[var(--surface)]">

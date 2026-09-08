@@ -1,6 +1,6 @@
 'use client'
-import { useEffect, useState, useMemo } from 'react'
-import GitHubCalendar from 'react-github-calendar'
+import { useEffect, useState, useMemo, useCallback } from 'react'
+import GitHubCalendar, { Activity } from 'react-github-calendar'
 
 interface GithubContributionsProps {
   username?: string
@@ -19,7 +19,11 @@ const generateColorScale = (isDark: boolean): string[] => (isDark ? GRAYSCALE.da
 const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsProps) => {
   const [isDark, setIsDark] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  
+  // The real fetched total, read off the same data the calendar renders —
+  // never a placeholder/guessed number. Stays null (and renders nothing)
+  // until the calendar's own fetch resolves.
+  const [totalCount, setTotalCount] = useState<number | null>(null)
+
   useEffect(() => {
     // Check if calendar has loaded by looking for the SVG element
     const checkCalendarLoaded = () => {
@@ -30,16 +34,16 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
       }
       return false
     }
-    
+
     let checkInterval: NodeJS.Timeout | null = null
     let timeout: NodeJS.Timeout | null = null
-    
+
     // Wait a bit for component to mount
     const initialDelay = setTimeout(() => {
       if (checkCalendarLoaded()) {
         return
       }
-      
+
       // Check periodically until calendar loads
       checkInterval = setInterval(() => {
         if (checkCalendarLoaded()) {
@@ -47,21 +51,21 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
           if (timeout) clearTimeout(timeout)
         }
       }, 100)
-      
+
       // Timeout after 10 seconds to prevent infinite loading
       timeout = setTimeout(() => {
         if (checkInterval) clearInterval(checkInterval)
         setIsLoading(false)
       }, 10000)
     }, 200)
-    
+
     return () => {
       clearTimeout(initialDelay)
       if (checkInterval) clearInterval(checkInterval)
       if (timeout) clearTimeout(timeout)
     }
   }, [username])
-  
+
   useEffect(() => {
     // Track dark/light so the calendar's grayscale ramp can flip with it
     const updateTheme = () => {
@@ -72,129 +76,42 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
     }
 
     updateTheme()
-    
+
     // Watch for theme changes
     const observer = new MutationObserver(updateTheme)
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class', 'style'],
     })
-    
+
     // Also watch for theme changes via next-themes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleMediaChange = () => updateTheme()
     mediaQuery.addEventListener('change', handleMediaChange)
-    
-    // Hide "Less" and "More" labels on mobile - aggressive continuous approach
-    const hideLegendLabels = () => {
-      if (typeof window !== 'undefined' && window.innerWidth <= 639) {
-        // Try multiple selectors
-        const svg = document.querySelector('.react-activity-calendar svg')
-        if (svg) {
-          // Get all text elements
-          const textElements = svg.querySelectorAll('text')
-          textElements.forEach((text) => {
-            const textContent = text.textContent?.trim()
-            if (textContent === 'Less' || textContent === 'More') {
-              const element = text as SVGTextElement
-              element.style.display = 'none'
-              element.style.visibility = 'hidden'
-              element.style.opacity = '0'
-              element.style.pointerEvents = 'none'
-              element.setAttribute('display', 'none')
-              element.setAttribute('visibility', 'hidden')
-              element.remove() // Actually remove from DOM
-            }
-          })
-          
-          // Also try finding by text-anchor attribute and remove them
-          const startTexts = svg.querySelectorAll('text[text-anchor="start"]')
-          const endTexts = svg.querySelectorAll('text[text-anchor="end"]')
-          
-          startTexts.forEach((text) => {
-            const textContent = text.textContent?.trim()
-            if (textContent === 'Less') {
-              text.remove()
-            }
-          })
-          
-          endTexts.forEach((text) => {
-            const textContent = text.textContent?.trim()
-            if (textContent === 'More') {
-              text.remove()
-            }
-          })
-          
-          // Also check the last group (legend area) and remove all text there
-          const groups = svg.querySelectorAll('g')
-          if (groups.length > 0) {
-            const lastGroup = groups[groups.length - 1]
-            const legendTexts = lastGroup.querySelectorAll('text')
-            legendTexts.forEach((text) => {
-              const textContent = text.textContent?.trim()
-              if (textContent === 'Less' || textContent === 'More') {
-                text.remove()
-              }
-            })
-          }
-        }
-      }
-    }
-    
-    // Run continuously with intervals to catch calendar rendering
-    const intervalId = setInterval(hideLegendLabels, 100)
-    
-    // Also run multiple times with different delays
-    const timers = [
-      setTimeout(hideLegendLabels, 100),
-      setTimeout(hideLegendLabels, 300),
-      setTimeout(hideLegendLabels, 500),
-      setTimeout(hideLegendLabels, 1000),
-      setTimeout(hideLegendLabels, 2000),
-    ]
-    
-    // Also run on resize
-    window.addEventListener('resize', hideLegendLabels)
-    
-    // Use MutationObserver to watch for calendar updates
-    const calendarObserver = new MutationObserver(() => {
-      hideLegendLabels()
-    })
-    const calendarContainer = document.querySelector('.react-activity-calendar')
-    if (calendarContainer) {
-      calendarObserver.observe(calendarContainer, {
-        childList: true,
-        subtree: true,
-        attributes: false,
-        characterData: false,
-      })
-    }
-    
-    // Also observe the entire document for calendar appearance
-    const documentObserver = new MutationObserver(() => {
-      const calendar = document.querySelector('.react-activity-calendar')
-      if (calendar) {
-        hideLegendLabels()
-      }
-    })
-    documentObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    })
-    
+
     return () => {
       observer.disconnect()
       mediaQuery.removeEventListener('change', handleMediaChange)
-      window.removeEventListener('resize', hideLegendLabels)
-      calendarObserver.disconnect()
-      documentObserver.disconnect()
-      clearInterval(intervalId)
-      timers.forEach(timer => clearTimeout(timer))
     }
   }, [])
-  
+
   const colorScale = useMemo(() => generateColorScale(isDark), [isDark])
-  
+
+  // Pass-through transform, used only to read the real total off the data
+  // the calendar already fetched — the SVG's own built-in total/legend are
+  // hidden (hideTotalCount/hideColorLegend below) because they live inside
+  // the horizontally-scrolling grid and get clipped off-screen; we render
+  // our own copies in a footer row that sits outside the scroll container.
+  const readTotal = useCallback((data: Array<Activity>) => {
+    const total = data.reduce((sum, day) => sum + day.count, 0)
+    // GitHubCalendar invokes transformData synchronously while it (and its
+    // parent) are rendering, so calling setState directly here trips
+    // React's "update a component while rendering a different component"
+    // warning. Deferring to a microtask moves it safely after that render.
+    queueMicrotask(() => setTotalCount(total))
+    return data
+  }, [])
+
   return (
     <div className="w-full py-6 sm:py-8">
       <div className="overflow-x-auto">
@@ -206,6 +123,9 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
               blockSize={12}
               blockMargin={4}
               fontSize={12}
+              hideTotalCount
+              hideColorLegend
+              transformData={readTotal}
               theme={{
                 light: colorScale,
                 dark: colorScale,
@@ -215,7 +135,7 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
               }}
             />
           </div>
-          
+
           {/* Loading Skeleton - shown while loading */}
           {isLoading && (
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
@@ -238,13 +158,13 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
                     />
                   ))}
                 </div>
-                
+
                 {/* Grid skeleton - 7 rows x 53 columns = 371 blocks */}
                 {/* blockSize=12, blockMargin=4 means: 12px blocks with 4px gap */}
-                <div 
-                  className="grid mx-auto" 
-                  style={{ 
-                    gridTemplateColumns: 'repeat(53, 12px)', 
+                <div
+                  className="grid mx-auto"
+                  style={{
+                    gridTemplateColumns: 'repeat(53, 12px)',
                     gridTemplateRows: 'repeat(7, 12px)',
                     gap: '4px',
                     width: '844px', // 53 * 12 + 52 * 4 = 636 + 208 = 844px
@@ -260,36 +180,30 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
                     />
                   ))}
                 </div>
-                
-                {/* Bottom info skeleton */}
-                <div className="flex justify-between items-center mt-3" style={{ width: '844px' }}>
-                  {/* Contributions count text */}
-                  <div className="h-4 w-40 bg-[var(--foreground-border)] rounded animate-pulse" style={{ animationDelay: '0.2s' }} />
-                  
-                  {/* Legend: Less + color squares + More */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-[var(--foreground-muted)] opacity-60">Less</span>
-                    <div className="flex gap-1">
-                      {[0, 1, 2, 3, 4].map((level) => (
-                        <div
-                          key={level}
-                          className="w-3 h-3 rounded-sm bg-[var(--foreground-border)] animate-pulse"
-                          style={{
-                            animationDelay: `${level * 0.1}s`,
-                            opacity: 0.2 + (level * 0.15),
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-xs text-[var(--foreground-muted)] opacity-60">More</span>
-                  </div>
-                </div>
               </div>
             </div>
           )}
         </div>
       </div>
-      
+
+      {/* Total count + color legend, pinned here outside the horizontally
+          scrolling calendar above — they used to live inside the calendar's
+          own SVG and would scroll (and get clipped) with it. */}
+      {!isLoading && (
+        <div className="mt-3 flex items-center justify-between gap-3 text-xs text-[var(--foreground-muted)]">
+          <span>{totalCount !== null ? `${totalCount.toLocaleString()} contributions in the last year` : ''}</span>
+          <div className="flex items-center gap-1.5">
+            <span>Less</span>
+            <div className="flex gap-1">
+              {colorScale.map((color) => (
+                <span key={color} className="h-3 w-3 rounded-sm" style={{ backgroundColor: color }} />
+              ))}
+            </div>
+            <span>More</span>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         :global(.react-activity-calendar) {
           font-family: inherit;
@@ -310,23 +224,6 @@ const GithubContributions = ({ username = 'manovHacksaw' }: GithubContributionsP
         :global(.react-activity-calendar rect[data-level="0"]) {
           stroke: var(--foreground-border);
           stroke-width: 1;
-        }
-        /* Hide "Less" and "More" labels on mobile - aggressive approach */
-        @media (max-width: 639px) {
-          /* Hide all text elements that might be Less/More */
-          :global(.react-activity-calendar svg text[text-anchor="start"]),
-          :global(.react-activity-calendar svg text[text-anchor="end"]) {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-          }
-          /* Hide by finding all text and checking if it's at the legend position */
-          :global(.react-activity-calendar svg g:last-child text) {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-          }
         }
       `}</style>
     </div>

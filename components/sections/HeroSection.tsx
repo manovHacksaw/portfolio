@@ -19,6 +19,21 @@ const fadeUpItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
+// Bolds "Manov"/"Mandal" wherever they appear in the bio, without baking
+// markup into the data file — mockData.ts stays plain text, this is purely
+// a rendering concern.
+function renderBioWithEmphasis(bio: string) {
+  return bio.split(/(Manov|Mandal)/g).map((part, i) =>
+    part === "Manov" || part === "Mandal" ? (
+      <strong key={i} className="font-semibold text-[var(--foreground)]">
+        {part}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
+
 export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectionProps) {
   const githubLink = portfolioLinks.find((l) => l.platform === "GitHub");
   const linkedInLink = portfolioLinks.find((l) => l.platform === "LinkedIn");
@@ -65,7 +80,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
         variants={fadeUpItem}
         className="w-full text-base leading-relaxed text-[var(--foreground-secondary)]"
       >
-        {personalInfo.bio}
+        {renderBioWithEmphasis(personalInfo.bio)}
       </motion.p>
 
       <motion.div variants={fadeUpItem} className="flex flex-wrap items-center gap-3">

@@ -2,6 +2,7 @@ import HeroSection from "../components/sections/HeroSection";
 import ExperiencePreview from "../components/sections/ExperiencePreview";
 import ProjectsPreview from "../components/sections/ProjectsPreview";
 import AchievementsPreview from "../components/sections/AchievementsPreview";
+import EducationPreview from "../components/sections/EducationPreview";
 import SkillsSection from "../components/sections/SkillsSection";
 import QuoteSection from "../components/sections/QuoteSection";
 import DotGridBanner from "../components/sections/DotGridBanner";
@@ -40,6 +41,10 @@ export default function Home() {
         <SectionDivider />
         <div className="px-4 sm:px-6">
           <AchievementsPreview hackathons={mockPortfolioData.hackathons} />
+        </div>
+        <SectionDivider />
+        <div className="px-4 sm:px-6">
+          <EducationPreview education={mockPortfolioData.education} />
         </div>
         <SectionDivider />
         <div className="px-4 sm:px-6">

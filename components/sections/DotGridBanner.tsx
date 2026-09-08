@@ -10,10 +10,13 @@ export default function DotGridBanner({ className = "" }: { className?: string }
       aria-hidden="true"
       className={`relative left-1/2 h-40 w-screen -translate-x-1/2 border-y border-dashed border-[var(--foreground-border)] sm:h-56 ${className}`}
     >
-      {/* The dot texture's fade mask lives on its own layer so it doesn't
-          also mask out the border above — mask-image affects the whole
-          element it's applied to, border included. */}
-      <div className="bg-dot-grid-fade absolute inset-0" />
+      {/* The dot texture is confined to the same 720px column as the page's
+          content (unlike the border above, which bleeds full width) and
+          uses a flat, unfaded pattern — a plain, evenly-dense grid, not a
+          fade to transparent. Sized/centered to match the content column,
+          inset by a small margin on all four sides so the dots don't touch
+          the border lines. */}
+      <div className="bg-dot-grid absolute left-1/2 top-4 bottom-4 w-[calc(100%-2rem)] max-w-[calc(720px-2rem)] -translate-x-1/2" />
     </div>
   );
 }
