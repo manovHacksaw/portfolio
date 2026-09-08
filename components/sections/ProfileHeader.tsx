@@ -27,7 +27,7 @@ const fadeUpItem = {
 export default function ProfileHeader({ name, titles, images, verified = true }: ProfileHeaderProps) {
   return (
     <motion.div
-      className="flex items-start justify-between gap-3 py-6 sm:gap-4 sm:py-8"
+      className="flex items-start justify-between gap-3 py-3 sm:gap-4 sm:py-4"
       initial="hidden"
       animate="visible"
       variants={fadeUpItem}
@@ -35,7 +35,7 @@ export default function ProfileHeader({ name, titles, images, verified = true }:
       <div className="flex items-end gap-3 sm:gap-4">
         <ProfileImage images={images} alt={name} />
 
-        <div className="flex flex-col gap-0.5">
+        <div className="flex flex-col gap-0.5 pb-2">
           <h1 className="flex items-center gap-1.5 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
             {name}
             {verified && (
@@ -47,9 +47,10 @@ export default function ProfileHeader({ name, titles, images, verified = true }:
       </div>
 
       {/* Height-matched to the profile image so ViewCounter (bottom) lands
-          at the same baseline as the rotating title next to it, while
-          ThemeToggle (top) stays put at the header's top edge. */}
-      <div className="flex h-[100px] shrink-0 flex-col items-end justify-between">
+          at the same baseline as the rotating title next to it (both
+          nudged up by the same pb-2), while ThemeToggle (top) stays put
+          at the header's top edge. */}
+      <div className="flex h-[100px] shrink-0 flex-col items-end justify-between pb-2">
         <ThemeToggle />
         <ViewCounter />
       </div>

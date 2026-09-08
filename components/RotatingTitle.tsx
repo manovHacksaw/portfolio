@@ -27,7 +27,7 @@ export default function RotatingTitle({ titles, className = "" }: RotatingTitleP
   // above it or the bio below it — the container's size is constant
   // regardless of which title is currently showing.
   return (
-    <div className={`relative h-5 overflow-hidden sm:h-6 ${className}`}>
+    <div className={`relative h-6 overflow-hidden sm:h-7 ${className}`}>
       <AnimatePresence mode="wait">
         <motion.p
           key={titles[index] ?? index}
