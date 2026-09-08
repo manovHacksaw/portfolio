@@ -5,6 +5,7 @@ import ProjectsPreview from "../components/sections/ProjectsPreview";
 import AchievementsPreview from "../components/sections/AchievementsPreview";
 import EducationPreview from "../components/sections/EducationPreview";
 import SkillsSection from "../components/sections/SkillsSection";
+import NotesSection from "../components/sections/NotesSection";
 import QuoteSection from "../components/sections/QuoteSection";
 import DotGridBanner from "../components/sections/DotGridBanner";
 import SectionDivider from "../components/sections/SectionDivider";
@@ -59,6 +60,14 @@ export default function Home() {
         <div className="px-4 sm:px-6">
           <SkillsSection skills={mockPortfolioData.skills} />
         </div>
+        {mockPortfolioData.notes && mockPortfolioData.notes.length > 0 && (
+          <>
+            <SectionDivider />
+            <div className="px-4 sm:px-6">
+              <NotesSection notes={mockPortfolioData.notes} />
+            </div>
+          </>
+        )}
         {quote && (
           <>
             <SectionDivider />

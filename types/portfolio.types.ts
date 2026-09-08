@@ -122,6 +122,16 @@ export interface AchievementsPageData {
   introduction?: string; // Optional introduction text
 }
 
+export interface Note {
+  id: string;
+  url: string; // link to the original post
+  excerpt: string; // real text pulled from the post — never invented
+  /** true if `excerpt` is a truncated preview, not the full post text */
+  truncated: boolean;
+  date: string; // ISO date string
+  imageUrl?: string; // attached media from the post, if any
+}
+
 export interface PortfolioData {
   personalInfo: PersonalInfo;
   interests: Interest[];
@@ -131,6 +141,7 @@ export interface PortfolioData {
   education: Education[];
   projects: Project[];
   portfolioLinks: PortfolioLink[];
+  notes?: Note[]; // Optional long-form posts/threads, linked out to their source
   contactPage?: ContactPageData; // Optional contact page data
   educationPage?: EducationPageData; // Optional education page data
   achievementsPage?: AchievementsPageData; // Optional achievements page data

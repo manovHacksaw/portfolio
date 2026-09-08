@@ -569,6 +569,35 @@ export const mockPortfolioData: PortfolioData = {
     { id: '4', platform: 'Email', url: 'https://mail.google.com/mail/?view=cm&to=manovmandal@gmail.com', icon: 'email' },
     { id: '5', platform: 'Telegram', url: 'https://t.me/manov_weeb', icon: 'telegram' },
   ],
+  notes: [
+    {
+      id: '1',
+      url: 'https://x.com/manovmandal/status/2059372184766918817',
+      excerpt:
+        "Back in 2015, my father set up a desktop at home for me and my brother. 1GB RAM, some random processor that I didn't care about and 128GB Hard Drive Storage. The goal was simple: learn typing, Excel, basic computer skills, internet familiarity etc. At that age I honestly…",
+      truncated: true,
+      date: '2026-05-26',
+      imageUrl: '/images/notes/note-1.jpg',
+    },
+    {
+      id: '2',
+      url: 'https://x.com/manovmandal/status/2037489186845209073',
+      excerpt:
+        'Most people scrolling right now have no idea what actually happens when they tap "Like" on this post. Even my fellow devs, would just say: "An HTTP request is sent to the X\'s API". True. But that\'s just the visible tip of the iceberg.',
+      truncated: false,
+      date: '2026-03-27',
+      imageUrl: '/images/notes/note-2.jpg',
+    },
+    {
+      id: '3',
+      url: 'https://x.com/manovmandal/status/2027414233810719169',
+      excerpt:
+        "Fast forward to now. College is over, and life looks very different from what I had imagined when I started. After graduation, I took a drop year to explore opportunities and casually thinking about doing a master's abroad, since pursuing one here didn't feel very valuable…",
+      truncated: true,
+      date: '2026-02-27',
+      imageUrl: '/images/notes/note-3.jpg',
+    },
+  ],
   contactPage: {
     header: {
       title: "Let's Work Together",
