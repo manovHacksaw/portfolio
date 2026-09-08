@@ -7,8 +7,13 @@ export const mockPortfolioData: PortfolioData = {
   personalInfo: {
     name: 'Manobendra Mandal',
     title: 'Lead Backend & Web3 Developer',
+    titles: ['Blockchain Developer', 'Full Stack Developer', 'Backend Engineer'],
     bio: 'Ayyoh! You don\'t have to read my full name. Call me Manov or Mandal. I care a lot about clean architecture and probably have a little OCD when building websites. I enjoy digging into protocols, cloud infrastructure, and low-level stuff, always curious about how things work under the hood. When I\'m not coding, you\'ll find me strolling through a park, at a momo shop, playing guitar, or cooking dinner.',
     avatarUrl: '/avatar.png',
+    // Swap in your own photos here once provided — the header will rotate
+    // through them automatically. A single-item array just renders that
+    // one photo with no rotation.
+    avatarUrls: ['/avatar.png'],
     age: 21,
     email: 'manovmandal@gmail.com',
     location: 'Kolkata, West Bengal, India',

@@ -1,4 +1,5 @@
-import HeroSection from "../components/sections/HeroSection";
+import ProfileHeader from "../components/sections/ProfileHeader";
+import BioSection from "../components/sections/BioSection";
 import ExperiencePreview from "../components/sections/ExperiencePreview";
 import ProjectsPreview from "../components/sections/ProjectsPreview";
 import AchievementsPreview from "../components/sections/AchievementsPreview";
@@ -19,7 +20,15 @@ export default function Home() {
       <div className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)]">
         <DotGridBanner />
         <div className="px-4 sm:px-6">
-          <HeroSection
+          <ProfileHeader
+            name={mockPortfolioData.personalInfo.name}
+            titles={mockPortfolioData.personalInfo.titles ?? [mockPortfolioData.personalInfo.title]}
+            images={mockPortfolioData.personalInfo.avatarUrls ?? [mockPortfolioData.personalInfo.avatarUrl]}
+          />
+        </div>
+        <SectionDivider />
+        <div className="px-4 sm:px-6">
+          <BioSection
             personalInfo={mockPortfolioData.personalInfo}
             portfolioLinks={mockPortfolioData.portfolioLinks}
           />

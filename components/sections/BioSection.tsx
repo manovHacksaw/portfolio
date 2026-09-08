@@ -1,15 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import { PersonalInfo, PortfolioLink } from "@/types/portfolio.types";
-import Image from "next/image";
-import { Github, Linkedin, Mail, FileText, BadgeCheck } from "lucide-react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
 import Link from "next/link";
 import { EASE } from "../motion/variants";
-import ThemeToggle from "../layout/ThemeToggle";
-import ViewCounter from "../ViewCounter";
 
-interface HeroSectionProps {
+interface BioSectionProps {
   personalInfo: PersonalInfo;
   portfolioLinks: PortfolioLink[];
 }
@@ -34,7 +31,10 @@ function renderBioWithEmphasis(bio: string) {
   );
 }
 
-export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectionProps) {
+// A distinct block from ProfileHeader above it — bio text, CTAs, and
+// socials, starting at a stable vertical position regardless of anything
+// (title rotation, image rotation) happening in the header.
+export default function BioSection({ personalInfo, portfolioLinks }: BioSectionProps) {
   const githubLink = portfolioLinks.find((l) => l.platform === "GitHub");
   const linkedInLink = portfolioLinks.find((l) => l.platform === "LinkedIn");
   const telegramLink = portfolioLinks.find((l) => l.platform === "Telegram");
@@ -51,31 +51,12 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
   );
 
   return (
-    <motion.section
-      className="flex w-full flex-col gap-4 pb-8 pt-3 sm:pb-10"
+    <motion.div
+      className="flex w-full flex-col gap-4 pb-8 pt-6 sm:pb-10 sm:pt-8"
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
     >
-      <motion.div variants={fadeUpItem} className="flex items-start justify-between gap-3 sm:gap-4">
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div className="relative h-[100px] w-[100px] shrink-0 overflow-hidden rounded-2xl border border-[var(--foreground-border)] bg-[var(--surface)]">
-            <Image src={personalInfo.avatarUrl} alt={personalInfo.name} fill className="object-cover" priority />
-          </div>
-          <div className="flex flex-col gap-0.5">
-            <h1 className="flex items-center gap-1.5 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
-              {personalInfo.name}
-              <BadgeCheck size={18} className="shrink-0 fill-blue-500 text-white" aria-hidden="true" />
-            </h1>
-            <p className="text-sm text-[var(--foreground-muted)] sm:text-base">{personalInfo.title}</p>
-          </div>
-        </div>
-        <div className="flex shrink-0 flex-col items-end gap-1.5 pt-0.5">
-          <ThemeToggle />
-          <ViewCounter />
-        </div>
-      </motion.div>
-
       <motion.p
         variants={fadeUpItem}
         className="w-full text-base leading-relaxed text-[var(--foreground-secondary)]"
@@ -123,6 +104,6 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
           ))}
         </div>
       </motion.div>
-    </motion.section>
+    </motion.div>
   );
 }

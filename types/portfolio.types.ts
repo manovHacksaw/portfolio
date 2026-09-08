@@ -78,9 +78,13 @@ export interface Project {
 
 export interface PersonalInfo {
   name: string;
-  title: string;
+  title: string; // canonical title — used for SEO/structured data (jobTitle)
+  /** Titles the header rotates through. Falls back to [title] if omitted. */
+  titles?: string[];
   bio: string;
-  avatarUrl: string;
+  avatarUrl: string; // canonical avatar — used for SEO/structured data (image)
+  /** Photos the header rotates through. Falls back to [avatarUrl] if omitted. */
+  avatarUrls?: string[];
   age: number;
   email: string;
   location: string;
