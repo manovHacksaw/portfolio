@@ -332,6 +332,7 @@ export const mockPortfolioData: PortfolioData = {
     {
       id: '18',
       name: 'Stellar Builder Garage',
+      logoUrl: '/images/hackathons/stellar-builder-garage.jpg',
       projectName: 'NordStern',
       achievement: 'Winner',
       date: 'Jun 2026',
