@@ -26,7 +26,7 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
     };
   }, []);
 
-  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleTheme = () => {
     if (!mounted) return;
     const next = resolvedTheme === "dark" ? "light" : "dark";
 
@@ -37,11 +37,10 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
       });
     }
 
+    // The transition is a fixed top-to-bottom wipe (see vt-wipe-down in
+    // globals.css) — it doesn't originate from the button, so no position
+    // needs to be read here.
     const root = document.documentElement;
-    const rect = e.currentTarget.getBoundingClientRect();
-    root.style.setProperty("--vt-x", `${rect.left + rect.width / 2}px`);
-    root.style.setProperty("--vt-y", `${rect.top + rect.height / 2}px`);
-
     const doc = document as Document & {
       startViewTransition?: (callback: () => void) => { finished: Promise<void> };
     };

@@ -143,8 +143,9 @@ body {
 }
 
 /* ==========================================================================
-   Theme toggle — native View Transitions, circle-reveal from the toggle
-   button. Falls back to an instant swap when unsupported (handled in JS by
+   Theme toggle — native View Transitions, a top-to-bottom wipe (the new
+   theme sweeps down from the top edge, not a reveal centered on the toggle
+   button). Falls back to an instant swap when unsupported (handled in JS by
    simply not requesting a transition), so no @supports fallback is needed
    here.
    ========================================================================== */
@@ -164,15 +165,15 @@ body {
 }
 
 html.vt-expanding::view-transition-new(root) {
-  animation: vt-circle-reveal 0.65s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: vt-wipe-down 600ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-@keyframes vt-circle-reveal {
+@keyframes vt-wipe-down {
   from {
-    clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
+    clip-path: inset(0 0 100% 0);
   }
   to {
-    clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%));
+    clip-path: inset(0 0 0% 0);
   }
 }
 

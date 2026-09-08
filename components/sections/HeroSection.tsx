@@ -2,10 +2,12 @@
 import { motion } from "framer-motion";
 import { PersonalInfo, PortfolioLink } from "@/types/portfolio.types";
 import Image from "next/image";
-import { Github, Linkedin, Mail, FileText, Globe } from "lucide-react";
+import { Github, Linkedin, Mail, FileText, BadgeCheck } from "lucide-react";
+import { SiTelegram } from "react-icons/si";
 import Link from "next/link";
 import { EASE } from "../motion/variants";
 import ThemeToggle from "../layout/ThemeToggle";
+import ViewCounter from "../ViewCounter";
 
 interface HeroSectionProps {
   personalInfo: PersonalInfo;
@@ -20,15 +22,18 @@ const fadeUpItem = {
 export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectionProps) {
   const githubLink = portfolioLinks.find((l) => l.platform === "GitHub");
   const linkedInLink = portfolioLinks.find((l) => l.platform === "LinkedIn");
-  const portfolioLink = portfolioLinks.find((l) => l.platform === "Portfolio");
+  const telegramLink = portfolioLinks.find((l) => l.platform === "Telegram");
   const emailHref = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(personalInfo.email)}`;
 
-  const socials = [
+  type SocialIcon = React.ComponentType<{ size?: number; className?: string }>;
+  const socialCandidates: { label: string; href?: string; icon: SocialIcon }[] = [
     { label: "GitHub", href: githubLink?.url, icon: Github },
     { label: "LinkedIn", href: linkedInLink?.url, icon: Linkedin },
-    { label: "Resume", href: "/Manobendra-Mandal.pdf", icon: FileText },
-    portfolioLink ? { label: "Portfolio", href: portfolioLink.url, icon: Globe } : null,
-  ].filter((s): s is { label: string; href: string; icon: typeof Github } => Boolean(s?.href));
+    { label: "Telegram", href: telegramLink?.url, icon: SiTelegram },
+  ];
+  const socials = socialCandidates.filter(
+    (s): s is { label: string; href: string; icon: SocialIcon } => Boolean(s.href)
+  );
 
   return (
     <motion.section
@@ -43,13 +48,17 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
             <Image src={personalInfo.avatarUrl} alt={personalInfo.name} fill className="object-cover" priority />
           </div>
           <div className="flex flex-col gap-0.5">
-            <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
+            <h1 className="flex items-center gap-1.5 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
               {personalInfo.name}
+              <BadgeCheck size={18} className="shrink-0 fill-blue-500 text-white" aria-hidden="true" />
             </h1>
             <p className="text-sm text-[var(--foreground-muted)] sm:text-base">{personalInfo.title}</p>
           </div>
         </div>
-        <ThemeToggle />
+        <div className="flex shrink-0 flex-col items-end gap-1.5 pt-0.5">
+          <ThemeToggle />
+          <ViewCounter />
+        </div>
       </motion.div>
 
       <motion.p
@@ -73,7 +82,7 @@ export default function HeroSection({ personalInfo, portfolioLinks }: HeroSectio
           href={emailHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-[var(--foreground-border)] px-4 py-2 text-sm font-medium text-[var(--foreground)] transition-colors hover:border-[var(--foreground)]"
+          className="inline-flex items-center gap-2 rounded-full border border-[var(--foreground-border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--foreground)] transition-colors hover:border-[var(--foreground)]"
         >
           <Mail size={15} />
           Send an email

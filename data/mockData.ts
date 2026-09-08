@@ -562,6 +562,7 @@ export const mockPortfolioData: PortfolioData = {
     { id: '2', platform: 'LinkedIn', url: 'https://linkedin.com/in/manobendra-mandal-513ba7214/', icon: 'linkedin' },
     { id: '3', platform: 'Portfolio', url: 'https://maybe-manov.vercel.app/', icon: 'globe' },
     { id: '4', platform: 'Email', url: 'https://mail.google.com/mail/?view=cm&to=manovmandal@gmail.com', icon: 'email' },
+    { id: '5', platform: 'Telegram', url: 'https://t.me/manov_weeb', icon: 'telegram' },
   ],
   contactPage: {
     header: {
