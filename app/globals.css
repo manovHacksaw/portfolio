@@ -41,7 +41,7 @@ html.dark {
 html {
   /* Slightly smaller than the 16px default so every rem-based text size
      and spacing value scales down proportionally, site-wide, in one place. */
-  font-size: 95%;
+  font-size: 90%;
   scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--foreground);
