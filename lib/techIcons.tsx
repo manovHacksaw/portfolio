@@ -38,6 +38,11 @@ const ICON_MAP: Record<string, IconType> = {
   Rust: Si.SiRust,
   Java: Si.SiOpenjdk,
   Solidity: Si.SiSolidity,
+  DigitalOcean: Si.SiDigitalocean,
+  AWS: Si.SiAmazonwebservices,
+  Redis: Si.SiRedis,
+  Traefik: Si.SiTraefikproxy,
+  Terraform: Si.SiTerraform,
 };
 
 export function getTechIcon(name: string): IconType {

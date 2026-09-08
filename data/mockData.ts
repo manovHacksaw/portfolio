@@ -378,6 +378,12 @@ export const mockPortfolioData: PortfolioData = {
     // Tools & DevOps
     { id: '25', name: 'Git', category: 'tools', icon: 'Git', color: '#F05032' },
     { id: '26', name: 'Docker', category: 'tools', icon: 'Docker', color: '#2496ED' },
+    { id: '36', name: 'AWS', category: 'tools', color: '#FF9900' },
+    { id: '37', name: 'DigitalOcean', category: 'tools', color: '#0080FF' },
+    { id: '38', name: 'Terraform', category: 'tools', color: '#7B42BC' },
+    { id: '39', name: 'Traefik', category: 'tools', color: '#24A1C1' },
+    { id: '40', name: 'Redis', category: 'tools', color: '#DC382D' },
+    { id: '41', name: 'BullMQ', category: 'tools', color: '#E53935' },
     { id: '27', name: 'Socket.io', category: 'tools', color: '#010101' },
     { id: '28', name: 'Hardhat', category: 'tools', color: '#F9E7A2' },
     { id: '29', name: 'Arcjet', category: 'tools', color: '#000000' },
