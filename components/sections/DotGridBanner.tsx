@@ -8,7 +8,12 @@ export default function DotGridBanner({ className = "" }: { className?: string }
   return (
     <div
       aria-hidden="true"
-      className={`bg-dot-grid-fade relative left-1/2 h-40 w-screen -translate-x-1/2 border-y border-dashed border-[var(--foreground-border)] sm:h-56 ${className}`}
-    />
+      className={`relative left-1/2 h-40 w-screen -translate-x-1/2 border-y border-dashed border-[var(--foreground-border)] sm:h-56 ${className}`}
+    >
+      {/* The dot texture's fade mask lives on its own layer so it doesn't
+          also mask out the border above — mask-image affects the whole
+          element it's applied to, border included. */}
+      <div className="bg-dot-grid-fade absolute inset-0" />
+    </div>
   );
 }

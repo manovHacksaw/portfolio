@@ -35,7 +35,7 @@ export default function ExperienceItem({ experience, defaultOpen = false }: Expe
   const initial = experience.company.trim().charAt(0).toUpperCase();
 
   return (
-    <motion.div variants={fadeUp} className="border-b border-[var(--foreground-border)]">
+    <motion.div variants={fadeUp}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

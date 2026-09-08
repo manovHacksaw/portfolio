@@ -39,7 +39,7 @@ export default function AchievementsClient() {
             <motion.div
               key={`${group.name}_${group.date}`}
               variants={fadeUp}
-              className="flex gap-4 border-b border-[var(--foreground-border)] py-8 sm:gap-6"
+              className="flex gap-4 py-8 sm:gap-6"
             >
               <div className="flex shrink-0 flex-col items-center gap-3">
                 <span className="label-mono">{String(groupIndex + 1).padStart(2, "0")}</span>

@@ -35,7 +35,7 @@ export default function AchievementsPreview({ hackathons }: AchievementsPreviewP
             <motion.div
               key={`${group.name}_${group.date}`}
               variants={fadeUp}
-              className="flex items-start gap-4 border-b border-[var(--foreground-border)] py-4"
+              className="flex items-start gap-4 py-4"
             >
               <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-[var(--foreground-border)] bg-white">
                 {group.logoUrl ? (
