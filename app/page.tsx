@@ -14,9 +14,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-16">
-      <DotGridBanner />
-      <div className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)] px-4 sm:px-6">
-        <div className="divide-y divide-dashed divide-[var(--foreground-border)]">
+      <div className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)]">
+        <DotGridBanner />
+        <div className="divide-y divide-dashed divide-[var(--foreground-border)] px-4 sm:px-6">
           <HeroSection
             personalInfo={mockPortfolioData.personalInfo}
             portfolioLinks={mockPortfolioData.portfolioLinks}
@@ -30,8 +30,8 @@ export default function Home() {
           <SkillsSection skills={mockPortfolioData.skills} />
           {quote && <QuoteSection text={quote.text} attribution={quote.attribution} />}
         </div>
+        <DotGridBanner />
       </div>
-      <DotGridBanner />
     </div>
   );
 }

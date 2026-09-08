@@ -153,8 +153,9 @@ export default function ContactClient() {
 
   return (
     <div className="min-h-screen pb-16">
-      <DotGridBanner />
-      <main className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)] px-4 pt-6 sm:px-6 sm:pt-8">
+      <div className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)]">
+        <DotGridBanner />
+        <main className="px-4 pt-6 sm:px-6 sm:pt-8">
         <div className="mb-2 flex items-center justify-end">
           <ThemeToggle />
         </div>
@@ -318,8 +319,9 @@ export default function ContactClient() {
             </span>
           </motion.div>
         </motion.div>
-      </main>
-      <DotGridBanner />
+        </main>
+        <DotGridBanner />
+      </div>
     </div>
   );
 }

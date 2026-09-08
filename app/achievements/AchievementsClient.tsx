@@ -17,8 +17,9 @@ export default function AchievementsClient() {
 
   return (
     <div className="min-h-screen pb-16">
-      <DotGridBanner />
-      <main className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)] px-4 pt-6 sm:px-6 sm:pt-8">
+      <div className="mx-auto max-w-[720px] border-x border-dashed border-[var(--foreground-border)]">
+        <DotGridBanner />
+        <main className="px-4 pt-6 sm:px-6 sm:pt-8">
         <SectionReveal variants={fadeUp} className="mb-10 flex flex-col gap-3">
           <div className="flex items-center justify-between gap-4">
             <h1 className="text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl">
@@ -150,8 +151,9 @@ export default function AchievementsClient() {
             </motion.div>
           ))}
         </motion.div>
-      </main>
-      <DotGridBanner />
+        </main>
+        <DotGridBanner />
+      </div>
     </div>
   );
 }
